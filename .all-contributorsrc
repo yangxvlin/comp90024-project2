@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "yangxvlin",
+      "name": "XuLinYang",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/26871369?v=4",
+      "profile": "https://yangxvlin.github.io",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "comp90024-project2",
+  "projectOwner": "yangxvlin",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
