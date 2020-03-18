@@ -26,3 +26,13 @@ COMP90024 - Cluster and Cloud Computing - 2020 S1 - Project 2
 </table>
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
+## Repository Structure
+```
+| /.github 
+      - github app configure file
+  /docs 
+      - documentations
+  .all-contributorsrc 
+      - all contributers infomation
+```
