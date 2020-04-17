@@ -41,6 +41,48 @@ COMP90024 - Cluster and Cloud Computing - 2020 S1 - Project 2
       - all contributers infomation
 ```
 
+## Due: Wednesday 20th May (by 12 noon!).
+
+## The focus of this assignment
+1. harvest tweets from across the cities of Australia on the UniMelb Research Cloud
+2. and undertake a variety of social media data analytics scenarios that tell interesting stories of life in Australian cities
+3. and importantly how the Twitter data can be used alongside/compared with/augment the data available within the AURIN platform to improve our knowledge of life in the cities of Australia.
+
 ## Implementation Requirements
-- [ ] asas
-- [ ] as
+<!-- exploits a multitude of virtual machines: 利用大量虚拟机 -->
+1. develop a Cloud-based solution that exploits a multitude of virtual machines (VMs) across the UniMelb Research Cloud for harvesting tweets through the Twitter APIs (using both the Streaming and the Search API interfaces).
+2. produce a solution that can be run (in principle) across any node of the UniMelb Research Cloud to harvest and store tweets and scale up/down as required.
+3. may want to explore other sources of data they find on the Internet
+    - e.g. information on weather, sport events, TV shows, visiting celebrities, stock market rise/falls, images from Instagram etc, however these are not compulsory to complete the work.
+4. For the implementation, teams are recommended to use a commonly understood language across team members – most likely Java or Python.
+5. Information on building and using Twitter harvesters can be found on the web, e.g. see https://dev.twitter.com/ and related links to resources such as **Tweepy** and **Twitter4J**.
+<!-- deem: 认为 -->
+
+- [ ] expected to have multiple instances of this application running on the UniMelb Research Cloud 
+  - together with an associated CouchDB database containing the amalgamated collection of Tweets from the harvester applications
+  - [ ] The entire system should have scripted deployment capabilities. 
+    1. This means that your team will provide a script, which, when executed, will create and deploy one or more virtual machines and orchestrate the set up of all necessary software on said machines (e.g. CouchDB, the twitter harvesters, web servers etc.) to create a ready-to-run system. 
+    <!-- orchestrate: 策划, populate the database: 给数据库增添数据 -->
+    2. Note that this setup need not populate the database but demonstrate your ability to orchestrate the necessary software environment on the UniMelb Research Cloud. 
+    3. Teams should use Ansible (http://www.ansible.com/home) for this task.
+- [ ] Teams are expected to develop a range of analytic scenarios. [Normally around 3-5](https://canvas.lms.unimelb.edu.au/courses/17514/discussion_topics/187247)
+  - [ ] scenerio 1
+  - [ ] scenerio 2
+  - [ ] scenerio 3
+  1. Students may decide to create their own analytics based on the data they obtain. 
+  2. Students are not expected to build advanced “general purpose” data analytic services that can support any scenario but show how tools like CouchDB with targeted data analysis capabilities like MapReduce when provided with suitable inputs can be used to capture the essence of life in Australia.
+- [x] a version-control system such as GitHub or Bitbucket for sharing source code.
+- [ ] solution should include a Twitter harvesting application for any/all of the cities of Australia.
+- [ ] A front-end web application is required for visualising these data sets/scenarios.
+  1. Teams are free to use any pre-existing software systems that they deem appropriate for the analysis and visualisation capabilities, e.g. Javascript libraries, Googlemaps etc.
+- [ ] The server side of your analytics web application may expose its data to the client through **a ReSTful design**. 
+  1. Authentication or authorization is NOT required for the web front end
+- [ ] CouchDB setup may be a single node or based on a cluster setup
+  - [ ] MapReduce based implementations for analytics where appropriate, using CouchDB’s built in MapReduce capabilities.
+- [ ] **(Optional)** Teams may wish to utilise container technologies such as Docker, but this is not mandatory.
+
+## Demo requirements
+- A working demonstration of the Cloud-based solution with dynamic deployment – 25% marks
+- A working demonstration of – 25% marks
+  1. tweet harvesting and 
+  2. CouchDB utilization for specific analytics scenarios
