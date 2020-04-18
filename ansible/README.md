@@ -21,6 +21,9 @@
 4. Deploy Applications on the Nectar instances
     - ``` ```
 
+5. Remove instances on the Nectar
+    - ```./remove_deploy_instances.sh```
+
 ## Notes
 1. initialize a role
     - ```cd roles```
