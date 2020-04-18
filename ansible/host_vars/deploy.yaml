@@ -12,36 +12,28 @@ project_working_directory: /home/xuliny/COMP90024
 security_groups:
   - name: instance1-security-group
     description: "security group for instance1 server"
-    rules:
-      - name: 'Any'
-        protocol: tcp
-        port_range_min: 1
-        port_range_max: 65535
-        remote_ip_prefix: 0.0.0.0/0
+    protocol: tcp
+    port_range_min: 1
+    port_range_max: 65535
+    remote_ip_prefix: 0.0.0.0/0
   - name: instance2-security-group
     description: "security group for instance2 server"
-    rules:
-      - name: 'Any'
-        protocol: tcp
-        port_range_min: 1
-        port_range_max: 65535
-        remote_ip_prefix: 0.0.0.0/0
+    protocol: tcp
+    port_range_min: 1
+    port_range_max: 65535
+    remote_ip_prefix: 0.0.0.0/0
   - name: instance3-security-group
     description: "security group for instance3 server"
-    rules:
-      - name: 'Any'
-        protocol: tcp
-        port_range_min: 1
-        port_range_max: 65535
-        remote_ip_prefix: 0.0.0.0/0
+    protocol: tcp
+    port_range_min: 1
+    port_range_max: 65535
+    remote_ip_prefix: 0.0.0.0/0
   - name: instance4-security-group
     description: "security group for instance4 server"
-    rules:
-      - name: 'Any'
-        protocol: tcp
-        port_range_min: 1
-        port_range_max: 65535
-        remote_ip_prefix: 0.0.0.0/0
+    protocol: tcp
+    port_range_min: 1
+    port_range_max: 65535
+    remote_ip_prefix: 0.0.0.0/0
 
 # ****************************** Volume ******************************
 volumes:
