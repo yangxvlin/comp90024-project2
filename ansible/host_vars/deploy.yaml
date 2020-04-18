@@ -1,0 +1,84 @@
+---
+# ****************************** Common vars ******************************
+availability_zone: melbourne-qh2-uom
+instance_network: qh2-uom-internal
+instance_flavor: uom.mse.2c9g
+instance_image: 45225edb-66d8-4fd0-bf41-132a31a18166 # NeCTAR Ubuntu 18.04 LTS (Bionic) amd64
+instance_key_name: NectarGroupKey # ssh private key
+project_working_directory: /home/xuliny/COMP90024
+
+# ****************************** Security group ******************************
+# Create a TCP rule covering all ports
+security_groups:
+  - name: instance1-security-group
+    description: "security group for instance1 server"
+    rules:
+      - name: 'Any'
+        protocol: tcp
+        port_range_min: 1
+        port_range_max: 65535
+        remote_ip_prefix: 0.0.0.0/0
+  - name: instance2-security-group
+    description: "security group for instance2 server"
+    rules:
+      - name: 'Any'
+        protocol: tcp
+        port_range_min: 1
+        port_range_max: 65535
+        remote_ip_prefix: 0.0.0.0/0
+  - name: instance3-security-group
+    description: "security group for instance3 server"
+    rules:
+      - name: 'Any'
+        protocol: tcp
+        port_range_min: 1
+        port_range_max: 65535
+        remote_ip_prefix: 0.0.0.0/0
+  - name: instance4-security-group
+    description: "security group for instance4 server"
+    rules:
+      - name: 'Any'
+        protocol: tcp
+        port_range_min: 1
+        port_range_max: 65535
+        remote_ip_prefix: 0.0.0.0/0
+
+# ****************************** Volume ******************************
+volumes:
+  - vol_name: instance1-volume
+    vol_size: 80
+    device: /dev/vdb
+    mountpoint: /data
+  - vol_name: instance2-volume
+    vol_size: 80
+    device: /dev/vdb
+    mountpoint: /data
+  - vol_name: instance3-volume
+    vol_size: 80
+    device: /dev/vdb
+    mountpoint: /data
+  - vol_name: instance4-volume
+    vol_size: 80
+    device: /dev/vdb
+    mountpoint: /data
+
+# ****************************** Instance ******************************
+instances:
+  - name: instance1
+    security_groups: instance1-security-group
+    volume_ids: '{{ instance1_volumes|default([]) }}'
+    volumes: ['instance1-volume']
+  - name: instance2
+    security_groups: instance2-security-group
+    volume_ids: '{{ instance2_volumes|default([]) }}'
+    volumes: ['instance2-volume']
+  - name: instance3
+    security_groups: instance3-security-group
+    volume_ids: '{{ instance3_volumes|default([]) }}'
+    volumes: ['instance3-volume']
+  - name: instance4
+    security_groups: instance4-security-group
+    volume_ids: '{{ instance4_volumes|default([]) }}'
+    volumes: ['instance4-volume']
+
+image_facts: []
