@@ -1,0 +1,18 @@
+---
+# tasks file for add-proxy
+
+- name: Add proxy in /etc/environment
+  become: yes
+  blockinfile:
+    path: /etc/environment
+    block: |
+      http_proxy=http://wwwproxy.unimelb.edu.au:8000/
+      https_proxy=http://wwwproxy.unimelb.edu.au:8000/
+      no_proxy="localhost,127.0.0.1,localhostaddress,172.16.0.0/12,.melbourne.rc.nectar.org.au,.storage.unimelb.edu.au,.cloud.unimelb.edu.au"
+      HTTP_PROXY=http://wwwproxy.unimelb.edu.au:8000/
+      HTTPS_PROXY=http://wwwproxy.unimelb.edu.au:8000/
+
+- name: Reboot a machine
+  become: yes
+  reboot:
+    reboot_timeout: 3000
