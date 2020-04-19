@@ -5,7 +5,7 @@ instance_network: qh2-uom-internal
 instance_flavor: uom.mse.2c9g
 instance_image: 45225edb-66d8-4fd0-bf41-132a31a18166 # NeCTAR Ubuntu 18.04 LTS (Bionic) amd64
 instance_key_name: NectarGroupKey # ssh private key
-project_working_directory: /home/xuliny/COMP90024
+project_working_directory: /home/ubuntu/COMP90024
 
 # ****************************** Security group ******************************
 # Create a TCP rule covering all ports

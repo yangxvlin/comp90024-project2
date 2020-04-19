@@ -16,7 +16,13 @@
     - ```./deploy_instances.sh```
 
 3. Configure instances environments on the Nectar
-    - ``` ```
+    - |role|description|
+      |---|---|
+      |add-proxy|Add proxy in /etc/environment<br/>Reboot the instance|
+    - If using windows, 
+        1. ```cp ./NectarGroupKey.pem ~/.ssh/```
+        2. ```chmod 400 ~/.ssh/NectarGroupKey.pem```
+    - ```./configure_instances_debug.sh```
 
 4. Deploy Applications on the Nectar instances
     - ``` ```
