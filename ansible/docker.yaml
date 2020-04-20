@@ -2,6 +2,7 @@
 - hosts: instances
   vars_files:
     - host_vars/config.yaml
+    - host_vars/wordpress.yaml
   gather_facts: true
 
   roles:

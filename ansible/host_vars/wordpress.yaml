@@ -1,0 +1,14 @@
+---
+volumes:
+  - device: /dev/vdb
+    mountpoint: /var/lib/docker
+  - device: /dev/vdc
+    mountpoint: /data
+
+wp_dir: wordpress
+
+# Wordpress / MySQL
+database_name: wordpress
+database_user: wordpress
+database_password: wordpress
+mysql_root_password: "P@ssw0rd"
