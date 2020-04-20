@@ -7,4 +7,4 @@
   roles:
     - role: add-proxy
     - role: install-dependencies
-    - role: docker
+    - role: setup-docker
