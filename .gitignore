@@ -2,4 +2,4 @@
 
 ansible/.dist/
 /**/*.swp
-
+/**/*.ansible-host.j2.swp
