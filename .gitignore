@@ -3,3 +3,4 @@
 ansible/.dist/
 /**/*.swp
 /**/*.ansible-host.j2.swp
+ansible/roles/create-instances/templates/.ansible-hosts.j2.swp
