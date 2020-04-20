@@ -6,6 +6,7 @@ instance_flavor: uom.mse.2c9g
 instance_image: 215f9775-483c-4e0a-b703-d21a5c966f2e # NeCTAR Ubuntu 18.04 LTS (Bionic) amd64 (with Docker)
 instance_key_name: NectarGroupKey # ssh private key
 project_working_directory: /home/ubuntu/COMP90024
+wm_inventory_file: "./inventory/wm_inventory_file.ini"
 
 # ****************************** Security group ******************************
 # Create a TCP rule covering all ports

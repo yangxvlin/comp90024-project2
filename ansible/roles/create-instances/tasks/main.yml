@@ -39,3 +39,9 @@
     groups: instances
   loop: '{{ os_instance.results }}'
   when: item.openstack is defined
+
+- name: create file
+  become: yes
+  template:
+    src: ansible-hosts.j2
+    dest: "{{ wm_inventory_file }}"
