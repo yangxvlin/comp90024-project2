@@ -1,4 +1,5 @@
 .idea/
 
 ansible/.dist/
-
+/**/*.swp
+ansible/roles/create-instances/templates/.ansible-hosts.j2.swp
