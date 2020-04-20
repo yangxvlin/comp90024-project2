@@ -1,0 +1,9 @@
+---
+- hosts: instances
+  vars_files:
+    - host_vars/config.yaml
+  gather_facts: true
+
+  roles:
+    - role: docker
+    - role: wordpress
