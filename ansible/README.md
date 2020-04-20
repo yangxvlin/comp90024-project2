@@ -55,7 +55,7 @@
         </tr>
         <tr>
             <td>install-dependencies</td>
-            <td>sudo apt-get update; sudo apt-get install ['git', 'python3-dev', 'python3-pip', 'python3-setuptools', 'vim', 'python3-pip', 'libblacs-mpi-dev']<br>pip3 install ['wheel', 'mpi4py']</td>
+            <td>sudo apt-get update; sudo apt-get install [...]<br>pip3 install [...]</td>
         </tr>
         <tr>
             <td>setup-docker</td>
