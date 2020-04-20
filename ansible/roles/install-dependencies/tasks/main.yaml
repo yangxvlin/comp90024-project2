@@ -21,18 +21,25 @@
     state: latest
 # pip install --upgrade pip
 
-- name: pip install xxx
-  become: yes
-  pip:
-    name: ['mpi4py']
-    state: latest
-# pip install openstacksdk
-
-- name: Install dependencies
+- name: sudo apt-get install ['git', 'python3-dev', 'python3-pip', 'python3-setuptools', 'vim', 'python3-pip', 'libblacs-mpi-dev']
   tags: always
   become: yes
   apt:
-    name: ['git', 'python3-dev', 'python3-pip', 'python3-setuptools', 'vim']
+    name: ['git', 'python3-dev', 'python3-pip', 'python3-setuptools', 'vim', 'python3-pip', 'libblacs-mpi-dev']
     state: latest
     install_recommends: no
     update_cache: yes
+
+- name: pip3 install ['wheel', 'mpi4py']
+  command: pip3 install {{item}}
+  with_items:
+    - wheel
+    - mpi4py
+
+# - name: pip install ['mpi4py']
+#   become: yes
+#   pip:
+#     name: ['mpi4py']
+#     state: latest
+# pip install ['mpi4py']
+
