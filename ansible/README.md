@@ -19,6 +19,7 @@
     - |role|description|
       |---|---|
       |add-proxy|Add proxy in /etc/environment<br/>Reboot the instance|
+      |install-dependencies|sudo apt-get update; sudo apt-get install ['python-pip', 'git', 'python3-dev', 'python3-pip', 'python3-setuptools', 'vim']<br/>pip install ['mpi4py']|
     - If using windows, 
         1. ```cp ./NectarGroupKey.pem ~/.ssh/```
         2. ```chmod 400 ~/.ssh/NectarGroupKey.pem```
