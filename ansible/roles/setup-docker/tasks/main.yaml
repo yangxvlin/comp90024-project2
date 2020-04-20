@@ -6,7 +6,7 @@
     name: ['docker', 'docker-engine', 'docker.io']
     state: absent
 
-- name: Install dependencies
+- name: Install dependencies for docker
   tags: 'docker'
   become: yes
   apt:
@@ -78,3 +78,9 @@
 - name: restart docker
   become: yes
   shell: systemctl restart docker
+
+# Display Docker version
+- name: Display Docker version
+  command: docker --version
+  register: cmd
+- debug: var=cmd.stdout_lines

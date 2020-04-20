@@ -1,4 +1,10 @@
 ---
+- hosts: localhost
+  gather_facts: true
+
+  roles:
+    - role: add-NectarGroupKey
+
 - hosts: instances
   vars_files:
     - host_vars/config.yaml
@@ -8,3 +14,4 @@
     - role: add-proxy
     - role: install-dependencies
     - role: setup-docker
+    - role: git-clone-source-repository
