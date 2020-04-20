@@ -51,7 +51,7 @@
         <tr>
             <td rowspan="4">instances</td>
             <td>add-proxy</td>
-            <td>Add proxy in /etc/environment&lt;br/&gt;Reboot the instance</td>
+            <td>Add proxy in /etc/environment<br/>Reboot the instance</td>
         </tr>
         <tr>
             <td>install-dependencies</td>
