@@ -79,3 +79,4 @@
 1. initialize a role
     - ```cd roles```
     - ```ansible-galaxy init test-role-1```
+2. use https://www.tablesgenerator.com/html_tables to modify the tables above
