@@ -2,7 +2,7 @@
 
 ## how to run
 ```python main.py```
-    - if you add more crime json file, just add the file name in ```data_file.json``` and rerun the python script and result file will be ready
+- if you add more crime json file, just add the file name in ```data_file.json``` and rerun the python script and result file will be ready
 
 ## format
 ### meta
