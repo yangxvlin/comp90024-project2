@@ -1,8 +1,8 @@
 """
 Author:      XuLin Yang
 Student id:  904904
-Date:        
-Description: 
+Date:        2020-4-21 23:06:48
+Description: preprocess crime data
 """
 
 import json
@@ -53,7 +53,7 @@ def parse_data(file_path: str, meta_path: str):
             result[lga] = {'lga_name': name, 'crimes': crime_data}
 
     with open('result-'+file_path, 'w') as outfile:
-        json.dump(attribute_info, outfile)
+        json.dump(result, outfile)
 
     # print all lga_code
     # pprint(result.keys())
@@ -63,10 +63,9 @@ def parse_data(file_path: str, meta_path: str):
 
 
 if __name__ == "__main__":
-    years = ["2019"]
+    meta_file = "meta_data.json"
 
-    file_name = "crime-"
-    file_type = ".json"
-    meta_file = 'meta_data.json'
-    for y in years:
-        parse_data(file_name + y + file_type, meta_file)
+    with open("data_file.json") as file:
+        files = json.load(file)
+    for f in files:
+        parse_data(f, meta_file)
