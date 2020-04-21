@@ -47,7 +47,7 @@ def parse_data(file_path: str, meta_path: str):
 
             # row with error
             if not lga:
-                print("Error:", str(row))
+                print("Error: [row with empty lga]", str(row))
                 continue
 
             result[lga] = {'lga_name': name, 'crimes': crime_data}
