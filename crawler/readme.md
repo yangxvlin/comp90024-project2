@@ -17,5 +17,6 @@ it should looks like this
     "scomor"]
 }
 
-Once done, run the program with 
-$ python stream_AU.py
+Once done, run the following command
+$./setup
+$python stream_AU.py
