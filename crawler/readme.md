@@ -17,6 +17,19 @@ it should looks like this
     "scomor"]
 }
 
-Once done, run the following command
-$./setup
-$python stream_AU.py
+Once done, run the following command to **ONLY** setup the environment
+
+```
+./setup
+```
+
+if you want to retrieve real time twitter, use
+
+```
+./setup realtime
+```
+
+if you want to keep hydrating the twitter, use
+```
+./setup hydrated
+```
