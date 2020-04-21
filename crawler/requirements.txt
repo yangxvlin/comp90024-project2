@@ -1,0 +1,5 @@
+urllib3
+numpy
+pandas
+twarc
+tqdm

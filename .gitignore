@@ -3,3 +3,7 @@ crawler/.DS_Store
 
 *.json
 .DS_Store
+
+crawler/COVID-19-TweetIDs/
+
+crawler/env/
