@@ -1,5 +1,8 @@
 # crime
 
+## how to run
+```python main.py```
+
 ## format
 ### meta
 ```json
