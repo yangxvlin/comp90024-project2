@@ -1,0 +1,19 @@
+#!/bin/bash
+
+VENV="./env/"
+DATA="./COVID-19-TweetIDs/"
+
+if [ ! -d "$VENV" ]; then
+    echo "venv for python3 not found, making a new one"
+    echo ""
+    python3 -m pip install --user virtualenv
+    python3 -m venv env
+else
+    echo "venv already created"
+fi
+
+source env/bin/activate
+which python
+
+pip install --upgrade pip
+python -m pip install -r requirements.txt

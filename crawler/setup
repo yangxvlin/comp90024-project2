@@ -1,32 +1,39 @@
-#!/bin/bash
 
-VENV="./env/"
-DATA="./COVID-19-TweetIDs/"
+chmod 755 ./setup_only
 
-if [ ! -d "$VENV" ]; then
-    echo "venv for python3 not found, making a new one"
-    echo ""
-    python3 -m pip install --user virtualenv
-    python3 -m venv env
-else
-    echo "venv already created"
-fi
+if [ "$1" = "hydrated" ]
+then
 
-echo ""
+    echo "hydrated mode"
 
-if [ ! -d "$DATA" ]; then
-    each "cloning hydrated data from github"
+    if [ ! -d "$DATA" ]
+    then
+
+    echo "cloning hydrated data from github"
     git clone git@github.com:echen102/COVID-19-TweetIDs.git
+    
+    else
+        echo "dehydrated data found"
+    fi
+
+    ./setup_only
+    python my_hydrated.py
+
+elif [ "$1" = "realtime" ]
+then
+
+    echo "realtime mode"
+    ./setup_only
+    python stream_AU.py
+
 else
-    echo "dehydrated data found"
+
+    if [ ! "$1" = "" ]
+    then
+        echo "unknown parameters"
+        exit 1
+    fi
+
+    echo "no parameter provided, only setup environment"
+    ./setup_only
 fi
-
-echo ""
-
-source env/bin/activate
-which python
-
-echo ""
-
-pip install --upgrade pip
-python -m pip install -r requirements.txt
