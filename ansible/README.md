@@ -38,33 +38,37 @@
 
 3. Configure instances environments on the Nectar
     - <table>
-        <tr>
+          <tr>
             <th>Hosts</th>
             <th>role</th>
             <th>description</th>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td><span style="font-weight:normal">localhost</span></td>
             <td><span style="font-weight:normal">add-NectarGroupKey</span><br></td>
             <td><span style="font-weight:normal">copy /config/NectarGroupKey to ~/.ssh/</span><span style="font-weight:400;font-style:normal">NectarGroupKey</span><br></td>
-        </tr>
-        <tr>
-            <td rowspan="4">instances</td>
+          </tr>
+          <tr>
+            <td rowspan="5">instances</td>
             <td>add-proxy</td>
-            <td>Add proxy in /etc/environment<br/>Reboot the instance</td>
-        </tr>
-        <tr>
+            <td>Add proxy in /etc/environment&lt;br/&gt;Reboot the instance</td>
+          </tr>
+          <tr>
             <td>install-dependencies</td>
             <td>sudo apt-get update; sudo apt-get install [...]<br>pip3 install [...]</td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td>setup-docker</td>
             <td>Install docker as well as setting up http proxy for docker</td>
-        </tr>
-        <tr>
+          </tr>
+          <tr>
             <td><span style="font-weight:normal">git-clone-source-repository</span><br></td>
             <td>configure git ssh key<br>clone the source code repository to the instances</td>
-        </tr>
+          </tr>
+          <tr>
+            <td>mount-volumes<br></td>
+            <td>mount the volumes for each instances</td>
+          </tr>
         </table>
     - No matter what OS you are, you should create a file: ```/config/GitHubKey.pem``` with **your GitHub private key**
     - ```./configure_instances_debug.sh```
