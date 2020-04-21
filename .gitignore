@@ -2,6 +2,7 @@
 crawler/.DS_Store
 
 *.json
+.DS_Store
 
 
 ansible/config/GitHubKey.pem
