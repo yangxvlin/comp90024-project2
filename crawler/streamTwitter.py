@@ -30,6 +30,7 @@ class StreamListener(tw.StreamListener):
             # Chance of happening about 0.1%. Printed the whole json file in terminal for manual log if needed
             print("Exception made. Data printed below")
             print(data)
+            print(e)
             return True
 
         return True
@@ -73,7 +74,6 @@ if __name__ == '__main__':
     except IOError:
         print("please make sure you have config.json under the current path")
         exit(1)
-
     
     print("stream init")
     listener = StreamListener()
@@ -84,8 +84,8 @@ if __name__ == '__main__':
 
     # stream.filter(languages=["en"], track=search_words, is_async=True, locations=[
     #     112.28, -44.36, 155.23, -10.37])
-    stream.filter(track=search_words, is_async=True, locations=[
-                  113.338953078, -43.6345972634, 153.569469029, -10.6681857235])
+    stream.filter(languages = ["en"], track=search_words, is_async=True, locations=[
+                  112.28, -44.36, 155.23, -10.37])
 
     print("stream started")
     
