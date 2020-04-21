@@ -33,3 +33,5 @@ if you want to keep hydrating the twitter, use
 ```
 ./setup hydrated
 ```
+
+provide anything else as an argument will cause the script abort.
