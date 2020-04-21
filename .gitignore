@@ -1,1 +1,4 @@
 .idea/
+crawler/.DS_Store
+
+*.json
