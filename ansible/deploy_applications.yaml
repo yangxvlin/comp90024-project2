@@ -1,0 +1,8 @@
+---
+- hosts: crawler
+  gather_facts: true
+  vars_files:
+    - host_vars/config.yaml
+#    - host_vars/deploy.yaml
+  roles:
+    - role: deploy-crawler
