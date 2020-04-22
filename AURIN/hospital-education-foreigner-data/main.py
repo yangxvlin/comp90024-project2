@@ -60,12 +60,6 @@ def parse_data(file_path: str, meta_path: str):
     # print all lga_code
     # pprint(result.keys())
 
-    # print all population count
-    # pprint(result['20110'][count_str].keys())
-
-    # print all population percent
-    # pprint(result['20110'][percent_str].keys())
-
 
 if __name__ == "__main__":
     meta_file = "meta_data.json"
