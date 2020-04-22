@@ -36,7 +36,15 @@
     - ```./deploy_instances_debug.sh```  
     - ```./deploy_instances.sh```
 
-3. Configure instances environments on the Nectar
+3. generate instance to be created
+
+    ```cd host_vars```
+
+    ```python generate-instances.py -n <n instances you would like to be created>```
+    
+    generated instances setup will be stored in ```host_vars/instances.yaml```
+
+4. Configure instances environments on the Nectar
     - <table>
           <tr>
             <th>Hosts</th>
@@ -73,8 +81,16 @@
     - No matter what OS you are, you should create a file: ```/config/GitHubKey.pem``` with **your GitHub private key**
     - ```./configure_instances_debug.sh```
 
+5. generate hosts for applications
+
+    ```cd inventory```
+
+    ```python generate-host.py -c <n hosts for the crawler>```
+    
+    generated application host setup will be stored in ```inventory/application_hosts.yaml```
+
 4. Deploy Applications on the Nectar instances
-    - ``` ```
+    - ```./deploy_applications.sh```
 
 5. Remove instances on the Nectar
     - ```./remove_deploy_instances.sh```

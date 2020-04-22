@@ -2,6 +2,7 @@
 - hosts: localhost
   vars_files:
     - host_vars/deploy.yaml
+    - host_vars/instances.yaml
   gather_facts: true
 
   roles:
