@@ -20,14 +20,14 @@ then
         git -C COVID-19-TweetIDs/ pull
     fi
 
-    ./setup_only
+    . ./setup_only
     python my_hydrated.py
 
 elif [ "$1" = "realtime" ]
 then
 
     echo "realtime mode"
-    ./setup_only
+    . ./setup_only
     python stream_AU.py
 
 else
@@ -39,5 +39,5 @@ else
     fi
 
     echo "no parameter provided, only setup environment"
-    ./setup_only
+    . ./setup_only
 fi

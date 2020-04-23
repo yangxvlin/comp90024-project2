@@ -21,6 +21,7 @@ else
     echo "venv already created"
 fi
 
+echo "sourcing $ACTIVATE"
 source "$ACTIVATE"
 which python
 
