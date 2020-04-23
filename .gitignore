@@ -1,3 +1,5 @@
 .idea/
 
 ansible/config/GitHubKey.pem
+
+backend/venv
