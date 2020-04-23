@@ -31,4 +31,6 @@
 ```
 
 ## Note
-[tutorial](https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask)
+- [flask-ReSTful documentation](https://flask-restful.readthedocs.io/en/latest/)
+- [Designing a RESTful API with Python and Flask](https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask)
+- [Docker + Flask | A Simple Tutorial](https://medium.com/@doedotdev/docker-flask-a-simple-tutorial-bbcb2f4110b5)
