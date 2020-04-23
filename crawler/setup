@@ -1,6 +1,9 @@
 
 chmod 755 ./setup_only
 
+VENV="./env/"
+DATA="./COVID-19-TweetIDs/"
+
 if [ "$1" = "hydrated" ]
 then
 
@@ -13,7 +16,8 @@ then
     git clone git@github.com:echen102/COVID-19-TweetIDs.git
     
     else
-        echo "dehydrated data found"
+        echo "dehydrated data found, try to update"
+        git -C COVID-19-TweetIDs/ pull
     fi
 
     ./setup_only
