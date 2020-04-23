@@ -21,11 +21,11 @@
     state: latest
 # pip install --upgrade pip
 
-- name: sudo apt-get install ['git', 'python3-dev', 'python3-pip', 'python3-setuptools', 'vim', 'python3-pip', 'libblacs-mpi-dev']
+- name: sudo apt-get install ['git', 'python3-dev', 'python3-pip', 'python3-setuptools', 'vim', 'python3-pip', 'libblacs-mpi-dev', 'python3-venv']
   tags: always
   become: yes
   apt:
-    name: ['git', 'python3-dev', 'python3-pip', 'python3-setuptools', 'vim', 'python3-pip', 'libblacs-mpi-dev']
+    name: ['git', 'python3-dev', 'python3-pip', 'python3-setuptools', 'vim', 'python3-pip', 'libblacs-mpi-dev', 'python3-venv']
     state: latest
     install_recommends: no
     update_cache: yes
