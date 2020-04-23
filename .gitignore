@@ -8,6 +8,8 @@ crawler/COVID-19-TweetIDs/
 
 crawler/env/
 
+*.gz
+
 
 ansible/config/GitHubKey.pem
 

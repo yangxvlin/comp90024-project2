@@ -19,7 +19,7 @@ def hydrate(account):
         for p in Path("COVID-19-TweetIDs/" + data_dir).iterdir():
             if p.name.endswith(".txt"):
                 hydrate_file(p, twarc, file_pointer)
-                exit(1)
+                # only run once
                 
 
 def hydrate_file(id_file, twarc, target):
