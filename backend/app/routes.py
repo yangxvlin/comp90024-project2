@@ -2,10 +2,10 @@
 Author:      XuLin Yang
 Student id:  904904
 Date:        
-Description: 
+Description: deprecated as we use ReSTFul design
 """
 
-from app import app
+from app.resources import app
 
 
 @app.route('/')
