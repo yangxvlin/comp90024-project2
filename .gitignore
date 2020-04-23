@@ -1,1 +1,3 @@
 .idea/
+
+ansible/config/GitHubKey.pem
