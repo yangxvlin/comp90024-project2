@@ -6,6 +6,7 @@
   gather_facts: true
 
   roles:
+    - role: add-NectarGroupKey
     - role: common
     - role: show-images
     - role: create-volumes
