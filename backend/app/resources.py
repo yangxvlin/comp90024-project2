@@ -18,4 +18,4 @@ class HelloWorld(Resource):
         return {'sdsdd': 'worsdld'}
 
 
-api.add_resource(HelloWorld, '/')
+api.add_resource(HelloWorld, '/index')
