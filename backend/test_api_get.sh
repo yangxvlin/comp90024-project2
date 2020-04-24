@@ -5,4 +5,4 @@ read -p "Enter location id: " id
 LOCATION="{\"location\":$id}"
 
 # shellcheck disable=SC2090
-curl -i -H "Content-Type: application/json" -X GET -d "LOCATION" "$url"/map
+curl -i -H "Content-Type: application/json" -X GET -d "$LOCATION" "$url"/map
