@@ -1,7 +1,7 @@
 # !flask/bin/python
 """
-Author:      XuLin Yang
-Student id:  904904
+Author:      XuLin Yang & Renjie Meng
+Student id:  904904 & 877396
 Date:        2020-4-24 01:09:38
 Description: backend flask application
 """

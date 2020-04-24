@@ -1,6 +1,6 @@
 """
-Author:      XuLin Yang
-Student id:  904904
+Author:      XuLin Yang & Renjie Meng
+Student id:  904904 & 877396
 Date:        2020-4-24 02:52:05
 Description: 
 """
@@ -15,7 +15,7 @@ api = Api(app)
 
 class HelloWorld(Resource):
     def get(self):
-        return {'hello': 'world'}
+        return {'sdsdd': 'worsdld'}
 
 
 api.add_resource(HelloWorld, '/')
