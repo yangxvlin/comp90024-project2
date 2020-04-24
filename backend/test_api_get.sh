@@ -1,6 +1,8 @@
 # shellcheck disable=SC2140
-LOCATION="{"""location""":"""Read a book"""}"
 read -p "Enter server url: " url
-curl -i "$url"/map
+read -p "Enter location id: " id
+# shellcheck disable=SC2089
+LOCATION="{\"location\":$id}"
 
-curl -i -H "Content-Type: application/json" -X GET -d "{\"location\":1}"  "$url"/map
+# shellcheck disable=SC2090
+curl -i -H "Content-Type: application/json" -X GET -d "$LOCATION" "$url"/map
