@@ -23,7 +23,7 @@ fi
 
 echo "sourcing $ACTIVATE"
 source "$ACTIVATE"
-which python
+
 
 echo ""
 echo "installing dependancy"
@@ -31,3 +31,8 @@ echo ""
 
 pip install --upgrade pip
 python -m pip install -r requirements.txt
+
+echo ""
+echo ""
+
+which python
