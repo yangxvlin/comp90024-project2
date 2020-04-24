@@ -4,12 +4,13 @@ from pathlib import Path
 import os
 import gzip
 from tqdm import tqdm
+from multiprocessing.pool import ThreadPool, Pool
 
 def hydrate(account):
     # unpack keys
     twarc = Twarc(**account)
     data_dirs = ['2020-01', '2020-02', '2020-03', '2020-04']
-
+    
     for data_dir in data_dirs:
         file_pointer = os.path.join(os.getcwd(), "hydrated/", data_dir+"/")
 
@@ -19,7 +20,7 @@ def hydrate(account):
         for p in Path("COVID-19-TweetIDs/" + data_dir).iterdir():
             if p.name.endswith(".txt"):
                 hydrate_file(p, twarc, file_pointer)
-                # only run once
+
                 
 
 def hydrate_file(id_file, twarc, target):
@@ -41,7 +42,8 @@ def hydrate_file(id_file, twarc, target):
     with gzip.open(gzip_path, 'w') as output:
         with tqdm(total=total_ids) as pbar:
             for tweet in twarc.hydrate(id_file.open()):
-                output.write(json.dumps(tweet).encode('utf8') + b"\n")
+                # simply write to a gzip file
+                output.write(json.dump(tweet).encode('utf-8') + b"\n")
                 pbar.update(1)
 
 
