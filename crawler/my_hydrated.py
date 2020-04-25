@@ -34,20 +34,17 @@ def hydrate_file(id_file, twarc, target):
         print("skipping jsonl file already exists: ", gzip_path)
         return
 
-    # set prograss bar totoal ids
-    f = open(id_file, 'rb')
-    f_gen = _reader_generator(f.raw.read)
-    total_ids = sum(buf.count(b'\n') for buf in f_gen)
+    # # set prograss bar totoal ids
+    # f = open(id_file, 'rb')
+    # f_gen = _reader_generator(f.raw.read)
+    # total_ids = sum(buf.count(b'\n') for buf in f_gen)
 
     with gzip.open(gzip_path, 'w') as output:
-        with tqdm(total=total_ids) as pbar:
-            for tweet in twarc.hydrate(id_file.open()):
-                # simply write to a gzip file
-                if(tweet['place']):
-                    if(tweet['place']["country_code"].strip() == 'AU'):
-                        print(tweet['place'])
-                        output.write(json.dumps(tweet).encode('utf-8') + b"\n")
-                pbar.update(1)  
+        for tweet in twarc.hydrate(id_file.open()):
+            # simply write to a gzip file and remove pbar
+            if(tweet['place']):
+                if(tweet['place']["country_code"].strip() == 'AU'):
+                    output.write(json.dumps(tweet).encode('utf-8') + b"\n")
 
 
 
