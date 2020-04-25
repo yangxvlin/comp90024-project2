@@ -43,8 +43,12 @@ def hydrate_file(id_file, twarc, target):
         with tqdm(total=total_ids) as pbar:
             for tweet in twarc.hydrate(id_file.open()):
                 # simply write to a gzip file
-                output.write(json.dump(tweet).encode('utf-8') + b"\n")
-                pbar.update(1)
+                if("place" in tweet):
+                    if('au' in tweet['place']["country_code"].lower()): 
+                        output.write(json.dump(tweet).encode('utf-8') + b"\n")
+
+                pbar.update(1)  
+
 
 
 def _reader_generator(reader):
