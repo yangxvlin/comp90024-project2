@@ -42,6 +42,12 @@
 
     ```python generate-instances.py -n <n instances you would like to be created>```
     
+    - E.g.: 
+    
+        windows: ```python generate-instances.py -n 4```
+      
+        ubuntu: ```python3 generate-instances.py -n 4```
+    
     generated instances setup will be stored in ```host_vars/instances.yaml```
 
 4. Configure instances environments on the Nectar
@@ -85,7 +91,12 @@
 
     ```cd inventory```
 
-    ```python generate-host.py -c <n hosts for the crawler>```
+    ```python generate-host.py -c <n hosts for the crawler> -b <n hosts for the backend server>```
+    
+    - E.g.:
+        windows: ```python generate-host.py -c 1 -b 1```
+      
+        ubuntu: ```python3 generate-instances.py -c 1 -b 1```
     
     generated application host setup will be stored in ```inventory/application_hosts.yaml```
 
