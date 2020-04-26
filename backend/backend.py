@@ -8,6 +8,7 @@ Description: backend flask application
 
 # import argparse
 import argparse
+import sys
 
 from app.resources import app
 
@@ -43,6 +44,6 @@ if __name__ == '__main__':
 
     if args.test:
         print("Successfully compiled")
-        exit(0)
+        sys.exit(0)
 
     app.run(debug=True, host='0.0.0.0')
