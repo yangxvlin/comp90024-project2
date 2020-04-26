@@ -5,44 +5,70 @@ import os
 import gzip
 import time
 from tqdm import tqdm
-from multiprocessing import Process
+from multiprocessing import Process, SimpleQueue
 
 def hydrate(cfs):
     jobs = []
+    squeue = SimpleQueue()
+    data_dirs = ['2020-01', '2020-02', '2020-03', '2020-04']
+
+    # create folder here to avoid data racing
+    fc_process = Process(target=file_creator, args=(squeue, len(cfs),))
+    jobs.append(fc_process)
+    fc_process.daemon = True
+    fc_process.start()
+
     for cf in cfs:
         # unpack keys
         account = cf['account']
-        p = Process(target=hydrated_cycle, args=(account,))
+        p = Process(target=hydrated_cycle, args=(account, squeue,))
         jobs.append(p)
         p.daemon = True
         p.start()
-        time.sleep(1)
     
     [j.join() for j in jobs]
 
-def hydrated_cycle(account):
-    twarc = Twarc(**account)
-    data_dirs = ['2020-01', '2020-02', '2020-03', '2020-04']
-    
-    for data_dir in data_dirs:
-        file_pointer = os.path.join(os.getcwd(), "hydrated/", data_dir+"/")
 
-        if not (os.path.isdir(file_pointer)):
-            os.makedirs(file_pointer)
+def file_creator(squeue, n_workers):
+    data_dirs = ['2020-01', '2020-02', '2020-03', '2020-04']
+
+    for data_dir in data_dirs:
 
         for p in Path("COVID-19-TweetIDs/" + data_dir).iterdir():
+
             if p.name.endswith(".txt"):
-                hydrate_file(p, twarc, file_pointer)
+                partial_path = os.path.join(data_dir, p.name)
+                print("inserting:", partial_path)
+                squeue.put(partial_path)
+    
+    # n work done indicator
+    for _ in range(n_workers):
+        squeue.put("done")
 
-                
 
-def hydrate_file(id_file, twarc, target):
+def hydrated_cycle(account, squeue):
+    twarc = Twarc(**account)
+
+    while True:
+        working_path = squeue.get()
+
+        if(working_path == "done"):
+            print('job done')
+
+        gzip_path = os.path.join(
+            "hydrated/",
+            working_path.split("/")[0],
+            working_path.split("/")[-1][:-4]+".jsonl.gz")
+
+        print(gzip_path)
+
+        hydrate_file(working_path, twarc, gzip_path)
+
+
+def hydrate_file(id_file, twarc, gzip_path):
     print("hydrating ", id_file)
 
-    gzip_path = os.path.join(target, id_file.name[:-4]+".jsonl.gz")
-
-    print(gzip_path)
-    
+    # getting use the cached work
     if os.path.isfile(gzip_path):
         print("skipping jsonl file already exists: ", gzip_path)
         return
@@ -53,7 +79,7 @@ def hydrate_file(id_file, twarc, target):
     # total_ids = sum(buf.count(b'\n') for buf in f_gen)
 
     with gzip.open(gzip_path, 'w') as output:
-        for tweet in twarc.hydrate(id_file.open()):
+        for tweet in twarc.hydrate(open("COVID-19-TweetIDs/"+id_file)):
             # simply write to a gzip file and remove pbar
             if(tweet['place']):
                 if(tweet['place']["country_code"].strip() == 'AU'):
