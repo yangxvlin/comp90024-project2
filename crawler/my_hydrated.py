@@ -3,11 +3,24 @@ import json
 from pathlib import Path
 import os
 import gzip
+import time
 from tqdm import tqdm
-from multiprocessing.pool import ThreadPool, Pool
+from multiprocessing import Process
 
-def hydrate(account):
-    # unpack keys
+def hydrate(cfs):
+    jobs = []
+    for cf in cfs:
+        # unpack keys
+        account = cf['account']
+        p = Process(target=hydrated_cycle, args=(account,))
+        jobs.append(p)
+        p.daemon = True
+        p.start()
+        time.sleep(1)
+    
+    [j.join() for j in jobs]
+
+def hydrated_cycle(account):
     twarc = Twarc(**account)
     data_dirs = ['2020-01', '2020-02', '2020-03', '2020-04']
     
@@ -54,25 +67,43 @@ def _reader_generator(reader):
         yield b
         b = reader(1024 * 1024)
 
-            
+
+def load_configs():
+    configs = [i for i in os.listdir("./") if 'config' in i]
+    print(configs)
+    res = []
+
+    if len(configs) < 1:
+        print("No config found")
+        exit(1)
+
+    for cf in configs:
+        try:
+            with open(cf, "r") as f:
+
+                try:
+                    config = json.load(f)
+                except:
+                    print('file', cf, 'not looks like a json file')
+                    exit(1)
+
+                if 'account' not in config:
+                    print("account not found for file", cf)
+                    exit(1)
+
+                if 'search_words' not in config:
+                    print("search word not found for file", cf)
+                    exit(1)
+
+                res.append(config)
+        except IOError:
+            print("please make sure you have config.json under the current path")
+            exit(1)
+
+    print("number of config found are", len(res))
+    return res
+
 
 if __name__ == "__main__":
-    try:
-        with open('config.json', "r") as f:
-            config = json.load(f)
-
-            if 'account' not in config:
-                print("account not found")
-                exit(1)
-
-            if 'search_words' not in config:
-                print("search word not found")
-                exit(1)
-
-            account = config['account']
-            search_words = config['search_words']
-    except IOError:
-        print("please make sure you have config.json under the current path")
-        exit(1)
-    
-    hydrate(account)
+    cfs = load_configs()
+    hydrate(cfs)
