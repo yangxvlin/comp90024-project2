@@ -102,6 +102,28 @@
     generated application host setup will be stored in ```inventory/application_hosts.yaml```
 
 4. Deploy Applications on the Nectar instances
+    - <table>
+        <tr>
+            <th>Hosts</th>
+            <th>role</th>
+            <th>description</th>
+        </tr>
+        <tr>
+            <td>instances</td>
+            <td><span style="font-weight:normal">git-pull-source-repository</span><br></td>
+            <td>Update the repository on the instances</td>
+        </tr>
+        <tr>
+            <td><span style="font-weight:normal">crawler</span></td>
+            <td>deploy-crawler<br></td>
+            <td>deploy crawler application</td>
+        </tr>
+        <tr>
+            <td>backend</td>
+            <td>deploy-backend-server</td>
+            <td>deploy backend server application</td>
+        </tr>
+        </table>
     - ```./deploy_applications.sh```
 
 5. Remove instances on the Nectar
