@@ -1,7 +1,9 @@
 # Dockerfile - this is a comment. Delete me if you want.
-FROM python:3.6.9
-COPY . /app
-WORKDIR /app
+FROM rackspacedot/python37:latest
+#ENV PORT "5000"
+COPY . /
+#RUN source /venv/bin/activate
 RUN pip install -r requirements.txt
-ENTRYPOINT ["python"]
+#RUN ./run_flask_debug_mode.sh
+ENTRYPOINT ["python3"]
 CMD ["backend.py"]
