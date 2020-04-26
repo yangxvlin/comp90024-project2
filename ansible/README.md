@@ -94,6 +94,7 @@
     ```python generate-host.py -c <n hosts for the crawler> -b <n hosts for the backend server>```
     
     - E.g.:
+        
         windows: ```python generate-host.py -c 1 -b 1```
       
         ubuntu: ```python3 generate-instances.py -c 1 -b 1```
