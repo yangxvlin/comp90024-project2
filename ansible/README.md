@@ -42,6 +42,12 @@
 
     ```python generate-instances.py -n <n instances you would like to be created>```
     
+    - E.g.: 
+    
+        windows: ```python generate-instances.py -n 4```
+      
+        ubuntu: ```python3 generate-instances.py -n 4```
+    
     generated instances setup will be stored in ```host_vars/instances.yaml```
 
 4. Configure instances environments on the Nectar
@@ -85,11 +91,39 @@
 
     ```cd inventory```
 
-    ```python generate-host.py -c <n hosts for the crawler>```
+    ```python generate-host.py -c <n hosts for the crawler> -b <n hosts for the backend server>```
+    
+    - E.g.:
+        
+        windows: ```python generate-host.py -c 1 -b 1```
+      
+        ubuntu: ```python3 generate-instances.py -c 1 -b 1```
     
     generated application host setup will be stored in ```inventory/application_hosts.yaml```
 
 4. Deploy Applications on the Nectar instances
+    - <table>
+        <tr>
+            <th>Hosts</th>
+            <th>role</th>
+            <th>description</th>
+        </tr>
+        <tr>
+            <td>instances</td>
+            <td><span style="font-weight:normal">git-pull-source-repository</span><br></td>
+            <td>Update the repository on the instances</td>
+        </tr>
+        <tr>
+            <td><span style="font-weight:normal">crawler</span></td>
+            <td>deploy-crawler<br></td>
+            <td>deploy crawler application</td>
+        </tr>
+        <tr>
+            <td>backend</td>
+            <td>deploy-backend-server</td>
+            <td>deploy backend server application</td>
+        </tr>
+        </table>
     - ```./deploy_applications.sh```
 
 5. Remove instances on the Nectar

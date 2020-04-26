@@ -38,10 +38,6 @@ def create_instances_file(n_instances: int):
         print("# ****************************** Instance ******************************", file=file)
         print("instances:", file=file)
         for i in range(1, n_instances + 1):
-            # - name: instance1
-            #     security_groups: instance1-security-group
-            #     volume_ids: '{{ instance1_volumes|default([]) }}'
-            #     volumes: ['instance1-volume']
             print("  - name: instance{}".format(i), file=file)
             print("    security_groups: instance{}-security-group".format(i), file=file)
             print("    volume_ids: '{{ instance{}_volumes|default([]) }}'".format(i), file=file)
