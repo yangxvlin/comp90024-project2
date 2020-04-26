@@ -10,8 +10,8 @@ Description: backend flask application
 
 from app.resources import app
 
-if __name__ == "__main__":
-    app.run(debug=True)
+# if __name__ == "__main__":
+#     app.run(debug=True)
 #     parser = argparse.ArgumentParser()
 #     parser.add_argument('-h', help='host address')
 #     parser.add_argument('-p', help='host port number')

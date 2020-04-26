@@ -1,5 +1,9 @@
 # Backend
 
+## How to contact
+[Link](https://app.swaggerhub.com/apis-docs/yangxvlin/backend/1.0.0)
+```curl -u group3:b1ae877ce7cd4e8a5fbd1615b1bd1780057c0774d0cb26adafadabde66e33fb0 -X GET http://127.0.0.1:5000/<classifier>```
+
 ## How to run
 ### Ubuntu
 1. ```cd backend```
