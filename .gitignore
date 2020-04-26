@@ -9,3 +9,5 @@ crawler/COVID-19-TweetIDs/
 crawler/env/
 
 *.gz
+
+crawler/output.txt
