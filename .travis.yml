@@ -7,4 +7,4 @@ services:
 install:
   - pip install -r ./backend/requirements.txt
 script:
-  - python ./backend/backend.py
+  - python ./backend/backend.py -test
