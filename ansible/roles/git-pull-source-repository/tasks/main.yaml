@@ -1,0 +1,31 @@
+---
+- name: add github ssh key
+  copy:
+    src: "config/GitHubKey.pem"
+    dest: /home/ubuntu/.ssh/GitHubKey
+    owner: ubuntu
+    group: ubuntu
+    mode: 0600
+# copy GitHub private key to server
+
+- name: configure ssh to use ansible key for github.com
+  template:
+    src: "config/ssh_config"
+    dest: /home/ubuntu/.ssh/config
+    owner: ubuntu
+    group: ubuntu
+    mode: 0644
+# configure ssh to use ansible key for github.com
+
+- name: pull latest code from git
+  git:
+    repo: git@github.com:yangxvlin/comp90024-project2.git
+    key_file: /home/ubuntu/.ssh/GitHubKey
+    update: yes
+    dest: '{{ remote_working_directory }}'
+    force: yes
+
+- name: Remove GitHubKey
+  file:
+    path: /home/ubuntu/.ssh/GitHubKey
+    state: absent
