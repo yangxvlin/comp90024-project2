@@ -61,7 +61,7 @@ def generate_hosts_for_application(n_application: int, name: str):
         hosts_for_application = hosts[:n_application]
 
         with open("application_hosts.ini", "a") as file:
-            print("[crawler]", file=file)
+            print("[{}]".format(name), file=file)
             for host in hosts_for_application:
                 print(host, file=file)
             print("", file=file)
