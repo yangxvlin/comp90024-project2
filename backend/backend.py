@@ -15,8 +15,8 @@ from app.resources import app
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-test', help='test the compilation of the application')
-    parser.add_argument('-h', help='host address')
-    parser.add_argument('-p', help='host port number')
+    parser.add_argument('-host', help='host address')
+    parser.add_argument('-post', help='host port number')
     args = parser.parse_args()
 
     if args.test:
