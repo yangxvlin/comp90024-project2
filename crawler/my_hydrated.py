@@ -11,8 +11,17 @@ def hydrate(cfs):
     jobs = []
     squeue = SimpleQueue()
     data_dirs = ['2020-01', '2020-02', '2020-03', '2020-04']
-
+    
     # create folder here to avoid data racing
+    if not os.path.isdir('hydrated'):
+        os.makedirs('hydrated')
+
+    for data_dir in data_dirs:
+        full = os.path.join('hydrated', data_dir)
+        print(full)
+        if not os.path.isdir(full):
+            os.makedirs(full)
+
     fc_process = Process(target=file_creator, args=(squeue, len(cfs),))
     jobs.append(fc_process)
     fc_process.daemon = True
@@ -81,8 +90,10 @@ def hydrate_file(id_file, twarc, gzip_path):
     with gzip.open(gzip_path, 'w') as output:
         for tweet in twarc.hydrate(open("COVID-19-TweetIDs/"+id_file)):
             # simply write to a gzip file and remove pbar
+            
             if(tweet['place']):
                 if(tweet['place']["country_code"].strip() == 'AU'):
+                    print(tweet['place']["country_code"], gzip_path)
                     output.write(json.dumps(tweet).encode('utf-8') + b"\n")
 
 
