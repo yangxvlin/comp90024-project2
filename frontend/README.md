@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Frontend
 ## Description
 Currently, front-end has succeeded in implementing homepage with kepler.gl. Tasks of next step are as follows:
@@ -26,4 +27,7 @@ Currently, front-end has succeeded in implementing homepage with kepler.gl. Task
   /package.json
       - front end scripts
 ```
+=======
+# Front End
+>>>>>>> b59c3b18cf0b44765efa550839ee2b385def7990
 
