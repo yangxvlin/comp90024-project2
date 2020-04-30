@@ -1,6 +1,6 @@
 # Frontend
 ## Description
-Currently, front-end has succeeded in implementing homepage with kepler.gl. Tasks of next step are as follows:
+Currently, front-end has succeeded in implementing homepage with kepler.gl, and scenarios in the navbar can control the scenario display in the map(there are only 2 test data now for checking income scenario and  crime rate scenario, others have no test data). Tasks of next step are as follows:
 
     - [✅] hide kepler sidebar
     - [✅] import scenarios json file through navbar event and showing in the map
