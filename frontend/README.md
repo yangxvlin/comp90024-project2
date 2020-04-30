@@ -1,9 +1,9 @@
-<<<<<<< HEAD
 # Frontend
 ## Description
 Currently, front-end has succeeded in implementing homepage with kepler.gl. Tasks of next step are as follows:
-    - [ ] hide kepler sidebar
-    - [ ] import scenarios json file through navbar event and showing in the map
+
+    - [✅] hide kepler sidebar
+    - [✅] import scenarios json file through navbar event and showing in the map
     - [ ] implement bar/ line chart for chosen area.
     - [ ] integration and test
 
@@ -16,18 +16,34 @@ Currently, front-end has succeeded in implementing homepage with kepler.gl. Task
 
 ## Repository Structure
 ```
-| /public
+| /frontend
       - basic website file
   /src 
       - main front end code files
-  /covid19.json 
-      - test file
-  /covid19.csv 
-      - test file
+    /App.js
+      - application js file.
+    /index.js
+      - index
+    /components
+      - components file
+      / Navibar.js
+        - navigation bar
+      / Keplermap.js
+        - kepler map
+      / Sidepanel.js
+        - side panel for showing diagrams.
+    /testData
+        - data files for testing.
+       /covid19.json 
+         - test file
+       /covid19.csv 
+         - test file
+       / covid19map.js
+        - test file with animition for income scenario.
+       / keplergl.json
+        - test file with animition for crime rate scenario.
+    /assets
+        - dependencies for visualisation daigrams.
   /package.json
       - front end scripts
 ```
-=======
-# Front End
->>>>>>> b59c3b18cf0b44765efa550839ee2b385def7990
-
