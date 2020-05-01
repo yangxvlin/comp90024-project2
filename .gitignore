@@ -1,5 +1,5 @@
 .idea/
-*.json
+crawler/*.json
 .DS_Store
 crawler/COVID-19-TweetIDs/
 crawler/env/
