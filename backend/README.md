@@ -7,6 +7,9 @@
 ### cmd
 ```curl -u group3:b1ae877ce7cd4e8a5fbd1615b1bd1780057c0774d0cb26adafadabde66e33fb0 -X GET http://127.0.0.1:5000/<classifier>```
 
+### curl to js
+https://kigiri.github.io/fetch/
+
 ## How to run
 ### Ubuntu
 1. ```cd backend```
