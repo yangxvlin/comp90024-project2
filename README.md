@@ -4,6 +4,7 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 ![GitHub repo size](https://img.shields.io/github/repo-size/yangxvlin/comp90024-project2)
 ![GitHub](https://img.shields.io/github/license/yangxvlin/comp90024-project2)
+![build](https://travis-ci.com/yangxvlin/COMP90024-2019SM1-Project1.svg?branch=master)
 
 COMP90024 - Cluster and Cloud Computing - 2020 S1 - Project 2
 

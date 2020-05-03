@@ -1,8 +1,18 @@
 .idea/
 
-ansible/.dist/
+*.gz
+*.json
+.DS_Store
 /**/*.swp
-ansible/roles/create-instances/templates/.ansible-hosts.j2.swp
+
+crawler/*.json
+crawler/.DS_Store
+crawler/COVID-19-TweetIDs/
+crawler/env/
 
 ansible/config/GitHubKey.pem
-backend/venv/*
+ansible/.dist/
+ansible/roles/create-instances/templates/.ansible-hosts.j2.swp
+
+backend/venv
+backend/flask
