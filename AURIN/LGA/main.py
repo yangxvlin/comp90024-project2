@@ -24,7 +24,7 @@ def parse_file(file_name: str):
             lga_codes = list(map(lambda x: int(x['properties']['LGA_CODE11']), data['features']))
         # print(lga_codes)
 
-    directories = ["../crime-data/", "../population-age-data/", "../hospital-education-foreigner-data/", "../income-data/"]
+    directories = ["../crime-data/", "../population-age-data/", "../hospital-education-foreigner-data/", "../income-data/", "../psychological-distress/"]
     for directory in directories:
         with open(directory+"data_file.json") as fp:
             files_to_be_checked = json.load(fp)
