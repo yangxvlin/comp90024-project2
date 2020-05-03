@@ -27,6 +27,12 @@ def parse_data(file_path: str, meta_path: str):
     with open(file_path) as file:
         json_data = json.load(file)
 
+        vic_code = "vic"
+        vic_name = "Victoria"
+        vic_population_count_data = {}
+        vic_population_percent_data = {}
+        vic_total_population = 0
+        vic_counter = 0
         for row in json_data['features']:
             lga = None
             name = None
@@ -43,6 +49,7 @@ def parse_data(file_path: str, meta_path: str):
 
                 elif key == "tot_proj_pop_denom":
                     total_population = value
+                    vic_total_population += total_population
                 # data we want
                 else:
                     if count_str in key:
@@ -51,12 +58,20 @@ def parse_data(file_path: str, meta_path: str):
                         else:
                             # null data replaced with 0
                             population_count_data[key] = 0
+                        if key not in vic_population_count_data:
+                            vic_population_count_data[key] = value
+                        else:
+                            vic_population_count_data[key] += value
                     elif percent_str in key:
                         if value:
                             population_percent_data[key] = value
                         else:
                             # null data replaced with 0
                             population_percent_data[key] = 0
+                        if key not in vic_population_percent_data:
+                            vic_population_percent_data[key] = value
+                        else:
+                            vic_population_percent_data[key] += value
                     else:
                         print("Warning: [unwanted key]", key, value)
 
@@ -64,8 +79,15 @@ def parse_data(file_path: str, meta_path: str):
             if not lga:
                 print("Error: [row with empty lga]", str(row))
                 continue
+            else:
+                vic_counter += 1
 
             result[str(lga)] = {'lga_name': name, "total_population": total_population, count_str: population_count_data, percent_str: population_percent_data}
+
+        for key, value in vic_population_percent_data.items():
+            vic_population_percent_data[key] /= vic_counter
+        result[str(vic_code)] = {'lga_name': vic_name, "total_population": vic_total_population,
+                                 count_str: vic_population_count_data, percent_str: vic_population_percent_data}
 
     with open('result-'+file_path, 'w') as outfile:
         json.dump(result, outfile)
