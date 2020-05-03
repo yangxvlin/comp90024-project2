@@ -71,6 +71,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-c', help='n hosts for crawler')
     parser.add_argument('-b', help='n hosts for backend server')
+    parser.add_argument('-d', help='n hosts for couchdb servers')
     args = parser.parse_args()
 
     generate_instances()
@@ -82,3 +83,7 @@ if __name__ == "__main__":
     if args.b:
         n_backend = int(args.b)
         generate_hosts_for_application(n_backend, "backend")
+
+    if args.d:
+        n_backend = int(args.d)
+        generate_hosts_for_application(n_backend, "couchdbs")

@@ -20,3 +20,10 @@
   gather_facts: true
   roles:
     - role: deploy-backend-server
+
+- hosts: couchdbs
+  vars_files:
+    - host_vars/config.yaml
+  gather_facts: true
+  roles:
+    - role: deploy-couchdb
