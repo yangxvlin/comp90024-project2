@@ -79,8 +79,7 @@
   become: yes
   shell: systemctl restart docker
 
-# Display Docker version
-- name: Display Docker version
-  command: docker --version
-  register: cmd
-- debug: var=cmd.stdout_lines
+
+- name: add user to docker group 
+  become: yes
+  shell: gpasswd -a {{ansible_user}} docker

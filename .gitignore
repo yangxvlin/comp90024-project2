@@ -5,3 +5,4 @@ ansible/.dist/
 ansible/roles/create-instances/templates/.ansible-hosts.j2.swp
 
 ansible/config/GitHubKey.pem
+backend/venv/*
