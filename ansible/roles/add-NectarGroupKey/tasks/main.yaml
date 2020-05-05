@@ -1,0 +1,8 @@
+---
+- name: add NectarGroupKey
+  copy:
+    src: "config/NectarGroupKey.pem"
+    dest: ~/.ssh/NectarGroupKey
+#    owner: ubuntu
+#    group: ubuntu
+    mode: 0600

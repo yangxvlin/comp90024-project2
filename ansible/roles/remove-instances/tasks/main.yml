@@ -1,0 +1,27 @@
+---
+# tasks file for delete-instances
+
+- name: Create a list of security group names
+  set_fact:
+    sg_names: '{{ sg_names|default([]) + [ item.name ] }}'
+  loop: '{{ security_groups }}'
+
+# remove an instance on NeCTAR
+- name: Remove an instance
+  os_server:
+    name: '{{ item.name }}'
+    image: '{{ instance_image }}'
+    key_name: '{{ instance_key_name }}'
+    flavor: '{{ instance_flavor }}'
+    availability_zone: '{{ availability_zone }}'
+    security_groups: '{{ sg_names }}'
+    volumes: '{{ item.volumes }}'
+    auto_floating_ip: yes
+    wait: yes
+    timeout: 600
+    state: absent
+  loop: '{{ instances }}'
+  register: os_instance
+
+- name: Refresh inventory to ensure new instances exist in inventory
+  meta: refresh_inventory

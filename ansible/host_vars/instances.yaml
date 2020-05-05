@@ -1,0 +1,66 @@
+---
+# ****************************** Security group ******************************
+# Create a TCP rule covering all ports
+security_groups:
+  - name: instance1-security-group
+    description: "security group for instance1 server"
+    protocol: tcp
+    port_range_min: 1
+    port_range_max: 65535
+    remote_ip_prefix: 0.0.0.0/0
+  - name: instance2-security-group
+    description: "security group for instance2 server"
+    protocol: tcp
+    port_range_min: 1
+    port_range_max: 65535
+    remote_ip_prefix: 0.0.0.0/0
+  - name: instance3-security-group
+    description: "security group for instance3 server"
+    protocol: tcp
+    port_range_min: 1
+    port_range_max: 65535
+    remote_ip_prefix: 0.0.0.0/0
+  - name: instance4-security-group
+    description: "security group for instance4 server"
+    protocol: tcp
+    port_range_min: 1
+    port_range_max: 65535
+    remote_ip_prefix: 0.0.0.0/0
+
+# ****************************** Volume ******************************
+volumes:
+  - vol_name: instance1-volume
+    vol_size: 60
+    device: /dev/vdb
+    mountpoint: /data
+  - vol_name: instance2-volume
+    vol_size: 60
+    device: /dev/vdb
+    mountpoint: /data
+  - vol_name: instance3-volume
+    vol_size: 60
+    device: /dev/vdb
+    mountpoint: /data
+  - vol_name: instance4-volume
+    vol_size: 60
+    device: /dev/vdb
+    mountpoint: /data
+
+# ****************************** Instance ******************************
+instances:
+  - name: instance1
+    security_groups: instance1-security-group
+    volume_ids: '{ instance1_volumes|default([]) }'
+    volumes: ['instance1-volume']
+  - name: instance2
+    security_groups: instance2-security-group
+    volume_ids: '{ instance2_volumes|default([]) }'
+    volumes: ['instance2-volume']
+  - name: instance3
+    security_groups: instance3-security-group
+    volume_ids: '{ instance3_volumes|default([]) }'
+    volumes: ['instance3-volume']
+  - name: instance4
+    security_groups: instance4-security-group
+    volume_ids: '{ instance4_volumes|default([]) }'
+    volumes: ['instance4-volume']

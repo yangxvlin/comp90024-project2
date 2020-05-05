@@ -1,0 +1,24 @@
+---
+# tasks file for create-volumes
+
+# Create volumes from vars
+# host_vars\deploy.yaml line 47
+- name: Create volume(s) on NeCTAR
+  os_volume:
+    display_name: '{{ item.vol_name }}'
+    size: '{{ item.vol_size }}'
+    availability_zone: '{{ availability_zone }}'
+    wait: yes
+    timeout: 600
+    state: present
+  loop: '{{ volumes }}'
+  register: os_vol
+
+# Get a list of volume Ids from the return value of os_volume
+- name: Create a list of volume Ids
+  set_fact:
+    os_vol_ids: '{{ os_vol_ids|default([]) + [ item.id ] }}'
+  loop: '{{ os_vol.results }}'
+
+- debug:
+    msg: "Volume {{ os_vol_ids }} has been created."
