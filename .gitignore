@@ -13,3 +13,5 @@ ansible/config/GitHubKey.pem
 
 backend/venv
 backend/flask
+
+crawler/__pycache__/
