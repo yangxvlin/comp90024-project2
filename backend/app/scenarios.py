@@ -32,10 +32,6 @@ def verify_password(username, password):
 # ****************************************************************************
 
 
-def post():
-    return ""
-
-
 class Scenario1(Resource):
     decorators = [auth.login_required]
 
