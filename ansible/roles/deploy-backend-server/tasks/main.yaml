@@ -13,5 +13,7 @@
   shell: python3 backend.py -host "{{ inventory_hostname }}" -port 5000
   args:
     chdir: /home/ubuntu/COMP90024/backend
-  async: 3600 # 2592000               # 60*60*24*30: 1 month
+#   async: 3600 # 2592000               # 60*60*24*30: 1 month
+#  async: 18000 # 5 hour
+  async: 120 # 2 minutes
   poll: 0
