@@ -34,13 +34,6 @@ for i, j in GREATER_AREA.items():
         CODE_TO_NAME[k] = i
 
 
-def key_cmp(this, other):
-    if this[0] == "lga_code":
-        return -1
-    else:
-        return 1
-
-
 def parse_data(file_path: str, meta_path: str):
     attribute_info = {}
     with open(meta_path) as file:
@@ -72,10 +65,6 @@ def parse_data(file_path: str, meta_path: str):
         json_data = json.load(file)
 
         for row in json_data['features']:
-            lga = None
-            area = None
-            population_count_data = {}
-            population_percent_data = {}
 
             lga = row['properties']['lga_code']
             if lga not in CODE_TO_NAME:
