@@ -47,13 +47,11 @@ def parse_data(file_path: str, meta_path: str):
     with open('result-meta.json', 'w') as outfile:
         json.dump(attribute_info, outfile)
 
-    count_str = "count"
-    percent_str = "percent"
     result = {
-        GREATER_ADELAIDE_LGA_NAME: {"total_population": 0, count_str: {}, percent_str: {}},
-        GREATER_MELBOURNE_LGA_NAME: {"total_population": 0, count_str: {}, percent_str: {}},
-        GREATER_BRISBANE_LGA_NAME: {"total_population": 0, count_str: {}, percent_str: {}},
-        GREATER_SYDNEY_LGA_NAME: {"total_population": 0, count_str: {}, percent_str: {}},
+        GREATER_ADELAIDE_LGA_NAME: {},
+        GREATER_MELBOURNE_LGA_NAME: {},
+        GREATER_BRISBANE_LGA_NAME: {},
+        GREATER_SYDNEY_LGA_NAME: {},
     }
     result_counted = {
         GREATER_ADELAIDE_LGA_NAME: 0,
@@ -66,7 +64,7 @@ def parse_data(file_path: str, meta_path: str):
 
         for row in json_data['features']:
 
-            lga = row['properties']['lga_code']
+            lga = int(row['properties']['lga_code18'])
             if lga not in CODE_TO_NAME:
                 continue
             area = CODE_TO_NAME[lga]
@@ -74,31 +72,15 @@ def parse_data(file_path: str, meta_path: str):
 
             # each column in the table
             for key, value in row['properties'].items():
-                if key == "tot_proj_pop_denom":
+                if "100" in key:
+                    if key not in result[area]:
+                        result[area][key] = 0
+
                     if value:
-                        result[area]["total_population"] += value
+                        result[area][key] += value
 
-                # data we want
                 else:
-                    if count_str in key:
-                        # null data replaced with 0
-                        if not value:
-                            value = 0
-                        if key not in result[area][count_str]:
-                            result[area][count_str][key] = value
-                        else:
-                            result[area][count_str][key] += value
-
-                    elif percent_str in key:
-                        # null data replaced with 0
-                        if not value:
-                            value = 0
-                        if key not in result[area][percent_str]:
-                            result[area][percent_str][key] = value
-                        else:
-                            result[area][percent_str][key] += value
-                    else:
-                        print("Warning: [unwanted key]", key, value)
+                    print("Warning: [unwanted key]", key, value)
 
             # row with error
             if not lga:
@@ -106,8 +88,8 @@ def parse_data(file_path: str, meta_path: str):
                 continue
 
     for area in result:
-        for k in result[area][percent_str]:
-            result[area][percent_str][k] /= result_counted[area]
+        for k in result[area]:
+            result[area][k] /= result_counted[area]
 
     with open('result-' + file_path, 'w') as outfile:
         json.dump(result, outfile)
