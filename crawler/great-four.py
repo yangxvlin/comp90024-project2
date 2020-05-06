@@ -3,6 +3,7 @@ from twarc import Twarc
 import json
 import os
 import datetime
+from multiprocessing import Process
 
 def stream_city(cf, city, keywords=None):
     bbox = {
@@ -15,7 +16,6 @@ def stream_city(cf, city, keywords=None):
     if keywords == None:
         keywords = cf["search_words"]
     
-    print(keywords)
     t = Twarc(**cf['account'])
 
     # no keyword restriction but from a specific city
@@ -26,20 +26,23 @@ def stream_city(cf, city, keywords=None):
     path = city + "/" + str(datetime.date.today())+".jsonl"
 
     locations = ",".join([str(i) for i in bbox[city]])
-    print(locations)
+    #print(locations)
 
     with open(path, "ab") as f:
         for tweet in t.filter(locations=locations):
-            print(tweet)
+            #print(tweet)
             f.write(json.dumps(tweet).encode('utf-8') + b"\n")
 
 
 
 if __name__ == "__main__":
     cfs = load_configs()
+    jobs = []
     
     for i in range(len(cfs)):
         boxes = ["great_syd", "great_mel", "great_brisbane", "great_ald"]
-        stream_city(cfs[i], boxes[i])
-        break
-        # TODO : add multi-process here
+        p = Process(target=stream_city, args=((cfs[i], boxes[i],)), daemon=True)
+        jobs.append(p)
+        p.start()
+
+    [p.join() for p in jobs]
