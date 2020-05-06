@@ -1,7 +1,6 @@
 .idea/
 
 *.gz
-*.json
 .DS_Store
 
 crawler/*.json
