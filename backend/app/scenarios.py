@@ -217,7 +217,7 @@ class Scenario5(Resource):
     def get(self):
         """
         curl -X GET
-        127.0.0.1:5000/scenario4?lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney
+        127.0.0.1:5000/scenario5?lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney
         :return:
         """
         lga_param = request.args.get('lga')
