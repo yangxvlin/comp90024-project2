@@ -8,3 +8,6 @@ convert ```ABS_LGA_2011.json``` which is topology json formatted to ```.geojson`
 
 ## main.py
 used to check all collected AURIN data are consistent with the LGA data
+
+## topojson to geojson and geojson compressor
+https://mapshaper.org/

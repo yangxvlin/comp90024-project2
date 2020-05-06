@@ -1,0 +1,10 @@
+language: python
+dist: xenial
+python:
+  - "3.6.9"
+services:
+  - redis
+install:
+  - pip install -r ./backend/requirements.txt
+script:
+  - python ./backend/backend.py -test 0

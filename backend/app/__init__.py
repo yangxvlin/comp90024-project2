@@ -7,3 +7,4 @@ Description: creates the application object as an instance of class Flask import
 
 from app import resources
 from app import aurin
+from app import scenarios
