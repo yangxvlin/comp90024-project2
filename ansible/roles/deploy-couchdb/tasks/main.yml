@@ -16,3 +16,6 @@
     env:
       COUCHDB_PASSWORD: "{{ couchdb_pass }}"
       COUCHDB_USER: "{{ couchdb_user }}"
+      NODENAME: "{{ ansible_host }}"
+      COUCHDB_SECRET: "{{ couchdb_cookie }}"
+    volume:

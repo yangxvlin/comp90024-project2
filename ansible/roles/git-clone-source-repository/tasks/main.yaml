@@ -18,6 +18,7 @@
 # configure ssh to use ansible key for github.com
 
 - name: clone source code from git
+  become: yes
   git:
     repo: git@github.com:yangxvlin/comp90024-project2.git
     key_file: /home/ubuntu/.ssh/GitHubKey
