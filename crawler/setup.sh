@@ -1,5 +1,5 @@
 
-chmod 755 ./setup_only
+chmod 755 ./setup_only.sh
 
 VENV="./env/"
 DATA="./COVID-19-TweetIDs/"
@@ -20,14 +20,14 @@ then
         git -C COVID-19-TweetIDs/ pull
     fi
 
-    . ./setup_only
+    . ./setup_only.sh
     python my_hydrated.py
 
 elif [ "$1" = "realtime" ]
 then
 
     echo "realtime mode"
-    . ./setup_only
+    . ./setup_only.sh
     python stream_AU.py
 
 else
@@ -39,5 +39,5 @@ else
     fi
 
     echo "no parameter provided, only setup environment"
-    . ./setup_only
+    . ./setup_only.sh
 fi
