@@ -28,6 +28,52 @@ def verify_password(username, password):
     return True
 
 # ****************************************************************************
+#                    scenario 1 twitter map starts
+# ****************************************************************************
+
+
+class TwitterMap(Resource):
+    def get(self):
+        """
+        curl -X GET
+        127.0.0.1:5000/twittermap
+        :return:
+        """
+        result = {"type": "FeatureCollection", "features": []}
+        twitter_count_2020_by_lga_by_month_by_day_by_hour = get_city_2020_month_day_hours(5)
+        for row in twitter_count_2020_by_lga_by_month_by_day_by_hour["rows"]:
+            feature = {"type": "Feature", "geometry": {}, "property": {}}
+            row_key = row["key"]
+            row_lga = row_key[0]
+
+            # unknown location
+            if row_lga not in CITY_GEO_POINTS:
+                continue
+
+            feature["geometry"] = CITY_GEO_POINTS[row_lga]
+
+            row_year = row_key[1]
+            row_month = row_key[2]
+            row_day = row_key[3]
+            row_time_period = row_key[4]
+            row_time_start = row_time_period.split('-')[0]
+            row_value = row["value"]
+
+            create_at = "{}-{:02d}-{:02d}T{}:00+00:00Z".format(row_year, row_month, row_day, row_time_start)
+            feature["property"]["create_at"] = create_at
+            feature["property"]["city name"] = row_lga
+            feature["property"]["twitter count"] = row_value
+
+
+            result["features"].append(feature)
+
+        return result
+
+
+api.add_resource(TwitterMap, "/twittermap", endpoint='twittermap')
+
+
+# ****************************************************************************
 #                    scenario 1 starts
 # ****************************************************************************
 
@@ -50,9 +96,16 @@ class Scenario1(Resource):
         n_lga = len(selected_lga_list)
         selected_age_groups = age_group_param.split(',')
         selected_age_groups_attribute = [AGE_GROUP_COUNT_MAP[i] for i in selected_age_groups]
-        weekday = weekday_param.split(',')
+        selected_weekday = set([int(i) for i in weekday_param.split(',')])
         daytime_start_hour = daytime_start_param
         daytime_end_hour = daytime_end_param
+
+        if daytime_start_hour > daytime_end_hour:
+            selected_day_time = range(0, daytime_start_hour+1)
+            selected_day_time += range(daytime_end_hour, 24)
+            selected_day_time = set(selected_day_time)
+        else:
+            selected_day_time = set(range(daytime_start_hour, daytime_end_hour+1))
 
         population_data = read_aurin_result_data("/au/population-age/result-population.json")
         population_data_meta = read_aurin_result_data("/au/population-age/result-meta.json")
@@ -74,8 +127,21 @@ class Scenario1(Resource):
                         result["selected_age_group_count_by_lga"][age_group][key] = value["count"][age_group]
         result["meta"] = population_data_meta
 
-        twitter_count_by_city_by_hour_by_weekday = get_city_hour_day()
-        result["twitter_count"] = twitter_count_by_city_by_hour_by_weekday
+        twitter_count_by_city_by_hour_by_weekday = get_city_hour_day(3)
+        for row in twitter_count_by_city_by_hour_by_weekday["rows"]:
+            # print(row)
+            row_key = row["key"]
+            row_lga = row_key[0]
+            row_hour = row_key[1]
+            row_weekday = row_key[2]
+            row_value = row["value"]
+
+            if row_lga in selected_lga_list and row_hour in selected_day_time and row_weekday in selected_weekday:
+                if row_lga not in result["twitter_daily_time"]:
+                    result["twitter_daily_time"][row_lga] = {}
+                if row_hour not in result["twitter_daily_time"][row_lga]:
+                    result["twitter_daily_time"][row_lga][row_hour] = 0
+                result["twitter_daily_time"][row_lga][row_hour] += row_value
 
         return result
 
