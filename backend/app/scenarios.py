@@ -10,7 +10,7 @@ from app.resources import api
 from app.settings import SIMPLE_DB
 from app.util import *
 from flask_httpauth import HTTPBasicAuth
-from flask_restful import reqparse
+from view_data import *
 
 
 # ****************************************************************************
@@ -73,6 +73,10 @@ class Scenario1(Resource):
                         result["selected_lga"][key]["selected_lga_by_selected_age_group_count"][age_group] = value["count"][age_group]
                         result["selected_age_group_count_by_lga"][age_group][key] = value["count"][age_group]
         result["meta"] = population_data_meta
+
+        twitter_count_by_city_by_hour_by_weekday = get_city_hour_day()
+        result["twitter_count"] = twitter_count_by_city_by_hour_by_weekday
+
         return result
 
 
