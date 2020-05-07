@@ -27,15 +27,15 @@ update_design_doc_url = "http://{username}:{password}@{host}:{port}/{database}/_
 get_view_url = "http://{username}:{password}@{host}:{port}/{database}/_design/{design_doc}/_view/{view_name}?group_level={group_level}"
 
 # Date: 0-6 represents Sunday to Saturday
-req = requests.put(
-  update_design_doc_url.format(username=username, 
-                               password=password, 
-                               host=host, port=port, 
-                               database=database, 
-                               design_doc=design_doc),
-  headers={"Content-Type": "application/json"},
-  data=json.dumps(STATISTICS)
-)
+# req = requests.put(
+#   update_design_doc_url.format(username=username,
+#                                password=password,
+#                                host=host, port=port,
+#                                database=database,
+#                                design_doc=design_doc),
+#   headers={"Content-Type": "application/json"},
+#   data=json.dumps(STATISTICS)
+# )
 
 def get_city_hour_day(group_level=3):
   """
@@ -48,7 +48,7 @@ def get_city_hour_day(group_level=3):
     The number of levels to reduce the documents to
   """
   return json.loads(requests.get(
-    get_view_url.format(username=username, 
+    get_view_url.format(username=username,
                         password=password, 
                         host=host, port=port, 
                         database=database, 
