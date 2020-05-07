@@ -7,11 +7,11 @@ STATISTICS = {
   "language": "javascript",
   "views": {
     "city_hour_day": {
-      "map": "geo_codes = {\n  \"great_syd\": \"Greater Sydney\",\n  \"great_mel\": \"Greater Melbourne\",\n  \"great_brisbane\": \"Greater Brisbane\",\n  \"great_ald\": \"Greater Sydney\",\n  \"Australia other\": \"unknown\"\n}\n\nfunction (doc) {\n  city = geo_codes[doc.geo_code]\n\n  if (city && doc.created_at) {\n    date = new Date(doc.created_at);\n    day = (date.getDay() + 6) % 7;\n    emit([city, date.getHours(), day], date);\n  }\n}",
+      "map": "geo_codes = {\n  \"great_syd\": \"Greater Sydney\",\n  \"great_mel\": \"Greater Melbourne\",\n  \"great_brisbane\": \"Greater Brisbane\",\n  \"great_ald\": \"Greater Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  city = \"unknown\";\n  date = new Date(doc.created_at);\n  day = (date.getDay() + 6) % 7;\n  hour = date.getHours();\n  if (doc.place) {\n    city = geo_codes[doc.geo_code]\n  } \n  emit([city, hour, day], date);\n}",
       "reduce": "_count"
     },
     "city_2020_month_day_hours": {
-      "map": "geo_codes = {\n  \"great_syd\": \"Greater Sydney\",\n  \"great_mel\": \"Greater Melbourne\",\n  \"great_brisbane\": \"Greater Brisbane\",\n  \"great_ald\": \"Greater Sydney\",\n  \"Australia other\": \"unknown\"\n}\n\nfunction (doc) {\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  // Hour is ranged from 0 to 23\n  hour = date.getHours();\n  \n  city = geo_codes[doc.geo_code]\n  \n  if (city && year == 2020) {\n    if (hour >= 0 && hour <= 7) {\n      emit([city, year, date.getMonth(), date.getDay(), \"00:00-07:59\"], 1);\n    } else if (hour >= 8 && hour <= 15) {\n      emit([city, year, date.getMonth(), date.getDay(), \"08:00-15:59\"], 1);\n    } else if (hour >= 16 && hour <= 23) {\n      emit([city, year, date.getMonth(), date.getDay(), \"16:00-23:59\"], 1);\n    }\n  }\n}",
+      "map": "geo_codes = {\n  \"great_syd\": \"Greater Sydney\",\n  \"great_mel\": \"Greater Melbourne\",\n  \"great_brisbane\": \"Greater Brisbane\",\n  \"great_ald\": \"Greater Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  city = \"unknown\";\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  month = date.getMonth();\n  day = date.getDay();\n  hour = date.getHours();\n  hours = \"other\"\n  \n  if (doc.place) {\n    city = geo_codes[doc.geo_code];\n  }\n  \n  if (year == 2020) {\n    if (hour >= 0 && hour <= 7) {\n      hours = \"00:00-07:59\";\n    } else if (hour >= 8 && hour <= 15) {\n      hours = \"08:00-15:59\";\n    } else if (hour >= 16 && hour <= 23) {\n      hours = \"16:00-23:59\";\n    }\n    emit([city, year, month, day, hours], 1);\n  }\n}",
       "reduce": "_count"
     }
   }
