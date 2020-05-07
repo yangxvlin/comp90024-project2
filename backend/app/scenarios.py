@@ -4,7 +4,7 @@ Student id:  904904
 Date:        2020-5-3 22:08:12
 Description: api for scenarios
 """
-
+from flask import request
 from flask_restful import Resource
 from app.resources import api
 from app.settings import SIMPLE_DB
@@ -33,27 +33,26 @@ def verify_password(username, password):
 
 
 class Scenario1(Resource):
-    decorators = [auth.login_required]
-
-    def post(self):
+    def get(self):
         """
-        curl -d "lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney&weekday=1,2,3&daytime_start=0&daytime_end=24&age_group=0,1,2,17" -u group3:b1ae877ce7cd4e8a5fbd1615b1bd1780057c0774d0cb26adafadabde66e33fb0 -X POST http://127.0.0.1:5000/scenario1
+        curl -X GET
+        127.0.0.1:5000/scenario1?lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney&weekday=1,2,3&daytime_start=0&daytime_end=24&age_group=0,1,2,17
         :return:
         """
-        parser = reqparse.RequestParser()
-        parser.add_argument('lga', required=True, action='split', help='missing or ' + LGA_LIST_ERROR_MSG)
-        parser.add_argument('age_group', required=True, action='split', help='missing or ' + AGE_GROUP_LIST_ERROR_MSG)
-        parser.add_argument('weekday', required=True, action='split', help='missing or ' + WEEKDAY_LIST_ERROR_MSG)
-        parser.add_argument('daytime_start', required=True, type=int)
-        parser.add_argument('daytime_end', required=True, type=int)
-        args = parser.parse_args()
-        selected_lga_list = args['lga'].split(',')
+        # parser = reqparse.RequestParser()
+        lga_param = request.args.get('lga')
+        age_group_param = request.args.get('age_group')
+        weekday_param = request.args.get('weekday')
+        daytime_start_param = request.args.get('daytime_start', type=int)
+        daytime_end_param = request.args.get('daytime_end', type=int)
+        # args = parser.parse_args()
+        selected_lga_list = lga_param.split(',')
         n_lga = len(selected_lga_list)
-        selected_age_groups = args['age_group'].split(',')
+        selected_age_groups = age_group_param.split(',')
         selected_age_groups_attribute = [AGE_GROUP_COUNT_MAP[i] for i in selected_age_groups]
-        weekday = args['weekday'].split(',')
-        daytime_start_hour = args['daytime_start']
-        daytime_end_hour = args['daytime_end']
+        weekday = weekday_param.split(',')
+        daytime_start_hour = daytime_start_param
+        daytime_end_hour = daytime_end_param
 
         population_data = read_aurin_result_data("/au/population-age/result-population.json")
         population_data_meta = read_aurin_result_data("/au/population-age/result-meta.json")
@@ -86,20 +85,17 @@ api.add_resource(Scenario1, "/scenario1", endpoint='scenario1')
 
 
 class Scenario2(Resource):
-    decorators = [auth.login_required]
-
-    def post(self):
+    def get(self):
         """
-        curl -d "lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney&age_group=0,1,2,17" -u group3:b1ae877ce7cd4e8a5fbd1615b1bd1780057c0774d0cb26adafadabde66e33fb0 -X POST http://127.0.0.1:5000/scenario2
+        curl -X GET
+        127.0.0.1:5000/scenario2?lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney&age_group=0,1,2,17
         :return:
         """
-        parser = reqparse.RequestParser()
-        parser.add_argument('lga', required=True, action='split', help='missing or ' + LGA_LIST_ERROR_MSG)
-        parser.add_argument('age_group', required=True, action='split', help='missing or ' + AGE_GROUP_LIST_ERROR_MSG)
-        args = parser.parse_args()
-        selected_lga_list = args['lga'].split(',')
+        lga_param = request.args.get('lga')
+        age_group_param = request.args.get('age_group')
+        selected_lga_list = lga_param.split(',')
         n_lga = len(selected_lga_list)
-        selected_age_groups = args['age_group'].split(',')
+        selected_age_groups = age_group_param.split(',')
         selected_age_groups_attribute = [AGE_GROUP_COUNT_MAP[i] for i in selected_age_groups]
 
         population_data = read_aurin_result_data("/au/population-age/result-population.json")
@@ -133,17 +129,14 @@ api.add_resource(Scenario2, "/scenario2", endpoint='scenario2')
 
 
 class Scenario3(Resource):
-    decorators = [auth.login_required]
-
-    def post(self):
+    def get(self):
         """
-        curl -d "lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney" -u group3:b1ae877ce7cd4e8a5fbd1615b1bd1780057c0774d0cb26adafadabde66e33fb0 -X POST http://127.0.0.1:5000/scenario3
+        curl -X GET
+        127.0.0.1:5000/scenario3?lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney
         :return:
         """
-        parser = reqparse.RequestParser()
-        parser.add_argument('lga', required=True, action='split', help='missing or ' + LGA_LIST_ERROR_MSG)
-        args = parser.parse_args()
-        selected_lga_list = args['lga'].split(',')
+        lga_param = request.args.get('lga')
+        selected_lga_list = lga_param.split(',')
         n_lga = len(selected_lga_list)
 
         foreigner_data = read_aurin_result_data("/au/foreigner/result-foreigner.json")
@@ -173,17 +166,14 @@ api.add_resource(Scenario3, "/scenario3", endpoint='scenario3')
 
 
 class Scenario4(Resource):
-    decorators = [auth.login_required]
-
-    def post(self):
+    def get(self):
         """
-        curl -d "lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney" -u group3:b1ae877ce7cd4e8a5fbd1615b1bd1780057c0774d0cb26adafadabde66e33fb0 -X POST http://127.0.0.1:5000/scenario4
+        curl -X GET
+        127.0.0.1:5000/scenario4?lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney
         :return:
         """
-        parser = reqparse.RequestParser()
-        parser.add_argument('lga', required=True, action='split', help='missing or ' + LGA_LIST_ERROR_MSG)
-        args = parser.parse_args()
-        selected_lga_list = args['lga'].split(',')
+        lga_param = request.args.get('lga')
+        selected_lga_list = lga_param.split(',')
         n_lga = len(selected_lga_list)
 
         result = {i: {"education_level": {}, "health_access": {}, "income": {}} for i in selected_lga_list}
@@ -224,17 +214,14 @@ api.add_resource(Scenario4, "/scenario4", endpoint='scenario4')
 
 
 class Scenario5(Resource):
-    decorators = [auth.login_required]
-
-    def post(self):
+    def get(self):
         """
-        curl -d "lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney" -u group3:b1ae877ce7cd4e8a5fbd1615b1bd1780057c0774d0cb26adafadabde66e33fb0 -X POST http://127.0.0.1:5000/scenario5
+        curl -X GET
+        127.0.0.1:5000/scenario5?lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney
         :return:
         """
-        parser = reqparse.RequestParser()
-        parser.add_argument('lga', required=True, action='split', help='missing or ' + LGA_LIST_ERROR_MSG)
-        args = parser.parse_args()
-        selected_lga_list = args['lga'].split(',')
+        lga_param = request.args.get('lga')
+        selected_lga_list = lga_param.split(',')
         n_lga = len(selected_lga_list)
 
         result = {i: {} for i in selected_lga_list}
