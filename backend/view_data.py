@@ -2,40 +2,17 @@
 import requests
 import json
 
-# STATS = {
-#     "_id": "_design/stat",
-#     "views": {
-#         "tweet-daily-time": {
-#             "map": "function (doc) {\n  emit(doc.created_at.slice(0, doc.created_at.indexOf(' ')), 1);\n}",
-#             "reduce": "_sum"
-#         }
-#     },
-#     "language": "javascript"
-# }
-
-
-# date = {
-#   "_id": "_design/loc",
-#   "views": {
-#     "new-view": {
-#       "map": "function (doc) {\n  emit([doc.geo_code, doc.created_at.slice(0, doc.created_at.indexOf(' '))], 1);\n}",
-#       "reduce": "_sum"
-#     },
-#     "date": {
-#       "reduce": "_count",
-#       "map": "function (doc) {\n  emit(doc.created_at.slice(0, doc.created_at.indexOf(' ')), 1);\n}"
-#     }
-#   },
-#   "language": "javascript"
-# }
-
 STATISTICS = {
   "_id": "_design/STATISTICS",
   "language": "javascript",
   "views": {
     "city_hour_day": {
-      "reduce": "_sum",
-      "map": "function (doc) {\n  if (doc.place && doc.created_at) {\n    date = new Date(doc.created_at);\n    emit([doc.place.full_name, date.getHours(), date.getDay()], 1);\n  }\n}"
+      "map": "function (doc) {\n  if (doc.place && doc.created_at) {\n    city = doc.place.full_name;\n    date = new Date(doc.created_at);\n    day = (date.getDay() + 6) % 7;\n    emit([city, date.getHours(), day], date);\n  }\n}",
+      "reduce": "_count"
+    },
+    "city_2020_month_day_hours": {
+      "map": "function (doc) {\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  // Hour is ranged from 0 to 23\n  hour = date.getHours();\n  \n  if (doc.place && year == 2020) {\n    if (hour >= 0 && hour <= 7) {\n      emit([doc.place.full_name, year, date.getMonth(), date.getDay(), \"00:00-07:59\"], 1);\n    } else if (hour >= 8 && hour <= 15) {\n      emit([doc.place.full_name, year, date.getMonth(), date.getDay(), \"08:00-15:59\"], 1);\n    } else if (hour >= 16 && hour <= 23) {\n      emit([doc.place.full_name, year, date.getMonth(), date.getDay(), \"16:00-23:59\"], 1);\n    }\n  }\n}",
+      "reduce": "_count"
     }
   }
 }
@@ -45,7 +22,9 @@ port = "5984"
 username = password = "admin"
 database = 'tweets'
 design_doc = "STATISTICS"
+
 update_design_doc_url = "http://{username}:{password}@{host}:{port}/{database}/_design/{design_doc}"
+get_view_url = "http://{username}:{password}@{host}:{port}/{database}/_design/{design_doc}/_view/{view_name}?group_level={group_level}"
 
 # Date: 0-6 represents Sunday to Saturday
 req = requests.put(
@@ -54,11 +33,19 @@ req = requests.put(
   data=json.dumps(STATISTICS)
 )
 
-# req = requests.put(
-#     'http://' + username + ':' + password + '@' + host + ':' + port + '/' + database + '/_design/' + design_doc,
-#     headers={"Content-Type": "application/json"},
-#     data=json.dumps(STATS))
+def get_city_hour_day(group_level=1):
+  """
+  According to the group level provided by the user, return all the documents sorted in asending order from city, hour and day.
+  """
+  return requests.get(
+    get_view_url.format(username=username, password=password, host=host, port=port, database=database, design_doc=design_doc, view_name="city_hour_day", group_level=group_level)
+  ).content
 
-# print(requests.get(
-#     'http://' + username + ':' + password + '@' + host + ':' + port + '/' + database + '/_design/' + design_doc + '/_view/' + "tweet-daily-time?group_level=1"
-# ).content)
+def get_city_2020_month_day_hours(group_level=1):
+  """
+  According to the group level provided by the user, return all the documents created in 2020
+  sorted in asending order from city, month, day and hours.
+  """
+  return requests.get(
+    get_view_url.format(username=username, password=password, host=host, port=port, database=database, design_doc=design_doc, view_name="city_2020_month_day_hours", group_level=group_level)
+  ).content
