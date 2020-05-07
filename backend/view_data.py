@@ -39,7 +39,7 @@ def get_city_hour_day(group_level=1):
   """
   return requests.get(
     get_view_url.format(username=username, password=password, host=host, port=port, database=database, design_doc=design_doc, view_name="city_hour_day", group_level=group_level)
-  ).content
+  ).content.decode("ascii")
 
 def get_city_2020_month_day_hours(group_level=1):
   """
@@ -48,4 +48,4 @@ def get_city_2020_month_day_hours(group_level=1):
   """
   return requests.get(
     get_view_url.format(username=username, password=password, host=host, port=port, database=database, design_doc=design_doc, view_name="city_2020_month_day_hours", group_level=group_level)
-  ).content
+  ).content.decode("ascii")
