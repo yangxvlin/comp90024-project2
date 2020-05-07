@@ -37,15 +37,15 @@ def get_city_hour_day(group_level=1):
   """
   According to the group level provided by the user, return all the documents sorted in asending order from city, hour and day.
   """
-  return requests.get(
+  return json.loads(requests.get(
     get_view_url.format(username=username, password=password, host=host, port=port, database=database, design_doc=design_doc, view_name="city_hour_day", group_level=group_level)
-  ).content.decode("ascii")
+  ).content.decode("utf-8"))
 
 def get_city_2020_month_day_hours(group_level=1):
   """
   According to the group level provided by the user, return all the documents created in 2020
   sorted in asending order from city, month, day and hours.
   """
-  return requests.get(
+  return json.loads(requests.get(
     get_view_url.format(username=username, password=password, host=host, port=port, database=database, design_doc=design_doc, view_name="city_2020_month_day_hours", group_level=group_level)
-  ).content.decode("ascii")
+  ).content.decode("utf-8"))
