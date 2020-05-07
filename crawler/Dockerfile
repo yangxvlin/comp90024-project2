@@ -9,10 +9,8 @@ ENV no_proxy localhost,127.0.0.1,localaddress,172.16.0.0/12,.melbourne.rc.nectar
 
 WORKDIR /usr/src/app
 
-COPY requirements.txt requirements.txt
+COPY . .
 
 RUN pip install -r requirements.txt
-
-COPY great-four.py great-four.py
 
 CMD ["python", "great-four.py"]
