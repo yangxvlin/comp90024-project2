@@ -86,7 +86,7 @@ if __name__ == "__main__":
 
     if args.b:
         n_backend = int(args.b)
-        generate_hosts_for_application(n_backend, "backend")
+        generate_hosts_for_application(n_backend, "backend", reverse=True)
 
     if args.db:
         n_database = int(args.db)
