@@ -60,10 +60,9 @@ class TwitterMap(Resource):
             row_value = row["value"]
 
             create_at = "{}-{:02d}-{:02d}T{}:00+00:00Z".format(row_year, row_month, row_day, row_time_start)
-            feature["property"]["create_at"] = create_at
-            feature["property"]["city name"] = row_lga
-            feature["property"]["twitter count"] = row_value
-
+            feature["properties"]["create_at"] = create_at
+            feature["properties"]["city name"] = row_lga
+            feature["properties"]["twitter count"] = row_value
 
             result["features"].append(feature)
 
