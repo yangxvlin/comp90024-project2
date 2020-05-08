@@ -4,7 +4,7 @@ Student id:  904904
 Date:        2020-5-3 22:08:12
 Description: api for scenarios
 """
-from flask import request
+from flask import request, jsonify
 from flask_restful import Resource
 from app.resources import api
 from app.settings import SIMPLE_DB
@@ -67,7 +67,9 @@ class TwitterMap(Resource):
 
             result["features"].append(feature)
 
-        return result
+        resp = jsonify(result)
+        resp.status_code = 200
+        return resp
 
 
 api.add_resource(TwitterMap, "/twittermap", endpoint='twittermap')
@@ -143,7 +145,9 @@ class Scenario1(Resource):
                     result["twitter_daily_time"][row_lga][row_hour] = 0
                 result["twitter_daily_time"][row_lga][row_hour] += row_value
 
-        return result
+        resp = jsonify(result)
+        resp.status_code = 200
+        return resp
 
 
 api.add_resource(Scenario1, "/scenario1", endpoint='scenario1')
