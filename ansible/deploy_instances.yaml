@@ -8,6 +8,6 @@
   roles:
     - role: common
     # - role: show-images
-    - role: create-volumes
+    # - role: create-volumes
     - role: create-security-groups
     - role: create-instances

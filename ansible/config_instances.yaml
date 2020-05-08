@@ -5,7 +5,7 @@
   roles:
     - role: add-NectarGroupKey
 
-- hosts: 172.26.131.101
+- hosts: instances
   vars_files:
     - host_vars/config.yaml
     - host_vars/deploy.yaml
@@ -13,8 +13,8 @@
   gather_facts: true
 
   roles:
-    - role: add-proxy
-    - role: install-dependencies
-    - role: setup-docker
-    # - role: git-clone-source-repository
+    # - role: add-proxy
+    # - role: install-dependencies
+    # - role: setup-docker
+    - role: git-clone-source-repository
     - role: mount-volumes

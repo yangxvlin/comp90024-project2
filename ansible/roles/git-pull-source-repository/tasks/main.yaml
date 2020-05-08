@@ -24,6 +24,7 @@
     update: yes
     dest: '{{ remote_working_directory }}'
     force: yes
+  become: yes
 
 - name: Remove GitHubKey
   file:
