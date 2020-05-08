@@ -17,13 +17,22 @@
     mode: 0644
 # configure ssh to use ansible key for github.com
 
-- name: clone source code from git
-  become: yes
-  git:
-    repo: git@github.com:yangxvlin/comp90024-project2.git
-    accept_hostkey: yes
-    key_file: /home/ubuntu/.ssh/GitHubKey
-    dest: '{{ remote_working_directory }}'
+- name: Creates ~COMP90024 directory
+  file:
+    path: '{{ remote_working_directory }}'
+    state: directory
+
+- name: pull clone
+  shell: git clone git@github.com:yangxvlin/comp90024-project2.git --config core.sshCommand="ssh -i /home/ubuntu/.ssh/GitHubKey"
+  args:
+    chdir: '{{ remote_working_directory }}'
+# - name: clone source code from git
+#   become: yes
+#   git:
+#     repo: git@github.com:yangxvlin/comp90024-project2.git
+#     accept_hostkey: yes
+#     key_file: /home/ubuntu/.ssh/GitHubKey
+#     dest: '{{ remote_working_directory }}'
 # git clone through ssh
 
 - name: Remove GitHubKey

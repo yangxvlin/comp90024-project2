@@ -2,17 +2,17 @@
 - name: pip3 install requirements
   command: pip3 install -r requirements.txt
   args:
-    chdir: /home/ubuntu/COMP90024/backend
+    chdir: /home/ubuntu/COMP90024/comp90024-project2/backend
 
 - name: pip3 install flask
   command: pip3 install flask
   args:
-    chdir: /home/ubuntu/COMP90024/backend
+    chdir: /home/ubuntu/COMP90024/comp90024-project2/backend
 
 - name: Start server
   shell: python3 backend.py -host "{{ inventory_hostname }}" -port 5000
   args:
-    chdir: /home/ubuntu/COMP90024/backend
+    chdir: /home/ubuntu/COMP90024/comp90024-project2/backend
 #   async: 3600 # 2592000               # 60*60*24*30: 1 month
   async: 50400 # 14 hour
 #  async: 18000 # 5 hour

@@ -1,10 +1,10 @@
 ---
-- hosts: instances
-  vars_files:
-    - host_vars/config.yaml
-  gather_facts: true
-  roles:
-    - role: git-pull-source-repository
+# - hosts: instances
+#   vars_files:
+#     - host_vars/config.yaml
+#   gather_facts: true
+#   roles:
+#     - role: git-pull-source-repository
 
 - hosts: crawler
   gather_facts: true
@@ -19,6 +19,7 @@
     - host_vars/config.yaml
   gather_facts: true
   roles:
+    - role: git-pull-source-repository
     - role: deploy-backend-server
 
 #- hosts: database
