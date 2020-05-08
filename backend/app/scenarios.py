@@ -42,7 +42,7 @@ class TwitterMap(Resource):
         result = {"type": "FeatureCollection", "features": []}
         twitter_count_2020_by_lga_by_month_by_day_by_hour = get_city_2020_month_day_hours(5)
         for row in twitter_count_2020_by_lga_by_month_by_day_by_hour["rows"]:
-            feature = {"type": "Feature", "geometry": {}, "property": {}}
+            feature = {"type": "Feature", "geometry": {}, "properties": {}}
             row_key = row["key"]
             row_lga = row_key[0]
 
