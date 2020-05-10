@@ -5,7 +5,19 @@
 [Link](https://app.swaggerhub.com/apis-docs/yangxvlin/backend/1.0.0)
 
 ### cmd
-```curl -u group3:b1ae877ce7cd4e8a5fbd1615b1bd1780057c0774d0cb26adafadabde66e33fb0 -X GET http://127.0.0.1:5000/<classifier>```
+#### scenario 1
+```curl -X GET 127.0.0.1:5000/scenario1?lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney&weekday=1,2,3&daytime_start=0&daytime_end=24&age_group=0,1,2,17```
+#### scenario 2
+```curl -X GET 127.0.0.1:5000/scenario2?lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney&age_group=0,1,2,17```
+#### scenario 3
+```curl -X GET 127.0.0.1:5000/scenario3?lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney```
+#### scenario 4
+```curl -X GET 127.0.0.1:5000/scenario4?lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney```
+#### scenario 5
+```curl -X GET 127.0.0.1:5000/scenario5?lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney```
+
+### curl to js
+https://kigiri.github.io/fetch/
 
 ## How to run
 ### Ubuntu
