@@ -114,7 +114,7 @@ class Scenario1(Resource):
         result = {}
 
         twitter_count_by_city_by_hour_by_weekday = get_city_hour_day(3)
-        print(twitter_count_by_city_by_hour_by_weekday)
+        # print(twitter_count_by_city_by_hour_by_weekday)
         twitter_count_by_city_by_hour = {}
         for row in twitter_count_by_city_by_hour_by_weekday["rows"]:
             # print(row)
