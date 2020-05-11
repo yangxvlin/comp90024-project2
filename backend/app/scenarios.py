@@ -151,6 +151,25 @@ class Scenario1(Resource):
                 line_data[population_data_meta[k]["title"]] = v
             result["pie_charts_for_each_city_all_age_groups"]["pieChart"].append(line_data)
 
+        result["population_age_axis_by_selected_age_group_legend_by_lga_selected"] = {"multiBarChart_age_by_group_by_lga": []}
+        for selected_age_group_attribute in selected_age_groups_attribute:
+            line_data = {}
+            line_data["title"] = population_data_meta[selected_age_group_attribute]["title"]
+            line_data["data"] = []
+            for selected_lga in selected_lga_list:
+                line_data["data"].append({"x": selected_lga, "y": population_data[selected_lga]["count"][selected_age_group_attribute]})
+            result["population_age_axis_by_selected_age_group_legend_by_lga_selected"]["multiBarChart_age_by_group_by_lga"].append(line_data)
+
+        result["population_age_axis_by_lga_selected_legend_by_selected_age_group"] = {"multiBarChart_age_by_lga_by_group": []}
+        for selected_lga in selected_lga_list:
+            line_data = {}
+            line_data["title"] = selected_lga
+            line_data["data"] = []
+            for selected_age_group_attribute in selected_age_groups_attribute:
+                line_data["data"].append({"x": population_data_meta[selected_age_group_attribute]["title"],
+                                          "y": population_data[selected_lga]["count"][selected_age_group_attribute]
+                                          })
+            result["population_age_axis_by_lga_selected_legend_by_selected_age_group"]["multiBarChart_age_by_lga_by_group"].append(line_data)
 
         # result["selected_lga"] = {}
         # result["twitter_daily_time"] = {}
@@ -168,7 +187,6 @@ class Scenario1(Resource):
         #                 result["selected_age_group_count_by_lga"][age_group][key] = value["count"][age_group]
         # result["meta"] = population_data_meta
 
-        print(result)
         resp = jsonify(result)
         resp.status_code = 200
         return resp
