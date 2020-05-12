@@ -42,7 +42,8 @@ def parse_data(file_path: str, meta_path: str):
         # pprint(meta_data)
 
         for info in meta_data['selectedAttributes'][1:]:
-            attribute_info[info['name']] = {'title': info['title'].replace("??? ", ""), 'description': info['description'].replace("??? ", "")}
+            attribute_info[info['name']] = {'title': info['title'].replace("??? ", "").replace(" ", "_"),
+                                            'description': info['description'].replace("??? ", "")}
 
     with open('result-meta.json', 'w') as outfile:
         json.dump(attribute_info, outfile)
