@@ -171,6 +171,14 @@ class Scenario1(Resource):
                                           })
             result["population_age_axis_by_lga_selected_legend_by_selected_age_group"]["multiBarChart_age_by_lga_by_group"].append(line_data)
 
+        result["barChart_total_pop"] = []
+        line_data = {}
+        line_data["title"] = "total_population"
+        line_data["data"] = []
+        for lga in CITY_GEO_POINTS.keys():
+            line_data["data"].append({"x": lga, "y": population_data[lga]["total_population"]})
+        result["barChart_total_pop"].append(line_data)
+
         # result["selected_lga"] = {}
         # result["twitter_daily_time"] = {}
         # result["selected_age_group_count_by_lga"] = {selected_age_group: {} for selected_age_group in selected_age_groups_attribute}
