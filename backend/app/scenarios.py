@@ -84,6 +84,12 @@ class Scenario1(Resource):
         """
         curl -X GET
         127.0.0.1:5000/scenario1?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney&weekday=1,2,3&daytime_start=0&daytime_end=24&age_group=0,1,2,17
+
+        :parameter: lga: [Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney]
+        :parameter: weekday: 0-6 monday to sunday
+        :parameter: daytime_start 0-24
+        :parameter: daytime_end 0-24
+        :parameter: age_group 0-17
         :return:
         """
         # parser = reqparse.RequestParser()
