@@ -42,7 +42,12 @@ def parse_data(file_path: str, meta_path: str):
         # pprint(meta_data)
 
         for info in meta_data['selectedAttributes'][1:]:
-            attribute_info[info['name']] = {'title': info['title'].replace("??? ", "").replace("Projected population of ", "").replace(" ", "_"),
+            attribute_info[info['name']] = {'title': info['title'].replace("??? ", "")
+                                                                    .replace("Projected population of ", "")
+                                                                    .replace(" ", "_")
+                                                                    .replace("People_aged_", "")
+                                                                    .replace("_years_count", "")
+                                                                    .replace("_years_and_over_count", "+"),
                                             'description': info['description'].replace("??? ", "")}
 
     with open('result-meta.json', 'w') as outfile:
