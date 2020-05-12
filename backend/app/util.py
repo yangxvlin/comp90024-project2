@@ -37,10 +37,10 @@ AGE_GROUP_COUNT_MAP = {
 }
 
 
-GREATER_ADELAIDE_LGA_NAME = "Greater Adelaide"
-GREATER_MELBOURNE_LGA_NAME = "Greater Melbourne"
-GREATER_BRISBANE_LGA_NAME = "Greater Brisbane"
-GREATER_SYDNEY_LGA_NAME = "Greater Sydney"
+GREATER_ADELAIDE_LGA_NAME = "Greater_Adelaide"
+GREATER_MELBOURNE_LGA_NAME = "Greater_Melbourne"
+GREATER_BRISBANE_LGA_NAME = "Greater_Brisbane"
+GREATER_SYDNEY_LGA_NAME = "Greater_Sydney"
 
 
 CITY_GEO_POINTS = {

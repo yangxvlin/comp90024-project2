@@ -83,7 +83,7 @@ class Scenario1(Resource):
     def get(self):
         """
         curl -X GET
-        127.0.0.1:5000/scenario1?lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney&weekday=1,2,3&daytime_start=0&daytime_end=24&age_group=0,1,2,17
+        127.0.0.1:5000/scenario1?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney&weekday=1,2,3&daytime_start=0&daytime_end=24&age_group=0,1,2,17
         :return:
         """
         # parser = reqparse.RequestParser()
@@ -112,37 +112,88 @@ class Scenario1(Resource):
         population_data_meta = read_aurin_result_data("/au/population-age/result-meta.json")
 
         result = {}
-        result["selected_lga"] = {}
-        result["twitter_daily_time"] = {}
-        result["selected_age_group_count_by_lga"] = {selected_age_group: {} for selected_age_group in selected_age_groups_attribute}
-        for key, value in population_data.items():
-            if key in selected_lga_list:
-                result["selected_lga"][key] = {}
-                result["selected_lga"][key]["selected_lga_by_selected_age_group_count"] = {}
-                result["selected_lga"][key]["selected_lga_by_all_age_group_count"] = {age_group: 0 for age_group in AGE_GROUP_COUNT_MAP.values()}
-                result["selected_lga"][key]["total_population"] = value["total_population"]
-                for age_group in AGE_GROUP_COUNT_MAP.values():
-                    result["selected_lga"][key]["selected_lga_by_all_age_group_count"][age_group] += value["count"][age_group]
-                    if age_group in selected_age_groups_attribute:
-                        result["selected_lga"][key]["selected_lga_by_selected_age_group_count"][age_group] = value["count"][age_group]
-                        result["selected_age_group_count_by_lga"][age_group][key] = value["count"][age_group]
-        result["meta"] = population_data_meta
 
         twitter_count_by_city_by_hour_by_weekday = get_city_hour_day(3)
+        # print(twitter_count_by_city_by_hour_by_weekday)
+        twitter_count_by_city_by_hour = {}
         for row in twitter_count_by_city_by_hour_by_weekday["rows"]:
             # print(row)
             row_key = row["key"]
-            row_lga = row_key[0]
+            row_lga = row_key[0]# .replace(" ", "_")
             row_hour = row_key[1]
             row_weekday = row_key[2]
             row_value = row["value"]
 
             if row_lga in selected_lga_list and row_hour in selected_day_time and row_weekday in selected_weekday:
-                if row_lga not in result["twitter_daily_time"]:
-                    result["twitter_daily_time"][row_lga] = {}
-                if row_hour not in result["twitter_daily_time"][row_lga]:
-                    result["twitter_daily_time"][row_lga][row_hour] = 0
-                result["twitter_daily_time"][row_lga][row_hour] += row_value
+                if row_lga not in twitter_count_by_city_by_hour:
+                    twitter_count_by_city_by_hour[row_lga] = {}
+                if row_hour not in twitter_count_by_city_by_hour[row_lga]:
+                    twitter_count_by_city_by_hour[row_lga][row_hour] = 0
+                twitter_count_by_city_by_hour[row_lga][row_hour] += row_value
+        # print(twitter_count_by_city_by_hour)
+
+        result["twitter_daily_time_line_chart"] = {"lineChart": []}
+        for key in selected_lga_list:
+            try:
+                line_data = {}
+                line_data["title"] = key
+                for k, v in twitter_count_by_city_by_hour[key].items():
+                    line_data[str(k)] = v
+                result["twitter_daily_time_line_chart"]["lineChart"].append(line_data)
+            except KeyError:
+                print("No key:", key, " in twitter_count_by_city_by_hour")
+
+        result["pie_charts_for_each_city_all_age_groups"] = {"pieChart": []}
+        for key in selected_lga_list:
+            line_data = {}
+            line_data["title"] = key
+            for k, v in population_data[key]["count"].items():
+                line_data[population_data_meta[k]["title"]] = v
+            result["pie_charts_for_each_city_all_age_groups"]["pieChart"].append(line_data)
+
+        result["population_age_axis_by_selected_age_group_legend_by_lga_selected"] = {"multiBarChart_age_by_group_by_lga": []}
+        for selected_age_group_attribute in selected_age_groups_attribute:
+            line_data = {}
+            line_data["title"] = population_data_meta[selected_age_group_attribute]["title"]
+            line_data["data"] = []
+            for selected_lga in selected_lga_list:
+                line_data["data"].append({"x": selected_lga, "y": population_data[selected_lga]["count"][selected_age_group_attribute]})
+            result["population_age_axis_by_selected_age_group_legend_by_lga_selected"]["multiBarChart_age_by_group_by_lga"].append(line_data)
+
+        result["population_age_axis_by_lga_selected_legend_by_selected_age_group"] = {"multiBarChart_age_by_lga_by_group": []}
+        for selected_lga in selected_lga_list:
+            line_data = {}
+            line_data["title"] = selected_lga
+            line_data["data"] = []
+            for selected_age_group_attribute in selected_age_groups_attribute:
+                line_data["data"].append({"x": population_data_meta[selected_age_group_attribute]["title"],
+                                          "y": population_data[selected_lga]["count"][selected_age_group_attribute]
+                                          })
+            result["population_age_axis_by_lga_selected_legend_by_selected_age_group"]["multiBarChart_age_by_lga_by_group"].append(line_data)
+
+        result["barChart_total_pop"] = []
+        line_data = {}
+        line_data["title"] = "total_population"
+        line_data["data"] = []
+        for lga in CITY_GEO_POINTS.keys():
+            line_data["data"].append({"x": lga, "y": population_data[lga]["total_population"]})
+        result["barChart_total_pop"].append(line_data)
+
+        # result["selected_lga"] = {}
+        # result["twitter_daily_time"] = {}
+        # result["selected_age_group_count_by_lga"] = {selected_age_group: {} for selected_age_group in selected_age_groups_attribute}
+        # for key, value in population_data.items():
+        #     if key in selected_lga_list:
+        #         result["selected_lga"][key] = {}
+        #         result["selected_lga"][key]["selected_lga_by_selected_age_group_count"] = {}
+        #         result["selected_lga"][key]["selected_lga_by_all_age_group_count"] = {age_group: 0 for age_group in AGE_GROUP_COUNT_MAP.values()}
+        #         result["selected_lga"][key]["total_population"] = value["total_population"]
+        #         for age_group in AGE_GROUP_COUNT_MAP.values():
+        #             result["selected_lga"][key]["selected_lga_by_all_age_group_count"][age_group] += value["count"][age_group]
+        #             if age_group in selected_age_groups_attribute:
+        #                 result["selected_lga"][key]["selected_lga_by_selected_age_group_count"][age_group] = value["count"][age_group]
+        #                 result["selected_age_group_count_by_lga"][age_group][key] = value["count"][age_group]
+        # result["meta"] = population_data_meta
 
         resp = jsonify(result)
         resp.status_code = 200
