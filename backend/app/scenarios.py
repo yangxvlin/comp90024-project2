@@ -137,8 +137,9 @@ class Scenario1(Resource):
             try:
                 line_data = {}
                 line_data["title"] = key
+                line_data["data"] = []
                 for k, v in twitter_count_by_city_by_hour[key].items():
-                    line_data[str(k)] = v
+                    line_data["data"].append({"x": k, "y": v})
                 result["twitter_daily_time_line_chart"]["lineChart"].append(line_data)
             except KeyError:
                 print("No key:", key, " in twitter_count_by_city_by_hour")
@@ -147,8 +148,10 @@ class Scenario1(Resource):
         for key in selected_lga_list:
             line_data = {}
             line_data["title"] = key
+            line_data["data"] = []
             for k, v in population_data[key]["count"].items():
-                line_data[population_data_meta[k]["title"]] = v
+                line_data["data"].append({"name": population_data_meta[k]["title"], "y": v})
+            line_data["data"] = sorted(line_data["data"], key=lambda x: int(x["name"].replace("+", "-").split("-")[0]))
             result["pie_charts_for_each_city_all_age_groups"]["pieChart"].append(line_data)
 
         result["population_age_axis_by_selected_age_group_legend_by_lga_selected"] = {"multiBarChart_age_by_group_by_lga": []}
