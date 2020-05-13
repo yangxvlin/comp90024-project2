@@ -43,6 +43,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ],
-    "proxy": "http://172.26.132.42:5000"
+    "proxy": "http://172.26.132.122:5001"
   }
 }

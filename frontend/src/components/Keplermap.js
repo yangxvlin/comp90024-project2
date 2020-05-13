@@ -22,6 +22,7 @@ const reducers = combineReducers({
 const store = createStore(reducers, {}, applyMiddleware(taskMiddleware));
 
 export default function Keplermap(scenario) {
+  console.log(scenario);
   return (
     <Provider store={store}>
       <Map scenario={scenario} />
@@ -37,6 +38,7 @@ function Map(scenario) {
       "https://gist.githubusercontent.com/leighhalliday/a994915d8050e90d413515e97babd3b3/raw/a3eaaadcc784168e3845a98931780bd60afb362f/covid19.json"
    );*/
     //  if(scenario === "1")
+    
     const data = scenario.scenario.scenario; //await response.json();
     //   const data = {testJson};
     console.log(data);
@@ -52,7 +54,7 @@ const data1 =  fetch('./testDate/convid19.json')
 */
 
   React.useEffect(() => {
-    if (data === "1") {
+    if (data === "3") {
       const map1 = KeplerGlSchema.load(covid19map);
       dispatch(
         addDataToMap(
@@ -75,19 +77,25 @@ const data1 =  fetch('./testDate/convid19.json')
     } else if (data === "2") {
       const map = KeplerGlSchema.load(testJson);
       dispatch(addDataToMap(map));
-    } else if (data === "3") {
-      fetch("http://172.26.132.42:5001/scenario1", {
-        body:
-          "lga=vic,20110&weekday=1,2,3&daytime_start=0&daytime_end=24&age_group=0,1,2,17",
-        headers: {
-          Authorization:
-            "Basic Z3JvdXAzOmIxYWU4NzdjZTdjZDRlOGE1ZmJkMTYxNWIxYmQxNzgwMDU3YzA3NzRkMGNiMjZhZGFmYWRhYmRlNjZlMzNmYjA=",
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        method: "POST"
-      }).then(res => res.json()).then(data => {
-        console.log(data.selected_lga);
-      });
+    } else if (data === "1") {
+      const map1 = KeplerGlSchema.load(covid19map);
+    /*  fetch("http://172.26.132.122:5001/scenario1?lga=Greater%20Adelaide,Greater%20Melbourne,Greater%20Brisbane,Greater%20Sydney&weekday=1,2,3&daytime_start=0&daytime_end=24&age_group=0,1,2,17"
+      ).then(res => res.json()).then(data => {console.log(data);
+        const map = KeplerGlSchema.load(data);
+        dispatch(addDataToMap(map));
+      })*/
+      /*
+      .then(res => {if (res.ok) {
+        console.log('ok');
+      } else {
+        console.log('error');
+      };console.log(res.json())}, err=>{
+        console.log(err)
+    }).then(data => {
+        console.log(data);
+      },err=>{
+        console.log(err)
+    });*/
      }else {
       dispatch(
         addDataToMap(

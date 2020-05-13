@@ -1,19 +1,20 @@
 import React from "react";
-/*import Navibar from "./components/Navibar";
-import Keplermap from "./components/Keplermap";
-import Sidepanel from "./components/Sidepanel";*/
+import { Router, Route } from "react-router";
 import MainContainer from "./components/MainContainer";
+import Diagrams from "./components/Diagrams";
 
-export default function App() {
-  return (
-    <MainContainer/>
-    /*
+export default class App extends React.Component {
+  render() {
+    return (
+      <MainContainer/>
+      /*
+     <MainContainer/>
     <div>
       <Navibar/>
       <Keplermap/>
       <Sidepanel/>
     </div>
     */
-  );
+    );
+  }
 }
-

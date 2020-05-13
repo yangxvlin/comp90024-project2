@@ -1,9 +1,12 @@
 import React from "react";
 import "rsuite/dist/styles/rsuite-default.css";
-import topic from "../testData/topic.json";
-import cities from "../testData/au.json";
+
 import Keplermap from "./Keplermap";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Elements from "./Elements";
+import Diagrams from "./Diagrams";
+import scenario1 from "../testData/s1.json";
+
+import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import {
   Icon,
@@ -14,10 +17,7 @@ import {
   Navbar,
   Sidebar,
   Header,
-  Content,
-  TagPicker,
-  SelectPicker,
-  DateRangePicker
+  Content
 } from "rsuite";
 
 const headerStyles = {
@@ -71,16 +71,30 @@ const NavToggle = ({ expand, onChange }) => {
 export default class MainContainer extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.state = {
-      expand: true
+      expand: true,
+      diagramData: []
     };
     this.handleToggle = this.handleToggle.bind(this);
   }
+
+  getChildrenMsg = msg => {
+    console.log(msg);
+    this.setState({ diagramData: msg });
+    //   console.log(this.state.diagramData);
+  };
+
   handleToggle() {
     this.setState({
       expand: !this.state.expand
     });
   }
+
+  fetchDate() {
+    console.log(scenario1);
+  }
+
   render() {
     const { expand } = this.state;
     return (
@@ -106,7 +120,7 @@ export default class MainContainer extends React.Component {
                 expanded={expand}
                 defaultOpenKeys={["3"]}
                 appearance="default"
-             //   style={{ background: "black" }}
+                //   style={{ background: "black" }}
               >
                 <Sidenav.Body>
                   <Nav>
@@ -114,6 +128,7 @@ export default class MainContainer extends React.Component {
                       eventKey="1"
                       active
                       icon={<Icon icon="dashboard" />}
+                      href="/dashboard"
                     >
                       Dashboard
                     </Nav.Item>
@@ -134,10 +149,10 @@ export default class MainContainer extends React.Component {
                         Twitter Language Usage
                       </Dropdown.Item>
                       <Dropdown.Item href="/scenario4">
-                       COVID-19 on twitter and attention in community
+                        COVID-19 on twitter and attention in community
                       </Dropdown.Item>
                       <Dropdown.Item href="/scenario5">
-                       People Emotion
+                        People Emotion
                       </Dropdown.Item>
                     </Dropdown>
                     <Dropdown
@@ -147,40 +162,9 @@ export default class MainContainer extends React.Component {
                       placement="rightStart"
                       icon={<Icon icon="gear-circle" />}
                     >
-                      <div style={{ align: "center", width: 250 }}>
-                        <br />
-                        <SelectPicker
-                          data={topic}
-                          labelKey="topic"
-                          style={{ width: 250 }}
-                          appearance="default"
-                          searchable={false}
-                          placeholder="--- Please choose topic here ---"
-                        ></SelectPicker>
-                        <br />
-                        <br />
-                        <TagPicker
-                          data={cities}
-                          labelKey="city"
-                          appearance="subtle"
-                          style={{ width: 250 }}
-                          menuStyle={{ width: 250 }}
-                          placeholder="--- Please choose cities here ---"
-                        />
-                        <br />
-                        <br />
-                        <DateRangePicker
-                          appearance="default"
-                          placeholder="--- Please setting date range ---"
-                          style={{ width: 280 }}
-                        />
-                        <hr />
-                       
-                        <button align='center'>Submit</button>
-                        
-                      </div>
-                      
+                      <Elements getChildrenMsg={this.getChildrenMsg} />
                     </Dropdown>
+
                     <Nav.Item eventKey="2" icon={<Icon icon="group" />}>
                       User Group
                     </Nav.Item>
@@ -191,34 +175,39 @@ export default class MainContainer extends React.Component {
             </Sidebar>
 
             <Container>
-              <Header>
-                
-              </Header>
+              <Header></Header>
               <Content>
                 <Switch>
                   <Route path="/team">
                     <Keplermap scenario="0" />
                   </Route>
+                    <Route path={"/comparison/:url"} 
+                      render={(props) => {
+                        return <Diagrams {...props} items={this.state.data}/>
+                      }}
+                   />
+                      
+
                   <Route path="/home">
                     <Home />
                   </Route>
-                  <Route path="/senario1">
+                  <Route path="/scenario1">
                     <Keplermap scenario="1" />
                   </Route>
-                  <Route path="/senario2">
+                  <Route path="/scenario2">
                     <Keplermap scenario="2" />
                   </Route>
-                  <Route path="/senario3">
+                  <Route path="/scenario3">
                     <Keplermap scenario="3" />
                   </Route>
-                  <Route path="/senario4">
+                  <Route path="/scenario4">
                     <Keplermap scenario="4" />
                   </Route>
-                  <Route path="/senario5">
+                  <Route path="/scenario5">
                     <Keplermap scenario="5" />
                   </Route>
-                  <Route path="/">
-                    <Keplermap scenario="0" />
+                  <Route path="/111">
+                    <Keplermap scenario="1" />
                   </Route>
                 </Switch>
               </Content>
