@@ -1,18 +1,7 @@
 # Frontend
 ## Description
-<<<<<<< HEAD
-Currently, front-end has succeeded in implementing homepage with kepler.gl, and scenarios in the navbar can control the scenario display in the map(there are only 2 test data now for checking income scenario and  crime rate scenario, others have no test data). Tasks of next step are as follows:
 
-    - [✅] hide kepler sidebar
-    - [✅] import scenarios json file through navbar event and showing in the map
-=======
-Currently, front-end has succeeded in implementing homepage with kepler.gl. Tasks of next step are as follows:
-
-    - [ ] hide kepler sidebar
-    - [ ] import scenarios json file through navbar event and showing in the map
->>>>>>> 6b7857ee667a300cb238be51448509755c521b09
-    - [ ] implement bar/ line chart for chosen area.
-    - [ ] integration and test
+Frontend can display animation with kepler.gl by choosing scenario, and can set parameters to fetch related data from backend, then display related diagrams. Currently, data of scenario1 has been tested succesfully.
 
 ## How to run
 1. ```cd frontend```
