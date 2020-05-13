@@ -37,6 +37,40 @@ AGE_GROUP_COUNT_MAP = {
 }
 
 
+GREATER_ADELAIDE_LGA_NAME = "Greater_Adelaide"
+GREATER_MELBOURNE_LGA_NAME = "Greater_Melbourne"
+GREATER_BRISBANE_LGA_NAME = "Greater_Brisbane"
+GREATER_SYDNEY_LGA_NAME = "Greater_Sydney"
+
+
+CITY_GEO_POINTS = {
+    GREATER_ADELAIDE_LGA_NAME: {
+        "type": "Point",
+        "coordinates": [
+            138.6056818, -34.9300819,
+        ]
+      },
+    GREATER_MELBOURNE_LGA_NAME: {
+        "type": "Point",
+        "coordinates": [
+            144.9697107, -37.8140928,
+        ]
+      },
+    GREATER_BRISBANE_LGA_NAME: {
+        "type": "Point",
+        "coordinates": [
+            153.0218027, -27.4727113,
+        ]
+      },
+    GREATER_SYDNEY_LGA_NAME: {
+        "type": "Point",
+        "coordinates": [
+            151.1827303, -33.8844329,
+        ]
+      },
+}
+
+
 def read_aurin_result_data(relative_file_path: str):
     """
     :param relative_file_path: file path in "AURIN"

@@ -15,10 +15,10 @@ GREATER_BRISBANE_LGA_CODES = [36580, 35010, 31000, 36250, 34590, 36510, 34580, 3
 GREATER_SYDNEY_LGA_CODES = [18550, 13100, 14000, 16370, 18000, 14500, 17420, 13800, 10750, 16350, 10900, 14900, 18400, 16100, 11500, 11450, 17150, 10750, 12850,
                             13950, 16250, 10350, 16700, 14100, 14700, 18250, 15950, 15350, 15150, 10200, 11520, 14800, 17200, 18500, 18050, 16550, 11100, 16650,
                             14450, 14150, 17100, 11550, 11300, 10150, 15200]
-GREATER_ADELAIDE_LGA_NAME = "Greater Adelaide"
-GREATER_MELBOURNE_LGA_NAME = "Greater Melbourne"
-GREATER_BRISBANE_LGA_NAME = "Greater Brisbane"
-GREATER_SYDNEY_LGA_NAME = "Greater Sydney"
+GREATER_ADELAIDE_LGA_NAME = "Greater_Adelaide"
+GREATER_MELBOURNE_LGA_NAME = "Greater_Melbourne"
+GREATER_BRISBANE_LGA_NAME = "Greater_Brisbane"
+GREATER_SYDNEY_LGA_NAME = "Greater_Sydney"
 
 CODE_TO_NAME = {}
 
@@ -42,7 +42,8 @@ def parse_data(file_path: str, meta_path: str):
         # pprint(meta_data)
 
         for info in meta_data['selectedAttributes'][1:]:
-            attribute_info[info['name']] = {'title': info['title'].replace("??? ", ""), 'description': info['description'].replace("??? ", "")}
+            attribute_info[info['name']] = {'title': info['title'].replace("??? ", "").replace(" ", "_").replace("-", "_to_"),
+                                            'description': info['description'].replace("??? ", "")}
 
     with open('result-meta.json', 'w') as outfile:
         json.dump(attribute_info, outfile)
