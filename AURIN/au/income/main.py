@@ -42,7 +42,10 @@ def parse_data(file_path: str, meta_path: str):
         # pprint(meta_data)
 
         for info in meta_data['selectedAttributes'][1:]:
-            attribute_info[info['name']] = {'title': info['title'].replace("??? ", "").replace(" ", "_").replace("-", "_to_"),
+            attribute_info[info['name']] = {'title': info['title'].replace("??? ", "")
+                                                                    .replace("Income of ", "")
+                                                                    .replace(" Total", "")
+                                                                    .replace(" or more", "+"),
                                             'description': info['description'].replace("??? ", "")}
 
     with open('result-meta.json', 'w') as outfile:
@@ -95,7 +98,7 @@ def parse_data(file_path: str, meta_path: str):
     # pprint(result.keys())
 
     # print all population count
-    # pprint(result['20110'][count_str].keys())
+    # pprint(result['Greater_Adelaide'].keys())
 
     # print all population percent
     # pprint(result['20110'][percent_str].keys())
