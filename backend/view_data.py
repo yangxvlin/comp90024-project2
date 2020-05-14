@@ -11,7 +11,7 @@ STATISTICS = {
       "reduce": "_count"
     },
     "city_2020_month_day_hours": {
-      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  city = \"unknown\";\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  month = date.getMonth();\n  day = date.getDay();\n  hour = date.getHours();\n  hours = \"other\"\n  \n  if (doc.place) {\n    city = geo_codes[doc.geo_code];\n  }\n  \n  if (year == 2020) {\n    if (hour >= 0 && hour <= 7) {\n      hours = \"00:00-07:59\";\n    } else if (hour >= 8 && hour <= 15) {\n      hours = \"08:00-15:59\";\n    } else if (hour >= 16 && hour <= 23) {\n      hours = \"16:00-23:59\";\n    }\n    emit([city, year, month, day, hours], 1);\n  }\n}",
+      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  city = \"unknown\";\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  month = date.getMonth();\n  day = date.getDay();\n  hour = date.getHours();\n  hours = \"other\"\n  \n  if (doc.place) {\n    city = geo_codes[doc.geo_code];\n  }\n  \n  if (year === 2020) {\n    if (hour >= 0 && hour <= 7) {\n      hours = \"00:00-07:59\";\n    } else if (hour >= 8 && hour <= 15) {\n      hours = \"08:00-15:59\";\n    } else if (hour >= 16 && hour <= 23) {\n      hours = \"16:00-23:59\";\n    }\n    emit([city, year, month, day, hours], 1);\n  }\n}",
       "reduce": "_count"
     },
     "city_year_month": {
@@ -20,7 +20,19 @@ STATISTICS = {
     },
     "English_city_year_month": {
       "reduce": "_count",
-      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  if (doc.lang == \"en\") {\n    city = \"unknown\";\n    date = new Date(doc.created_at);\n    year = date.getFullYear();\n    month = date.getMonth();\n    if (doc.place) {\n      city = geo_codes[doc.geo_code]\n    } \n    emit([\"English\", city, year, month], 1);\n  }\n  \n}"
+      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  if (doc.lang === \"en\") {\n    city = \"unknown\";\n    date = new Date(doc.created_at);\n    year = date.getFullYear();\n    month = date.getMonth();\n    if (doc.place) {\n      city = geo_codes[doc.geo_code]\n    } \n    emit([\"English\", city, year, month], 1);\n  }\n  \n}"
+    },
+    "covid_city_year_month_day": {
+      "reduce": "_count",
+      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  city = \"unknown\";\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  month = date.getMonth();\n  day = (date.getDay() + 1) % 7;\n  if (doc.place) {\n    city = geo_codes[doc.geo_code]\n  } \n  emit([\"COVID-19\", city, year, month, day], 1);\n}"
+    },
+    "covid_polarity_city_year_month_day": {
+      "reduce": "_count",
+      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  city = \"unknown\";\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  month = date.getMonth();\n  day = (date.getDay() + 1) % 7;\n  pol = doc.polarity;\n  if (doc.place) {\n    city = geo_codes[doc.geo_code]\n  }\n  emit([\"COVID-19\", pol, city, year, month, day], 1);\n  \n}"
+    },
+    "covid_subjectivity_city_year_month_day": {
+      "reduce": "_count",
+      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  city = \"unknown\";\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  month = date.getMonth();\n  day = (date.getDay() + 1) % 7;\n  subj = doc.subjectivity;\n  if (doc.place) {\n    city = geo_codes[doc.geo_code]\n  }\n  emit([\"COVID-19\", subj, city, year, month, day], 1);\n  \n}"
     }
   }
 }
@@ -45,6 +57,18 @@ get_view_url = "http://{username}:{password}@{host}:{port}/{database}/_design/{d
 #   data=json.dumps(STATISTICS)
 # )
 
+
+def get_view(view_name, group_level):
+  return json.loads(requests.get(
+    get_view_url.format(username=username,
+                        password=password, 
+                        host=host, port=port, 
+                        database=database, 
+                        design_doc=design_doc, 
+                        view_name=view_name, 
+                        group_level=group_level)
+  ).content.decode("utf-8"))
+
 def get_city_hour_day(group_level=3):
   """
   According to the group level provided by the user, return all the documents 
@@ -55,15 +79,7 @@ def get_city_hour_day(group_level=3):
   group_level : int, optional
     The number of levels to reduce the documents to
   """
-  return json.loads(requests.get(
-    get_view_url.format(username=username,
-                        password=password, 
-                        host=host, port=port, 
-                        database=database, 
-                        design_doc=design_doc, 
-                        view_name="city_hour_day", 
-                        group_level=group_level)
-  ).content.decode("utf-8"))
+  return get_view("city_hour_day", group_level)
 
 def get_city_2020_month_day_hours(group_level=5):
   """
@@ -75,15 +91,8 @@ def get_city_2020_month_day_hours(group_level=5):
   group_level : int, optional
     The number of levels to reduce the documents to
   """
-  return json.loads(requests.get(
-    get_view_url.format(username=username, 
-                        password=password, 
-                        host=host, port=port, 
-                        database=database, 
-                        design_doc=design_doc, 
-                        view_name="city_2020_month_day_hours", 
-                        group_level=group_level)
-  ).content.decode("utf-8"))
+  return get_view("city_2020_month_day_hours", group_level)
+
 
 def get_city_year_month(group_level=3):
   """
@@ -95,26 +104,29 @@ def get_city_year_month(group_level=3):
   group_level : int, optional
     The number of levels to reduce the documents to
   """
-  return json.loads(requests.get(
-    get_view_url.format(username=username,
-                        password=password,
-                        host=host,
-                        port=port,
-                        database=database,
-                        design_doc=design_doc,
-                        view_name="city_year_month",
-                        group_level=group_level)
-  ).content.decode("utf-8"))
+  return get_view("city_year_month", group_level)
+
 
 def get_English_city_year_month(group_level=4):
+  """
+  According to the group level provided by the user, return all the documents 
+  created in English sorted in asending order from city, year and month.
 
-  return json.loads(requests.get(
-    get_view_url.format(username=username,
-                        password=password,
-                        host=host,
-                        port=port,
-                        database=database,
-                        design_doc=design_doc,
-                        view_name="English_city_year_month",
-                        group_level=group_level)
-  ).content.decode("utf-8"))
+  Parameters
+  ----------
+  group_level : int, optional
+    The number of levels to reduce the documents to
+  """
+  return get_view("English_city_year_month", group_level)
+
+
+def get_covid_city_year_month_day(group_level=5):
+  return get_view("covid_city_year_month_day", group_level)
+
+
+def get_covid_polarity_city_year_month_day(group_level=6):
+  return get_view("covid_polarity_city_year_month_day", group_level)
+
+
+def get_covid_subjectivity_city_year_month_day(group_level=6):
+  return get_view("covid_subjectivity_city_year_month_day", group_level)
