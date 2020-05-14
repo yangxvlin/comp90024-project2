@@ -188,22 +188,6 @@ class Scenario1(Resource):
             line_data["data"].append({"x": lga, "y": population_data[lga]["total_population"]})
         result["barChart_total_pop"].append(line_data)
 
-        # result["selected_lga"] = {}
-        # result["twitter_daily_time"] = {}
-        # result["selected_age_group_count_by_lga"] = {selected_age_group: {} for selected_age_group in selected_age_groups_attribute}
-        # for key, value in population_data.items():
-        #     if key in selected_lga_list:
-        #         result["selected_lga"][key] = {}
-        #         result["selected_lga"][key]["selected_lga_by_selected_age_group_count"] = {}
-        #         result["selected_lga"][key]["selected_lga_by_all_age_group_count"] = {age_group: 0 for age_group in AGE_GROUP_COUNT_MAP.values()}
-        #         result["selected_lga"][key]["total_population"] = value["total_population"]
-        #         for age_group in AGE_GROUP_COUNT_MAP.values():
-        #             result["selected_lga"][key]["selected_lga_by_all_age_group_count"][age_group] += value["count"][age_group]
-        #             if age_group in selected_age_groups_attribute:
-        #                 result["selected_lga"][key]["selected_lga_by_selected_age_group_count"][age_group] = value["count"][age_group]
-        #                 result["selected_age_group_count_by_lga"][age_group][key] = value["count"][age_group]
-        # result["meta"] = population_data_meta
-
         resp = jsonify(result)
         resp.status_code = 200
         return resp
@@ -302,38 +286,63 @@ class Scenario4(Resource):
     def get(self):
         """
         curl -X GET
-        127.0.0.1:5000/scenario4?lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney
+        127.0.0.1:5000/scenario4?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney&income=0,3,7,8,9,12,13,15
         :return:
         """
         lga_param = request.args.get('lga')
         selected_lga_list = lga_param.split(',')
         n_lga = len(selected_lga_list)
+        income_group_param = request.args.get('income')
+        selected_income_group = income_group_param.split(',')
+        selected_income_groups_attribute = [INCOME_GROUP_COUNT_MAP[i] for i in selected_income_group]
 
-        result = {i: {"education_level": {}, "health_access": {}, "income": {}} for i in selected_lga_list}
+        result = {}
 
-        education_level_data = read_aurin_result_data("/au/education-level/result-education-level.json")
-        education_level_meta_data = read_aurin_result_data("/au/education-level/result-meta.json")
-
-        for k, v in education_level_data.items():
-            if k in selected_lga_list:
-                result[k]["education_level"] = v
-
-        result["meta"] = education_level_meta_data
-
-        health_data = read_aurin_result_data("/au/health/result-health.json")
-        health_data_meta = read_aurin_result_data("/au/health/result-meta.json")
-        for k, v in health_data.items():
-            if k in selected_lga_list:
-                result[k]["health_access"] = v
-        result["meta"].update(health_data_meta)
-
+        # population_data = read_aurin_result_data("/au/population-age/result-population.json")
+        # population_data_meta = read_aurin_result_data("/au/population-age/result-meta.json")
         income_data = read_aurin_result_data("/au/income/result-income.json")
         income_meta_data = read_aurin_result_data("/au/income/result-meta.json")
-        for k, v in income_data.items():
-            if k in selected_lga_list:
-                result[k]["income"] = v
 
-        result["meta"].update(income_meta_data)
+        result["income_axis_by_selected_income_group_legend_by_lga_selected"] = {"multiBarChart_income_by_group_by_lga": []}
+        for selected_income_group_attribute in selected_income_groups_attribute:
+            line_data = {}
+            line_data["title"] = income_meta_data[selected_income_group_attribute]["title"]
+            line_data["data"] = []
+            for selected_lga in selected_lga_list:
+                line_data["data"].append({"x": selected_lga, "y": income_data[selected_lga][selected_income_group_attribute]})
+            result["income_axis_by_selected_income_group_legend_by_lga_selected"]["multiBarChart_income_by_group_by_lga"].append(line_data)
+
+        result["income_axis_by_lga_selected_legend_by_selected_income_group"] = {"multiBarChart_income_by_lga_by_group": []}
+        for selected_lga in selected_lga_list:
+            line_data = {}
+            line_data["title"] = selected_lga
+            line_data["data"] = []
+            for selected_income_group_attribute in selected_income_groups_attribute:
+                line_data["data"].append({"x": income_meta_data[selected_income_group_attribute]["title"],
+                                          "y": income_data[selected_lga][selected_income_group_attribute]
+                                          })
+            result["income_axis_by_lga_selected_legend_by_selected_income_group"]["multiBarChart_income_by_lga_by_group"].append(line_data)
+
+        # for k, v in education_level_data.items():
+        #     if k in selected_lga_list:
+        #         result[k]["education_level"] = v
+        #
+        # result["meta"] = education_level_meta_data
+        #
+        # health_data = read_aurin_result_data("/au/health/result-health.json")
+        # health_data_meta = read_aurin_result_data("/au/health/result-meta.json")
+        # for k, v in health_data.items():
+        #     if k in selected_lga_list:
+        #         result[k]["health_access"] = v
+        # result["meta"].update(health_data_meta)
+        #
+        # income_data = read_aurin_result_data("/au/income/result-income.json")
+        # income_meta_data = read_aurin_result_data("/au/income/result-meta.json")
+        # for k, v in income_data.items():
+        #     if k in selected_lga_list:
+        #         result[k]["income"] = v
+        #
+        # result["meta"].update(income_meta_data)
 
         return result
 
