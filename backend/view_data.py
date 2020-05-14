@@ -59,6 +59,29 @@ get_view_url = "http://{username}:{password}@{host}:{port}/{database}/_design/{d
 
 
 def get_view(view_name, group_level):
+  """
+  This function will retreived the aggregated documents from the database, and
+  the aggregation level is determined by the group_level.
+
+  Parameters
+  ----------
+  view_name: String
+  The name of the view to be retrieved
+
+  group_level : int
+    The number of levels to reduce the documents to
+
+  Sample return
+  -------------
+  {'rows': 
+    [
+      {'key': ['Greater_Brisbane', 2020, 2], 'value': 609}, 
+      {'key': ['Greater_Melbourne', 2020, 2], 'value': 1420}, 
+      {'key': ['Greater_Sydney', 2020, 2], 'value': 1613}, 
+      {'key': ['other', 2020, 2], 'value': 1358}
+    ]
+  }
+  """
   return json.loads(requests.get(
     get_view_url.format(username=username,
                         password=password, 
