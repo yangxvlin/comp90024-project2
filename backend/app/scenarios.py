@@ -286,7 +286,7 @@ class Scenario4(Resource):
     def get(self):
         """
         curl -X GET
-        127.0.0.1:5000/scenario4?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney&income=0,3,7,8,9,12,13,15
+        127.0.0.1:5000/scenario4?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney&income=0,3,7,8,9,12,13,15&year_start=2020&month_start=2&day_start=1&year_end=2020&month_end=5&day_end=10
         :return:
         """
         lga_param = request.args.get('lga')
@@ -296,12 +296,62 @@ class Scenario4(Resource):
         selected_income_group = income_group_param.split(',')
         selected_income_groups_attribute = [INCOME_GROUP_COUNT_MAP[i] for i in selected_income_group]
 
+        year_start_param = request.args.get('year_start')
+        month_start_param = request.args.get('month_start')
+        day_start_param = request.args.get('day_start')
+        year_end_param = request.args.get('year_end')
+        month_end_param = request.args.get('month_end')
+        day_end_param = request.args.get('day_end')
+
+        year_start_integer = int(year_start_param)
+        month_start_integer = int(month_start_param)
+        day_start_integer = int(day_start_param)
+        year_end_integer = int(year_end_param)
+        month_end_integer = int(month_end_param)
+        day_end_integer = int(day_end_param)
+
         result = {}
 
         # population_data = read_aurin_result_data("/au/population-age/result-population.json")
         # population_data_meta = read_aurin_result_data("/au/population-age/result-meta.json")
         income_data = read_aurin_result_data("/au/income/result-income.json")
         income_meta_data = read_aurin_result_data("/au/income/result-meta.json")
+
+        covid_twitter_data_by_city_year_month_day = get_covid_city_year_month_day()
+        result["covid_related_twitter_count"] = {"lineChart": []}
+        for key in selected_lga_list:
+            line_data = {}
+            line_data["title"] = key
+            line_data["data"] = []
+
+            for row in covid_twitter_data_by_city_year_month_day["rows"]:
+                row_key = row["key"]
+                row_value = row["value"]
+
+                row_city = row_key[1]
+                row_year = row_key[2]
+                row_month = row_key[3]
+                row_day = row_key[4]
+
+                if row_city == key and \
+                        year_start_integer <= row_year <= year_end_integer and \
+                        month_start_integer <= row_month <= month_end_integer and \
+                        day_start_integer <= row_day <= day_end_integer:
+                    line_data["data"].append({"name": "{}-{}-{}".format(row_year, row_month, row_day), "y": row_value})
+            line_data["data"] = sorted(line_data["data"], key=lambda x: year_month_day_sorter(x["name"]))
+            result["covid_related_twitter_count"]["lineChart"].append(line_data)
+
+        covid_state_data = read_covid_csv_by_city(selected_lga_list)
+
+        result["state_covid_count"] = {"lineChart": []}
+        for key in selected_lga_list:
+            line_data = {}
+            city_state = CITY_STATE_MAP[key]
+            line_data["title"] = city_state
+            line_data["data"] = get_covid_count_by_time(year_start_integer, month_start_integer, day_start_integer,
+                                                        year_end_integer, month_end_integer, day_end_integer,
+                                                        covid_state_data, city_state)
+            result["state_covid_count"]["lineChart"].append(line_data)
 
         result["income_axis_by_selected_income_group_legend_by_lga_selected"] = {"multiBarChart_income_by_group_by_lga": []}
         for selected_income_group_attribute in selected_income_groups_attribute:
@@ -322,6 +372,25 @@ class Scenario4(Resource):
                                           "y": income_data[selected_lga][selected_income_group_attribute]
                                           })
             result["income_axis_by_lga_selected_legend_by_selected_income_group"]["multiBarChart_income_by_lga_by_group"].append(line_data)
+
+        health_data = read_aurin_result_data("/au/health/result-health.json")
+        health_meta_data = read_aurin_result_data("/au/health/result-meta.json")
+
+        result["barChart_gp_per_persion"] = []
+        line_data = {}
+        line_data["title"] = "GP service per person"
+        line_data["data"] = []
+        for lga in CITY_GEO_POINTS.keys():
+            line_data["data"].append({"x": lga, "y": health_data[lga]["gpsrv_meas"]})
+        result["barChart_gp_per_persion"].append(line_data)
+
+        result["barChart_hospital_per_person"] = []
+        line_data = {}
+        line_data["title"] = "Hospital service per person"
+        line_data["data"] = []
+        for lga in CITY_GEO_POINTS.keys():
+            line_data["data"].append({"x": lga, "y": health_data[lga]["hs_meas"]})
+        result["barChart_hospital_per_person"].append(line_data)
 
         # for k, v in education_level_data.items():
         #     if k in selected_lga_list:
@@ -344,7 +413,9 @@ class Scenario4(Resource):
         #
         # result["meta"].update(income_meta_data)
 
-        return result
+        resp = jsonify(result)
+        resp.status_code = 200
+        return resp
 
 
 api.add_resource(Scenario4, "/scenario4", endpoint='scenario4')

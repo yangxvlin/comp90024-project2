@@ -4,10 +4,11 @@ Student id:  904904
 Date:        2020-4-26 15:33:59
 Description: some helper function
 """
-
+import datetime
 import os
 from app.settings import BASE_DIR, AURIN_DATA_PATH
 import json
+import pandas as pd
 
 LGA_LIST_ERROR_MSG = 'should be comma separated lga code or vic for Victoria. e.g.: lga=vic,20110'
 
@@ -96,3 +97,58 @@ def read_aurin_result_data(relative_file_path: str):
     os.chdir(BASE_DIR)
     with open(AURIN_DATA_PATH + relative_file_path) as f:
         return json.load(f)
+
+
+def year_month_day_sorter(x: str):
+    """
+    :param x: year_month_day splited by '-'
+    """
+    y, m, d = x.split('-')
+
+    return [int(y), int(m), int(d)]
+
+
+COVID_19_DATA = "../../COVID-19/time_series_covid19_confirmed_global.csv"
+
+
+CITY_STATE_MAP = {
+    "Greater_Adelaide": "South Australia",
+    "Greater_Melbourne": "Victoria",
+    "Greater_Brisbane": "Queensland",
+    "Greater_Sydney": "New South Wales"
+}
+
+
+def read_covid_csv_by_city(selected_lga_list: list):
+    states = [CITY_STATE_MAP[i] for i in selected_lga_list]
+
+    try:
+        data = pd.read_csv(COVID_19_DATA)
+    except FileNotFoundError:
+        data = pd.read_csv(COVID_19_DATA[3:])
+    result = data.loc[data["Province/State"].isin(states)]
+    return result
+
+
+def get_covid_count_by_time(year_start, month_start, day_start, year_end, month_end, day_end, data, state):
+    start = datetime.datetime.strptime("{}/{}/{}".format(month_start, day_start, year_start), "%m/%d/%Y")
+    end = datetime.datetime.strptime("{}/{}/{}".format(month_end, day_end, year_end), "%m/%d/%Y")
+    date_generated = [start + datetime.timedelta(days=x) for x in range(0, (end - start).days)]
+
+    results = []
+    state_data = data.loc[data["Province/State"] == state]
+
+    for date in date_generated:
+        dt = datetime.datetime.strptime(str(date).split(" ")[0], '%Y-%m-%d')
+        date = '{0}/{1}/{2:02}'.format(dt.month, dt.day, dt.year % 100)
+        # print(date)
+        if date in state_data:
+            results.append({"name": '{2}-{0}-{1}'.format(dt.month, dt.day, dt.year), "y": int(state_data[date])})
+    return results
+
+# testing
+# if __name__ == "__main__":
+#     print(get_covid_count_by_time(2020, 2, 1,
+#                                   2020, 5, 16,
+#                                   read_covid_csv_by_city(["Greater_Adelaide","Greater_Melbourne","Greater_Brisbane","Greater_Sydney"]),
+#                                   "Greater_Sydney"))
