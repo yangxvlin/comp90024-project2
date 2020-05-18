@@ -206,7 +206,7 @@ class Scenario2(Resource):
     def get(self):
         """
         curl -X GET
-        127.0.0.1:5000/scenario2?lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney&age_group=0,1,2,17
+        127.0.0.1:5000/scenario2?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney&age_group=0,1,2,17
         :return:
         """
         lga_param = request.args.get('lga')
@@ -220,6 +220,7 @@ class Scenario2(Resource):
         population_data_meta = read_aurin_result_data("/au/population-age/result-meta.json")
 
         result = {}
+
         result["selected_lga"] = {}
         result["twitter_daily_time"] = {}
         result["selected_age_group_count_by_lga"] = {selected_age_group: {} for selected_age_group in selected_age_groups_attribute}
@@ -235,7 +236,10 @@ class Scenario2(Resource):
                         result["selected_lga"][key]["selected_lga_by_selected_age_group_count"][age_group] = value["count"][age_group]
                         result["selected_age_group_count_by_lga"][age_group][key] = value["count"][age_group]
         result["meta"] = population_data_meta
-        return result
+
+        resp = jsonify(result)
+        resp.status_code = 200
+        return resp
 
 
 api.add_resource(Scenario2, "/scenario2", endpoint='scenario2')
