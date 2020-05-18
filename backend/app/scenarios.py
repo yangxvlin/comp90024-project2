@@ -11,6 +11,7 @@ from app.settings import SIMPLE_DB
 from app.util import *
 from flask_httpauth import HTTPBasicAuth
 from view_data import *
+import datetime
 
 
 # ****************************************************************************
@@ -249,29 +250,95 @@ class Scenario3(Resource):
     def get(self):
         """
         curl -X GET
-        127.0.0.1:5000/scenario3?lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney
+        127.0.0.1:5000/scenario3?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney&year_start=2020&month_start=2&year_end=2020&month_end=5
         :return:
         """
         lga_param = request.args.get('lga')
         selected_lga_list = lga_param.split(',')
         n_lga = len(selected_lga_list)
 
+        year_start_param = request.args.get('year_start')
+        month_start_param = request.args.get('month_start')
+        # day_start_param = request.args.get('day_start')
+        year_end_param = request.args.get('year_end')
+        month_end_param = request.args.get('month_end')
+        # day_end_param = request.args.get('day_end')
+
+        date_start = datetime.datetime.strptime("01/{}/{}".format(month_start_param, year_start_param), '%d/%m/%Y')
+        date_end = datetime.datetime.strptime("28/{}/{}".format(month_end_param, year_end_param), '%d/%m/%Y')
+
+        # year_start_integer = int(year_start_param)
+        # month_start_integer = int(month_start_param)
+        # year_end_integer = int(year_end_param)
+        # month_end_integer = int(month_end_param)
+
+        result = {}
+
+        # english twitter count
+        total_tweets_by_city_year_month = get_city_year_month()
+        total_tweets_by_city_year_month_rows_dict = {tuple(x["key"]): x["value"] for x in total_tweets_by_city_year_month["rows"]}
+        total_english_tweets_by_city_year_month = get_English_city_year_month()
+
+        result["english_tweet_percentage"] = {"lineChart": []}
+        for key in selected_lga_list:
+            line_data = {}
+            line_data["title"] = key
+            line_data["data"] = []
+
+            for row in total_english_tweets_by_city_year_month["rows"]:
+                row_key = row["key"]
+                row_value = row["value"]
+
+                row_city = row_key[1]
+                row_year = row_key[2]
+                row_month = row_key[3]
+
+                try:
+                    row_date = datetime.datetime(year=int(row_year), month=int(row_month), day=2)
+                except ValueError:
+                    print(int(row_year), int(row_month), 2)
+                    continue
+
+                total_tweets_by_city_year_month_key = tuple([row_city, row_year, row_month])
+
+                if row_city == key and \
+                        total_tweets_by_city_year_month_key in total_tweets_by_city_year_month_rows_dict and \
+                        date_start <= row_date <= date_end:
+                    line_data["data"].append({"name": "{}-{}".format(row_year, row_month),
+                                              "y": row_value / total_tweets_by_city_year_month_rows_dict[total_tweets_by_city_year_month_key]})
+            line_data["data"] = sorted(line_data["data"], key=lambda x: year_month_sorter(x["name"]))
+            result["english_tweet_percentage"]["lineChart"].append(line_data)
+
+        # foreigner
         foreigner_data = read_aurin_result_data("/au/foreigner/result-foreigner.json")
 
-        result = {i: {"education_level": {}} for i in selected_lga_list}
-        for k, v in foreigner_data.items():
-            if k in selected_lga_list:
-                result[k]["percentage_foreigner"] = v["percentage_foreigner"]
+        result["barChart_city_foreigner"] = []
+        line_data = {}
+        line_data["title"] = "Foreigner %"
+        line_data["data"] = []
+        for lga in CITY_GEO_POINTS.keys():
+            line_data["data"].append({"x": lga, "y": foreigner_data[lga]["percentage_foreigner"]})
+        result["barChart_city_foreigner"].append(line_data)
 
+        # education lvel
         education_level_data = read_aurin_result_data("/au/education-level/result-education-level.json")
         education_level_meta_data = read_aurin_result_data("/au/education-level/result-meta.json")
 
-        for k, v in education_level_data.items():
-            if k in selected_lga_list:
-                result[k]["education_level"] = v
+        result["education_level_per_100_axis_by_education_level_legend_by_lga"] = {"multiBarChart_education_level_per_100_axis_by_education_level_legend_by_lga": []}
+        for edu_level in education_level_data["Greater_Adelaide"].keys():
+            line_data = {}
+            line_data["title"] = education_level_meta_data[edu_level]["title"]
+            line_data["data"] = []
+            for selected_lga in selected_lga_list:
+                line_data["data"].append({"x": selected_lga,
+                                          "y": education_level_data[selected_lga][edu_level]
+                                          })
+            result["education_level_per_100_axis_by_education_level_legend_by_lga"]["multiBarChart_education_level_per_100_axis_by_education_level_legend_by_lga"].append(line_data)
 
-        result["meta"] = education_level_meta_data
-        return result
+
+        resp = jsonify(result)
+        resp.status_code = 200
+        return resp
 
 
 api.add_resource(Scenario3, "/scenario3", endpoint='scenario3')
@@ -303,6 +370,9 @@ class Scenario4(Resource):
         month_end_param = request.args.get('month_end')
         day_end_param = request.args.get('day_end')
 
+        date_start = datetime.datetime.strptime("{}/{}/{}".format(day_start_param, month_start_param, year_start_param), '%d/%m/%Y')
+        date_end = datetime.datetime.strptime("{}/{}/{}".format(day_end_param, month_end_param, year_end_param), '%d/%m/%Y')
+
         year_start_integer = int(year_start_param)
         month_start_integer = int(month_start_param)
         day_start_integer = int(day_start_param)
@@ -333,10 +403,14 @@ class Scenario4(Resource):
                 row_month = row_key[3]
                 row_day = row_key[4]
 
+                try:
+                    row_date = datetime.datetime(year=int(row_year), month=int(row_month), day=int(row_day))
+                except ValueError:
+                    print(int(row_year), int(row_month), int(row_day))
+                    continue
+
                 if row_city == key and \
-                        year_start_integer <= row_year <= year_end_integer and \
-                        month_start_integer <= row_month <= month_end_integer and \
-                        day_start_integer <= row_day <= day_end_integer:
+                        date_start <= row_date <= date_end:
                     line_data["data"].append({"name": "{}-{}-{}".format(row_year, row_month, row_day), "y": row_value})
             line_data["data"] = sorted(line_data["data"], key=lambda x: year_month_day_sorter(x["name"]))
             result["covid_related_twitter_count"]["lineChart"].append(line_data)

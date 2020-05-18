@@ -108,6 +108,15 @@ def year_month_day_sorter(x: str):
     return [int(y), int(m), int(d)]
 
 
+def year_month_sorter(x: str):
+    """
+    :param x: year_month_day splited by '-'
+    """
+    y, m = x.split('-')
+
+    return [int(y), int(m)]
+
+
 COVID_19_DATA = "../../COVID-19/time_series_covid19_confirmed_global.csv"
 
 
