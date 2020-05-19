@@ -192,6 +192,80 @@ def get_non_English_tweets(num_of_tweets):
   }
   return get_sample_tweets(condition)
 
+def get_pol_positive_tweets(num_of_tweets):
+  condition = {
+    "selector": {
+      "polarity": {"$gte": 1/3}
+    },
+    "limit": num_of_tweets
+  }
+  return get_sample_tweets(condition)
+
+
+def get_pol_negative_tweets(num_of_tweets):
+  condition = {
+    "selector": {
+      "polarity": {"$lte": -(1/3)}
+    },
+    "limit": num_of_tweets
+  }
+  return get_sample_tweets(condition)
+
+
+def get_pol_neutral_tweets(num_of_tweets):
+  condition = {
+    "selector": {
+      "$and": [
+        {
+          "polarity": {"$gt": -(1/3)}
+        },
+        {
+          "polarity": {"$lt": 1/3}
+        }
+      ]
+    },
+    "limit": num_of_tweets
+  }
+  return get_sample_tweets(condition)
+
+
+def get_sub_objective_tweets(num_of_tweets):
+  condition = {
+    "selector": {
+      "subjectivity": {"$lte": 1/3}
+    },
+    "limit": num_of_tweets
+  }
+  return get_sample_tweets(condition)
+
+
+
+def get_sub_neutral_tweets(num_of_tweets):
+  condition = {
+    "selector": {
+      "$and": [
+        {
+          "subjectivity": {"$gt": 1/3}
+        },
+        {
+          "subjectivity": {"$lte": 2/3}
+        }
+      ]
+    },
+    "limit": num_of_tweets
+  }
+  return get_sample_tweets(condition)
+
+
+def get_sub_subjective_tweets(num_of_tweets):
+  condition = {
+    "selector": {
+      "subjectivity": {"$gt": 2/3}
+    },
+    "limit": num_of_tweets
+  }
+  return get_sample_tweets(condition)
+
 
 def get_emotion_city(group_level=2):
   return get_view("emotion_city", group_level)
