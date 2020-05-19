@@ -22,17 +22,29 @@ STATISTICS = {
       "reduce": "_count",
       "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  if (doc.lang === \"en\") {\n    city = \"unknown\";\n    date = new Date(doc.created_at);\n    year = date.getFullYear();\n    month = date.getMonth();\n    if (doc.place) {\n      city = geo_codes[doc.geo_code]\n    } \n    emit([\"English\", city, year, month], 1);\n  }\n  \n}"
     },
-    "covid_city_year_month_date": {
-      "reduce": "_count",
-      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  city = \"unknown\";\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  month = date.getMonth();\n  date = date.getDate();\n  if (doc.place) {\n    city = geo_codes[doc.geo_code]\n  } \n  emit([\"COVID-19\", city, year, month, date], 1);\n}"
+    "emotion_city": {
+      "reduce": "_sum",
+      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nemotions = ['anger', 'anticipation', 'disgust', 'fear', 'joy', \n            'negative', 'positive', 'sadness', 'surprise', 'trust']\n\nfunction (doc) {\n  city = \"unknown\"\n  \n  if (doc.place) {\n    city = geo_codes[doc.geo_code]\n  }\n  \n  for (e of emotions) {\n    emit([e, city], doc[e])\n  }\n}"
     },
-    "covid_polarity_city_year_month_date": {
+    "covid_subjectivity_city_year_month_day": {
       "reduce": "_count",
-      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  city = \"unknown\";\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  month = date.getMonth();\n  date = date.getDate();\n  pol = doc.polarity;\n  if (doc.place) {\n    city = geo_codes[doc.geo_code]\n  }\n  emit([\"COVID-19\", pol, city, year, month, date], 1);\n  \n}"
+      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  city = \"unknown\";\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  month = date.getMonth();\n  day = date.getDate();\n  subj = doc.subjectivity;\n  if (doc.place) {\n    city = geo_codes[doc.geo_code]\n  }\n  \n  if (subj >= 0 && subj <= 1/3) {\n    subj = \"objective\"\n  } \n  else if (subj > 1/3 && subj <= 2/3) {\n    subj = \"neutral\"\n  } else {\n    subj = \"subjective\"\n  }\n  emit([\"COVID-19\", subj, city, year, month, day], 1);\n  \n}"
     },
-    "covid_subjectivity_city_year_month_date": {
+    "covid_polarity_city_year_month_day": {
       "reduce": "_count",
-      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  city = \"unknown\";\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  month = date.getMonth();\n  date = date.getDate();\n  subj = doc.subjectivity;\n  if (doc.place) {\n    city = geo_codes[doc.geo_code]\n  }\n  emit([\"COVID-19\", subj, city, year, month, date], 1);\n  \n}"
+      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  city = \"unknown\";\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  month = date.getMonth();\n  day = date.getDate();\n  pol = doc.polarity;\n  if (doc.place) {\n    city = geo_codes[doc.geo_code]\n  }\n  emit([\"COVID-19\", pol, city, year, month, day], 1);\n  \n}"
+    },
+    "covid_city_year_month_day": {
+      "reduce": "_count",
+      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  city = \"unknown\";\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  month = date.getMonth();\n  day = date.getDate();\n  if (doc.place) {\n    city = geo_codes[doc.geo_code]\n  } \n  emit([\"COVID-19\", city, year, month, day], 1);\n}"
+    },
+    "emotion_city_year_month_day": {
+      "reduce": "_sum",
+      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nemotions = ['anger', 'anticipation', 'disgust', 'fear', 'joy', \n            'negative', 'positive', 'sadness', 'surprise', 'trust']\n\nfunction (doc) {\n  city = \"unknown\"\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  month = date.getMonth();\n  day = date.getDate();\n  \n  if (doc.place) {\n    city = geo_codes[doc.geo_code]\n  }\n  \n  for (e of emotions) {\n    emit([e, city, year, month, day], doc[e])\n  }\n}"
+    },
+    "wordlen_city": {
+      "reduce": "_sum",
+      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nwordlen_keys = [\"short_word_count\", \"medium_word_count\", \"long_word_count\"]\n\nfunction (doc) {\n  city = \"unknown\"\n  \n  if (doc.place) {\n    city = geo_codes[doc.geo_code]\n  }\n  \n  for (wordlen_key of wordlen_keys) {\n    emit([wordlen_key, city], doc[wordlen_key])\n  }\n}"
     }
   }
 }
@@ -40,12 +52,12 @@ STATISTICS = {
 host = "115.146.93.205"
 port = "5984"
 username = password = "admin"
-database = 'tweets2'
+database = 'tweets3'
 design_doc = "STATISTICS"
 
 update_design_doc_url = "http://{username}:{password}@{host}:{port}/{database}/_design/{design_doc}"
 get_view_url = "http://{username}:{password}@{host}:{port}/{database}/_design/{design_doc}/_view/{view_name}?group_level={group_level}"
-get_sample_view_url = "http://{username}:{password}@{host}:{port}/{database}/_design/{design_doc}/_view/{view_name}?group_level={group_level}&limit={num_of_tweets}"
+get_tweets_url = "http://{username}:{password}@{host}:{port}/{database}/_find"
 
 # Date: 0-6 represents Sunday to Saturday
 # req = requests.put(
@@ -93,54 +105,48 @@ def get_view(view_name, group_level):
                         group_level=group_level)
   ).content.decode("utf-8"))
 
-def get_city_hour_day(group_level=3):
+def get_sample_tweets(condition):
   """
-  According to the group level provided by the user, return all the documents 
-  sorted in asending order from city, hour and day.
+  This function will retrieve tweets, based on the conditions given, form the
+  database.
 
   Parameters
   ----------
-  group_level : int, optional
-    The number of levels to reduce the documents to
+  condition: Object
+  The filtering condition for the tweets
+
+  Sample return
+  -------------
+  [
+    {doc 1},
+    {doc 2},
+    ........,
+    {doc n}
+  ]
   """
+  return json.loads(requests.post(
+    get_tweets_url.format(username=username,
+                               password=password, 
+                               host=host, port=port, 
+                               database=database),
+                    headers={"Content-Type": "application/json"},
+                    data=json.dumps(condition)
+  ).content.decode("utf-8"))["docs"]
+
+
+def get_city_hour_day(group_level=3):
   return get_view("city_hour_day", group_level)
 
-def get_city_2020_month_day_hours(group_level=5):
-  """
-  According to the group level provided by the user, return all the documents 
-  created in 2020 sorted in asending order from city, month, day and hours.
 
-  Parameters
-  ----------
-  group_level : int, optional
-    The number of levels to reduce the documents to
-  """
+def get_city_2020_month_day_hours(group_level=5):
   return get_view("city_2020_month_day_hours", group_level)
 
 
 def get_city_year_month(group_level=3):
-  """
-  According to the group level provided by the user, return all the documents 
-  created sorted in asending order from city, year and month.
-
-  Parameters
-  ----------
-  group_level : int, optional
-    The number of levels to reduce the documents to
-  """
   return get_view("city_year_month", group_level)
 
 
 def get_English_city_year_month(group_level=4):
-  """
-  According to the group level provided by the user, return all the documents 
-  created in English sorted in asending order from city, year and month.
-
-  Parameters
-  ----------
-  group_level : int, optional
-    The number of levels to reduce the documents to
-  """
   return get_view("English_city_year_month", group_level)
 
 
@@ -148,9 +154,52 @@ def get_covid_city_year_month_day(group_level=5):
   return get_view("covid_city_year_month_day", group_level)
 
 
-def get_covid_polarity_city_year_month_day(group_level=6):
-  return get_view("covid_polarity_city_year_month_day", group_level)
-
-
 def get_covid_subjectivity_city_year_month_day(group_level=6):
   return get_view("covid_subjectivity_city_year_month_day", group_level)
+
+
+def get_language(group_level=1):
+  return get_view("language", group_level)
+
+
+def get_English_tweets(num_of_tweets):
+  condition = {
+    "selector": {
+        "lang": "en"
+    },
+    "limit": num_of_tweets
+  }
+  return get_sample_tweets(condition)
+
+
+def get_non_English_tweets(num_of_tweets):
+  condition = {
+    "selector": {
+      "$and": [
+        {
+          "lang": {
+            "$ne": "en"
+          }
+        },
+        {
+          "lang": {
+            "$ne": "und"
+          }
+        }
+      ]
+    },
+    "limit": num_of_tweets
+  }
+  return get_sample_tweets(condition)
+
+
+def get_emotion_city(group_level=2):
+  return get_view("emotion_city", group_level)
+
+
+def get_emotion_city_year_month_day(group_level=5):
+  return get_view("emotion_city_year_month_day", group_level)
+
+
+def get_wordlen_city(group_level=2):
+  return get_view("wordlen_city", group_level)
