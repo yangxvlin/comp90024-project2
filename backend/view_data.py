@@ -22,17 +22,17 @@ STATISTICS = {
       "reduce": "_count",
       "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  if (doc.lang === \"en\") {\n    city = \"unknown\";\n    date = new Date(doc.created_at);\n    year = date.getFullYear();\n    month = date.getMonth();\n    if (doc.place) {\n      city = geo_codes[doc.geo_code]\n    } \n    emit([\"English\", city, year, month], 1);\n  }\n  \n}"
     },
-    "covid_city_year_month_day": {
+    "covid_city_year_month_date": {
       "reduce": "_count",
-      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  city = \"unknown\";\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  month = date.getMonth();\n  day = (date.getDay() + 1) % 7;\n  if (doc.place) {\n    city = geo_codes[doc.geo_code]\n  } \n  emit([\"COVID-19\", city, year, month, day], 1);\n}"
+      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  city = \"unknown\";\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  month = date.getMonth();\n  date = date.getDate();\n  if (doc.place) {\n    city = geo_codes[doc.geo_code]\n  } \n  emit([\"COVID-19\", city, year, month, date], 1);\n}"
     },
-    "covid_polarity_city_year_month_day": {
+    "covid_polarity_city_year_month_date": {
       "reduce": "_count",
-      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  city = \"unknown\";\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  month = date.getMonth();\n  day = (date.getDay() + 1) % 7;\n  pol = doc.polarity;\n  if (doc.place) {\n    city = geo_codes[doc.geo_code]\n  }\n  emit([\"COVID-19\", pol, city, year, month, day], 1);\n  \n}"
+      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  city = \"unknown\";\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  month = date.getMonth();\n  date = date.getDate();\n  pol = doc.polarity;\n  if (doc.place) {\n    city = geo_codes[doc.geo_code]\n  }\n  emit([\"COVID-19\", pol, city, year, month, date], 1);\n  \n}"
     },
-    "covid_subjectivity_city_year_month_day": {
+    "covid_subjectivity_city_year_month_date": {
       "reduce": "_count",
-      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  city = \"unknown\";\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  month = date.getMonth();\n  day = (date.getDay() + 1) % 7;\n  subj = doc.subjectivity;\n  if (doc.place) {\n    city = geo_codes[doc.geo_code]\n  }\n  emit([\"COVID-19\", subj, city, year, month, day], 1);\n  \n}"
+      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  city = \"unknown\";\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  month = date.getMonth();\n  date = date.getDate();\n  subj = doc.subjectivity;\n  if (doc.place) {\n    city = geo_codes[doc.geo_code]\n  }\n  emit([\"COVID-19\", subj, city, year, month, date], 1);\n  \n}"
     }
   }
 }
@@ -45,6 +45,7 @@ design_doc = "STATISTICS"
 
 update_design_doc_url = "http://{username}:{password}@{host}:{port}/{database}/_design/{design_doc}"
 get_view_url = "http://{username}:{password}@{host}:{port}/{database}/_design/{design_doc}/_view/{view_name}?group_level={group_level}"
+get_sample_view_url = "http://{username}:{password}@{host}:{port}/{database}/_design/{design_doc}/_view/{view_name}?group_level={group_level}&limit={num_of_tweets}"
 
 # Date: 0-6 represents Sunday to Saturday
 # req = requests.put(
