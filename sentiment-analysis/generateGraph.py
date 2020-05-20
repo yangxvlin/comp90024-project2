@@ -32,14 +32,14 @@ def transform(data: pd.DataFrame):
     return new_df
 
 
-def generate(data: pd.DataFrame):
+def generate(new_data: pd.DataFrame):
     for g in geo:
-        pie_df = data[data['geo'] == g]
+        pie_df = new_data[new_data['geo'] == g]
         fig = px.sunburst(pie_df, path=['geo', 'polarity', "subjectivity"],
                           values="size", color="size", color_continuous_scale='RdBu')
 
         fig.write_html("./" + g + ".html")
-        fig.write_image("./" + g + ".jpg")
+        fig.write_image("./" + g + ".svg")
 
 
 if __name__ == "__main__":

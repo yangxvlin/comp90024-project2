@@ -33,3 +33,5 @@ sentiment-analysis/*.svg
 sentiment-analysis/.ipynb_checkpoints/
 
 *.jpg
+
+sentiment-analysis/compress.zip
