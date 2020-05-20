@@ -6,9 +6,9 @@ Description: api for scenarios
 """
 from flask import request, jsonify
 from flask_restful import Resource
-from app.resources import api
-from app.settings import SIMPLE_DB
-from app.util import *
+from resources import api
+from settings import SIMPLE_DB
+from util import *
 from flask_httpauth import HTTPBasicAuth
 from view_data import *
 import datetime

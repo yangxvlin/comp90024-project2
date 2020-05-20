@@ -9,7 +9,8 @@ Description: backend flask application
 import argparse
 import sys
 
-from app.resources import app
+from resources import app
+import scenarios
 
 
 if __name__ == '__main__':

@@ -6,7 +6,7 @@ Description: some helper function
 """
 import datetime
 import os
-from app.settings import BASE_DIR, AURIN_DATA_PATH
+from settings import BASE_DIR, AURIN_DATA_PATH
 import json
 import pandas as pd
 
