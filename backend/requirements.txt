@@ -20,7 +20,5 @@ requests==2.23.0
 six==1.14.0
 urllib3==1.25.9
 Werkzeug==1.0.1
-plotly==4.7.1
-plotly-orca==1.2.1
-psutil==5.7.0
-requests==2.23.0
+pandas==1.0.3
+numpy
