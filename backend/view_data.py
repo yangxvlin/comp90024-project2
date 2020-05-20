@@ -285,3 +285,11 @@ def get_city_subjectivity(group_level=2):
 
 def get_city_polarity(group_level=2):
   return get_view("city_polarity", group_level)
+
+
+def get_city_subjectivity_float(group_level=2):
+  return get_view("city_subjectivity_float", group_level)
+
+
+def get_city_polarity_float(group_level=2):
+  return get_view("city_polarity_float", group_level)
