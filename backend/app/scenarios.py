@@ -207,22 +207,49 @@ class Scenario2(Resource):
     def get(self):
         """
         curl -X GET
-        127.0.0.1:5000/scenario2?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney&age_group=0,1,2,17
+        127.0.0.1:5000/scenario2?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney
         :return:
         """
         lga_param = request.args.get('lga')
-        age_group_param = request.args.get('age_group')
         selected_lga_list = lga_param.split(',')
         n_lga = len(selected_lga_list)
-        selected_age_groups = age_group_param.split(',')
-        selected_age_groups_attribute = [AGE_GROUP_COUNT_MAP[i] for i in selected_age_groups]
-
-        population_data = read_aurin_result_data("/au/population-age/result-population.json")
-        population_data_meta = read_aurin_result_data("/au/population-age/result-meta.json")
 
         result = {}
 
+        data = {"polarity": [], "subjectivity": [], "geo": []}
+        city_subjectivity = get_city_subjectivity_float()
+        city_polarity = get_city_polarity_float()
+        for key in selected_lga_list:
+            data["geo"].append(key)
 
+            subjectivity = 0
+            for row in city_subjectivity["rows"]:
+                row_key = row["key"]
+                row_value = row["value"]
+
+                row_city = row_key[0]
+                row_v = row_key[1]
+
+                if row_city == key:
+                    subjectivity += row_v * row_value
+            data["subjectivity"].append(subjectivity)
+
+            polarity = 0
+            for row in city_polarity["rows"]:
+                row_key = row["key"]
+                row_value = row["value"]
+
+                row_city = row_key[0]
+                row_v = row_key[1]
+
+                if row_city == key:
+                    polarity += row_v * row_value
+            data["polarity"].append(polarity)
+        df = pd.DataFrame(data=data)
+
+        generate(df)
+
+        result["df"] = data
 
         resp = jsonify(result)
         resp.status_code = 200
@@ -493,23 +520,62 @@ class Scenario5(Resource):
     def get(self):
         """
         curl -X GET
-        127.0.0.1:5000/scenario5?lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney
+        127.0.0.1:5000/scenario5?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney
         :return:
         """
         lga_param = request.args.get('lga')
         selected_lga_list = lga_param.split(',')
         n_lga = len(selected_lga_list)
 
-        result = {i: {} for i in selected_lga_list}
+        result = {}
 
+        # city's emotion word cloud
+        twitter_emotion_word_count = get_emotion_city()
+
+        result["emotion_word_count_by_city"] = {"word_cloud": []}
+        for key in selected_lga_list:
+            line_data = {}
+            line_data["title"] = key
+            line_data["data"] = []
+
+            for row in twitter_emotion_word_count["rows"]:
+                row_key = row["key"]
+                row_value = row["value"]
+
+                row_emotion = row_key[0]
+                row_city = row_key[1]
+
+                if row_city == key:
+                    line_data["data"].append({"name": row_emotion, "y": row_value})
+            result["emotion_word_count_by_city"]["word_cloud"].append(line_data)
+
+        result["chart_emotion_word_count_by_city"] = {"multiBarChart_emotion_word_count_by_city": []}
+        for key in selected_lga_list:
+            line_data = {}
+            line_data["title"] = key
+            line_data["data"] = []
+
+            for row in twitter_emotion_word_count["rows"]:
+                row_key = row["key"]
+                row_value = row["value"]
+
+                row_emotion = row_key[0]
+                row_city = row_key[1]
+
+                if row_city == key:
+                    line_data["data"].append({"name": row_emotion, "y": row_value})
+            result["chart_emotion_word_count_by_city"]["multiBarChart_emotion_word_count_by_city"].append(line_data)
+
+        #  psychological distress
         psychological_distress_data = read_aurin_result_data("/au/psychological-distress/result-psychological-distress.json")
-        psychological_distress_meta_data = read_aurin_result_data("/au/psychological-distress/result-meta.json")
 
-        for k, v in psychological_distress_data.items():
-            if k in selected_lga_list:
-                result[k]["psychological_distress"] = v
-
-        result["meta"] = psychological_distress_meta_data
+        result["barChart_psychological_distress_by_lga"] = []
+        line_data = {}
+        line_data["title"] = "People feel High psychological level stress %"
+        line_data["data"] = []
+        for lga in selected_lga_list:
+            line_data["data"].append({"x": lga, "y": psychological_distress_data[lga]["k10_me_2_rate_3_11_7_13"]})
+        result["barChart_psychological_distress_by_lga"].append(line_data)
 
         return result
 
