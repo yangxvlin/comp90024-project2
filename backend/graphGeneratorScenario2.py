@@ -43,5 +43,5 @@ def generate(new_data: pd.DataFrame):
 
 
 if __name__ == "__main__":
-    data = pd.read_csv("test.csv")
+    data = pd.read_csv("../sentiment-analysis/test.csv")
     generate(transform(data))
