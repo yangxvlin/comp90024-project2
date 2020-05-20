@@ -32,16 +32,17 @@ def transform(data: pd.DataFrame):
     return new_df
 
 
-def generate(new_data: pd.DataFrame):
+def generate(new_data: pd.DataFrame, path="./"):
     for g in geo:
         pie_df = new_data[new_data['geo'] == g]
         fig = px.sunburst(pie_df, path=['geo', 'polarity', "subjectivity"],
                           values="size", color="size", color_continuous_scale='RdBu')
 
-        fig.write_html("./" + g + ".html")
-        fig.write_image("./" + g + ".svg")
+        fig.write_html(path + g + ".html")
+        fig.write_image(path + g + ".svg")
 
 
 if __name__ == "__main__":
     data = pd.read_csv("../sentiment-analysis/test.csv")
+    # assign data here
     generate(transform(data))
