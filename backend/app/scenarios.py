@@ -12,6 +12,7 @@ from app.util import *
 from flask_httpauth import HTTPBasicAuth
 from view_data import *
 import datetime
+from graphGeneratorScenario2 import generate
 
 
 # ****************************************************************************
@@ -221,21 +222,7 @@ class Scenario2(Resource):
 
         result = {}
 
-        result["selected_lga"] = {}
-        result["twitter_daily_time"] = {}
-        result["selected_age_group_count_by_lga"] = {selected_age_group: {} for selected_age_group in selected_age_groups_attribute}
-        for key, value in population_data.items():
-            if key in selected_lga_list:
-                result["selected_lga"][key] = {}
-                result["selected_lga"][key]["selected_lga_by_selected_age_group_count"] = {}
-                result["selected_lga"][key]["selected_lga_by_all_age_group_count"] = {age_group: 0 for age_group in AGE_GROUP_COUNT_MAP.values()}
-                result["selected_lga"][key]["total_population"] = value["total_population"]
-                for age_group in AGE_GROUP_COUNT_MAP.values():
-                    result["selected_lga"][key]["selected_lga_by_all_age_group_count"][age_group] += value["count"][age_group]
-                    if age_group in selected_age_groups_attribute:
-                        result["selected_lga"][key]["selected_lga_by_selected_age_group_count"][age_group] = value["count"][age_group]
-                        result["selected_age_group_count_by_lga"][age_group][key] = value["count"][age_group]
-        result["meta"] = population_data_meta
+
 
         resp = jsonify(result)
         resp.status_code = 200
@@ -339,6 +326,25 @@ class Scenario3(Resource):
                                           })
             result["education_level_per_100_axis_by_education_level_legend_by_lga"]["multiBarChart_education_level_per_100_axis_by_education_level_legend_by_lga"].append(line_data)
 
+        twitter_word_len = get_wordlen_city()
+        result["twitter_word_len_axis_by_lga_legend_by_len_type"] = {"multiBarChart_twitter_word_len_axis_by_short_medium_long_legend_by_lga": []}
+        for key in selected_lga_list:
+            line_data = {}
+            line_data["title"] = key
+            line_data["data"] = []
+
+            for row in twitter_word_len["rows"]:
+                row_key = row["key"]
+                row_value = row["value"]
+
+                row_len_type = row_key[0]
+                row_city = row_key[1]
+
+                if row_city == key:
+                    line_data["data"].append({"x": row_len_type.split('_')[0],
+                                              "y": row_value
+                                              })
+            result["twitter_word_len_axis_by_lga_legend_by_len_type"][ "multiBarChart_twitter_word_len_axis_by_short_medium_long_legend_by_lga"].append(line_data)
 
         resp = jsonify(result)
         resp.status_code = 200
@@ -469,27 +475,6 @@ class Scenario4(Resource):
         for lga in CITY_GEO_POINTS.keys():
             line_data["data"].append({"x": lga, "y": health_data[lga]["hs_meas"]})
         result["barChart_hospital_per_person"].append(line_data)
-
-        # for k, v in education_level_data.items():
-        #     if k in selected_lga_list:
-        #         result[k]["education_level"] = v
-        #
-        # result["meta"] = education_level_meta_data
-        #
-        # health_data = read_aurin_result_data("/au/health/result-health.json")
-        # health_data_meta = read_aurin_result_data("/au/health/result-meta.json")
-        # for k, v in health_data.items():
-        #     if k in selected_lga_list:
-        #         result[k]["health_access"] = v
-        # result["meta"].update(health_data_meta)
-        #
-        # income_data = read_aurin_result_data("/au/income/result-income.json")
-        # income_meta_data = read_aurin_result_data("/au/income/result-meta.json")
-        # for k, v in income_data.items():
-        #     if k in selected_lga_list:
-        #         result[k]["income"] = v
-        #
-        # result["meta"].update(income_meta_data)
 
         resp = jsonify(result)
         resp.status_code = 200
