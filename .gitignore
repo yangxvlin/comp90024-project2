@@ -31,3 +31,5 @@ sentiment-analysis/*.html
 sentiment-analysis/*.csv
 sentiment-analysis/*.svg
 sentiment-analysis/.ipynb_checkpoints/
+
+*.jpg
