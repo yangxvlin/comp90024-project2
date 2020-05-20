@@ -94,7 +94,7 @@ def read_aurin_result_data(relative_file_path: str):
     :param relative_file_path: file path in "AURIN"
     :return content in the file
     """
-    os.chdir(BASE_DIR)
+    # os.chdir(BASE_DIR)
     with open(AURIN_DATA_PATH + relative_file_path) as f:
         return json.load(f)
 
