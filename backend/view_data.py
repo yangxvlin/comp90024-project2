@@ -277,3 +277,11 @@ def get_emotion_city_year_month_day(group_level=5):
 
 def get_wordlen_city(group_level=2):
   return get_view("wordlen_city", group_level)
+
+
+def get_city_subjectivity(group_level=2):
+  return get_view("city_subjectivity", group_level)
+
+
+def get_city_polarity(group_level=2):
+  return get_view("city_polarity", group_level)
