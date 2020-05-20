@@ -1,3 +1,4 @@
+wheel==0.34.2
 aniso8601==8.0.0
 certifi==2020.4.5.1
 chardet==3.0.4
@@ -20,3 +21,6 @@ six==1.14.0
 urllib3==1.25.9
 Werkzeug==1.0.1
 plotly==4.7.1
+plotly-orca==1.2.1
+psutil==5.7.0
+requests==2.23.0
