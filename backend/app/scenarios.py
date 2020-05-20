@@ -12,7 +12,7 @@ from app.util import *
 from flask_httpauth import HTTPBasicAuth
 from view_data import *
 import datetime
-from graphGeneratorScenario2 import generate
+from graphGeneratorScenario2 import generate, transform
 
 
 # ****************************************************************************
@@ -246,8 +246,9 @@ class Scenario2(Resource):
                     polarity += row_v * row_value
             data["polarity"].append(polarity)
         df = pd.DataFrame(data=data)
+        print(df)
 
-        generate(df)
+        generate(transform(df))
 
         result["df"] = data
 
