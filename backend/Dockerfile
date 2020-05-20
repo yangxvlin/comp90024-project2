@@ -16,7 +16,11 @@ RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_6
     && echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc \
     && echo "conda activate base" >> ~/.bashrc
 
-WORKDIR /usr/src/app
+WORKDIR /usr/AURIN
+
+COPY AURIN .
+
+WORKDIR /usr/backend
 
 EXPOSE 5001
 
