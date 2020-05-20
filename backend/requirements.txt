@@ -10,17 +10,13 @@ idna==2.9
 itsdangerous==1.1.0
 Jinja2==2.11.2
 MarkupSafe==1.1.1
+numpy==1.16.6
+pandas==0.24.2
+python-dateutil==2.8.1
 python-dotenv==0.13.0
 pytz==2019.3
 requests==2.23.0
 six==1.14.0
 urllib3==1.25.9
 Werkzeug==1.0.1
-pandas==1.0.3
-
-# dependency for scenario 2 plot
-numpy
-plotly
-plotly-orca==1.2.1
-psutil
-requests
+plotly==4.7.1
