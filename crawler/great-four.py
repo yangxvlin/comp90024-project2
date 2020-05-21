@@ -30,6 +30,7 @@ def stream_city(cf, city, keywords=None):
     locations = ",".join([str(i) for i in bbox[city]])
 
     for tweet in t.filter(locations=locations):
+        print("get one tweet") #TODO
         send_to_db(tweet)
 
 

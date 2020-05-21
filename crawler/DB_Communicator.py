@@ -40,7 +40,7 @@ host = "115.146.95.30"
 port = "5984"
 username = password = "admin"
 server = connect_to_couch_db_server(host, port, username, password)
-database = connect_to_database("tweets3", server)
+database = connect_to_database("live-tweets", server)
 with open("emotion_lexicon.json", 'r') as f:
     emotion_lexicon = json.load(f)
 ######################################################
@@ -100,7 +100,7 @@ def send_to_db(tweet_, db=database):
         res = p.analyse(tweet_)
         tweet_['polarity'] = res[0]
         tweet_['subjectivity'] = res[1]
-        text = tweet__['full_text']
+        text = tweet_['full_text']
         sentences = nltk.sent_tokenize(text)
         tokens = []
         for sentence in sentences:
@@ -109,14 +109,15 @@ def send_to_db(tweet_, db=database):
         tweet_.update(word_length_distribution(tokens))  # ADD LECXICON INFO
         print(tweet_)
         db.save(tweet_)
+        print("saved") # TODO
 
 
-tweets = os.listdir("./tweets")
-count = 0
-
-rse = {'tweets': []}
-for tweet in tweets:
-    with open("./tweets/" + tweet) as f:
-        for line in f:
-            tweet__ = json.loads(line)
-            send_to_db(tweet__, database)  # GIVE THE TWEET OBJECT AND DATABASE OBJECT TO THIS FUNCTION
+# tweets = os.listdir("./tweets")
+# count = 0
+#
+# rse = {'tweets': []}
+# for tweet in tweets:
+#     with open("./tweets/" + tweet) as f:
+#         for line in f:
+#             tweet__ = json.loads(line)
+#             send_to_db(tweet__, database)  # GIVE THE TWEET OBJECT AND DATABASE OBJECT TO THIS FUNCTION
