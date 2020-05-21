@@ -5,6 +5,8 @@ import os
 import datetime
 from multiprocessing import Process
 
+from DB_Communicator import send_to_db
+
 def stream_city(cf, city, keywords=None):
     bbox = {
         "great_syd": [149.971885992, -34.33117400499998, 151.63054702400007, -32.99606922499993],
@@ -26,13 +28,9 @@ def stream_city(cf, city, keywords=None):
     path = city + "/" + str(datetime.date.today())+".jsonl"
 
     locations = ",".join([str(i) for i in bbox[city]])
-    #print(locations)
 
-    with open(path, "ab") as f:
-        for tweet in t.filter(locations=locations):
-            #print(tweet)
-            f.write(json.dumps(tweet).encode('utf-8') + b"\n")
-
+    for tweet in t.filter(locations=locations):
+        send_to_db(tweet)
 
 
 if __name__ == "__main__":

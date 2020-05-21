@@ -22,18 +22,6 @@ bbox = {
     "great_ald": [138.435645001, -35.350296029999974, 139.04403010400003, -34.50022530299998]
 }
 
-bbox_shapes = {}
-for name, coordinates in bbox.items():
-    bbox_shapes[name] = box(coordinates[0], coordinates[1], coordinates[2], coordinates[3])
-
-
-def preprocess(bounding_box):
-    user_shape = Polygon(bounding_box)
-    for name_, area_shape in bbox_shapes.items():
-        if area_shape.contains(user_shape.centroid):
-            return name_
-    return "Australia other"
-
 
 def connect_to_couch_db_server(host, port, username, password):
     secure_remote_server = couchdb.Server('http://' + username + ':' + password + '@' + host + ':' + port)
@@ -45,6 +33,30 @@ def connect_to_database(database_name, server):
         return server[database_name]
     except:
         return server.create(database_name)
+
+
+## SETUP ######################################################
+host = "115.146.95.30"
+port = "5984"
+username = password = "admin"
+server = connect_to_couch_db_server(host, port, username, password)
+database = connect_to_database("tweets3", server)
+with open("emotion_lexicon.json", 'r') as f:
+    emotion_lexicon = json.load(f)
+######################################################
+
+
+bbox_shapes = {}
+for name, coordinates in bbox.items():
+    bbox_shapes[name] = box(coordinates[0], coordinates[1], coordinates[2], coordinates[3])
+
+
+def preprocess(bounding_box):
+    user_shape = Polygon(bounding_box)
+    for name_, area_shape in bbox_shapes.items():
+        if area_shape.contains(user_shape.centroid):
+            return name_
+    return "Australia other"
 
 
 def emotion_count(tokens):
@@ -77,13 +89,13 @@ def word_length_distribution(tokens):
 
 
 # data: the dictionary format of tweet object
-def send_to_db(tweet_, db):
+def send_to_db(tweet_, db=database):
     # check for duplication first
     if str(tweet_["id"]) not in db:
         # set tweet id as the document id for duplication removal
         tweet_["_id"] = "%d" % tweet_["id"]
 
-        tweet_["geo_code"] = preprocess(tweet_['place']["bounding_box"]["coordinates"][0]) # ADD
+        tweet_["geo_code"] = preprocess(tweet_['place']["bounding_box"]["coordinates"][0])  # ADD
         p = TwitterClassifier()
         res = p.analyse(tweet_)
         tweet_['polarity'] = res[0]
@@ -93,8 +105,8 @@ def send_to_db(tweet_, db):
         tokens = []
         for sentence in sentences:
             tokens.extend(nltk.word_tokenize(sentence))
-        tweet_.update(emotion_count(tokens)) # ADD EMOTION INFO
-        tweet_.update(word_length_distribution(tokens)) # ADD LECXICON INFO
+        tweet_.update(emotion_count(tokens))  # ADD EMOTION INFO
+        tweet_.update(word_length_distribution(tokens))  # ADD LECXICON INFO
         print(tweet_)
         db.save(tweet_)
 
@@ -102,23 +114,9 @@ def send_to_db(tweet_, db):
 tweets = os.listdir("./tweets")
 count = 0
 
-## SETUP ######################################################
-host = "115.146.95.30"
-port = "5984"
-username = password = "admin"
-server = connect_to_couch_db_server(host, port, username, password)
-database = connect_to_database("tweets3", server)
-with open("emotion_lexicon.json", 'r') as f:
-    emotion_lexicon = json.load(f)
-######################################################
-
-
-
-
 rse = {'tweets': []}
 for tweet in tweets:
     with open("./tweets/" + tweet) as f:
         for line in f:
             tweet__ = json.loads(line)
-            send_to_db(tweet__, database) # GIVE THE TWEET OBJECT AND DATABASE OBJECT TO THIS FUNCTION
-
+            send_to_db(tweet__, database)  # GIVE THE TWEET OBJECT AND DATABASE OBJECT TO THIS FUNCTION

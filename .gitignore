@@ -24,3 +24,13 @@ crawler/great_mel/2020-05-06.jsonl
 *.pyc
 
 sentiment-analysis/test.jsonl
+
+*.zip
+
+*.ipynb
+
+*.html
+
+*.jpg
+
+*.svg
