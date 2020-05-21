@@ -96,6 +96,16 @@ def send_to_db(tweet_, db=database):
         tweet_["_id"] = "%d" % tweet_["id"]
 
         tweet_["geo_code"] = preprocess(tweet_['place']["bounding_box"]["coordinates"][0])  # ADD
+
+        # Rename the full_text fields to text if exits
+        if "full_text" in tweet_:
+            tweet_["text"] = tweet_["full_text"]
+            del tweet_["full_text"]
+
+        # get the full text if the tweets are truncated
+        if tweet_["truncated"]:
+            tweet_["text"] = tweet_["extended_tweet"]["full_text"]
+
         p = TwitterClassifier()
         res = p.analyse(tweet_)
         tweet_['polarity'] = res[0]
