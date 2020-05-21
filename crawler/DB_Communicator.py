@@ -6,7 +6,7 @@ from analysis import TwitterClassifier
 from shapely.geometry import Polygon, box
 from collections import defaultdict
 import nltk
-
+nltk.download('punkt')
 # Environemt variable:
 # - couchdb host ip
 # - couchdb host port
