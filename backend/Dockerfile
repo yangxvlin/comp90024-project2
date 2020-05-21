@@ -21,7 +21,7 @@ RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_6
     && echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc \
     && echo "conda activate base" >> ~/.bashrc
 
-RUN apt-get -y install nodejs npm build-essential
+RUN apt-get -y install nodejs npm build-essential libgconf2-4 xvfb
 
 
 WORKDIR /usr/AURIN
