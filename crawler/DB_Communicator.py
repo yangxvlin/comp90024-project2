@@ -61,6 +61,10 @@ def emotion_count(tokens):
 # Medium: 5-8 characters
 # Long: 9+ characters
 def word_length_distribution(tokens):
+    short_thresh = 4
+    long_thresh = 8
+    word_length_keys = ['short_word_count', 'medium_word_count', 'long_word_count']
+
     word_length = dict.fromkeys(word_length_keys, 0)
     for token in tokens:
         if len(token) <= short_thresh:
@@ -79,7 +83,7 @@ def send_to_db(tweet_, db):
         # set tweet id as the document id for duplication removal
         tweet_["_id"] = "%d" % tweet_["id"]
 
-        tweet_["geo_code"] = preprocess(tweet_['place']["bounding_box"]["coordinates"][0])
+        tweet_["geo_code"] = preprocess(tweet_['place']["bounding_box"]["coordinates"][0]) # ADD
         p = TwitterClassifier()
         res = p.analyse(tweet_)
         tweet_['polarity'] = res[0]
@@ -89,29 +93,32 @@ def send_to_db(tweet_, db):
         tokens = []
         for sentence in sentences:
             tokens.extend(nltk.word_tokenize(sentence))
-        tweet_.update(emotion_count(tokens))
-        tweet_.update(word_length_distribution(tokens))
+        tweet_.update(emotion_count(tokens)) # ADD EMOTION INFO
+        tweet_.update(word_length_distribution(tokens)) # ADD LECXICON INFO
         print(tweet_)
         db.save(tweet_)
 
 
 tweets = os.listdir("./tweets")
 count = 0
+
+## SETUP ######################################################
 host = "115.146.95.30"
 port = "5984"
 username = password = "admin"
 server = connect_to_couch_db_server(host, port, username, password)
 database = connect_to_database("tweets3", server)
-
 with open("emotion_lexicon.json", 'r') as f:
     emotion_lexicon = json.load(f)
+######################################################
 
-short_thresh = 4
-long_thresh = 8
-word_length_keys = ['short_word_count', 'medium_word_count', 'long_word_count']
+
+
+
 rse = {'tweets': []}
 for tweet in tweets:
     with open("./tweets/" + tweet) as f:
         for line in f:
             tweet__ = json.loads(line)
-            send_to_db(tweet__, database)
+            send_to_db(tweet__, database) # GIVE THE TWEET OBJECT AND DATABASE OBJECT TO THIS FUNCTION
+
