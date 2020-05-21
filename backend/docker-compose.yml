@@ -3,4 +3,4 @@ services:
   backend:
     build: .
     volumes:
-      - .:/
+      - .:/usr/backend

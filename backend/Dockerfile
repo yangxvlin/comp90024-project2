@@ -1,5 +1,5 @@
 # Dockerfile - this is a comment. Delete me if you want.
-FROM ubuntu:18.04
+FROM ubuntu:18.04 AS base
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
 ENV PATH /opt/conda/bin:$PATH
@@ -22,8 +22,6 @@ COPY AURIN .
 
 WORKDIR /usr/backend
 
-EXPOSE 5001
-
 #ENV PORT "5000"
 COPY . .
 
@@ -32,6 +30,13 @@ RUN pip install -r requirements.txt
 # install dependency to conda
 RUN conda install -c plotly plotly-orca==1.2.1 psutil requests
 
+
+FROM base
+
+ENV flask_port 5000
+ENV flask_host 0.0.0.0
+
+EXPOSE $flask_port
 #RUN ./run_flask_debug_mode.sh
-ENTRYPOINT ["python", "backend.py"]
-CMD ["-host", "0.0.0.0", "-port", "5001"]
+ENTRYPOINT ["sh", "-c"]
+CMD ["python backend.py -host $flask_host -port $flask_port"]
