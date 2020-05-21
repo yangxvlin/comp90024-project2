@@ -6,13 +6,13 @@
 #   roles:
 #     - role: git-pull-source-repository
 
-- hosts: crawler
-  gather_facts: true
-  vars_files:
-    - host_vars/config.yaml
-#    - host_vars/deploy.yaml
-  roles:
-    - role: deploy-crawler
+#- hosts: crawler
+#  gather_facts: true
+#  vars_files:
+#    - host_vars/config.yaml
+##    - host_vars/deploy.yaml
+#  roles:
+#    - role: deploy-crawler
 
 - hosts: backend
   vars_files:
