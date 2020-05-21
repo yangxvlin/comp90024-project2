@@ -39,7 +39,9 @@ https://kigiri.github.io/fetch/
   - In this script, I send http GET request with fake json data to the flask backend. This script would ask for 2 inputs. 1. host url for the flask app, e.g. http://localhost/8000. 2. a id(int), only 1 and 2 are in memory, other id would be 404 error
 
 ## docker
-1. ```docker build -t backend:latest```
+1. ```docker-compose up -d``` to run the code immediately.
+2. ```docker-compose down``` to shutdown the backend
+3.  to modify the port number, see docker-compose.yml
 
 ## directory structure
 ```
