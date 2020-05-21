@@ -4,7 +4,7 @@ Student id:  904904
 Date:        2020-5-3 22:08:12
 Description: api for scenarios
 """
-from flask import request, jsonify
+from flask import request, jsonify, render_template
 from flask_restful import Resource
 from resources import api
 from settings import SIMPLE_DB
@@ -207,12 +207,10 @@ class Scenario2(Resource):
     def get(self):
         """
         curl -X GET
-        127.0.0.1:5000/scenario2?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney
+        127.0.0.1:5000/scenario2
         :return:
         """
-        lga_param = request.args.get('lga')
-        selected_lga_list = lga_param.split(',')
-        n_lga = len(selected_lga_list)
+        selected_lga_list = list(CITY_GEO_POINTS.keys())
 
         result = {}
 
@@ -245,6 +243,20 @@ class Scenario2(Resource):
 
 api.add_resource(Scenario2, "/scenario2", endpoint='scenario2')
 
+
+class Scenario2Get(Resource):
+    def get(self):
+        """
+        curl -X GET
+        127.0.0.1:5000/scenario2?lga=Greater_Melbourne
+        :return:
+        """
+        lga_param = request.args.get('lga')
+        selected_lga = lga_param[0]
+        return render_template('./{}.html'.format(selected_lga), img='./{}.svg'.format(selected_lga))
+
+
+api.add_resource(Scenario2Get, "/scenario2_get", endpoint='scenario2get')
 
 # ****************************************************************************
 #                    scenario 3 starts
