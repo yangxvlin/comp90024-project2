@@ -12,7 +12,7 @@ class TwitterClassifier():
         return tObject['full_text']
 
 
-    def analyse(self, tweet):
+    def analyse(self, tweet, num_mode=False):
         """
         init the class object and simply pass either twitter object or 
         tweets plain text to this method. The analysis will return a list
@@ -30,31 +30,49 @@ class TwitterClassifier():
 
         res = []
 
-        if polarity == 0:
-            res.append("neutral")
-        elif polarity > 0:
-            res.append("positive")
+        if num_mode:
+            return polarity, subjectivity
         else:
-            res.append("negative")
-        
-        if subjectivity > 0:
-            res.append("objective")
-        elif subjectivity == 0:
-            res.append("neutral")
-        else:
-            res.append("objective")
+            if polarity == 0:
+                res.append("neutral")
+            elif polarity > 0:
+                res.append("positive")
+            else:
+                res.append("negative")
+            
+            if subjectivity > 0.6:
+                res.append("subjective")
+            elif subjectivity < 0.4:
+                res.append("objective")
+            else:
+                res.append("neutral")
 
-        return res
+            return res
 
 
 if __name__ == "__main__":
     import json
+    import numpy as np
 
     p = TwitterClassifier()
+
+    pd = [[],[],[]]
 
     with open("test.jsonl") as f:
         for t in f.readlines():
             tweet = json.loads(t)
-            print(tweet['full_text'])
-            print(p.analyse(tweet))
-            break
+            polarity, subjectivity = p.analyse(tweet, num_mode=True)
+            year = np.random.randint(low=0, high=80, size=1)[0]
+            pd[0].append(polarity)
+            pd[1].append(subjectivity)
+            pd[2].append(year)
+
+    with open("test.csv", "w") as f:
+        f.writelines("polarity,subjectivity,years_old\n")
+        
+        for i in range(len(pd[0])):
+            for j in range(len(pd)):
+                f.writelines(str(pd[j][i]))
+                if j < len(pd) -1:
+                    f.writelines(",")
+            f.writelines("\n")

@@ -2,12 +2,12 @@
 Author:      XuLin Yang
 Student id:  904904
 Date:        2020-4-26 15:03:24
-Description: ReSTful API implementation
+Description: ReSTful API implementation, decrypted
 """
 from flask_restful import Resource
-from app.resources import api
-from app.settings import SIMPLE_DB
-from app.util import read_aurin_result_data
+from resources import api
+from settings import SIMPLE_DB
+from util import read_aurin_result_data
 from flask_httpauth import HTTPBasicAuth
 
 # ****************************************************************************
