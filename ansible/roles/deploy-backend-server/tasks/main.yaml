@@ -9,12 +9,22 @@
   args:
     chdir: /home/ubuntu/COMP90024/comp90024-project2/backend
 
-- name: Start server
-  shell: python3 backend.py -host "{{ inventory_hostname }}" -port 5002
+- name: Shut down previous server
+  shell: docker-compose down
   args:
     chdir: /home/ubuntu/COMP90024/comp90024-project2/backend
-#   async: 3600 # 2592000               # 60*60*24*30: 1 month
-#   async: 50400 # 14 hour
-  async: 18000 # 5 hour
-#   async: 120 # 2 minutes
-  poll: 0
+
+- name: Start server
+  shell: docker-compose up -d
+  args:
+    chdir: /home/ubuntu/COMP90024/comp90024-project2/backend
+
+# - name: Start server
+#   shell: python3 backend.py -host "{{ inventory_hostname }}" -port 5002
+#   args:
+#     chdir: /home/ubuntu/COMP90024/comp90024-project2/backend
+# #   async: 3600 # 2592000               # 60*60*24*30: 1 month
+# #   async: 50400 # 14 hour
+#   async: 18000 # 5 hour
+# #   async: 120 # 2 minutes
+#   poll: 0
