@@ -33,7 +33,7 @@ COPY . .
 RUN pip install -r requirements.txt
 
 # install dependency to conda
-RUN conda install -c plotly plotly-orca==1.2.1 psutil requests
+RUN conda install -c plotly plotly-orca psutil requests
 
 
 FROM base
