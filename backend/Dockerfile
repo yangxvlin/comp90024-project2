@@ -21,6 +21,9 @@ RUN wget --quiet https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-x86_6
     && echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc \
     && echo "conda activate base" >> ~/.bashrc
 
+RUN apt-get -y install nodejs npm build-essential
+
+
 WORKDIR /usr/AURIN
 
 COPY AURIN .
@@ -33,7 +36,8 @@ COPY . .
 RUN pip install -r requirements.txt
 
 # install dependency to conda
-RUN conda install -c plotly plotly-orca psutil requests
+RUN npm install -g electron@1.8.4 orca \
+    && pip install psutil requests
 
 
 FROM base
