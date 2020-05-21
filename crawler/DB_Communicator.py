@@ -56,6 +56,7 @@ def emotion_count(tokens):
                 emotion_counter[emotion] += 1
     return emotion_counter
 
+
 # Short: 1-4 characters
 # Medium: 5-8 characters
 # Long: 9+ characters
@@ -110,27 +111,7 @@ long_thresh = 8
 word_length_keys = ['short_word_count', 'medium_word_count', 'long_word_count']
 rse = {'tweets': []}
 for tweet in tweets:
-    if count < 5:
-        with open("./tweets/" + tweet) as f:
-            for line in f:
-                tweet__ = json.loads(line)
-                send_to_db(tweet__, database)
-                # count += 2
-                # new_tweet = {"geo_code": Polygon(tweet__['place']["bounding_box"]["coordinates"][0]).centroid}
-                # new_tweet = {'geo': Polygon(tweet__['place']["bounding_box"]["coordinates"][0]).centroid.coords[0]}
-                # tweet__['geo_code'] = preprocess()
-                # p = TwitterClassifier()
-                # res = p.analyse(tweet__)
-                # tweet__['polarity'] = res[0]
-                # tweet__['subjectivity'] = res[1]
-
-
-            # print(rse)
-        # filename = str(count) + ".json"
-        # with open("processed.json", 'w') as f:
-        # json.dump(rse, f)
-        # count += 1
-        # send_to_db(tweet__, database)
-        # count += 1
-    # else:
-    #     break
+    with open("./tweets/" + tweet) as f:
+        for line in f:
+            tweet__ = json.loads(line)
+            send_to_db(tweet__, database)
