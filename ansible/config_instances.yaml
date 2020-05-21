@@ -1,11 +1,11 @@
 ---
-- hosts: localhost
-  gather_facts: true
+#- hosts: localhost
+#  gather_facts: true
+#
+#  roles:
+#    - role: add-NectarGroupKey
 
-  roles:
-    - role: add-NectarGroupKey
-
-- hosts: instances
+- hosts: 172.26.132.122
   vars_files:
     - host_vars/config.yaml
     - host_vars/deploy.yaml
@@ -13,8 +13,8 @@
   gather_facts: true
 
   roles:
-    - role: add-proxy
-    - role: install-dependencies
-    # - role: setup-docker
-    - role: git-clone-source-repository
+#    - role: add-proxy
+#    - role: install-dependencies
+     - role: setup-docker
+#    - role: git-clone-source-repository
     # - role: mount-volumes
