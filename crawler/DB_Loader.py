@@ -123,13 +123,14 @@ def send_to_db(tweet_, db=database):
         print("saved")  # TODO
 
 
-tweets_great_four = [os.listdir("./great_ald"), os.listdir("./great_mel"), os.listdir("./great_brisbane"),
-                     os.listdir("./great_syd")]
-tweets_great_four_dir = ["./great_ald", "./great_mel", "./great_brisbane", "./great_syd"]
+root_path = "~/COMP90024/comp90024-project2/crawler"
+tweets_great_four = [os.listdir(root_path + "/great_ald"), os.listdir(root_path + "/great_mel"), os.listdir(root_path + "/great_brisbane"),
+                     os.listdir(root_path + "/great_syd")]
+tweets_great_four_dir = [root_path + "/great_ald", root_path + "/great_mel", root_path + "/great_brisbane", root_path + "/great_syd"]
 
 for i, city_tweets in enumerate(tweets_great_four):
     for tweet in city_tweets:
         with open(tweets_great_four_dir[i] + tweet) as f:
             for line in f:
                 tweet__ = json.loads(line)
-                send_to_db(tweet__, database)  # GIVE THE TWEET OBJECT AND DATABASE OBJECT TO THIS FUNCTION
+                send_to_db(tweet__, database)  # GIVE THE TWEET OBJECT AND DATABASE OBJECT TO THIS FUgNCTION
