@@ -28,6 +28,9 @@ https://kigiri.github.io/fetch/
 5. ```pip install flask```
 6. ```flask run```
 
+### windows
+1. ```python backend.py -host 127.0.0.1 -port 5000```
+
 ## generate requirements.txt
 1. ```python3 -m venv venv```
 2. ```pip freeze | grep -v "pkg-resources" > requirements.txt``` [Note](https://stackoverflow.com/a/40167445)

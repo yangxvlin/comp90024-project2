@@ -216,35 +216,21 @@ class Scenario2(Resource):
 
         result = {}
 
+        tweet_city_polarity_subjectivity = get_city_polarity_subjectivity_float()
+
         data = {"polarity": [], "subjectivity": [], "geo": []}
-        city_subjectivity = get_city_subjectivity_float()
-        city_polarity = get_city_polarity_float()
         for key in selected_lga_list:
-            data["geo"].append(key)
-
-            subjectivity = 0
-            for row in city_subjectivity["rows"]:
+            for row in tweet_city_polarity_subjectivity["rows"]:
                 row_key = row["key"]
-                row_value = row["value"]
 
                 row_city = row_key[0]
-                row_v = row_key[1]
+                row_polarity = row_key[1]
+                row_subjectivity = row_key[2]
 
                 if row_city == key:
-                    subjectivity += row_v * row_value
-            data["subjectivity"].append(subjectivity)
-
-            polarity = 0
-            for row in city_polarity["rows"]:
-                row_key = row["key"]
-                row_value = row["value"]
-
-                row_city = row_key[0]
-                row_v = row_key[1]
-
-                if row_city == key:
-                    polarity += row_v * row_value
-            data["polarity"].append(polarity)
+                    data["polarity"].append(row_polarity)
+                    data["subjectivity"].append(row_subjectivity)
+                    data["geo"].append(row_city)
         df = pd.DataFrame(data=data)
         print(df)
 
