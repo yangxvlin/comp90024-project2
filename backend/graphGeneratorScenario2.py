@@ -39,7 +39,6 @@ def generate(new_data: pd.DataFrame, path="./"):
                           values="size", color="size", color_continuous_scale='RdBu')
 
         fig.write_html(path + g + ".html")
-        fig.write_image(path + g + ".svg")
 
 
 if __name__ == "__main__":
