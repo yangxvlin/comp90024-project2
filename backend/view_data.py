@@ -288,4 +288,16 @@ def get_city_polarity(group_level=2):
 
 
 def get_city_polarity_subjectivity_float(group_level=0):
+  """
+  This funciton will retrieve all the tweets, and return their corresponding
+  city, polarity and subjectivity.
+
+  Return:
+  -------
+  {'rows': 
+    [
+      {'key': [city, polarity, subjectivity], 'value': 1}
+    ]
+  }
+  """
   return get_view("city_polarity_subjectivity_float", group_level)
