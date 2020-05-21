@@ -35,7 +35,7 @@ def generate_instances():
             print("", file=file)
 
 
-def generate_hosts_for_application(n_application: int, name: str, reverse=False):
+def generate_hosts_for_application(n_application: int, name: str, reverse=False, n=-1):
     with open("wm_inventory_file.ini") as f:
         hosts_starts = False
         hosts = []
@@ -63,6 +63,8 @@ def generate_hosts_for_application(n_application: int, name: str, reverse=False)
         if reverse:
             hosts_for_application = hosts_for_application[::-1]
         hosts_for_application = hosts_for_application[:n_application]
+        if n != -1:
+            hosts_for_application = [hosts[n]]
 
         with open("application_hosts.ini", "a") as file:
             print("[{}]".format(name), file=file)
@@ -86,7 +88,7 @@ if __name__ == "__main__":
 
     if args.b:
         n_backend = int(args.b)
-        generate_hosts_for_application(n_backend, "backend", reverse=True)
+        generate_hosts_for_application(n_backend, "backend", reverse=True, n=2)
 
     if args.db:
         n_database = int(args.db)
