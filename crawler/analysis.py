@@ -9,7 +9,7 @@ class TwitterClassifier():
                                 | (\w+: \/\/\S+)", " ", tweet).split())
     
     def to_text(self, tObject):
-        return tObject['full_text']
+        return tObject['text']
 
 
     def analyse(self, tweet):
@@ -58,6 +58,6 @@ if __name__ == "__main__":
     with open("test.jsonl") as f:
         for t in f.readlines():
             tweet = json.loads(t)
-            print(tweet['full_text'])
+            print(tweet['text'])
             print(p.analyse(tweet))
             break

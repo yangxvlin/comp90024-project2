@@ -100,7 +100,7 @@ def send_to_db(tweet_, db=database):
         res = p.analyse(tweet_)
         tweet_['polarity'] = res[0]
         tweet_['subjectivity'] = res[1]
-        text = tweet_['full_text']
+        text = tweet_['text']
         sentences = nltk.sent_tokenize(text)
         tokens = []
         for sentence in sentences:
