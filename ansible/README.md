@@ -124,7 +124,8 @@
             <td>deploy backend server application</td>
         </tr>
         </table>
-    - ```./deploy_applications.sh```
+    - crawler: ```./deploy_crawler.sh```
+    - backend: ```./deploy_backend.sh```
 
 5. Remove instances on the Nectar
     - ```./remove_deploy_instances.sh```
