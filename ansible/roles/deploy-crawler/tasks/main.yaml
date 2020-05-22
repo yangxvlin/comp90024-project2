@@ -1,1 +1,15 @@
 ---
+#- name: Tamplating DB_Communicator to the instance
+- name: Shut down previous server
+  become:
+    yes
+  shell: docker-compose down
+  args:
+    chdir: /home/ubuntu/COMP90024/comp90024-project2/crawler
+#
+- name: Start server
+  become:
+    yes
+  shell: docker-compose up -d
+  args:
+    chdir: /home/ubuntu/COMP90024/comp90024-project2/crawler

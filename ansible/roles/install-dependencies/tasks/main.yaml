@@ -21,20 +21,20 @@
     state: latest
 # pip install --upgrade pip
 
-- name: sudo apt-get install ['git', 'python3-dev', 'python3-pip', 'python3-setuptools', 'vim', 'python3-pip', 'libblacs-mpi-dev', 'python3-venv']
+- name: sudo apt-get install ['git', 'python3-dev', 'python3-pip', 'python3-setuptools', 'vim', 'python3-pip', 'libblacs-mpi-dev', 'python3-venv', 'python-docker']
   tags: always
   become: yes
   apt:
-    name: ['git', 'python3-dev', 'python3-pip', 'python3-setuptools', 'vim', 'python3-pip', 'libblacs-mpi-dev', 'python3-venv']
+    name: ['git', 'python3-dev', 'python3-pip', 'python3-setuptools', 'vim', 'python3-pip', 'libblacs-mpi-dev', 'python3-venv', 'python-docker']
     state: latest
     install_recommends: no
     update_cache: yes
 
-- name: pip3 install ['wheel', 'mpi4py']
-  command: pip3 install {{item}}
-  with_items:
-    - wheel
-    - mpi4py
+#- name: pip3 install ['wheel', 'mpi4py']
+#  command: pip3 install {{item}}
+#  with_items:
+#    - wheel
+#    - mpi4py
 
 # - name: pip install ['mpi4py']
 #   become: yes
