@@ -252,7 +252,7 @@ class Scenario2Get(Resource):
         :return:
         """
         lga_param = request.args.get('lga')
-        selected_lga = lga_param[0]
+        selected_lga = [lga_param][0]
         return render_template('./{}.html'.format(selected_lga), img='./{}.svg'.format(selected_lga))
 
 
