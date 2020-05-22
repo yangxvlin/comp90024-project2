@@ -10,6 +10,6 @@
 - name: Start server
   become:
     yes
-  shell: docker-compose up -d
+  shell: docker-compose up  --build -d
   args:
     chdir: /home/ubuntu/COMP90024/comp90024-project2/crawler
