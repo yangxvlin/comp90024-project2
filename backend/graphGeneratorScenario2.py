@@ -43,6 +43,6 @@ def generate(new_data: pd.DataFrame, path="./"):
 
 
 if __name__ == "__main__":
-    data = pd.read_csv("../sentiment-analysis/test.csv")
+    data = pd.read_csv("./test.csv")
     # assign data here
     generate(transform(data))
