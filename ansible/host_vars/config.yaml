@@ -15,3 +15,5 @@ couchdb_cookie: 'a192aeb9904e6590849337933b000c99'
 couchdb_uuid: 'a192aeb9904e6590849337933b001159'
 cluster_name: '_cluster_setup'
 couchdb_container_name: 'couchdb_'
+couchdb_port: 5984
+couchdb_db_name: "live-tweets"

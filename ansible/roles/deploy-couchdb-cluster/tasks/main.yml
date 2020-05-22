@@ -2,7 +2,7 @@
 - name: setup couchdb cluster | step 1
   become: yes
   uri:
-    url: http://{{ groups['masternode'][0] }}:5984/{{ cluster_name }}
+    url: http://{{ groups['masternode'][0] }}:{{couchdb_port}}/{{ cluster_name }}
     status_code: 201
     method: POST
     user: "{{ couchdb_user }}"
@@ -11,7 +11,7 @@
     return_content: yes
     body_format: json
     body: "{\"action\": \"enable_cluster\", \"bind_address\":\"0.0.0.0\",\
-             \"username\": \"{{ couchdb_user }}\", \"password\":\"{{ couchdb_pass }}\", \"port\": \"5984\",\
+             \"username\": \"{{ couchdb_user }}\", \"password\":\"{{ couchdb_pass }}\", \"port\": \"{{couchdb_port}}\",\
              \"remote_node\": \"{{ item }}\", \"node_count\": \"{{ groups['database'] | length }}\",\
              \"remote_current_user\":\"{{ couchdb_user }}\", \"remote_current_password\":\"{{ couchdb_pass }}\"}"
     headers:
@@ -21,7 +21,7 @@
 - name: setup couchdb cluster | step 2
   become: yes
   uri:
-    url: http://{{ groups['masternode'][0] }}:5984/{{ cluster_name }}
+    url: http://{{ groups['masternode'][0] }}:{{couchdb_port}}/{{ cluster_name }}
     status_code: 201,409
     method: POST
     user: "{{ couchdb_user }}"
@@ -30,7 +30,7 @@
     return_content: yes
     body_format: json
     body: "{\"action\": \"add_node\", \"host\":\"{{ item }}\",\
-             \"port\": \"5984\", \"username\": \"{{ couchdb_user }}\", \"password\":\"{{ couchdb_pass }}\"}"
+             \"port\": \"{{ couchdb_port }}\", \"username\": \"{{ couchdb_user }}\", \"password\":\"{{ couchdb_pass }}\"}"
     headers:
       Content-Type: "application/json"
   loop: "{{ groups['workers'] }}"
@@ -38,7 +38,7 @@
 - name: setup couchdb cluster | step 2.5
   become: yes
   uri:
-    url: http://{{ groups['masternode'][0] }}:5984/
+    url: http://{{ groups['masternode'][0] }}:{{couchdb_port}}/
     status_code: 200,201,409
     method: GET
     user: "{{ couchdb_user }}"
@@ -50,7 +50,7 @@
 - name: steup couchdb cluster | step 3 -- finish
   become: yes
   uri:
-    url: http://{{ groups['masternode'][0] }}:5984/{{ cluster_name }}
+    url: http://{{ groups['masternode'][0] }}:{{ couchdb_port }}/{{ cluster_name }}
     status_code: 201
     method: POST
     user: "{{ couchdb_user }}"

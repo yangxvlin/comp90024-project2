@@ -10,7 +10,7 @@
     name: "{{ couchdb_container_name}}"
     image: "{{ couchdb_image }}"
     ports:
-      - "5984:5984" # 80 due to change security_group later
+      - "{{couchdb_port}}:{{couchdb_port}}" # 80 due to change security_group later
       - "9100:9100"
       - "4369:4369"
     env:
