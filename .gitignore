@@ -7,6 +7,7 @@
 crawler/.DS_Store
 crawler/COVID-19-TweetIDs/
 crawler/env/
+sentiment-analysis/test.csv
 
 ansible/config/GitHubKey.pem
 
