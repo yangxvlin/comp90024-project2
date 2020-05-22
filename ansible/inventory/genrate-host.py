@@ -73,11 +73,45 @@ def generate_hosts_for_application(n_application: int, name: str, reverse=False,
             print("", file=file)
 
 
+def generate_database(masternode_index: int, workers_indices: [int]):
+    with open("wm_inventory_file.ini") as f:
+        hosts_starts = False
+        hosts = []
+
+        for line in f.readlines():
+            line = line.replace("\n", "")
+
+            # no hosts any more
+            if hosts_starts:
+                if line == "":
+                    hosts_starts = False
+
+            # has hosts e.g.: 192.168.0.1
+            if hosts_starts:
+                hosts.append(line)
+
+            # starts reading hosts
+            if line == "[instances]":
+                hosts_starts = True
+
+        with open("application_hosts.ini", "a") as file:
+            print("[database:children]", file=file)
+            print("masternode", file=file)
+            print("workers", file=file)
+            print("", file=file)
+            print("[masternode]", file=file)
+            print("{}".format(hosts[masternode_index]), file=file)
+            print("", file=file)
+            print("[workers]", file=file)
+            print("{}".format(hosts[workers_indices[0]]), file=file)
+            print("{}".format(hosts[workers_indices[1]]), file=file)
+            print("", file=file)
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-c', help='n hosts for crawler')
     parser.add_argument('-b', help='n hosts for backend server')
-    parser.add_argument('-db', help='n hosts for database server')
     args = parser.parse_args()
 
     generate_instances()
@@ -90,6 +124,4 @@ if __name__ == "__main__":
         n_backend = int(args.b)
         generate_hosts_for_application(n_backend, "backend", reverse=True, n=2)
 
-    if args.db:
-        n_database = int(args.db)
-        generate_hosts_for_application(n_database, "database", reverse=True)
+    generate_database(0, [1, 3])
