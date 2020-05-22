@@ -30,7 +30,7 @@
         </tr>
         <tr>
             <td>create-instances</td>
-            <td>Create instances on NeCTAR<br>Add hosts to Ansible in-memory inventory</td>
+            <td>Create instances on NeCTAR<br>Add hosts to Ansible in-memory inventory and a file for hosts ip to inventory/wm_inventory_file</td>
         </tr>
         </table>
     - ```./deploy_instances_debug.sh```  
@@ -57,7 +57,7 @@
           <tr>
             <td rowspan="5">instances</td>
             <td>add-proxy</td>
-            <td>Add proxy in /etc/environment&lt;br/&gt;Reboot the instance</td>
+            <td>Add proxy in /etc/environment<br/>Reboot the instance</td>
           </tr>
           <tr>
             <td>install-dependencies</td>
