@@ -61,6 +61,15 @@ GREATER_MELBOURNE_LGA_NAME = "Greater_Melbourne"
 GREATER_BRISBANE_LGA_NAME = "Greater_Brisbane"
 GREATER_SYDNEY_LGA_NAME = "Greater_Sydney"
 
+
+SCENARIO2_FILE_MAP = {
+    GREATER_ADELAIDE_LGA_NAME: "great_ald",
+    GREATER_MELBOURNE_LGA_NAME: "great_mel",
+    GREATER_BRISBANE_LGA_NAME: "great_brisbane",
+    GREATER_SYDNEY_LGA_NAME: "great_syd",
+}
+
+
 CITY_GEO_POINTS = {
     GREATER_ADELAIDE_LGA_NAME: {
         "type": "Point",

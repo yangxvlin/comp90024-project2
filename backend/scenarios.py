@@ -253,7 +253,8 @@ class Scenario2Get(Resource):
         """
         lga_param = request.args.get('lga')
         selected_lga = [lga_param][0]
-        return render_template('./{}.html'.format(selected_lga), img='./{}.svg'.format(selected_lga))
+        file_name = SCENARIO2_FILE_MAP[selected_lga]
+        return render_template('./{}.html'.format(file_name), img='./{}.svg'.format(file_name))
 
 
 api.add_resource(Scenario2Get, "/scenario2_get", endpoint='scenario2get')
