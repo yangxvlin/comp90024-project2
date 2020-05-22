@@ -42,6 +42,9 @@ COMP90024 - Cluster and Cloud Computing - 2020 S1 - Project 2
       - all contributers infomation
 ```
 
+## COVID-19 data resource
+- https://github.com/covid-19-au/covid-19-au.github.io
+
 ## Due: Wednesday 20th May (by 12 noon!).
 
 ## The focus of this assignment
