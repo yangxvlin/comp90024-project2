@@ -6,6 +6,8 @@ from analysis import TwitterClassifier
 from shapely.geometry import Polygon, box
 from collections import defaultdict
 import nltk
+import crawlerSetting
+
 nltk.download('punkt')
 # Environemt variable:
 # - couchdb host ip
@@ -36,11 +38,8 @@ def connect_to_database(database_name, server):
 
 
 ## SETUP ######################################################
-host = "115.146.95.30"
-port = "5984"
-username = password = "admin"
 server = connect_to_couch_db_server(host, port, username, password)
-database = connect_to_database("live-tweets", server)
+database = connect_to_database(db_name, server)
 with open("emotion_lexicon.json", 'r') as f:
     emotion_lexicon = json.load(f)
 ######################################################
@@ -117,10 +116,11 @@ def send_to_db(tweet_, db=database):
             tokens.extend(nltk.word_tokenize(sentence))
         tweet_.update(emotion_count(tokens))  # ADD EMOTION INFO
         tweet_.update(word_length_distribution(tokens))  # ADD LECXICON INFO
-        print(tweet_)
-        db.save(tweet_)
-        print("saved") # TODO
-
+        if tweet_ is not None:
+            try:
+                db.save(tweet_)
+            except:
+                pass
 
 # tweets = os.listdir("./tweets")
 # count = 0
