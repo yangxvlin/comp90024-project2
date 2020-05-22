@@ -232,7 +232,7 @@ class Scenario2(Resource):
         df = pd.DataFrame(data=data)
         print(df)
 
-        generate(transform(df))
+        generate(transform(df), "./templates/")
 
         result["df"] = data
 
@@ -254,7 +254,7 @@ class Scenario2Get(Resource):
         lga_param = request.args.get('lga')
         selected_lga = [lga_param][0]
         file_name = SCENARIO2_FILE_MAP[selected_lga]
-        return render_template('./{}.html'.format(file_name), img='./{}.svg'.format(file_name))
+        return render_template('{}.html'.format(file_name), img='./templates/{}.svg'.format(file_name))
 
 
 api.add_resource(Scenario2Get, "/scenario2_get", endpoint='scenario2get')
