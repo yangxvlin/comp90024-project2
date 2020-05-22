@@ -19,6 +19,7 @@ import {
   Header,
   Content
 } from "rsuite";
+import Scenario3 from "./Scenario3";
 
 const headerStyles = {
   padding: 18,
@@ -183,7 +184,8 @@ export default class MainContainer extends React.Component {
                   </Route>
                     <Route path={"/comparison/:url"} 
                       render={(props) => {
-                        return <Diagrams {...props} items={this.state.data}/>
+                     //   return <Diagrams {...props} items={this.state.data}
+                        return <Scenario3 {...props} items={this.state.data}/>
                       }}
                    />
                       

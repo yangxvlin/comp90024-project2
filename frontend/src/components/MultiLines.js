@@ -127,7 +127,7 @@ export default class MultiLines extends React.Component {
     };
     return (
       <div>
-        <CanvasJSChart options={options} onRef={ref => (this.chart = ref)} />
+        <CanvasJSChart options={options} onRef={ref => (this.chart = ref)} width='100%' height='100%'/>
         {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}
       </div>
     );

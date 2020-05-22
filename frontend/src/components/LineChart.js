@@ -59,7 +59,7 @@ export default class LineChart extends React.Component {
     }
     return (
     <div>
-        <CanvasJSChart options = {options}
+        <CanvasJSChart options = {options} width='100%' height='100%'
             /* onRef={ref => this.chart = ref} */
         />
         {/*You can get reference to the chart instance as shown above using onRef. This allows you to access all chart properties and methods*/}

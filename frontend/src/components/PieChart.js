@@ -175,7 +175,7 @@ export default class PieChart extends React.Component {
       ]
     };
     return (
-          <CanvasJSChart options={options} />
+          <CanvasJSChart options={options} width='100%' height='100%'/>
     );
   }
 }
