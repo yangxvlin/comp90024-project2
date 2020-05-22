@@ -381,6 +381,29 @@ class Scenario3(Resource):
 api.add_resource(Scenario3, "/scenario3", endpoint='scenario3')
 
 
+class EnglishTweetSample(Resource):
+    def get(self):
+        """
+        curl -X GET
+        127.0.0.1:5000/englishTweetSample?n=5
+        :return:
+        """
+        n_sample = int(request.args.get('n'))
+
+        samples = get_English_tweets(n_sample)
+
+        result = {"samples": []}
+        for sample in samples:
+            result["samples"].append(sample)
+
+        resp = jsonify(result)
+        resp.status_code = 200
+        return resp
+
+
+api.add_resource(EnglishTweetSample, "/englishTweetSample", endpoint='englishTweetSample')
+
+
 # ****************************************************************************
 #                    scenario 4 starts
 # ****************************************************************************
