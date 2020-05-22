@@ -6,7 +6,7 @@ from analysis import TwitterClassifier
 from shapely.geometry import Polygon, box
 from collections import defaultdict
 import nltk
-import crawlerSetting
+from crawlerSetting import host, port, username, password, db_name
 
 nltk.download('punkt')
 # Environemt variable:
