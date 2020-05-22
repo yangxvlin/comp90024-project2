@@ -35,21 +35,13 @@
         </table>
     - ```./deploy_instances_debug.sh```  
     - ```./deploy_instances.sh```
-
-3. generate instance to be created
-
-    ```cd host_vars```
-
-    ```python generate-instances.py -n <n instances you would like to be created>```
-    
-    - E.g.: 
-    
-        windows: ```python generate-instances.py -n 4```
-      
-        ubuntu: ```python3 generate-instances.py -n 4```
-    
+3. generate instance to be created  
+    ```cd host_vars```  
+    ```python generate-instances.py -n <n instances you would like to be created>```  
+    - E.g.:   
+        windows: ```python generate-instances.py -n 4```  
+        ubuntu: ```python3 generate-instances.py -n 4```  
     generated instances setup will be stored in ```host_vars/instances.yaml```
-
 4. Configure instances environments on the Nectar
     - <table>
           <tr>
@@ -86,21 +78,13 @@
         </table>
     - No matter what OS you are, you should create a file: ```/config/GitHubKey.pem``` with **your GitHub private key**
     - ```./configure_instances_debug.sh```
-
-5. generate hosts for applications
-
-    ```cd inventory```
-
+5. generate hosts for applications  
+    ```cd inventory```  
     ```python generate-host.py -c <n hosts for the crawler> -b <n hosts for the backend server>```
-    
-    - E.g.:
-        
-        windows: ```python generate-host.py -c 1 -b 1```
-      
-        ubuntu: ```python3 generate-instances.py -c 1 -b 1```
-    
+    - E.g.:  
+        windows: ```python generate-host.py -c 1 -b 1```  
+        ubuntu: ```python3 generate-instances.py -c 1 -b 1```  
     generated application host setup will be stored in ```inventory/application_hosts.yaml```
-
 4. Deploy Applications on the Nectar instances
     - <table>
         <tr>
@@ -126,7 +110,6 @@
         </table>
     - crawler: ```./deploy_crawler.sh```
     - backend: ```./deploy_backend.sh```
-
 5. Remove instances on the Nectar
     - ```./remove_deploy_instances.sh```
 
