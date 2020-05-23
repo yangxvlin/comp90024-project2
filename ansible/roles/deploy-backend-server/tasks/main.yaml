@@ -9,17 +9,24 @@
 #   args:
 #     chdir: /home/ubuntu/COMP90024/comp90024-project2/backend
 
-- name: Shut down previous server
+- name: generate bacnkend configuration of couchdb
   become:
     yes
-  shell: docker-compose down
-  args:
-    chdir: /home/ubuntu/COMP90024/comp90024-project2/backend
+  template:
+    src: couchDBSetting.py.j2
+    dest: '{{remote_working_directory}}/comp90024-project2/backend/couchDBSetting.py'
 
-- name: Start server
-  shell: docker-compose up -d --build
-  args:
-    chdir: /home/ubuntu/COMP90024/comp90024-project2/backend
+#- name: Shut down previous server
+#  become:
+#    yes
+#  shell: docker-compose down
+#  args:
+#    chdir: /home/ubuntu/COMP90024/comp90024-project2/backend
+#
+#- name: Start server
+#  shell: docker-compose up -d --build
+#  args:
+#    chdir: /home/ubuntu/COMP90024/comp90024-project2/backend
 
 # - name: Start server
 #   shell: python3 backend.py -host "{{ inventory_hostname }}" -port 5002

@@ -1,5 +1,5 @@
 ---
-- name: generate crawler configuration for couchdb
+- name: generate crawler configuration of couchdb
   become:
     yes
   template:
