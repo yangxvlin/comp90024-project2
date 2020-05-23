@@ -409,6 +409,46 @@ api.add_resource(EnglishTweetSample, "/englishTweetSample", endpoint='englishTwe
 # ****************************************************************************
 
 
+class CovidTweet(Resource):
+    def get(self):
+        """
+        curl -X GET
+        127.0.0.1:5000/covidTweet
+        :return:
+        """
+        result = {"type": "FeatureCollection", "features": []}
+        covid_tweets = get_covid_city_year_month_day()
+        for row in covid_tweets["rows"]:
+            feature = {"type": "Feature", "geometry": {}, "properties": {}}
+            row_key = row["key"]
+            row_lga = row_key[1]
+
+            # unknown location
+            if row_lga not in CITY_GEO_POINTS:
+                continue
+
+            feature["geometry"] = CITY_GEO_POINTS[row_lga]
+
+            row_year = row_key[2]
+            row_month = row_key[3]
+            row_day = row_key[4]
+            row_value = row["value"]
+
+            create_at = "{}-{:02d}-{:02d}T00:00:00+00:00Z".format(row_year, row_month, row_day)
+            feature["properties"]["create_at"] = create_at
+            feature["properties"]["city name"] = row_lga
+            feature["properties"]["covid-19 twitter count"] = row_value
+
+            result["features"].append(feature)
+
+        resp = jsonify(result)
+        resp.status_code = 200
+        return resp
+
+
+api.add_resource(CovidTweet, "/covidTweet", endpoint='covidTweet')
+
+
 class Scenario4(Resource):
     def get(self):
         """
