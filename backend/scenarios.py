@@ -381,9 +381,72 @@ class Scenario3(Resource):
 api.add_resource(Scenario3, "/scenario3", endpoint='scenario3')
 
 
+class EnglishTweetSample(Resource):
+    def get(self):
+        """
+        curl -X GET
+        127.0.0.1:5000/englishTweetSample?n=5
+        :return:
+        """
+        n_sample = int(request.args.get('n'))
+
+        samples = get_English_tweets(n_sample)
+
+        result = {"samples": []}
+        for sample in samples:
+            result["samples"].append(sample)
+
+        resp = jsonify(result)
+        resp.status_code = 200
+        return resp
+
+
+api.add_resource(EnglishTweetSample, "/englishTweetSample", endpoint='englishTweetSample')
+
+
 # ****************************************************************************
 #                    scenario 4 starts
 # ****************************************************************************
+
+
+class CovidTweet(Resource):
+    def get(self):
+        """
+        curl -X GET
+        127.0.0.1:5000/covidTweet
+        :return:
+        """
+        result = {"type": "FeatureCollection", "features": []}
+        covid_tweets = get_covid_city_year_month_day()
+        for row in covid_tweets["rows"]:
+            feature = {"type": "Feature", "geometry": {}, "properties": {}}
+            row_key = row["key"]
+            row_lga = row_key[1]
+
+            # unknown location
+            if row_lga not in CITY_GEO_POINTS:
+                continue
+
+            feature["geometry"] = CITY_GEO_POINTS[row_lga]
+
+            row_year = row_key[2]
+            row_month = row_key[3]
+            row_day = row_key[4]
+            row_value = row["value"]
+
+            create_at = "{}-{:02d}-{:02d}T00:00:00+00:00Z".format(row_year, row_month, row_day)
+            feature["properties"]["create_at"] = create_at
+            feature["properties"]["city name"] = row_lga
+            feature["properties"]["covid-19 twitter count"] = row_value
+
+            result["features"].append(feature)
+
+        resp = jsonify(result)
+        resp.status_code = 200
+        return resp
+
+
+api.add_resource(CovidTweet, "/covidTweet", endpoint='covidTweet')
 
 
 class Scenario4(Resource):
@@ -546,7 +609,7 @@ class Scenario5(Resource):
                 row_city = row_key[1]
 
                 if row_city == key:
-                    line_data["data"].append({"name": row_emotion, "y": row_value})
+                    line_data["data"].append({"text": row_emotion, "value": row_value})
             result["emotion_word_count_by_city"]["word_cloud"].append(line_data)
 
         result["chart_emotion_word_count_by_city"] = {"multiBarChart_emotion_word_count_by_city": []}
