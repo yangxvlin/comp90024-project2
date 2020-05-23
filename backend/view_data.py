@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import requests
 import json
-from couchDBSetting import *;
+from couchDBSetting import *
 
 STATISTICS = {
   "_id": "_design/STATISTICS",
@@ -12,7 +12,7 @@ STATISTICS = {
       "reduce": "_count"
     },
     "city_2020_month_day_hours": {
-      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  city = \"unknown\";\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  month = date.getMonth();\n  day = date.getDay();\n  hour = date.getHours();\n  hours = \"other\"\n  \n  if (doc.place) {\n    city = geo_codes[doc.geo_code];\n  }\n  \n  if (year === 2020) {\n    if (hour >= 0 && hour <= 7) {\n      hours = \"00:00-07:59\";\n    } else if (hour >= 8 && hour <= 15) {\n      hours = \"08:00-15:59\";\n    } else if (hour >= 16 && hour <= 23) {\n      hours = \"16:00-23:59\";\n    }\n    emit([city, year, month, day, hours], 1);\n  }\n}",
+      "map": "geo_codes = {\n  \"great_syd\": \"Greater_Sydney\",\n  \"great_mel\": \"Greater_Melbourne\",\n  \"great_brisbane\": \"Greater_Brisbane\",\n  \"great_ald\": \"Greater_Sydney\",\n  \"Australia other\": \"other\"\n}\n\nfunction (doc) {\n  city = \"unknown\";\n  date = new Date(doc.created_at);\n  year = date.getFullYear();\n  month = date.getMonth();\n  day = date.getDate();\n  hour = date.getHours();\n  hours = \"other\"\n  \n  if (doc.place) {\n    city = geo_codes[doc.geo_code];\n  }\n  \n  if (year === 2020) {\n    if (hour >= 0 && hour <= 7) {\n      hours = \"00:00-07:59\";\n    } else if (hour >= 8 && hour <= 15) {\n      hours = \"08:00-15:59\";\n    } else if (hour >= 16 && hour <= 23) {\n      hours = \"16:00-23:59\";\n    }\n    emit([city, year, month, day, hours], 1);\n  }\n}",
       "reduce": "_count"
     },
     "city_year_month": {
