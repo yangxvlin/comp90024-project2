@@ -6,15 +6,46 @@
 
 ### cmd
 #### scenario 1
-```curl -X GET 127.0.0.1:5000/scenario1?lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney&weekday=1,2,3&daytime_start=0&daytime_end=24&age_group=0,1,2,17```
+```
+<ip>/scenario1?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney&weekday=1,2,3&daytime_start=0&daytime_end=24&age_group=0,1,2,17
+
+:parameter: lga: [Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney]
+:parameter: weekday: 0-6 monday to sunday
+:parameter: daytime_start 0-24
+:parameter: daytime_end 0-24
+:parameter: age_group 0-17
+```
 #### scenario 2
-```curl -X GET 127.0.0.1:5000/scenario2?lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney&age_group=0,1,2,17```
+see ```/templates```
 #### scenario 3
-```curl -X GET 127.0.0.1:5000/scenario3?lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney```
+```
+<ip>/scenario3?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney&year_start=2020&month_start=2&year_end=2020&month_end=5
+        
+:parameter: lga: [Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney]
+:parameter: year_start: 2020
+:parameter: month_start: 1-12
+:parameter: year_end: 2020
+:parameter: month_end: 1-12
+```
 #### scenario 4
-```curl -X GET 127.0.0.1:5000/scenario4?lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney```
+```
+<ip>/scenario4?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney&income=0,3,7,8,9,12,13,15&year_start=2020&month_start=2&day_start=1&year_end=2020&month_end=5&day_end=10
+        
+:parameter: lga: [Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney]
+:parameter: income: 0-15
+:parameter: year_start: 2020
+:parameter: month_start: 1-12
+:parameter: day_start: 1-31
+:parameter: year_end: 2020
+:parameter: month_end: 1-12
+:parameter: day_end: 1-31
+```
 #### scenario 5
-```curl -X GET 127.0.0.1:5000/scenario5?lga=Greater Adelaide,Greater Melbourne,Greater Brisbane,Greater Sydney```
+```
+<ip>/scenario5?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney
+
+:parameter: lga: [Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney]
+```
 
 ### curl to js
 https://kigiri.github.io/fetch/

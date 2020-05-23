@@ -269,6 +269,12 @@ class Scenario3(Resource):
         """
         curl -X GET
         127.0.0.1:5000/scenario3?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney&year_start=2020&month_start=2&year_end=2020&month_end=5
+        
+        :parameter: lga: [Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney]
+        :parameter: year_start: 2020
+        :parameter: month_start: 1-12
+        :parameter: year_end: 2020
+        :parameter: month_end: 1-12
         :return:
         """
         lga_param = request.args.get('lga')
@@ -454,6 +460,15 @@ class Scenario4(Resource):
         """
         curl -X GET
         127.0.0.1:5000/scenario4?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney&income=0,3,7,8,9,12,13,15&year_start=2020&month_start=2&day_start=1&year_end=2020&month_end=5&day_end=10
+        
+        :parameter: lga: [Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney]
+        :parameter: income: 0-15
+        :parameter: year_start: 2020
+        :parameter: month_start: 1-12
+        :parameter: day_start: 1-31
+        :parameter: year_end: 2020
+        :parameter: month_end: 1-12
+        :parameter: day_end: 1-31
         :return:
         """
         lga_param = request.args.get('lga')
@@ -584,6 +599,8 @@ class Scenario5(Resource):
         """
         curl -X GET
         127.0.0.1:5000/scenario5?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney
+
+        :parameter: lga: [Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney]
         :return:
         """
         lga_param = request.args.get('lga')
