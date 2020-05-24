@@ -161,7 +161,7 @@ def get_covid_count_by_time(year_start, month_start, day_start, year_end, month_
         date = '{0}/{1}/{2:02}'.format(dt.month, dt.day, dt.year % 100)
         # print(date)
         if date in state_data:
-            results.append({"name": '{2}-{0}-{1}'.format(dt.month, dt.day, dt.year), "y": int(state_data[date])})
+            results.append({"x": '{2}-{0}-{1}'.format(dt.month, dt.day, dt.year), "y": int(state_data[date])})
     return results
 
 # testing

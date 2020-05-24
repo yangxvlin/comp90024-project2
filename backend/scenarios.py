@@ -535,8 +535,8 @@ class Scenario4(Resource):
 
                 if row_city == key and \
                         date_start <= row_date <= date_end:
-                    line_data["data"].append({"name": "{}-{}-{}".format(row_year, row_month, row_day), "y": row_value})
-            line_data["data"] = sorted(line_data["data"], key=lambda x: year_month_day_sorter(x["name"]))
+                    line_data["data"].append({"x": "{}-{}-{}".format(row_year, row_month, row_day), "y": row_value})
+            line_data["data"] = sorted(line_data["data"], key=lambda x: year_month_day_sorter(x["x"]))
             result["covid_related_twitter_count"]["lineChart"].append(line_data)
 
         covid_state_data = read_covid_csv_by_city(selected_lga_list)
