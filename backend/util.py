@@ -126,7 +126,7 @@ def year_month_sorter(x: str):
     return [int(y), int(m)]
 
 
-COVID_19_DATA = "../../COVID-19/time_series_covid19_confirmed_global.csv"
+COVID_19_DATA = "./COVID-19/time_series_covid19_confirmed_global.csv"
 
 
 CITY_STATE_MAP = {
