@@ -304,7 +304,10 @@ class Scenario3(Resource):
         # english twitter count
         total_tweets_by_city_year_month = get_city_year_month()
         total_tweets_by_city_year_month_rows_dict = {tuple(x["key"]): x["value"] for x in total_tweets_by_city_year_month["rows"]}
+        # total_tweets_by_city_year_month_rows_dict_json = {str(x["key"]): x["value"] for x in total_tweets_by_city_year_month["rows"]}
+        # result["total_tweets_by_city_year_month_rows_dict"] = total_tweets_by_city_year_month_rows_dict_json
         total_english_tweets_by_city_year_month = get_English_city_year_month()
+        # result["total_english_tweets_by_city_year_month"] = total_english_tweets_by_city_year_month
 
         result["english_tweet_percentage"] = {"lineChart": []}
         for key in selected_lga_list:
