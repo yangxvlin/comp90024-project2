@@ -334,9 +334,9 @@ class Scenario3(Resource):
                 if row_city == key and \
                         total_tweets_by_city_year_month_key in total_tweets_by_city_year_month_rows_dict and \
                         date_start <= row_date <= date_end:
-                    line_data["data"].append({"name": "{}-{}".format(row_year, row_month),
+                    line_data["data"].append({"x": "{}-{}".format(row_year, row_month),
                                               "y": row_value / total_tweets_by_city_year_month_rows_dict[total_tweets_by_city_year_month_key]})
-            line_data["data"] = sorted(line_data["data"], key=lambda x: year_month_sorter(x["name"]))
+            line_data["data"] = sorted(line_data["data"], key=lambda x: year_month_sorter(x["x"]))
             result["english_tweet_percentage"]["lineChart"].append(line_data)
 
         # foreigner
