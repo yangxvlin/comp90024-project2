@@ -17,6 +17,11 @@
 ```
 #### scenario 2
 see ```/templates```
+1. ```<ip>/scenario2_mel```
+2. ```<ip>/scenario2_ald```
+3. ```<ip>/scenario2_brisbane```
+4. ```<ip>/scenario2_syd```
+
 #### scenario 3
 ```
 <ip>/scenario3?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney&year_start=2020&month_start=2&year_end=2020&month_end=5

@@ -206,61 +206,61 @@ api.add_resource(Scenario1, "/scenario1", endpoint='scenario1')
 # ****************************************************************************
 
 
-class Scenario2(Resource):
-    def get(self):
-        """
-        curl -X GET
-        127.0.0.1:5000/scenario2
-        :return:
-        """
-        selected_lga_list = list(CITY_GEO_POINTS.keys())
-
-        result = {}
-
-        tweet_city_polarity_subjectivity = get_city_polarity_subjectivity_float()
-
-        data = {"polarity": [], "subjectivity": [], "geo": []}
-        for key in selected_lga_list:
-            for row in tweet_city_polarity_subjectivity["rows"]:
-                row_key = row["key"]
-
-                row_city = row_key[0]
-                row_polarity = row_key[1]
-                row_subjectivity = row_key[2]
-
-                if row_city == key:
-                    data["polarity"].append(row_polarity)
-                    data["subjectivity"].append(row_subjectivity)
-                    data["geo"].append(row_city)
-        df = pd.DataFrame(data=data)
-        print(df)
-
-        generate(transform(df), "./templates/")
-
-        result["df"] = data
-
-        resp = jsonify(result)
-        resp.status_code = 200
-        return resp
-
-
-api.add_resource(Scenario2, "/scenario2", endpoint='scenario2')
-
-
-class Scenario2Get(Resource):
-    def get(self):
-        """
-        curl -X GET
-        127.0.0.1:5000/scenario2_get?lga=Greater_Melbourne
-        :return:
-        """
-        lga_param = request.args.get('lga')
-        selected_lga = [lga_param][0]
-        file_name = SCENARIO2_FILE_MAP[selected_lga]
-        return render_template('%s.html' % file_name)
-
-
-api.add_resource(Scenario2Get, "/scenario2_get", endpoint='scenario2get')
+# class Scenario2(Resource):
+#     def get(self):
+#         """
+#         curl -X GET
+#         127.0.0.1:5000/scenario2
+#         :return:
+#         """
+#         selected_lga_list = list(CITY_GEO_POINTS.keys())
+#
+#         result = {}
+#
+#         tweet_city_polarity_subjectivity = get_city_polarity_subjectivity_float()
+#
+#         data = {"polarity": [], "subjectivity": [], "geo": []}
+#         for key in selected_lga_list:
+#             for row in tweet_city_polarity_subjectivity["rows"]:
+#                 row_key = row["key"]
+#
+#                 row_city = row_key[0]
+#                 row_polarity = row_key[1]
+#                 row_subjectivity = row_key[2]
+#
+#                 if row_city == key:
+#                     data["polarity"].append(row_polarity)
+#                     data["subjectivity"].append(row_subjectivity)
+#                     data["geo"].append(row_city)
+#         df = pd.DataFrame(data=data)
+#         print(df)
+#
+#         generate(transform(df), "./templates/")
+#
+#         result["df"] = data
+#
+#         resp = jsonify(result)
+#         resp.status_code = 200
+#         return resp
+#
+#
+# api.add_resource(Scenario2, "/scenario2", endpoint='scenario2')
+#
+#
+# class Scenario2Get(Resource):
+#     def get(self):
+#         """
+#         curl -X GET
+#         127.0.0.1:5000/scenario2_get?lga=Greater_Melbourne
+#         :return:
+#         """
+#         lga_param = request.args.get('lga')
+#         selected_lga = [lga_param][0]
+#         file_name = SCENARIO2_FILE_MAP[selected_lga]
+#         return render_template('%s.html' % file_name)
+#
+#
+# api.add_resource(Scenario2Get, "/scenario2_get", endpoint='scenario2get')
 
 
 # ****************************************************************************
