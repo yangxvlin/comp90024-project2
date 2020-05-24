@@ -671,7 +671,7 @@ class Scenario5(Resource):
                 if row_city == key:
                     line_data["data"].append({"text": row_emotion, "value": log(row_value)})
             for emotion in other:
-                line_data["data"].append({"text": emotion, "value": log(random.randint(0, 100))})
+                line_data["data"].append({"text": emotion, "value": log(random.randint(1, 100))})
             result["emotion_word_count_by_city"]["word_cloud"].append(line_data)
 
         result["chart_emotion_word_count_by_city"] = {"multiBarChart_emotion_word_count_by_city": []}
