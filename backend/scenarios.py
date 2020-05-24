@@ -643,7 +643,7 @@ class Scenario5(Resource):
                 row_city = row_key[1]
 
                 if row_city == key:
-                    line_data["data"].append({"name": row_emotion, "y": row_value})
+                    line_data["data"].append({"x": row_emotion, "y": row_value})
             result["chart_emotion_word_count_by_city"]["multiBarChart_emotion_word_count_by_city"].append(line_data)
 
         #  psychological distress
