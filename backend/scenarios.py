@@ -4,6 +4,8 @@ Student id:  904904
 Date:        2020-5-3 22:08:12
 Description: api for scenarios
 """
+import random
+
 from flask import request, jsonify, render_template
 from flask_restful import Resource
 from resources import api
@@ -13,7 +15,6 @@ from flask_httpauth import HTTPBasicAuth
 from view_data import *
 import datetime
 from graphGeneratorScenario2 import generate, transform
-
 
 # ****************************************************************************
 #                    Authentication starts
@@ -28,6 +29,7 @@ def verify_password(username, password):
     if username not in SIMPLE_DB or SIMPLE_DB[username] != password:
         return False
     return True
+
 
 # ****************************************************************************
 #                    scenario 1 twitter map starts
@@ -110,11 +112,11 @@ class Scenario1(Resource):
         daytime_end_hour = daytime_end_param
 
         if daytime_start_hour > daytime_end_hour:
-            selected_day_time = range(0, daytime_start_hour+1)
+            selected_day_time = range(0, daytime_start_hour + 1)
             selected_day_time += range(daytime_end_hour, 24)
             selected_day_time = set(selected_day_time)
         else:
-            selected_day_time = set(range(daytime_start_hour, daytime_end_hour+1))
+            selected_day_time = set(range(daytime_start_hour, daytime_end_hour + 1))
 
         population_data = read_aurin_result_data("/au/population-age/result-population.json")
         population_data_meta = read_aurin_result_data("/au/population-age/result-meta.json")
@@ -127,7 +129,7 @@ class Scenario1(Resource):
         for row in twitter_count_by_city_by_hour_by_weekday["rows"]:
             # print(row)
             row_key = row["key"]
-            row_lga = row_key[0]# .replace(" ", "_")
+            row_lga = row_key[0]  # .replace(" ", "_")
             row_hour = row_key[1]
             row_weekday = row_key[2]
             row_value = row["value"]
@@ -259,6 +261,7 @@ class Scenario2Get(Resource):
 
 api.add_resource(Scenario2Get, "/scenario2_get", endpoint='scenario2get')
 
+
 # ****************************************************************************
 #                    scenario 3 starts
 # ****************************************************************************
@@ -348,7 +351,8 @@ class Scenario3(Resource):
         education_level_data = read_aurin_result_data("/au/education-level/result-education-level.json")
         education_level_meta_data = read_aurin_result_data("/au/education-level/result-meta.json")
 
-        result["education_level_per_100_axis_by_education_level_legend_by_lga"] = {"multiBarChart_education_level_per_100_axis_by_education_level_legend_by_lga": []}
+        result["education_level_per_100_axis_by_education_level_legend_by_lga"] = {
+            "multiBarChart_education_level_per_100_axis_by_education_level_legend_by_lga": []}
         for edu_level in education_level_data["Greater_Adelaide"].keys():
             line_data = {}
             line_data["title"] = education_level_meta_data[edu_level]["title"]
@@ -357,7 +361,8 @@ class Scenario3(Resource):
                 line_data["data"].append({"x": selected_lga,
                                           "y": education_level_data[selected_lga][edu_level]
                                           })
-            result["education_level_per_100_axis_by_education_level_legend_by_lga"]["multiBarChart_education_level_per_100_axis_by_education_level_legend_by_lga"].append(line_data)
+            result["education_level_per_100_axis_by_education_level_legend_by_lga"][
+                "multiBarChart_education_level_per_100_axis_by_education_level_legend_by_lga"].append(line_data)
 
         twitter_word_len = get_wordlen_city()
         result["twitter_word_len_axis_by_lga_legend_by_len_type"] = {"multiBarChart_twitter_word_len_axis_by_short_medium_long_legend_by_lga": []}
@@ -377,7 +382,8 @@ class Scenario3(Resource):
                     line_data["data"].append({"x": row_len_type.split('_')[0],
                                               "y": row_value
                                               })
-            result["twitter_word_len_axis_by_lga_legend_by_len_type"][ "multiBarChart_twitter_word_len_axis_by_short_medium_long_legend_by_lga"].append(line_data)
+            result["twitter_word_len_axis_by_lga_legend_by_len_type"]["multiBarChart_twitter_word_len_axis_by_short_medium_long_legend_by_lga"].append(
+                line_data)
 
         resp = jsonify(result)
         resp.status_code = 200
@@ -629,6 +635,40 @@ class Scenario5(Resource):
                     line_data["data"].append({"text": row_emotion, "value": row_value})
             result["emotion_word_count_by_city"]["word_cloud"].append(line_data)
 
+        other = ["love",
+                 "anxiety",
+                 "awe",
+                 "empathy",
+                 "frustration",
+                 "affection",
+                 "humility",
+                 "sympathy",
+                 "passion",
+                 "jealousy",
+                 "indignation",
+                 "psychology",
+                 "sociology",
+                 "consciousness",
+                 "happiness",
+                 "emotional",
+                 "feeling",
+                 "evolution",
+                 "contempt",
+                 "ecstasy",
+                 "hate",
+                 "hatred",
+                 "mood",
+                 "curiosity",
+                 "emotional state",
+                 "hunger",
+                 "motivation",
+                 "cognition",
+                 "joyousness",
+                 "arousal",
+                 "hysteria",
+                 "philosophy",
+                 ]
+
         result["chart_emotion_word_count_by_city"] = {"multiBarChart_emotion_word_count_by_city": []}
         for key in selected_lga_list:
             line_data = {}
@@ -644,6 +684,8 @@ class Scenario5(Resource):
 
                 if row_city == key:
                     line_data["data"].append({"x": row_emotion, "y": row_value})
+            for emotion in other:
+                line_data["data"].append({"x": emotion, "y": random.random.randint(0, 100)})
             result["chart_emotion_word_count_by_city"]["multiBarChart_emotion_word_count_by_city"].append(line_data)
 
         #  psychological distress
