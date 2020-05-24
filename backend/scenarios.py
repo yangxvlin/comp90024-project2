@@ -5,6 +5,7 @@ Date:        2020-5-3 22:08:12
 Description: api for scenarios
 """
 import random
+from math import log
 
 from flask import request, jsonify, render_template
 from flask_restful import Resource
@@ -668,9 +669,9 @@ class Scenario5(Resource):
                 row_city = row_key[1]
 
                 if row_city == key:
-                    line_data["data"].append({"text": row_emotion, "value": row_value})
+                    line_data["data"].append({"text": row_emotion, "value": log(row_value)})
             for emotion in other:
-                line_data["data"].append({"x": emotion, "y": random.randint(0, 100)})
+                line_data["data"].append({"text": emotion, "value": log(random.randint(0, 100))})
             result["emotion_word_count_by_city"]["word_cloud"].append(line_data)
 
         result["chart_emotion_word_count_by_city"] = {"multiBarChart_emotion_word_count_by_city": []}
