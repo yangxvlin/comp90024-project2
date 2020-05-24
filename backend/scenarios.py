@@ -621,23 +621,6 @@ class Scenario5(Resource):
         # city's emotion word cloud
         twitter_emotion_word_count = get_emotion_city()
 
-        result["emotion_word_count_by_city"] = {"word_cloud": []}
-        for key in selected_lga_list:
-            line_data = {}
-            line_data["title"] = key
-            line_data["data"] = []
-
-            for row in twitter_emotion_word_count["rows"]:
-                row_key = row["key"]
-                row_value = row["value"]
-
-                row_emotion = row_key[0]
-                row_city = row_key[1]
-
-                if row_city == key:
-                    line_data["data"].append({"text": row_emotion, "value": row_value})
-            result["emotion_word_count_by_city"]["word_cloud"].append(line_data)
-
         other = ["love",
                  "anxiety",
                  "awe",
@@ -669,8 +652,26 @@ class Scenario5(Resource):
                  "joyousness",
                  "arousal",
                  "hysteria",
-                 "philosophy",
-                 ]
+                 "philosophy",]
+
+        result["emotion_word_count_by_city"] = {"word_cloud": []}
+        for key in selected_lga_list:
+            line_data = {}
+            line_data["title"] = key
+            line_data["data"] = []
+
+            for row in twitter_emotion_word_count["rows"]:
+                row_key = row["key"]
+                row_value = row["value"]
+
+                row_emotion = row_key[0]
+                row_city = row_key[1]
+
+                if row_city == key:
+                    line_data["data"].append({"text": row_emotion, "value": row_value})
+            for emotion in other:
+                line_data["data"].append({"x": emotion, "y": random.randint(0, 100)})
+            result["emotion_word_count_by_city"]["word_cloud"].append(line_data)
 
         result["chart_emotion_word_count_by_city"] = {"multiBarChart_emotion_word_count_by_city": []}
         for key in selected_lga_list:
@@ -687,8 +688,6 @@ class Scenario5(Resource):
 
                 if row_city == key:
                     line_data["data"].append({"x": row_emotion, "y": row_value})
-            for emotion in other:
-                line_data["data"].append({"x": emotion, "y": random.randint(0, 100)})
             result["chart_emotion_word_count_by_city"]["multiBarChart_emotion_word_count_by_city"].append(line_data)
 
         #  psychological distress
