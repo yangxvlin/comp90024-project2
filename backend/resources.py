@@ -21,22 +21,22 @@ class HelloWorld(Resource):
 
 @app.route("/scenario2_mel")
 def scenario2_mel():
-    return render_template("great_mel.html")
+    return render_template("Greater_Melbourne.html")
 
 
 @app.route("/scenario2_ald")
 def scenario2_ald():
-    return render_template("great_ald.html")
+    return render_template("Greater_Adelaide.html")
 
 
 @app.route("/scenario2_brisbane")
 def scenario2_brisbane():
-    return render_template("great_brisbane.html")
+    return render_template("Greater_Brisbane.html")
 
 
 @app.route("/scenario2_syd")
 def scenario2_syd():
-    return render_template("great_syd.html")
+    return render_template("Greater_Sydney.html")
 
 
 api.add_resource(HelloWorld, '/index')
