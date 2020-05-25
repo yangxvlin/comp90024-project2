@@ -79,7 +79,7 @@ get_tweets_url = "http://{username}:{password}@{host}:{port}/{database}/_find"
 #   update_design_doc_url.format(username=username,
 #                                password=password,
 #                                host=hosts[0], port=port,
-#                                database=all_tweets_db_name,
+#                                database=live_db_name,
 #                                design_doc=design_doc),
 #   headers={"Content-Type": "application/json"},
 #   data=json.dumps(STATISTICS)
@@ -169,19 +169,19 @@ def get_sample_tweets(db_name, condition):
 
 
 def get_city_hour_day(group_level=3):
-  return get_view(all_tweets_db_name, "city_hour_day", group_level)
+  return get_view(live_db_name, "city_hour_day", group_level)
 
 
 def get_city_2020_month_day_hours(group_level=5):
-  return get_view(all_tweets_db_name, "city_2020_month_day_hours", group_level)
+  return get_view(live_db_name, "city_2020_month_day_hours", group_level)
 
 
 def get_city_year_month(group_level=3):
-  return get_view(all_tweets_db_name, "city_year_month", group_level)
+  return get_view(live_db_name, "city_year_month", group_level)
 
 
 def get_English_city_year_month(group_level=4):
-  return get_view(all_tweets_db_name, "English_city_year_month", group_level)
+  return get_view(live_db_name, "English_city_year_month", group_level)
 
 
 def get_covid_city_year_month_day(group_level=5):
@@ -199,7 +199,7 @@ def get_English_tweets(num_of_tweets):
     },
     "limit": num_of_tweets
   }
-  return get_sample_tweets(all_tweets_db_name, condition)
+  return get_sample_tweets(live_db_name, condition)
 
 
 def get_non_English_tweets(num_of_tweets):
@@ -220,7 +220,7 @@ def get_non_English_tweets(num_of_tweets):
     },
     "limit": num_of_tweets
   }
-  return get_sample_tweets(all_tweets_db_name ,condition)
+  return get_sample_tweets(live_db_name ,condition)
 
 def get_pol_positive_tweets(num_of_tweets):
   condition = {
@@ -229,7 +229,7 @@ def get_pol_positive_tweets(num_of_tweets):
     },
     "limit": num_of_tweets
   }
-  return get_sample_tweets(all_tweets_db_name, condition)
+  return get_sample_tweets(live_db_name, condition)
 
 
 def get_pol_negative_tweets(num_of_tweets):
@@ -239,7 +239,7 @@ def get_pol_negative_tweets(num_of_tweets):
     },
     "limit": num_of_tweets
   }
-  return get_sample_tweets(all_tweets_db_name, condition)
+  return get_sample_tweets(live_db_name, condition)
 
 
 def get_pol_neutral_tweets(num_of_tweets):
@@ -256,7 +256,7 @@ def get_pol_neutral_tweets(num_of_tweets):
     },
     "limit": num_of_tweets
   }
-  return get_sample_tweets(all_tweets_db_name, condition)
+  return get_sample_tweets(live_db_name, condition)
 
 
 def get_sub_objective_tweets(num_of_tweets):
@@ -266,7 +266,7 @@ def get_sub_objective_tweets(num_of_tweets):
     },
     "limit": num_of_tweets
   }
-  return get_sample_tweets(all_tweets_db_name, condition)
+  return get_sample_tweets(live_db_name, condition)
 
 
 
@@ -284,7 +284,7 @@ def get_sub_neutral_tweets(num_of_tweets):
     },
     "limit": num_of_tweets
   }
-  return get_sample_tweets(all_tweets_db_name, condition)
+  return get_sample_tweets(live_db_name, condition)
 
 
 def get_sub_subjective_tweets(num_of_tweets):
@@ -294,27 +294,27 @@ def get_sub_subjective_tweets(num_of_tweets):
     },
     "limit": num_of_tweets
   }
-  return get_sample_tweets(all_tweets_db_name, condition)
+  return get_sample_tweets(live_db_name, condition)
 
 
 def get_emotion_city(group_level=2):
-  return get_view(all_tweets_db_name, "emotion_city", group_level)
+  return get_view(live_db_name, "emotion_city", group_level)
 
 
 def get_emotion_city_year_month_day(group_level=5):
-  return get_view(all_tweets_db_name, "emotion_city_year_month_day", group_level)
+  return get_view(live_db_name, "emotion_city_year_month_day", group_level)
 
 
 def get_wordlen_city(group_level=2):
-  return get_view(all_tweets_db_name, "wordlen_city", group_level)
+  return get_view(live_db_name, "wordlen_city", group_level)
 
 
 def get_city_subjectivity(group_level=2):
-  return get_view(all_tweets_db_name, "city_subjectivity", group_level)
+  return get_view(live_db_name, "city_subjectivity", group_level)
 
 
 def get_city_polarity(group_level=2):
-  return get_view(all_tweets_db_name, "city_polarity", group_level)
+  return get_view(live_db_name, "city_polarity", group_level)
 
 
 def get_city_polarity_subjectivity_float(group_level=0):
@@ -330,4 +330,4 @@ def get_city_polarity_subjectivity_float(group_level=0):
     ]
   }
   """
-  return get_view(all_tweets_db_name, "city_polarity_subjectivity_float", group_level)
+  return get_view(live_db_name, "city_polarity_subjectivity_float", group_level)
