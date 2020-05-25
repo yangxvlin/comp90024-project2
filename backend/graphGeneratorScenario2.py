@@ -1,5 +1,6 @@
 import pandas as pd
 import plotly.express as px
+import json
 
 polarity_lists = ["positive_pol", "neutral_pol", "negative_pol"]
 subjectivity_list = ["subjective", "objective"]
@@ -42,7 +43,27 @@ def generate(new_data: pd.DataFrame, path="./"):
         fig.write_image(path + g + ".svg")
 
 
+def load_json_data(path):
+    with open(path) as f:
+        data_json = json.load(f)['df']
+
+    geo_list = []
+    pol_list = []
+    sub_list= []
+
+    for i in range(len(data_json['geo'])):
+        geo_list.append(data_json['geo'][i])
+        pol_list.append(data_json['polarity'][i])
+        sub_list.append(data_json['subjectivity'][i])
+    
+    global geo
+    geo = set(geo_list)
+
+    return pd.DataFrame(data = {"polarity":pol_list, "subjectivity":sub_list,
+        "geo":geo_list})
+
+
 if __name__ == "__main__":
-    data = pd.read_csv("./test.csv")
+    data = load_json_data("2.json")
     # assign data here
     generate(transform(data))
