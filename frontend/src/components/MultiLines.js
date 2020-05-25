@@ -28,13 +28,14 @@ export default class MultiLines extends React.Component {
           //console.log(data[i].data.length);
           var dataPoints = [];
           for (var j = 0; j < data[i].data.length; j++) {
+            console.log(data[i].data[j].x);
             dataPoints.push({
               x: data[i].data[j].x,
               y: data[i].data[j].y
             });
           }
           this.state.showData.push({
-            type: this.state.type,
+            type: "line",
             name: data[i].title,
             showInLegend: true,
             xValueFormatString: "Time: ##",

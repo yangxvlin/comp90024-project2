@@ -31,9 +31,9 @@ export default class LineChart extends React.Component {
             type: "line",
             toolTipContent: "Week {x}: {y}%",
             dataPoints: [
-                { x: 1, y: 64 },
-                { x: 2, y: 61 },
-                { x: 3, y: 64 },
+                { x: a, y: 64 },
+                { x: b, y: 61 },
+                { x: c, y: 64 },
                 { x: 4, y: 62 },
                 { x: 5, y: 64 },
                 { x: 6, y: 60 },

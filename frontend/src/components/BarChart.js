@@ -53,7 +53,7 @@ export default class BarChart extends React.Component {
 
     return (
      
-        <CanvasJSChart options={options} onRef={ref => (this.chart = ref)} />
+        <CanvasJSChart options={options} onRef={ref => (this.chart = ref)}  style={{width:100}}/>
       
     );
   }

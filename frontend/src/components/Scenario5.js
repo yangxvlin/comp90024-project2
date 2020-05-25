@@ -40,53 +40,56 @@ export default class Scenario5 extends React.Component {
     var muitiBarChartData;
     var muitiBarChartData1;
     var muiltiLineChartData;
-    /* fetch()//"http://172.26.132.122:5000/" + this.state.url)
-                                                  .then(res => res.json())
-                                                  .then(data => {*/
-    var data = scenario5;
-    console.log(data);
-    barChartData = data.barChart_psychological_distress_by_lga;
-    barChartData1 = data.emotion_word_count_by_city;
-    muitiBarChartData =
-      data.chart_emotion_word_count_by_city
-        .multiBarChart_emotion_word_count_by_city;
-    console.log(barChartData1.word_cloud[1]);
+    fetch("http://172.26.131.223/" + this.state.url)
+      .then(res => res.json())
+      .then(data => {
+        //   var data = scenario5;
+        console.log(data);
+        barChartData = data.barChart_psychological_distress_by_lga;
+        barChartData1 = data.emotion_word_count_by_city;
+        muitiBarChartData =
+          data.chart_emotion_word_count_by_city
+            .multiBarChart_emotion_word_count_by_city;
+        console.log(barChartData1.word_cloud[1]);
 
-    //   muitiBarChartData1 =
-    //     data.income_axis_by_selected_income_group_legend_by_lga_selected
-    //      .multiBarChart_income_by_group_by_lga;
-    //   muiltiLineChartData = data.state_covid_count.lineChart;
-    this.setState({
-      barChartData: barChartData,
-      barChartData1: barChartData1.word_cloud[1].data,
-      muitiBarChartData: muitiBarChartData,
-      //    muitiBarChartData1: muitiBarChartData1,
-      //    muiltiLineChartData: muiltiLineChartData,
-      isLoading: false
-    });
-    console.log(this.state.barChartData);
-    /*   })
-                                                  .then(
-                                                    res => {
-                                                      if (res.ok) {
-                                                        console.log("ok");
-                                                      } else {
-                                                        console.log("error");
-                                                      }
-                                                      console.log(res.json());
-                                                    },
-                                                    err => {
-                                                      console.log(err);
-                                                    }
-                                                  )
-                                                  .then(
-                                                    data => {
-                                                      console.log(data);
-                                                    },
-                                                    err => {
-                                                      console.log(err);
-                                                    }
-                                                  );*/
+        //   muitiBarChartData1 =
+        //     data.income_axis_by_selected_income_group_legend_by_lga_selected
+        //      .multiBarChart_income_by_group_by_lga;
+        //   muiltiLineChartData = data.state_covid_count.lineChart;
+        this.setState({
+          barChartData: barChartData,
+          barChartData1: barChartData1.word_cloud[1],
+          word_cloud2: barChartData1.word_cloud[0],
+          word_cloud3: barChartData1.word_cloud[2],
+          word_cloud4: barChartData1.word_cloud[3],
+          muitiBarChartData: muitiBarChartData,
+          //    muitiBarChartData1: muitiBarChartData1,
+          //    muiltiLineChartData: muiltiLineChartData,
+          isLoading: false
+        });
+        console.log(this.state.barChartData);
+      })
+      .then(
+        res => {
+          if (res.ok) {
+            console.log("ok");
+          } else {
+            console.log("error");
+          }
+          console.log(res.json());
+        },
+        err => {
+          console.log(err);
+        }
+      )
+      .then(
+        data => {
+          console.log(data);
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }
 
   render() {
@@ -105,6 +108,15 @@ export default class Scenario5 extends React.Component {
               </Col>
             );
           })}{" "}
+          <Col md={12} sm={12}>
+            <Panel shaded bordered expanded>
+              <MultiBars
+                type="column"
+                data={this.state.muitiBarChartData}
+                title="Emotion word count by city"
+              />
+            </Panel>{" "}
+          </Col>{" "}
           {/*
                                                                                                                                                                                             <Col md={12} sm={12}>
                                                                                                                                                                                               <Panel shaded bordered expanded>
@@ -116,22 +128,64 @@ export default class Scenario5 extends React.Component {
                                                                                                                                                                                               </Panel>
                                                                                                                                                                                             </Col>*/}{" "}
         </Row>{" "}
+        <Row className="show-grid" gutter={30}></Row>{" "}
         <Row className="show-grid" gutter={30}>
           <Col md={12} sm={12}>
-            <Panel shaded bordered expanded>
-              <MultiBars
-                type="column"
-                data={this.state.muitiBarChartData}
-                title="twitter_word_len"
-              />
+            <Panel
+              shaded
+              bordered
+              expanded
+              header={
+                `${this.state.barChartData1.title}` + "'s emotion: log(count)"
+              }
+            >
+              <div style={{ height: 400, width: 600 }} title="">
+                <ReactWordcloud words={this.state.barChartData1.data} />{" "}
+              </div>{" "}
+            </Panel>{" "}
+          </Col>{" "}
+          <Col md={12} sm={12}>
+            <Panel
+              shaded
+              bordered
+              expanded
+              header={
+                `${this.state.word_cloud3.title}` + "'s emotion: log(count)"
+              }
+            >
+              <div style={{ height: 400, width: 600 }} title="111">
+                <ReactWordcloud words={this.state.word_cloud3.data} />{" "}
+              </div>{" "}
             </Panel>{" "}
           </Col>{" "}
         </Row>{" "}
         <Row className="show-grid" gutter={30}>
           <Col md={12} sm={12}>
-            <Panel shaded bordered expanded>
+            <Panel
+              shaded
+              bordered
+              expanded
+              header={
+                `${this.state.word_cloud2.title}` + "'s emotion: log(count)"
+              }
+            >
               <div style={{ height: 400, width: 600 }} title="111">
-                <ReactWordcloud words={this.state.barChartData1} />{" "}
+                <ReactWordcloud words={this.state.word_cloud2.data} />{" "}
+              </div>{" "}
+            </Panel>{" "}
+          </Col>{" "}
+          <Col md={12} sm={12}>
+            <Panel
+              shaded
+              bordered
+              expanded
+              word_cloud4
+              header={
+                `${this.state.word_cloud3.title}` + "'s emotion: log(count)"
+              }
+            >
+              <div style={{ height: 400, width: 600 }} title="111">
+                <ReactWordcloud words={this.state.word_cloud4.data} />{" "}
               </div>{" "}
             </Panel>{" "}
           </Col>{" "}

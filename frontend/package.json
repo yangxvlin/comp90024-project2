@@ -2,12 +2,13 @@
   "name": "comp90024-team3",
   "version": "0.1.0",
   "private": true,
-  "homepage": "./",
+  "homepage": "https://yangxvlin.github.io/comp90024-project2",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "bootstrap": "^4.4.1",
+    "gh-pages": "^2.2.0",
     "http-to-curl": "^1.4.3",
     "kepler.gl": "^2.0.1",
     "react": "^16.13.1",
@@ -18,12 +19,15 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "react-sliding-side-panel": "^1.0.14",
+    "react-wordcloud": "^1.2.3",
     "redux": "^4.0.5",
-    "rsuite": "^4.4.1",
+    "rsuite": "^4.7.0",
     "styled-components": "^5.0.1",
     "swr": "^0.1.18"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "start-api": "cd api && venv/bin/flask run --no-debugger",
     "build": "react-scripts build",
@@ -44,6 +48,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ],
-    "proxy": "http://172.26.132.122:5001"
+    "proxy": "http://172.26.131.223"
+  },
+  "devDependencies": {
+    "html-loader": "^1.1.0"
   }
 }

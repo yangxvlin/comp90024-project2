@@ -39,7 +39,7 @@ export default class Diagrams extends React.Component {
     var muitiBarChartData;
     var muitiBarChartData1;
     var muiltiLineChartData;
-    fetch("http://172.26.132.122:5000/" + this.state.url)
+    fetch("http://172.26.131.223/" + this.state.url)
       .then(res => res.json())
       .then(data => {
         console.log(data);
@@ -119,7 +119,7 @@ export default class Diagrams extends React.Component {
               <MultiBars
                 type="column"
                 data={this.state.muitiBarChartData}
-                title="Age Group by LGA"
+                title="Age Group by city"
               />
             </Panel>
           </Col>
@@ -128,7 +128,7 @@ export default class Diagrams extends React.Component {
               <MultiBars
                 type="column"
                 data={this.state.muitiBarChartData1}
-                title="LGA by Age Group"
+                title="City by Age Group"
               />
             </Panel>
           </Col>

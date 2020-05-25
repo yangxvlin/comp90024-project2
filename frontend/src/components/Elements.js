@@ -1,32 +1,35 @@
 import React from "react";
 import comparisonMenu from "../testData/comparisonMenu.json";
 import scenario1 from "../testData/s1.json";
-import {
-  TagPicker,
-  SelectPicker,
-  InputNumber,
-  Button
-} from "rsuite";
+
+import { TagPicker, SelectPicker, InputNumber, Button } from "rsuite";
 import Diagrams from "./Diagrams.js";
 
 export default class Elements extends React.Component {
   constructor(props) {
     super(props);
-    //  console.log(comparisonMenu[2]);
+    console.log(comparisonMenu);
     // 默认Alert隐藏
     this.state = {
       visible: false,
-      url:"",
-      data:[],
-      scena: "",
+      url: "",
+      data: [],
+      scena: "0",
       lga: "",
       weekday: "",
       age_group: "",
       daytime_start: 0,
       endtime: 24,
+      month_start: "2",
+      month_end: "5",
+      year: 2020,
+      day_start: "",
+      day_end: "",
+      income: "",
       scenario: comparisonMenu[0].level_1,
       city: comparisonMenu[1].city,
       week: comparisonMenu[2].week,
+      incomes: comparisonMenu[4].income,
       community: comparisonMenu[3].age_group
     };
 
@@ -43,7 +46,6 @@ export default class Elements extends React.Component {
     }
   }
 
-
   clickSubmit(e) {
     //    e.preventDefault();
     var scena = this.state.scena;
@@ -52,30 +54,68 @@ export default class Elements extends React.Component {
     var age_group = this.state.age_group;
     var daytime_start = this.state.daytime_start;
     var endtime = this.state.endtime;
-    var url =
-      "scenario" +
-      scena +
-      "?&lga=" +
-      lga +
-      "&weekday=" +
-      weekday +
-      "&daytime_start=" +
-      daytime_start +
-      "&daytime_end=" +
-      endtime +
-      "&age_group=" +
-      age_group;
+    var month_start = this.state.month_start;
+    var month_end = this.state.month_end;
+    var income = this.state.income;
+    var day_start = this.state.day_start;
+    var day_end = this.state.day_end;
+    var url;
+    if (this.state.scena == "1")
+      url =
+        "scenario" +
+        scena +
+        "?&lga=" +
+        lga +
+        "&weekday=" +
+        weekday +
+        "&daytime_start=" +
+        daytime_start +
+        "&daytime_end=" +
+        endtime +
+        "&age_group=" +
+        age_group;
+    if (this.state.scena == "2") url = "scenario" + scena;
+    if (this.state.scena == "3")
+      url =
+        "scenario" +
+        scena +
+        "?&lga=" +
+        lga +
+        "&year_start=2020&month_start=" +
+        month_start +
+        "&year_end=2020&month_end=" +
+        month_end;
+
+    if (this.state.scena == "4")
+      url =
+        "scenario" +
+        scena +
+        "?&lga=" +
+        lga +
+        "&income=" +
+        income +
+        "&year_start=2020&month_start=" +
+        month_start +
+        "&day_start=" +
+        day_start +
+        "&year_end=2020&month_end=" +
+        month_end +
+        "&day_end=" +
+        day_end;
+
+    if (this.state.scena == "5") url = "scenario" + scena + "?&lga=" + lga;
+
     console.log(url);
 
- //   this.props.handleEmail = scenario1;
+    //   this.props.handleEmail = scenario1;
     this.setState({
       url: url,
       data: scenario1
-  })
-  // 触发回调 传递给父组件
-  this.props.getChildrenMsg(url);
- 
-/*
+    });
+    // 触发回调 传递给父组件
+    this.props.getChildrenMsg(url);
+
+    /*
     
     fetch(
       "http://172.26.132.122:5000/"+url
@@ -115,7 +155,7 @@ export default class Elements extends React.Component {
       // Alert显示
       this.setState({ visible: true });
     }
-  //  return (render(<Diagrams data={this.state.url}/>));
+    //  return (render(<Diagrams data={this.state.url}/>));
   }
 
   handleChange(value) {
@@ -149,20 +189,21 @@ export default class Elements extends React.Component {
   render() {
     return (
       <div>
-        
-          <div style={{ align: "center", width: 250 }}>
-            <SelectPicker
-              data={this.state.scenario}
-              style={{ width: 250 }}
-              onSelect={item => {
-                this.setState({ scena: item });
-              }}
-              appearance="default"
-              searchable={false}
-              placeholder="--- Please choose topic here ---"
-            ></SelectPicker>
-            <br />
-            <br />
+        <div style={{ align: "center", width: 250 }}>
+          <SelectPicker
+            data={this.state.scenario}
+            style={{ width: 250 }}
+            onSelect={item => {
+              this.setState({ scena: item });
+            }}
+            appearance="default"
+            searchable={false}
+            placeholder="--- Please choose topic here ---"
+          ></SelectPicker>
+          <br />
+          <br />
+
+          {this.state.scena == "1" || this.state.scena == "3" || this.state.scena == "4" || this.state.scena == "5"? ( //
             <TagPicker
               data={this.state.city}
               appearance="subtle"
@@ -173,72 +214,142 @@ export default class Elements extends React.Component {
               }}
               placeholder="--- Please choose cities here ---"
             />
-            <br />
-            <br />
-            <TagPicker
-              data={this.state.community}
-              appearance="subtle"
-              style={{ width: 250 }}
-              menuStyle={{ width: 250 }}
-              onSelect={item => {
-                this.setState({ age_group: item });
-              }}
-              placeholder="--- Please choose community here ---"
-            />
-            <br />
-            <br />
-            <SelectPicker
-              data={this.state.week}
-              style={{ width: 250 }}
-              appearance="default"
-              searchable={false}
-              onSelect={item => {
-                this.setState({ weekday: item });
-              }}
-              placeholder="--- Please choose a day here ---"
-            />
-            <br />
-            <br />
+          ) : null}
+          <br />
+          <br />
+          {this.state.scena == "1" ? (
+            <div>
+              <TagPicker
+                data={this.state.community}
+                appearance="subtle"
+                style={{ width: 250 }}
+                menuStyle={{ width: 250 }}
+                onSelect={item => {
+                  this.setState({ age_group: item });
+                }}
+                placeholder="--- Please choose community here ---"
+              />
+              <br />
+              <br />
+            </div>
+          ) : null}
+          {this.state.scena == "1" ? (
+            <div>
+              <TagPicker
+                data={this.state.week}
+                appearance="subtle"
+                style={{ width: 250 }}
+                menuStyle={{ width: 250 }}
+                onSelect={item => {
+                  this.setState({ weekday: item });
+                }}
+                placeholder="--- Please choose week here ---"
+              />
+              <br />
+              <br />
+            </div>
+          ) : null}
+          {this.state.scena == "4" ? (
+            <div>
+              <TagPicker
+                data={this.state.incomes}
+                appearance="subtle"
+                style={{ width: 250 }}
+                menuStyle={{ width: 250 }}
+                onSelect={item => {
+                  this.setState({ income: item });
+                }}
+                placeholder={"--- Please choose income here ---"}
+              />
+              <br />
+              <br />
+            </div>
+          ) : null}
+
+          {this.state.scena == "1" || this.state.scena == "4" ? (
             <div>
               <InputNumber
                 prefix="StartTime"
                 onChange={item => {
-                  this.setState({ daytime_start: item });
-                  if (parseInt(item) !== 0) {
-                    if (parseInt(item) !== 24)
-                      this.setState({ endtime: parseInt(item) });
-                    else this.setState({ endtime: 0 });
-                  } else {
-                    this.setState({ endtime: 24 });
-                  }
+                  if (this.state.scena == "1")
+                    this.setState({ daytime_start: item });
+                  if (this.state.scena == "4")
+                    this.setState({ day_start: item });
                 }}
                 defaultValue={0}
                 max={24}
                 min={0}
                 //  style={{ width: 150 }} }
               />
-              <hr />
-              <p>EndTime: {this.state.endtime}</p>
-              <p></p>
+
+              <br />
             </div>
-            <hr />
-            <Button appearance="primary" onClick={this.clickSubmit}
-             //href={"/comparison/"+`${this.state.url}`}> 
-             href={"/comparison/"+`${this.state.url}`}
-            >
-              Submit
-            </Button>
-            <Button
-              color="red"
-              appearance="ghost"
-              onClick={() => {
-                this.render();
+          ) : null}
+
+          {this.state.scena == "1" || this.state.scena == "4" ? (
+            <div>
+              <InputNumber
+                prefix="EndTime"
+                onChange={item => {
+                  if (this.state.scena == "1") this.setState({ endtime: item });
+                  if (this.state.scena == "4") this.setState({ day_end: item });
+                }}
+                defaultValue={0}
+                max={24}
+                min={0}
+                //  style={{ width: 150 }} }
+              />
+
+              <br />
+            </div>
+          ) : null}
+          {this.state.scena == "3" || this.state.scena == "4" ? (
+            <div>
+              <InputNumber
+                prefix="StartMonth"
+                value={2}
+                onChange={item => {
+                  this.setState({ month_start: item });
+                }}
+                defaultValue={0}
+                max={12}
+                min={1}
+                //  style={{ width: 150 }} }
+              />
+
+              <br />
+            </div>
+          ) : null}
+
+          {this.state.scena == "3" || this.state.scena == "4" ? (
+            <InputNumber
+              prefix="EndMonth"
+              value={5}
+              onChange={item => {
+                this.setState({ month_end: item });
               }}
-            >
-              Cancel
-            </Button>
+              defaultValue={0}
+              max={12}
+              min={1}
+              //  style={{ width: 150 }} }
+            />
+          ) : null}
+
+          <hr />
+          <div  style={{marginLeft:100}}>
+          <Button 
+            appearance="primary"
+            onClick={this.clickSubmit}
+            //href={"/comparison/"+`${this.state.url}`}>
+            href={"/comparison/" + `${this.state.url}`}
+          >
+            Submit
+          </Button>
           </div>
-          <div>{this.state.visible ? <p>You can see me.</p> : null}</div>
+          
+
+        </div>
+        <div>{this.state.visible ? <p>You can see me.</p> : null}</div>
       </div>
     );
   }

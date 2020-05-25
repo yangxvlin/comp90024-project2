@@ -4,6 +4,10 @@ import "rsuite/dist/styles/rsuite-default.css";
 import Keplermap from "./Keplermap";
 import Elements from "./Elements";
 import Diagrams from "./Diagrams";
+import Scenario5 from "./Scenario5";
+import Scenario4 from "./Scenario4";
+import Scenario3 from "./Scenario3";
+import Scenario2 from "./Scenario2";
 import scenario1 from "../testData/s1.json";
 
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
@@ -19,7 +23,6 @@ import {
   Header,
   Content
 } from "rsuite";
-import Scenario3 from "./Scenario3";
 
 const headerStyles = {
   padding: 18,
@@ -184,8 +187,23 @@ export default class MainContainer extends React.Component {
                   </Route>
                     <Route path={"/comparison/:url"} 
                       render={(props) => {
-                     //   return <Diagrams {...props} items={this.state.data}
+                    //    return <Diagrams {...props} items={this.state.data}
+                     
+                     if(props.match.params.url === "scenario1")
+                        return <Diagrams {...props} items={this.state.data}/>
+                     else if(props.match.params.url === "scenario2")
+                      return <Scenario2 {...props} items={this.state.data}/>
+                        
+                     if(props.match.params.url === "scenario3")
                         return <Scenario3 {...props} items={this.state.data}/>
+                     if(props.match.params.url === "scenario4")
+                       return <Scenario4 {...props} items={this.state.data}/>
+                     if(props.match.params.url === "scenario5")
+                       return <Scenario5 {...props} items={this.state.data}/>
+                      //  console.log(props.match.params.url)
+                    //    return <Scenario5 {...props} items={this.state.data}
+                    
+                        
                       }}
                    />
                       
