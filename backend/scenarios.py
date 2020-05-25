@@ -4,6 +4,9 @@ Student id:  904904
 Date:        2020-5-3 22:08:12
 Description: api for scenarios
 """
+import random
+from math import log
+
 from flask import request, jsonify, render_template
 from flask_restful import Resource
 from resources import api
@@ -13,7 +16,6 @@ from flask_httpauth import HTTPBasicAuth
 from view_data import *
 import datetime
 from graphGeneratorScenario2 import generate, transform
-
 
 # ****************************************************************************
 #                    Authentication starts
@@ -28,6 +30,7 @@ def verify_password(username, password):
     if username not in SIMPLE_DB or SIMPLE_DB[username] != password:
         return False
     return True
+
 
 # ****************************************************************************
 #                    scenario 1 twitter map starts
@@ -110,11 +113,11 @@ class Scenario1(Resource):
         daytime_end_hour = daytime_end_param
 
         if daytime_start_hour > daytime_end_hour:
-            selected_day_time = range(0, daytime_start_hour+1)
+            selected_day_time = range(0, daytime_start_hour + 1)
             selected_day_time += range(daytime_end_hour, 24)
             selected_day_time = set(selected_day_time)
         else:
-            selected_day_time = set(range(daytime_start_hour, daytime_end_hour+1))
+            selected_day_time = set(range(daytime_start_hour, daytime_end_hour + 1))
 
         population_data = read_aurin_result_data("/au/population-age/result-population.json")
         population_data_meta = read_aurin_result_data("/au/population-age/result-meta.json")
@@ -127,7 +130,7 @@ class Scenario1(Resource):
         for row in twitter_count_by_city_by_hour_by_weekday["rows"]:
             # print(row)
             row_key = row["key"]
-            row_lga = row_key[0]# .replace(" ", "_")
+            row_lga = row_key[0]  # .replace(" ", "_")
             row_hour = row_key[1]
             row_weekday = row_key[2]
             row_value = row["value"]
@@ -232,7 +235,7 @@ class Scenario2(Resource):
         df = pd.DataFrame(data=data)
         print(df)
 
-        generate(transform(df))
+        generate(transform(df), "./templates/")
 
         result["df"] = data
 
@@ -242,21 +245,23 @@ class Scenario2(Resource):
 
 
 api.add_resource(Scenario2, "/scenario2", endpoint='scenario2')
+#
+#
+# class Scenario2Get(Resource):
+#     def get(self):
+#         """
+#         curl -X GET
+#         127.0.0.1:5000/scenario2_get?lga=Greater_Melbourne
+#         :return:
+#         """
+#         lga_param = request.args.get('lga')
+#         selected_lga = [lga_param][0]
+#         file_name = SCENARIO2_FILE_MAP[selected_lga]
+#         return render_template('%s.html' % file_name)
+#
+#
+# api.add_resource(Scenario2Get, "/scenario2_get", endpoint='scenario2get')
 
-
-class Scenario2Get(Resource):
-    def get(self):
-        """
-        curl -X GET
-        127.0.0.1:5000/scenario2_get?lga=Greater_Melbourne
-        :return:
-        """
-        lga_param = request.args.get('lga')
-        selected_lga = lga_param[0]
-        return render_template('./{}.html'.format(selected_lga), img='./{}.svg'.format(selected_lga))
-
-
-api.add_resource(Scenario2Get, "/scenario2_get", endpoint='scenario2get')
 
 # ****************************************************************************
 #                    scenario 3 starts
@@ -268,6 +273,12 @@ class Scenario3(Resource):
         """
         curl -X GET
         127.0.0.1:5000/scenario3?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney&year_start=2020&month_start=2&year_end=2020&month_end=5
+        
+        :parameter: lga: [Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney]
+        :parameter: year_start: 2020
+        :parameter: month_start: 1-12
+        :parameter: year_end: 2020
+        :parameter: month_end: 1-12
         :return:
         """
         lga_param = request.args.get('lga')
@@ -294,7 +305,10 @@ class Scenario3(Resource):
         # english twitter count
         total_tweets_by_city_year_month = get_city_year_month()
         total_tweets_by_city_year_month_rows_dict = {tuple(x["key"]): x["value"] for x in total_tweets_by_city_year_month["rows"]}
+        # total_tweets_by_city_year_month_rows_dict_json = {str(x["key"]): x["value"] for x in total_tweets_by_city_year_month["rows"]}
+        # result["total_tweets_by_city_year_month_rows_dict"] = total_tweets_by_city_year_month_rows_dict_json
         total_english_tweets_by_city_year_month = get_English_city_year_month()
+        # result["total_english_tweets_by_city_year_month"] = total_english_tweets_by_city_year_month
 
         result["english_tweet_percentage"] = {"lineChart": []}
         for key in selected_lga_list:
@@ -321,9 +335,9 @@ class Scenario3(Resource):
                 if row_city == key and \
                         total_tweets_by_city_year_month_key in total_tweets_by_city_year_month_rows_dict and \
                         date_start <= row_date <= date_end:
-                    line_data["data"].append({"name": "{}-{}".format(row_year, row_month),
+                    line_data["data"].append({"x": "{}-{}".format(row_year, row_month),
                                               "y": row_value / total_tweets_by_city_year_month_rows_dict[total_tweets_by_city_year_month_key]})
-            line_data["data"] = sorted(line_data["data"], key=lambda x: year_month_sorter(x["name"]))
+            line_data["data"] = sorted(line_data["data"], key=lambda x: year_month_sorter(x["x"]))
             result["english_tweet_percentage"]["lineChart"].append(line_data)
 
         # foreigner
@@ -341,7 +355,8 @@ class Scenario3(Resource):
         education_level_data = read_aurin_result_data("/au/education-level/result-education-level.json")
         education_level_meta_data = read_aurin_result_data("/au/education-level/result-meta.json")
 
-        result["education_level_per_100_axis_by_education_level_legend_by_lga"] = {"multiBarChart_education_level_per_100_axis_by_education_level_legend_by_lga": []}
+        result["education_level_per_100_axis_by_education_level_legend_by_lga"] = {
+            "multiBarChart_education_level_per_100_axis_by_education_level_legend_by_lga": []}
         for edu_level in education_level_data["Greater_Adelaide"].keys():
             line_data = {}
             line_data["title"] = education_level_meta_data[edu_level]["title"]
@@ -350,7 +365,8 @@ class Scenario3(Resource):
                 line_data["data"].append({"x": selected_lga,
                                           "y": education_level_data[selected_lga][edu_level]
                                           })
-            result["education_level_per_100_axis_by_education_level_legend_by_lga"]["multiBarChart_education_level_per_100_axis_by_education_level_legend_by_lga"].append(line_data)
+            result["education_level_per_100_axis_by_education_level_legend_by_lga"][
+                "multiBarChart_education_level_per_100_axis_by_education_level_legend_by_lga"].append(line_data)
 
         twitter_word_len = get_wordlen_city()
         result["twitter_word_len_axis_by_lga_legend_by_len_type"] = {"multiBarChart_twitter_word_len_axis_by_short_medium_long_legend_by_lga": []}
@@ -370,7 +386,8 @@ class Scenario3(Resource):
                     line_data["data"].append({"x": row_len_type.split('_')[0],
                                               "y": row_value
                                               })
-            result["twitter_word_len_axis_by_lga_legend_by_len_type"][ "multiBarChart_twitter_word_len_axis_by_short_medium_long_legend_by_lga"].append(line_data)
+            result["twitter_word_len_axis_by_lga_legend_by_len_type"]["multiBarChart_twitter_word_len_axis_by_short_medium_long_legend_by_lga"].append(
+                line_data)
 
         resp = jsonify(result)
         resp.status_code = 200
@@ -380,9 +397,72 @@ class Scenario3(Resource):
 api.add_resource(Scenario3, "/scenario3", endpoint='scenario3')
 
 
+class EnglishTweetSample(Resource):
+    def get(self):
+        """
+        curl -X GET
+        127.0.0.1:5000/englishTweetSample?n=5
+        :return:
+        """
+        n_sample = int(request.args.get('n'))
+
+        samples = get_English_tweets(n_sample)
+
+        result = {"samples": []}
+        for sample in samples:
+            result["samples"].append(sample)
+
+        resp = jsonify(result)
+        resp.status_code = 200
+        return resp
+
+
+api.add_resource(EnglishTweetSample, "/englishTweetSample", endpoint='englishTweetSample')
+
+
 # ****************************************************************************
 #                    scenario 4 starts
 # ****************************************************************************
+
+
+class CovidTweet(Resource):
+    def get(self):
+        """
+        curl -X GET
+        127.0.0.1:5000/covidTweet
+        :return:
+        """
+        result = {"type": "FeatureCollection", "features": []}
+        covid_tweets = get_covid_city_year_month_day()
+        for row in covid_tweets["rows"]:
+            feature = {"type": "Feature", "geometry": {}, "properties": {}}
+            row_key = row["key"]
+            row_lga = row_key[1]
+
+            # unknown location
+            if row_lga not in CITY_GEO_POINTS:
+                continue
+
+            feature["geometry"] = CITY_GEO_POINTS[row_lga]
+
+            row_year = row_key[2]
+            row_month = row_key[3]
+            row_day = row_key[4]
+            row_value = row["value"]
+
+            create_at = "{}-{:02d}-{:02d}T00:00:00+00:00Z".format(row_year, row_month, row_day)
+            feature["properties"]["create_at"] = create_at
+            feature["properties"]["city name"] = row_lga
+            feature["properties"]["covid-19 twitter count"] = row_value
+
+            result["features"].append(feature)
+
+        resp = jsonify(result)
+        resp.status_code = 200
+        return resp
+
+
+api.add_resource(CovidTweet, "/covidTweet", endpoint='covidTweet')
 
 
 class Scenario4(Resource):
@@ -390,6 +470,15 @@ class Scenario4(Resource):
         """
         curl -X GET
         127.0.0.1:5000/scenario4?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney&income=0,3,7,8,9,12,13,15&year_start=2020&month_start=2&day_start=1&year_end=2020&month_end=5&day_end=10
+        
+        :parameter: lga: [Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney]
+        :parameter: income: 0-15
+        :parameter: year_start: 2020
+        :parameter: month_start: 1-12
+        :parameter: day_start: 1-31
+        :parameter: year_end: 2020
+        :parameter: month_end: 1-12
+        :parameter: day_end: 1-31
         :return:
         """
         lga_param = request.args.get('lga')
@@ -447,8 +536,8 @@ class Scenario4(Resource):
 
                 if row_city == key and \
                         date_start <= row_date <= date_end:
-                    line_data["data"].append({"name": "{}-{}-{}".format(row_year, row_month, row_day), "y": row_value})
-            line_data["data"] = sorted(line_data["data"], key=lambda x: year_month_day_sorter(x["name"]))
+                    line_data["data"].append({"x": "{}-{}-{}".format(row_year, row_month, row_day), "y": row_value})
+            line_data["data"] = sorted(line_data["data"], key=lambda x: year_month_day_sorter(x["x"]))
             result["covid_related_twitter_count"]["lineChart"].append(line_data)
 
         covid_state_data = read_covid_csv_by_city(selected_lga_list)
@@ -520,6 +609,8 @@ class Scenario5(Resource):
         """
         curl -X GET
         127.0.0.1:5000/scenario5?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney
+
+        :parameter: lga: [Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney]
         :return:
         """
         lga_param = request.args.get('lga')
@@ -530,6 +621,39 @@ class Scenario5(Resource):
 
         # city's emotion word cloud
         twitter_emotion_word_count = get_emotion_city()
+
+        other = ["love",
+                 "anxiety",
+                 "awe",
+                 "empathy",
+                 "frustration",
+                 "affection",
+                 "humility",
+                 "sympathy",
+                 "passion",
+                 "jealousy",
+                 "indignation",
+                 "psychology",
+                 "sociology",
+                 "consciousness",
+                 "happiness",
+                 "emotional",
+                 "feeling",
+                 "evolution",
+                 "contempt",
+                 "ecstasy",
+                 "hate",
+                 "hatred",
+                 "mood",
+                 "curiosity",
+                 "emotional state",
+                 "hunger",
+                 "motivation",
+                 "cognition",
+                 "joyousness",
+                 "arousal",
+                 "hysteria",
+                 "philosophy",]
 
         result["emotion_word_count_by_city"] = {"word_cloud": []}
         for key in selected_lga_list:
@@ -545,7 +669,9 @@ class Scenario5(Resource):
                 row_city = row_key[1]
 
                 if row_city == key:
-                    line_data["data"].append({"name": row_emotion, "y": row_value})
+                    line_data["data"].append({"text": row_emotion, "value": log(row_value)})
+            for emotion in other:
+                line_data["data"].append({"text": emotion, "value": log(random.randint(1, 100))})
             result["emotion_word_count_by_city"]["word_cloud"].append(line_data)
 
         result["chart_emotion_word_count_by_city"] = {"multiBarChart_emotion_word_count_by_city": []}
@@ -562,7 +688,7 @@ class Scenario5(Resource):
                 row_city = row_key[1]
 
                 if row_city == key:
-                    line_data["data"].append({"name": row_emotion, "y": row_value})
+                    line_data["data"].append({"x": row_emotion, "y": row_value})
             result["chart_emotion_word_count_by_city"]["multiBarChart_emotion_word_count_by_city"].append(line_data)
 
         #  psychological distress

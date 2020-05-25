@@ -30,24 +30,9 @@ class TwitterClassifier():
 
         res = []
 
-        if num_mode:
-            return polarity, subjectivity
-        else:
-            if polarity == 0:
-                res.append("neutral")
-            elif polarity > 0:
-                res.append("positive")
-            else:
-                res.append("negative")
-            
-            if subjectivity > 0.6:
-                res.append("subjective")
-            elif subjectivity < 0.4:
-                res.append("objective")
-            else:
-                res.append("neutral")
-
-            return res
+        res.append(polarity)
+        res.append(subjectivity)
+        return res
 
 
 if __name__ == "__main__":

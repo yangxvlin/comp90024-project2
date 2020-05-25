@@ -61,6 +61,15 @@ GREATER_MELBOURNE_LGA_NAME = "Greater_Melbourne"
 GREATER_BRISBANE_LGA_NAME = "Greater_Brisbane"
 GREATER_SYDNEY_LGA_NAME = "Greater_Sydney"
 
+
+SCENARIO2_FILE_MAP = {
+    GREATER_ADELAIDE_LGA_NAME: "great_ald",
+    GREATER_MELBOURNE_LGA_NAME: "great_mel",
+    GREATER_BRISBANE_LGA_NAME: "great_brisbane",
+    GREATER_SYDNEY_LGA_NAME: "great_syd",
+}
+
+
 CITY_GEO_POINTS = {
     GREATER_ADELAIDE_LGA_NAME: {
         "type": "Point",
@@ -117,7 +126,7 @@ def year_month_sorter(x: str):
     return [int(y), int(m)]
 
 
-COVID_19_DATA = "../../COVID-19/time_series_covid19_confirmed_global.csv"
+COVID_19_DATA = "./COVID-19/time_series_covid19_confirmed_global.csv"
 
 
 CITY_STATE_MAP = {
@@ -152,7 +161,7 @@ def get_covid_count_by_time(year_start, month_start, day_start, year_end, month_
         date = '{0}/{1}/{2:02}'.format(dt.month, dt.day, dt.year % 100)
         # print(date)
         if date in state_data:
-            results.append({"name": '{2}-{0}-{1}'.format(dt.month, dt.day, dt.year), "y": int(state_data[date])})
+            results.append({"x": '{2}-{0}-{1}'.format(dt.month, dt.day, dt.year), "y": int(state_data[date])})
     return results
 
 # testing

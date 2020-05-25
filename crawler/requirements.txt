@@ -4,3 +4,9 @@ pandas
 twarc
 tqdm
 tweepy
+nltk
+textblob
+couchdb
+geopandas
+shapely
+nltk
