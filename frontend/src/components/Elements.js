@@ -3,7 +3,6 @@ import comparisonMenu from "../testData/comparisonMenu.json";
 import scenario1 from "../testData/s1.json";
 
 import { TagPicker, SelectPicker, InputNumber, Button } from "rsuite";
-import Diagrams from "./Diagrams.js";
 
 export default class Elements extends React.Component {
   constructor(props) {
@@ -60,7 +59,7 @@ export default class Elements extends React.Component {
     var day_start = this.state.day_start;
     var day_end = this.state.day_end;
     var url;
-    if (this.state.scena == "1")
+    if (this.state.scena === "1")
       url =
         "scenario" +
         scena +
@@ -74,8 +73,8 @@ export default class Elements extends React.Component {
         endtime +
         "&age_group=" +
         age_group;
-    if (this.state.scena == "2") url = "scenario" + scena;
-    if (this.state.scena == "3")
+    if (this.state.scena === "2") url = "scenario" + scena;
+    if (this.state.scena === "3")
       url =
         "scenario" +
         scena +
@@ -86,7 +85,7 @@ export default class Elements extends React.Component {
         "&year_end=2020&month_end=" +
         month_end;
 
-    if (this.state.scena == "4")
+    if (this.state.scena === "4")
       url =
         "scenario" +
         scena +
@@ -103,7 +102,7 @@ export default class Elements extends React.Component {
         "&day_end=" +
         day_end;
 
-    if (this.state.scena == "5") url = "scenario" + scena + "?&lga=" + lga;
+    if (this.state.scena === "5") url = "scenario" + scena + "?&lga=" + lga;
 
     console.log(url);
 
@@ -203,7 +202,7 @@ export default class Elements extends React.Component {
           <br />
           <br />
 
-          {this.state.scena == "1" || this.state.scena == "3" || this.state.scena == "4" || this.state.scena == "5"? ( //
+          {this.state.scena === "1" || this.state.scena === "3" || this.state.scena === "4" || this.state.scena === "5"? ( //
             <TagPicker
               data={this.state.city}
               appearance="subtle"
@@ -217,7 +216,7 @@ export default class Elements extends React.Component {
           ) : null}
           <br />
           <br />
-          {this.state.scena == "1" ? (
+          {this.state.scena === "1" ? (
             <div>
               <TagPicker
                 data={this.state.community}
@@ -233,7 +232,7 @@ export default class Elements extends React.Component {
               <br />
             </div>
           ) : null}
-          {this.state.scena == "1" ? (
+          {this.state.scena === "1" ? (
             <div>
               <TagPicker
                 data={this.state.week}
@@ -249,7 +248,7 @@ export default class Elements extends React.Component {
               <br />
             </div>
           ) : null}
-          {this.state.scena == "4" ? (
+          {this.state.scena === "4" ? (
             <div>
               <TagPicker
                 data={this.state.incomes}
@@ -266,14 +265,14 @@ export default class Elements extends React.Component {
             </div>
           ) : null}
 
-          {this.state.scena == "1" || this.state.scena == "4" ? (
+          {this.state.scena === "1" || this.state.scena === "4" ? (
             <div>
               <InputNumber
                 prefix="StartTime"
                 onChange={item => {
-                  if (this.state.scena == "1")
+                  if (this.state.scena === "1")
                     this.setState({ daytime_start: item });
-                  if (this.state.scena == "4")
+                  if (this.state.scena === "4")
                     this.setState({ day_start: item });
                 }}
                 defaultValue={0}
@@ -286,13 +285,13 @@ export default class Elements extends React.Component {
             </div>
           ) : null}
 
-          {this.state.scena == "1" || this.state.scena == "4" ? (
+          {this.state.scena === "1" || this.state.scena === "4" ? (
             <div>
               <InputNumber
                 prefix="EndTime"
                 onChange={item => {
-                  if (this.state.scena == "1") this.setState({ endtime: item });
-                  if (this.state.scena == "4") this.setState({ day_end: item });
+                  if (this.state.scena === "1") this.setState({ endtime: item });
+                  if (this.state.scena === "4") this.setState({ day_end: item });
                 }}
                 defaultValue={0}
                 max={24}
@@ -303,7 +302,7 @@ export default class Elements extends React.Component {
               <br />
             </div>
           ) : null}
-          {this.state.scena == "3" || this.state.scena == "4" ? (
+          {this.state.scena === "3" || this.state.scena === "4" ? (
             <div>
               <InputNumber
                 prefix="StartMonth"
@@ -321,7 +320,7 @@ export default class Elements extends React.Component {
             </div>
           ) : null}
 
-          {this.state.scena == "3" || this.state.scena == "4" ? (
+          {this.state.scena === "3" || this.state.scena === "4" ? (
             <InputNumber
               prefix="EndMonth"
               value={5}

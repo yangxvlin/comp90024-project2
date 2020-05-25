@@ -7,10 +7,12 @@ import KeplerGl from "kepler.gl";
 import { addDataToMap } from "kepler.gl/actions";
 import useSwr from "swr";
 
-import testJson from "../testData/keplergl.json";
 import covid19map from "../testData/covid19map.json";
 import covid19 from "../testData/covid19.json";
 import KeplerGlSchema from "kepler.gl/schemas";
+
+import animationS1 from "../testData/animationS1.json";
+import animationS5 from "../testData/animationS5.json";
 
 const mapToLoad = KeplerGlSchema.load(covid19);
 const reducers = combineReducers({
@@ -74,11 +76,12 @@ const data1 =  fetch('./testDate/convid19.json')
         }*/
         )
       );
-    } else if (data === "2") {
-      const map = KeplerGlSchema.load(testJson);
+    } else if (data === "5") {
+      const map = KeplerGlSchema.load(animationS5);
       dispatch(addDataToMap(map));
     } else if (data === "1") {
-      const map1 = KeplerGlSchema.load(covid19map);
+      const map1 = KeplerGlSchema.load(animationS1);
+      dispatch(addDataToMap(map1));
     /*  fetch("http://172.26.132.122:5001/scenario1?lga=Greater%20Adelaide,Greater%20Melbourne,Greater%20Brisbane,Greater%20Sydney&weekday=1,2,3&daytime_start=0&daytime_end=24&age_group=0,1,2,17"
       ).then(res => res.json()).then(data => {console.log(data);
         const map = KeplerGlSchema.load(data);

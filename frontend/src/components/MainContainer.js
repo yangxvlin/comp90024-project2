@@ -128,32 +128,23 @@ export default class MainContainer extends React.Component {
               >
                 <Sidenav.Body>
                   <Nav>
-                    <Nav.Item
+                 { /*  <Nav.Item
                       eventKey="1"
                       active
                       icon={<Icon icon="dashboard" />}
                       href="/dashboard"
                     >
                       Dashboard
-                    </Nav.Item>
+                 </Nav.Item>*/}
                     <Dropdown
                       eventKey="3"
                       trigger="hover"
-                      title="Scenarios"
+                      title="Animation"
                       icon={<Icon icon="magic" />}
                       placement="rightStart"
                     >
                       <Dropdown.Item href="/scenario1">
                         Twitter Daily Time
-                      </Dropdown.Item>
-                      <Dropdown.Item href="/scenario2">
-                        Twitter Popularity
-                      </Dropdown.Item>
-                      <Dropdown.Item href="/senario3">
-                        Twitter Language Usage
-                      </Dropdown.Item>
-                      <Dropdown.Item href="/scenario4">
-                        COVID-19 on twitter and attention in community
                       </Dropdown.Item>
                       <Dropdown.Item href="/scenario5">
                         People Emotion

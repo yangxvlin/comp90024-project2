@@ -1,12 +1,6 @@
 import React from "react";
-//import CanvasJSReact from "../assets/canvasjs.react";
-//import LineChart from "./LineChart";
-import PieChart from "./PieChart";
-//import Paraluna from "./Paraluna";
-import scenario5 from "../testData/scenario5.json";
 import ReactWordcloud from "react-wordcloud";
 import { Grid, Row, Col, Panel } from "rsuite";
-import MultiLines from "./MultiLines";
 import MultiBars from "./MultiBars";
 import BarChart from "./BarChart";
 
@@ -38,8 +32,6 @@ export default class Scenario5 extends React.Component {
     var barChartData;
     var barChartData1;
     var muitiBarChartData;
-    var muitiBarChartData1;
-    var muiltiLineChartData;
     fetch("http://172.26.131.223/" + this.state.url)
       .then(res => res.json())
       .then(data => {

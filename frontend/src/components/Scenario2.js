@@ -1,19 +1,10 @@
 import React from "react";
-//import CanvasJSReact from "../assets/canvasjs.react";
-//import LineChart from "./LineChart";
-import PieChart from "./PieChart";
-//import Paraluna from "./Paraluna";
 import great_brisbane from "../testData/great_brisbane.svg";
-import great_mel from "../testData/great_mel.svg";
-import { ReactComponent as Brisbane } from "../scenario2/great_brisbane.svg";
-import { ReactComponent as Melbourne } from "../scenario2/great_mel.svg";
-import { ReactComponent as Ald } from "../scenario2/great_ald.svg";
-import { ReactComponent as Syd } from "../scenario2/great_syd.svg";
-import { Grid, Row, Col, Panel, Icon } from "rsuite";
-import MultiLines from "./MultiLines";
-import MultiBars from "./MultiBars";
-//import aldhtml from "../scenario2/great_ald.html";
-//var htmlDoc1 = {__html: aldhtml};
+import { ReactComponent as Brisbane } from "../scenario2/Greater_Brisbane.svg";
+import { ReactComponent as Melbourne } from "../scenario2/Greater_Melbourne.svg";
+import { ReactComponent as Ald } from "../scenario2/Greater_Adelaide.svg";
+import { ReactComponent as Syd } from "../scenario2/Greater_Sydney.svg";
+import { Grid, Row, Col, Panel } from "rsuite";
 
 export default class Scenario2 extends React.Component {
   constructor(props) {
@@ -33,7 +24,6 @@ export default class Scenario2 extends React.Component {
       muiltiLineChartData: muiltiLineChartData
     };
 
-    //  this.fetchData();
   }
   componentWillMount() {
     // fetch the HTML fragment with a local API request
