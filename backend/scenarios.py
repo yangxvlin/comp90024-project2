@@ -189,7 +189,7 @@ class Scenario1(Resource):
         line_data = {}
         line_data["title"] = "total_population"
         line_data["data"] = []
-        for lga in CITY_GEO_POINTS.keys():
+        for lga in selected_lga_list:
             line_data["data"].append({"x": lga, "y": population_data[lga]["total_population"]})
         result["barChart_total_pop"].append(line_data)
 
