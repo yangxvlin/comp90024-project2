@@ -128,7 +128,7 @@ const data1 =  fetch('./testDate/convid19.json')
     <div>
       <KeplerGl
         id="covid"
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_API}
+        mapboxApiAccessToken="pk.eyJ1Ijoib2xpdmlhMTMxNCIsImEiOiJjazljMnkweGYwMHN2M29vN2h5N3Y0Z2p3In0.ii0pWAJQE5VJWg_X-84MSw" //process.env.REACT_APP_MAPBOX_API}
         width={window.innerWidth}
         height={window.innerHeight}
       />

@@ -3,5 +3,5 @@ services:
   frontend:
     build: .
     ports:
-      - "80:3000"
+      - "3456:3000"
     stdin_open: true
