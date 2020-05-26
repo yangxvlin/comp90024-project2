@@ -16,5 +16,5 @@
      - role: add-proxy
      - role: install-dependencies
      - role: setup-docker
-    - role: git-clone-source-repository
-#    - role: mount-volumes
+     - role: git-clone-source-repository
+     - role: mount-volumes
