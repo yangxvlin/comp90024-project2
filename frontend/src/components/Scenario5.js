@@ -42,7 +42,7 @@ export default class Scenario5 extends React.Component {
         muitiBarChartData =
           data.chart_emotion_word_count_by_city
             .multiBarChart_emotion_word_count_by_city;
-        console.log(barChartData1.word_cloud[1]);
+        console.log(barChartData1.word_cloud);
 
         //   muitiBarChartData1 =
         //     data.income_axis_by_selected_income_group_legend_by_lga_selected
@@ -50,7 +50,7 @@ export default class Scenario5 extends React.Component {
         //   muiltiLineChartData = data.state_covid_count.lineChart;
         this.setState({
           barChartData: barChartData,
-          barChartData1: barChartData1.word_cloud[1],
+          barChartData1: barChartData1.word_cloud,
           word_cloud2: barChartData1.word_cloud[0],
           word_cloud3: barChartData1.word_cloud[2],
           word_cloud4: barChartData1.word_cloud[3],
@@ -109,78 +109,25 @@ export default class Scenario5 extends React.Component {
               />
             </Panel>{" "}
           </Col>{" "}
-          {/*
-                                                                                                                                                                                            <Col md={12} sm={12}>
-                                                                                                                                                                                              <Panel shaded bordered expanded>
-                                                                                                                                                                                                <MultiLines
-                                                                                                                                                                                                  type="line"
-                                                                                                                                                                                           //       data={this.state.muiltiLineChartData}
-                                                                                                                                                                                                  title="english_tweet_percentage"
-                                                                                                                                                                                                />
-                                                                                                                                                                                              </Panel>
-                                                                                                                                                                                            </Col>*/}{" "}
         </Row>{" "}
         <Row className="show-grid" gutter={30}></Row>{" "}
         <Row className="show-grid" gutter={30}>
-          <Col md={12} sm={12}>
-            <Panel
-              shaded
-              bordered
-              expanded
-              header={
-                `${this.state.barChartData1.title}`// + "'s emotion: log(count)"
-              }
-            >
-              <div style={{ height: 400, width: 600 }} title="">
-                <ReactWordcloud words={this.state.barChartData1.data} />{" "}
-              </div>{" "}
-            </Panel>{" "}
-          </Col>{" "}
-          <Col md={12} sm={12}>
-            <Panel
-              shaded
-              bordered
-              expanded
-              header={
-                `${this.state.word_cloud3.title}`// + "'s emotion: log(count)"
-              }
-            >
-              <div style={{ height: 400, width: 600 }} title="111">
-                <ReactWordcloud words={this.state.word_cloud3.data} />{" "}
-              </div>{" "}
-            </Panel>{" "}
-          </Col>{" "}
-        </Row>{" "}
-        <Row className="show-grid" gutter={30}>
-          <Col md={12} sm={12}>
-            <Panel
-              shaded
-              bordered
-              expanded
-              header={
-                `${this.state.word_cloud2.title}`// + "'s emotion: log(count)"
-              }
-            >
-              <div style={{ height: 400, width: 600 }} title="111">
-                <ReactWordcloud words={this.state.word_cloud2.data} />{" "}
-              </div>{" "}
-            </Panel>{" "}
-          </Col>{" "}
-          <Col md={12} sm={12}>
-            <Panel
-              shaded
-              bordered
-              expanded
-              word_cloud4
-              header={
-                `${this.state.word_cloud2.title}`// + "'s emotion: log(count)"
-              }
-            >
-              <div style={{ height: 400, width: 600 }} title="111">
-                <ReactWordcloud words={this.state.word_cloud4.data} />{" "}
-              </div>{" "}
-            </Panel>{" "}
-          </Col>{" "}
+          {this.state.barChartData1.map(item => {
+            return (
+              <Col md={12} sm={12}>
+                <Panel
+                  shaded
+                  bordered
+                  expanded
+                  header={`${item.title}` + "'s emotion: log(count)"}
+                >
+                  <div style={{ height: 400, width: 600 }} title="">
+                    <ReactWordcloud words={item.data} />{" "}
+                  </div>{" "}
+                </Panel>
+              </Col>
+            );
+          })}
         </Row>{" "}
       </Grid>
     );

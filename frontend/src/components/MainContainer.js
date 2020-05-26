@@ -179,7 +179,7 @@ export default class MainContainer extends React.Component {
                     <Route path={"/comparison/:url"} 
                       render={(props) => {
                     //    return <Diagrams {...props} items={this.state.data}
-                     
+                    console.log(props)
                      if(props.match.params.url === "scenario1")
                         return <Diagrams {...props} items={this.state.data}/>
                      else if(props.match.params.url === "scenario2")
@@ -191,7 +191,7 @@ export default class MainContainer extends React.Component {
                        return <Scenario4 {...props} items={this.state.data}/>
                      if(props.match.params.url === "scenario5")
                        return <Scenario5 {...props} items={this.state.data}/>
-                      //  console.log(props.match.params.url)
+                        
                     //    return <Scenario5 {...props} items={this.state.data}
                     
                         
