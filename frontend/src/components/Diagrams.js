@@ -40,9 +40,18 @@ export default class Diagrams extends React.Component {
     var muitiBarChartData;
     var muitiBarChartData1;
     var muiltiLineChartData;
-    console.log(this.state.url);
-    fetch("http://172.26.131.223/" + this.state.url)
-      .then(res => res.json())
+  //  console.log(this.state.url);
+    fetch(""+this.state.url)
+      .then(function(res) {
+        if (res.status >= 400) {
+          alert("Bad response from server: " + res.status);
+          throw new Error("Bad response from server");
+        }
+        if (res.status == 200) {
+          alert("Response OK but wrong Json format : " + res.status);
+        }
+        return res.json();
+      })
       .then(data => {
         console.log(data);
         pieChartData = data.pie_charts_for_each_city_all_age_groups.pieChart;

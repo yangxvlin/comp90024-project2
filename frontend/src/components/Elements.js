@@ -344,7 +344,7 @@ export default class Elements extends React.Component {
             appearance="primary"
             onClick={this.clickSubmit}
             //href={"/comparison/"+`${this.state.url}`}>
-            href={"/comparison/" + `${this.state.url}`}
+            href={"/" + `${this.state.url}`}
           >
             Submit
           </Button>

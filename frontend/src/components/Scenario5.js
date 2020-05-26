@@ -32,8 +32,17 @@ export default class Scenario5 extends React.Component {
     var barChartData;
     var barChartData1;
     var muitiBarChartData;
-    fetch("http://172.26.131.223/" + this.state.url)
-      .then(res => res.json())
+    fetch('' + this.state.url)
+      .then(function(res) {
+        if (res.status >= 400) {
+          alert("Bad response from server: " + res.status);
+          throw new Error("Bad response from server");
+        }
+        if (res.status == 200) {
+          alert("Response OK but wrong Json format : " + res.status);
+        }
+        return res.json();
+      })
       .then(data => {
         //   var data = scenario5;
         console.log(data);
@@ -67,13 +76,13 @@ export default class Scenario5 extends React.Component {
             console.log("ok");
           } else {
             console.log("error");
-            alert("error");
+            //    alert("error");
           }
           console.log(res.json());
         },
         err => {
           console.log(err);
-          alert("error");
+          //   alert("error");
         }
       )
       .then(
@@ -82,7 +91,7 @@ export default class Scenario5 extends React.Component {
         },
         err => {
           console.log(err);
-          alert("error");
+          //    alert("error");
         }
       );
   }

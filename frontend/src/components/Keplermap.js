@@ -40,7 +40,7 @@ function Map(scenario) {
       "https://gist.githubusercontent.com/leighhalliday/a994915d8050e90d413515e97babd3b3/raw/a3eaaadcc784168e3845a98931780bd60afb362f/covid19.json"
    );*/
     //  if(scenario === "1")
-    
+    console.log(scenario);
     const data = scenario.scenario.scenario; //await response.json();
     //   const data = {testJson};
     console.log(data);

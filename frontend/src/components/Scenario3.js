@@ -37,29 +37,26 @@ export default class Scenario3 extends React.Component {
     var muitiBarChartData1;
     var muiltiLineChartData;
     var test = this.state.url;
-    fetch("" + this.state.url) //http://172.26.131.223/ "scenario3?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney&year_start=2020&month_start=2&year_end=2020&month_end=5")//)
-      .then(//res => 
-     //   if (res.status >= 400) 
-      //    alert("Bad response from server");
-     //   res.json()
-      function(res) {
-        console.log(res);
-        console.log(test);
-        if (res.status >= 400) {
-          alert("Bad response from server: " + res.status);
-          throw new Error("Bad response from server" );
+    fetch("http://172.26.131.223/" + this.state.url) //http://172.26.131.223/ "scenario3?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney&year_start=2020&month_start=2&year_end=2020&month_end=5")//)
+      .then(
+        function(res) {
+          if (res.status >= 400) {
+            alert("Bad response from server: " + res.status);
+            throw new Error("Bad response from server");
+          }
+          if (res.status == 200) {
+            alert("Response OK but wrong Json format : " + res.status);
+          }
+          return res.json();
         }
-        if (res.status == 200){
-          alert("Response OK but wrong Json format : " + res.status);
-        }
-        return res.json();
-      }
-        )
+      )
       .then(data => {
-     //   var data = scenario3;
+        //   var data = scenario3;
         console.log(data);
         barChartData = data.barChart_city_foreigner;
-        muitiBarChartData1 = data.education_level_per_100_axis_by_education_level_legend_by_lga.multiBarChart_education_level_per_100_axis_by_education_level_legend_by_lga;
+        muitiBarChartData1 =
+          data.education_level_per_100_axis_by_education_level_legend_by_lga
+            .multiBarChart_education_level_per_100_axis_by_education_level_legend_by_lga;
         muitiBarChartData =
           data.twitter_word_len_axis_by_lga_legend_by_len_type
             .multiBarChart_twitter_word_len_axis_by_short_medium_long_legend_by_lga;
@@ -67,7 +64,7 @@ export default class Scenario3 extends React.Component {
         this.setState({
           barChartData: barChartData,
           muitiBarChartData: muitiBarChartData,
-          muitiBarChartData1:muitiBarChartData1,
+          muitiBarChartData1: muitiBarChartData1,
           muiltiLineChartData: muiltiLineChartData,
           isLoading: false
         });
@@ -79,13 +76,13 @@ export default class Scenario3 extends React.Component {
             console.log("ok");
           } else {
             console.log("error");
-        //    alert("error")
+            //    alert("error")
           }
           console.log(res.json());
         },
         err => {
           console.log(err);
-       //   alert("error")
+          //   alert("error")
         }
       )
       .then(
@@ -94,7 +91,7 @@ export default class Scenario3 extends React.Component {
         },
         err => {
           console.log(err);
-       //   alert("error")
+          //   alert("error")
         }
       );
   }
@@ -103,11 +100,11 @@ export default class Scenario3 extends React.Component {
     return this.state.isLoading ? (
       "loading"
     ) : (
-      <Grid fluid >
+      <Grid fluid>
         <Row className="show-grid" gutter={30}>
           {this.state.barChartData.map(item => {
             return (
-              <Col md={12} sm={12} >
+              <Col md={12} sm={12}>
                 <Panel shaded bordered expanded>
                   <BarChart data={item} title={item.title} />
                 </Panel>
@@ -117,7 +114,9 @@ export default class Scenario3 extends React.Component {
           {
             <Col md={12} sm={12}>
               <Panel shaded bordered expanded>
-                <MultiBars width='100%' height='100%'
+                <MultiBars
+                  width="100%"
+                  height="100%"
                   type="line"
                   data={this.state.muiltiLineChartData}
                   title="English tweet(%)"
@@ -130,7 +129,9 @@ export default class Scenario3 extends React.Component {
         <Row className="show-grid" gutter={30}>
           <Col md={12} sm={12}>
             <Panel shaded bordered expanded>
-              <MultiBars width='100%' height='100%'
+              <MultiBars
+                width="100%"
+                height="100%"
                 type="column"
                 data={this.state.muitiBarChartData}
                 title="Twitter word by length"
@@ -139,7 +140,9 @@ export default class Scenario3 extends React.Component {
           </Col>
           <Col md={12} sm={12}>
             <Panel shaded bordered expanded>
-              <MultiBars width='100%' height='100%'
+              <MultiBars
+                width="100%"
+                height="100%"
                 type="column"
                 data={this.state.muitiBarChartData1}
                 title="Education by city"

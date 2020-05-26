@@ -11,7 +11,7 @@ import Scenario2 from "./Scenario2";
 import scenario1 from "../testData/s1.json";
 import AboutUs from "../testData/aboutUs.jpg";
 
-import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import {
   Icon,
@@ -79,7 +79,7 @@ export default class MainContainer extends React.Component {
     console.log(props);
     this.state = {
       expand: true,
-      url:"",
+      url: "",
       diagramData: ""
     };
     this.handleToggle = this.handleToggle.bind(this);
@@ -88,9 +88,9 @@ export default class MainContainer extends React.Component {
   getChildrenMsg = msg => {
     console.log(msg);
     this.setState({ diagramData: msg });
-     console.log(this.state.diagramData);
-//   (<Diagrams {...props} items={this.state.data}/>)
-     //
+    console.log(this.state.diagramData);
+    //   (<Diagrams {...props} items={this.state.data}/>)
+    //
   };
 
   handleToggle() {
@@ -132,7 +132,7 @@ export default class MainContainer extends React.Component {
               >
                 <Sidenav.Body>
                   <Nav>
-                 { /*  <Nav.Item
+                    {/*  <Nav.Item
                       eventKey="1"
                       active
                       icon={<Icon icon="dashboard" />}
@@ -147,12 +147,10 @@ export default class MainContainer extends React.Component {
                       icon={<Icon icon="magic" />}
                       placement="rightStart"
                     >
-                      <Dropdown.Item href="/scenario1">
+                      <Dropdown.Item href="/s1">
                         Twitter Daily Time
                       </Dropdown.Item>
-                      <Dropdown.Item href="/scenario4">
-                       Covid-19 Tweet
-                      </Dropdown.Item>
+                      <Dropdown.Item href="/s4">Covid-19 Tweet</Dropdown.Item>
                     </Dropdown>
                     <Dropdown
                       eventKey="4"
@@ -164,7 +162,11 @@ export default class MainContainer extends React.Component {
                       <Elements getChildrenMsg={this.getChildrenMsg} />
                     </Dropdown>
 
-                    <Nav.Item eventKey="2" icon={<Icon icon="group" />} href="/aboutus">
+                    <Nav.Item
+                      eventKey="2"
+                      icon={<Icon icon="group" />}
+                      href="/aboutus"
+                    >
                       About Us
                     </Nav.Item>
                   </Nav>
@@ -180,49 +182,47 @@ export default class MainContainer extends React.Component {
                   <Route path="/team">
                     <Keplermap scenario="0" />
                   </Route>
-                    <Route path={"/comparison/:url"} 
-                      render={(props) => {
-                    //    return <Diagrams {...props} items={this.state.data}
-                    console.log(props)
-                     if(props.match.params.url === "scenario1")
-                        return <Diagrams {...props} items={this.state.data}/>
-                     if(props.match.params.url === "scenario2")
-                      return <Scenario2 {...props} items={this.state.data}/>
-                        
-                     if(props.match.params.url === "scenario3")
-                        return <Scenario3 {...props} items={this.state.data}/>
-                     if(props.match.params.url === "scenario4")
-                       return <Scenario4 {...props} items={this.state.data}/>
-                     if(props.match.params.url === "scenario5")
-                       return <Scenario5 {...props} items={this.state.data}/>
-                        
-                    //    return <Scenario5 {...props} items={this.state.data}
-                    
-                        
-                      }}
-                   />
-                      
+                  <Route
+                    path={"/:url"}
+                    render={props => {
+                      //    return <Diagrams {...props} items={this.state.data}
+                      console.log(props);
+                      if (props.match.params.url === "scenario1")
+                        return <Diagrams {...props} items={this.state.data} />;
+                      else if (props.match.params.url === "scenario2")
+                        return <Scenario2 {...props} items={this.state.data} />;
+                      else if (props.match.params.url === "scenario3")
+                        return <Scenario3 {...props} items={this.state.data} />;
+                      else if (props.match.params.url === "scenario4")
+                        return <Scenario4 {...props} items={this.state.data} />;
+                      else if (props.match.params.url === "scenario5")
+                        return <Scenario5 {...props} items={this.state.data} />;
+                      else if (props.match.params.url === "s1")
+                        return <Keplermap scenario="1" />;
+                      else if (props.match.params.url === "s4")
+                        return <Keplermap scenario="4" />;
+                      else if (props.match.params.url === "s4")
+                        return <img src={AboutUs} width="100%" height="100%" />;
+                      else if (props.match.params.url === "/")
+                        return <Keplermap scenario="0" />;
+                      else return <Keplermap scenario="0" />;
+                    }}
+                  />
 
                   <Route path="/home">
                     <Home />
                   </Route>
-                  <Route path="/scenario1">
+                  <Route path="/s1">
                     <Keplermap scenario="1" />
                   </Route>
                   <Route path="/aboutus">
-                  <img src={AboutUs} width="100%"
-                height="100%"/>
-                    
+                    <img src={AboutUs} width="100%" height="100%" />
                   </Route>
-                  <Route path="/scenario3">
-                    <Keplermap scenario="3" />
-                  </Route>
-                  <Route path="/scenario4">
+
+                  <Route path="/s4">
                     <Keplermap scenario="4" />
                   </Route>
-                  <Route path="/scenario5">
-                    <Keplermap scenario="5" />
-                  </Route>
+
                   <Route path="/">
                     <Keplermap scenario="0" />
                   </Route>
