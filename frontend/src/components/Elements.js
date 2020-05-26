@@ -198,7 +198,7 @@ export default class Elements extends React.Component {
           <SelectPicker
             data={this.state.scenario}
             style={{ width: 250 }}
-            onSelect={item => {
+            onChange={(item,event) => {
               this.setState({ scena: item });
             }}
             appearance="default"
@@ -214,7 +214,7 @@ export default class Elements extends React.Component {
               appearance="subtle"
               style={{ width: 250 }}
               menuStyle={{ width: 250 }}
-              onSelect={item => {
+              onChange={(item,event) => {
                 this.setState({ lga: item });
               }}
               placeholder="--- Please choose cities here ---"
@@ -229,7 +229,9 @@ export default class Elements extends React.Component {
                 appearance="subtle"
                 style={{ width: 250 }}
                 menuStyle={{ width: 250 }}
-                onSelect={item => {
+                onChange={(item,event) => {
+                  console.log(item);
+                  console.log(event);
                   this.setState({ age_group: item });
                 }}
                 placeholder="--- Please choose community here ---"
@@ -245,7 +247,7 @@ export default class Elements extends React.Component {
                 appearance="subtle"
                 style={{ width: 250 }}
                 menuStyle={{ width: 250 }}
-                onSelect={item => {
+                onChange={(item,event) => {
                   this.setState({ weekday: item });
                 }}
                 placeholder="--- Please choose week here ---"
@@ -261,7 +263,7 @@ export default class Elements extends React.Component {
                 appearance="subtle"
                 style={{ width: 250 }}
                 menuStyle={{ width: 250 }}
-                onSelect={item => {
+                onChange={(item,event) => {
                   this.setState({ income: item });
                 }}
                 placeholder={"--- Please choose income here ---"}

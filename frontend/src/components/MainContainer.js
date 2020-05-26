@@ -1,8 +1,8 @@
 import React from "react";
 import "rsuite/dist/styles/rsuite-default.css";
 
-import Keplermap from "./Keplermap";
-import Keplermap1 from "./Keplermap1";
+import KeplermapDaily from "./KeplermapDaily";
+import KeplermapCovid from "./KeplermapCovid";
 import KeplermapHome from "./KeplermapHome";
 import Elements from "./Elements";
 import Diagrams from "./Diagrams";
@@ -193,9 +193,7 @@ export default class MainContainer extends React.Component {
               <Header></Header>
               <Content>
                 <Switch>
-                  <Route path="/team">
-                    <Keplermap scenario="0" />
-                  </Route>
+                 
                   <Route
                     path={"/:url"}
                     render={props => {
@@ -226,23 +224,9 @@ export default class MainContainer extends React.Component {
                     }}
                   />
 
-                  <Route path="/home">
-                    <Home />
-                  </Route>
-                  <Route path="/s1">
-                    <Keplermap scenario="1" />
-                  </Route>
-                  <Route path="/aboutus">
-                    <img src={AboutUs} width="100%" height="100%" />
-                  </Route>
+            
+                 
 
-                  <Route path="/s4">
-                    <Keplermap scenario="4" />
-                  </Route>
-
-                  <Route path="/">
-                    <Keplermap scenario="0" />
-                  </Route>
                 </Switch>
                
                 {this.state.diagramData == "scenario1" ? (
@@ -261,10 +245,10 @@ export default class MainContainer extends React.Component {
                     <Scenario5 data={this.state.url} />
                 ) : null}
                 {this.state.diagramData == "s1" ? (
-                  <Keplermap scenario="1" />
+                  <KeplermapDaily scenario="1" />
                 ) : null}
                 {this.state.diagramData == "s4" ? (
-                  <Keplermap1 scenario="4" />
+                  <KeplermapCovid scenario="4" />
                 ) : null}
                 {this.state.diagramData == "" ? (
                   <KeplermapHome />
