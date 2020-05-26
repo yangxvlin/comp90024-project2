@@ -19,42 +19,62 @@ export default class BarChart extends React.Component {
       showData: datas
     };
     for (var i = 0; i < data.length; i++) {
-    console.log(data[i].lable);
-    datas.push({
-      label: data[i].x,
-        y: data[i].y,
+      console.log(data[i].lable);
+      datas.push({
+        label: data[i].x,
+        y: data[i].y
       });
-      
     }
     console.log(this.state.showData);
   }
 
- 
+  UNSAFE_componentWillUpdate(nextProps, nextState) {
+    console.log(nextProps);
+
+   // if (nextProps.data.data !== this.state.data) {
+     // var datas = [];
+      var data = nextProps.data.data;
+      console.log(data);
+      this.state.title = nextProps.title;
+      this.state.data = data;
+      this.state.showData = [];
+      
+      for (var i = 0; i < data.length; i++) {
+        console.log(data[i].x);
+        this.state.showData.push({
+          label: data[i].x,
+          y: data[i].y
+        });
+      }
+  //    console.log(this.state.showData);
+//    }
+  }
 
   render() {
     const options = {
-			title: {
-				text: this.state.title
+      title: {
+        text: this.state.title
       },
       axisX: {
         valueFormatString: "#,###"
       },
-			data: [
-			{
-				// Change type to "doughnut", "line", "splineArea", etc.
-        type: "column",
-        xValueFormatString: "##",
-				yValueFormatString: "#,###",
-				dataPoints: this.state.showData
-			}
-			]
-		    
+      data: [
+        {
+          // Change type to "doughnut", "line", "splineArea", etc.
+          type: "column",
+          xValueFormatString: "##",
+          yValueFormatString: "#,###",
+          dataPoints: this.state.showData
+        }
+      ]
     };
 
     return (
-     
-        <CanvasJSChart options={options} onRef={ref => (this.chart = ref)}  style={{width:100}}/>
-      
+      <CanvasJSChart
+        options={options}
+        onRef={ref => (this.chart = ref)}
+        style={{ width: 100 }}
+      />
     );
   }
 }

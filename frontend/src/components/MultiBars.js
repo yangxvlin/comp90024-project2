@@ -48,6 +48,7 @@ export default class MultiBars extends React.Component {
     this.toggleDataSeries = this.toggleDataSeries.bind(this);
     this.addSymbols = this.addSymbols.bind(this);
   }
+  
   UNSAFE_componentWillUpdate(nextProps, nextState) {
     console.log(nextProps);
     
