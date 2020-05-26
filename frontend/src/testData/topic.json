@@ -1,0 +1,32 @@
+[
+    {
+      "topic": "Twitter daily time",
+      "value": "1",
+      "community": [{"community":"population age"}],
+      "day": [{"day":"Mon"},{"day":"Tue"},{"day":"Wed"},{"day":"Thu"},{"day":"Fri"},{"day":"Sat"},{"day":"Sun"}],
+      "timeRange": "Twitter sender range"
+    },
+    {
+      "topic": "Twitter popularity",
+      "value": "2",
+      "community": [{"community":"population age"}],
+      "timeRange": "Twitter sender range"
+    },
+    {
+      "topic": "Twitter language usage",
+      "value": "3",
+      "community": [{"community":"Foreigner"},{"community":"number of school and population"}]
+    },
+    {
+      "topic": "COVID-19 on twitter and attention in community",
+      "value": "4",
+      "community": [{"community":"number of hospital"}, {"community":"schools"}, {"community":"income"}, {"community":"COVID-19 cases in AU"}],
+      "timeRange":"period of day to day selection"
+    },
+    {
+      "topic": "People emotion",
+      "value": "5",
+      "community": [{"community":"psychological distress"}],
+      "timeRange":"period of day to day selection"
+    }
+  ]

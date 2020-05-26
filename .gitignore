@@ -2,6 +2,7 @@
 
 *.gz
 .DS_Store
+/**/*.swp
 
 #crawler/*.json
 crawler/.DS_Store
@@ -10,6 +11,8 @@ crawler/env/
 sentiment-analysis/test.csv
 
 ansible/config/GitHubKey.pem
+ansible/.dist/
+ansible/roles/create-instances/templates/.ansible-hosts.j2.swp
 
 backend/venv
 backend/flask
@@ -32,8 +35,6 @@ sentiment-analysis/*.html
 sentiment-analysis/*.csv
 sentiment-analysis/*.svg
 sentiment-analysis/.ipynb_checkpoints/
-
-*.jpg
 
 sentiment-analysis/compress.zip
 

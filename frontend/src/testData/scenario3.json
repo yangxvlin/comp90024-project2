@@ -1,0 +1,270 @@
+{
+    "barChart_city_foreigner": [
+        {
+            "data": [
+                {
+                    "x": "Greater_Adelaide",
+                    "y": 37.69130434782608
+                },
+                {
+                    "x": "Greater_Melbourne",
+                    "y": 40.39142857142857
+                },
+                {
+                    "x": "Greater_Brisbane",
+                    "y": 43.824999999999996
+                },
+                {
+                    "x": "Greater_Sydney",
+                    "y": 37.85555555555556
+                }
+            ],
+            "title": "Foreigner %"
+        }
+    ],
+    "education_level_per_100_axis_by_education_level_legend_by_lga": {
+        "multiBarChart_education_level_per_100_axis_by_education_level_legend_by_lga": [
+            {
+                "data": [
+                    {
+                        "x": "Greater_Adelaide",
+                        "y": 2.256521739130435
+                    },
+                    {
+                        "x": "Greater_Melbourne",
+                        "y": 2.6885714285714286
+                    },
+                    {
+                        "x": "Greater_Brisbane",
+                        "y": 1.4749999999999999
+                    },
+                    {
+                        "x": "Greater_Sydney",
+                        "y": 2.0777777777777775
+                    }
+                ],
+                "title": "Graduate Diploma, Graduate Certificate %"
+            },
+            {
+                "data": [
+                    {
+                        "x": "Greater_Adelaide",
+                        "y": 8.617391304347828
+                    },
+                    {
+                        "x": "Greater_Melbourne",
+                        "y": 9.517142857142854
+                    },
+                    {
+                        "x": "Greater_Brisbane",
+                        "y": 10.675
+                    },
+                    {
+                        "x": "Greater_Sydney",
+                        "y": 9.792592592592595
+                    }
+                ],
+                "title": "Inadequately Described, Not Stated %"
+            },
+            {
+                "data": [
+                    {
+                        "x": "Greater_Adelaide",
+                        "y": 8.886956521739132
+                    },
+                    {
+                        "x": "Greater_Melbourne",
+                        "y": 9.46857142857143
+                    },
+                    {
+                        "x": "Greater_Brisbane",
+                        "y": 8.6125
+                    },
+                    {
+                        "x": "Greater_Sydney",
+                        "y": 9.255555555555556
+                    }
+                ],
+                "title": "Advanced Diploma, Or Diploma  %"
+            },
+            {
+                "data": [
+                    {
+                        "x": "Greater_Adelaide",
+                        "y": 5.104347826086955
+                    },
+                    {
+                        "x": "Greater_Melbourne",
+                        "y": 6.1571428571428575
+                    },
+                    {
+                        "x": "Greater_Brisbane",
+                        "y": 2.6125000000000003
+                    },
+                    {
+                        "x": "Greater_Sydney",
+                        "y": 8.56666666666667
+                    }
+                ],
+                "title": "Postgraduate Degree %"
+            },
+            {
+                "data": [
+                    {
+                        "x": "Greater_Adelaide",
+                        "y": 16.156521739130437
+                    },
+                    {
+                        "x": "Greater_Melbourne",
+                        "y": 18.231428571428573
+                    },
+                    {
+                        "x": "Greater_Brisbane",
+                        "y": 10.362499999999999
+                    },
+                    {
+                        "x": "Greater_Sydney",
+                        "y": 21.407407407407412
+                    }
+                ],
+                "title": "Bachelor Degree %"
+            },
+            {
+                "data": [
+                    {
+                        "x": "Greater_Adelaide",
+                        "y": 59.330434782608684
+                    },
+                    {
+                        "x": "Greater_Melbourne",
+                        "y": 61.98285714285712
+                    },
+                    {
+                        "x": "Greater_Brisbane",
+                        "y": 56.28750000000001
+                    },
+                    {
+                        "x": "Greater_Sydney",
+                        "y": 65.45185185185186
+                    }
+                ],
+                "title": "Persons With Post School Qualification %"
+            },
+            {
+                "data": [
+                    {
+                        "x": "Greater_Adelaide",
+                        "y": 18.313043478260873
+                    },
+                    {
+                        "x": "Greater_Melbourne",
+                        "y": 15.928571428571432
+                    },
+                    {
+                        "x": "Greater_Brisbane",
+                        "y": 22.5625
+                    },
+                    {
+                        "x": "Greater_Sydney",
+                        "y": 14.34814814814815
+                    }
+                ],
+                "title": "Certificate %"
+            }
+        ]
+    },
+    "english_tweet_percentage": {
+        "lineChart": [
+            {
+                "data": [],
+                "title": "Greater_Adelaide"
+            },
+            {
+                "data": [
+                    {
+                        "name": "2020-2",
+                        "y": 0.9112676056338028
+                    }
+                ],
+                "title": "Greater_Melbourne"
+            },
+            {
+                "data": [
+                    {
+                        "name": "2020-2",
+                        "y": 0.8866995073891626
+                    }
+                ],
+                "title": "Greater_Brisbane"
+            },
+            {
+                "data": [
+                    {
+                        "name": "2020-2",
+                        "y": 0.8772473651580905
+                    }
+                ],
+                "title": "Greater_Sydney"
+            }
+        ]
+    },
+    "twitter_word_len_axis_by_lga_legend_by_len_type": {
+        "multiBarChart_twitter_word_len_axis_by_short_medium_long_legend_by_lga": [
+            {
+                "data": [],
+                "title": "Greater_Adelaide"
+            },
+            {
+                "data": [
+                    {
+                        "x": "long",
+                        "y": 4758
+                    },
+                    {
+                        "x": "medium",
+                        "y": 10279
+                    },
+                    {
+                        "x": "short",
+                        "y": 23566
+                    }
+                ],
+                "title": "Greater_Melbourne"
+            },
+            {
+                "data": [
+                    {
+                        "x": "long",
+                        "y": 2053
+                    },
+                    {
+                        "x": "medium",
+                        "y": 4465
+                    },
+                    {
+                        "x": "short",
+                        "y": 10310
+                    }
+                ],
+                "title": "Greater_Brisbane"
+            },
+            {
+                "data": [
+                    {
+                        "x": "long",
+                        "y": 5455
+                    },
+                    {
+                        "x": "medium",
+                        "y": 11723
+                    },
+                    {
+                        "x": "short",
+                        "y": 26785
+                    }
+                ],
+                "title": "Greater_Sydney"
+            }
+        ]
+    }
+}
