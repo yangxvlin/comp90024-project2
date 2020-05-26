@@ -1,11 +1,11 @@
 ---
-#- hosts: localhost
-#  gather_facts: true
-#
-#  roles:
-#    - role: add-NectarGroupKey
+- hosts: localhost
+  gather_facts: true
 
-- hosts: workers
+  roles:
+    - role: add-NectarGroupKey
+
+- hosts: instances
   vars_files:
     - host_vars/config.yaml
     - host_vars/deploy.yaml
