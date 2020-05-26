@@ -348,7 +348,7 @@ class Scenario3(Resource):
         line_data = {}
         line_data["title"] = "Foreigner %"
         line_data["data"] = []
-        for lga in CITY_GEO_POINTS.keys():
+        for lga in selected_lga_list:
             line_data["data"].append({"x": lga, "y": foreigner_data[lga]["percentage_foreigner"]})
         result["barChart_city_foreigner"].append(line_data)
 
@@ -585,7 +585,7 @@ class Scenario4(Resource):
         line_data = {}
         line_data["title"] = "GP service per person"
         line_data["data"] = []
-        for lga in CITY_GEO_POINTS.keys():
+        for lga in selected_lga_list:
             line_data["data"].append({"x": lga, "y": health_data[lga]["gpsrv_meas"]})
         result["barChart_gp_per_persion"].append(line_data)
 
@@ -593,7 +593,7 @@ class Scenario4(Resource):
         line_data = {}
         line_data["title"] = "Hospital service per person"
         line_data["data"] = []
-        for lga in CITY_GEO_POINTS.keys():
+        for lga in selected_lga_list:
             line_data["data"].append({"x": lga, "y": health_data[lga]["hs_meas"]})
         result["barChart_hospital_per_person"].append(line_data)
 
