@@ -161,7 +161,7 @@ export default class MainContainer extends React.Component {
                     </Dropdown>
 
                     <Nav.Item eventKey="2" icon={<Icon icon="group" />}>
-                      User Group
+                      About Us
                     </Nav.Item>
                   </Nav>
                 </Sidenav.Body>

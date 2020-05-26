@@ -128,7 +128,7 @@ export default class Scenario5 extends React.Component {
               bordered
               expanded
               header={
-                `${this.state.barChartData1.title}` + "'s emotion: log(count)"
+                `${this.state.barChartData1.title}`// + "'s emotion: log(count)"
               }
             >
               <div style={{ height: 400, width: 600 }} title="">
@@ -142,7 +142,7 @@ export default class Scenario5 extends React.Component {
               bordered
               expanded
               header={
-                `${this.state.word_cloud3.title}` + "'s emotion: log(count)"
+                `${this.state.word_cloud3.title}`// + "'s emotion: log(count)"
               }
             >
               <div style={{ height: 400, width: 600 }} title="111">
@@ -158,7 +158,7 @@ export default class Scenario5 extends React.Component {
               bordered
               expanded
               header={
-                `${this.state.word_cloud2.title}` + "'s emotion: log(count)"
+                `${this.state.word_cloud2.title}`// + "'s emotion: log(count)"
               }
             >
               <div style={{ height: 400, width: 600 }} title="111">
@@ -173,7 +173,7 @@ export default class Scenario5 extends React.Component {
               expanded
               word_cloud4
               header={
-                `${this.state.word_cloud3.title}` + "'s emotion: log(count)"
+                `${this.state.word_cloud3.title}`// + "'s emotion: log(count)"
               }
             >
               <div style={{ height: 400, width: 600 }} title="111">
