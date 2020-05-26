@@ -10,7 +10,6 @@ import argparse
 import sys
 
 from resources import app
-import scenarios
 
 
 if __name__ == '__main__':

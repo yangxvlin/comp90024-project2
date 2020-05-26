@@ -97,13 +97,11 @@ class Scenario1(Resource):
         :parameter: age_group 0-17
         :return:
         """
-        # parser = reqparse.RequestParser()
         lga_param = request.args.get('lga')
         age_group_param = request.args.get('age_group')
         weekday_param = request.args.get('weekday')
         daytime_start_param = request.args.get('daytime_start', type=int)
         daytime_end_param = request.args.get('daytime_end', type=int)
-        # args = parser.parse_args()
         selected_lga_list = lga_param.split(',')
         n_lga = len(selected_lga_list)
         selected_age_groups = age_group_param.split(',')
@@ -125,10 +123,8 @@ class Scenario1(Resource):
         result = {}
 
         twitter_count_by_city_by_hour_by_weekday = get_city_hour_day(3)
-        # print(twitter_count_by_city_by_hour_by_weekday)
         twitter_count_by_city_by_hour = {}
         for row in twitter_count_by_city_by_hour_by_weekday["rows"]:
-            # print(row)
             row_key = row["key"]
             row_lga = row_key[0]  # .replace(" ", "_")
             row_hour = row_key[1]
@@ -141,7 +137,6 @@ class Scenario1(Resource):
                 if row_hour not in twitter_count_by_city_by_hour[row_lga]:
                     twitter_count_by_city_by_hour[row_lga][row_hour] = 0
                 twitter_count_by_city_by_hour[row_lga][row_hour] += row_value
-        # print(twitter_count_by_city_by_hour)
 
         result["twitter_daily_time_line_chart"] = {"lineChart": []}
         for key in selected_lga_list:
@@ -233,7 +228,6 @@ class Scenario2(Resource):
                     data["subjectivity"].append(row_subjectivity)
                     data["geo"].append(row_city)
         df = pd.DataFrame(data=data)
-        print(df)
 
         generate(transform(df), "./templates/")
 
@@ -245,8 +239,8 @@ class Scenario2(Resource):
 
 
 api.add_resource(Scenario2, "/scenario2", endpoint='scenario2')
-#
-#
+
+
 # class Scenario2Get(Resource):
 #     def get(self):
 #         """
@@ -288,28 +282,18 @@ class Scenario3(Resource):
 
         year_start_param = request.args.get('year_start')
         month_start_param = request.args.get('month_start')
-        # day_start_param = request.args.get('day_start')
         year_end_param = request.args.get('year_end')
         month_end_param = request.args.get('month_end')
-        # day_end_param = request.args.get('day_end')
 
         date_start = datetime.datetime.strptime("01/{}/{}".format(month_start_param, year_start_param), '%d/%m/%Y')
         date_end = datetime.datetime.strptime("28/{}/{}".format(month_end_param, year_end_param), '%d/%m/%Y')
-
-        # year_start_integer = int(year_start_param)
-        # month_start_integer = int(month_start_param)
-        # year_end_integer = int(year_end_param)
-        # month_end_integer = int(month_end_param)
 
         result = {}
 
         # english twitter count
         total_tweets_by_city_year_month = get_city_year_month()
         total_tweets_by_city_year_month_rows_dict = {tuple(x["key"]): x["value"] for x in total_tweets_by_city_year_month["rows"]}
-        # total_tweets_by_city_year_month_rows_dict_json = {str(x["key"]): x["value"] for x in total_tweets_by_city_year_month["rows"]}
-        # result["total_tweets_by_city_year_month_rows_dict"] = total_tweets_by_city_year_month_rows_dict_json
         total_english_tweets_by_city_year_month = get_English_city_year_month()
-        # result["total_english_tweets_by_city_year_month"] = total_english_tweets_by_city_year_month
 
         result["english_tweet_percentage"] = {"lineChart": []}
         for key in selected_lga_list:
@@ -513,8 +497,6 @@ class Scenario4(Resource):
 
         result = {}
 
-        # population_data = read_aurin_result_data("/au/population-age/result-population.json")
-        # population_data_meta = read_aurin_result_data("/au/population-age/result-meta.json")
         income_data = read_aurin_result_data("/au/income/result-income.json")
         income_meta_data = read_aurin_result_data("/au/income/result-meta.json")
 
@@ -579,7 +561,6 @@ class Scenario4(Resource):
             result["income_axis_by_lga_selected_legend_by_selected_income_group"]["multiBarChart_income_by_lga_by_group"].append(line_data)
 
         health_data = read_aurin_result_data("/au/health/result-health.json")
-        health_meta_data = read_aurin_result_data("/au/health/result-meta.json")
 
         result["barChart_gp_per_persion"] = []
         line_data = {}
