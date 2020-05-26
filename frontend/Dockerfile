@@ -1,8 +1,6 @@
 FROM node:14.3.0
 
 
-ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
-ENV PATH /opt/conda/bin:$PATH
 ENV http_proxy http://wwwproxy.unimelb.edu.au:8000/
 ENV https_proxy http://wwwproxy.unimelb.edu.au:8000/
 ENV HTTP_PROXY http://wwwproxy.unimelb.edu.au:8000/
