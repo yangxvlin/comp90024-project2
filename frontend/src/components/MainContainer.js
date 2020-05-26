@@ -93,11 +93,14 @@ export default class MainContainer extends React.Component {
     this.state.diagramData = msg;
     console.log(this.state.diagramData);
     var urlm;
-    urlm = this.state.diagramData.split("?");
-    console.log(urlm[0]);
-    this.setState({ diagramData: urlm[0], url: msg });
-    this.forceUpdate();
-
+    if(this.state.diagramData === "" || this.state.diagramData === null){
+      alert("Please choose one senario for comparison");
+    }else{
+      urlm = this.state.diagramData.split("?");
+      console.log(urlm[0]);
+      this.setState({ diagramData: urlm[0], url: msg });
+      this.forceUpdate();
+    }
   };
 
   handleToggle() {
