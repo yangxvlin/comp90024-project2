@@ -15,6 +15,10 @@ COPY src src
 
 COPY public public
 
+COPY config config
+
+COPY scripts scripts
+
 COPY package.json package.json
 
 COPY ".env.local" ".env.local"
