@@ -25,20 +25,13 @@ export default class Scenario5 extends React.Component {
       muitiBarChartData1: muitiBarChartData1,
       muiltiLineChartData: muiltiLineChartData
     };
-
-    
    
-    //  this.fetchData();
   }
 
-
-  
 
   UNSAFE_componentWillUpdate(nextProps, nextState) {
     console.log(nextProps);
 
-    
-    // 只要 props.email 改变，就改变 state
     if (nextProps.data !== this.state.url) {
       this.setState({
         url: nextProps.data
@@ -56,7 +49,6 @@ export default class Scenario5 extends React.Component {
           return res.json();
         })
         .then(data => {
-          //   var data = scenario5;
           console.log(data);
           barChartData = data.barChart_psychological_distress_by_lga;
           barChartData1 = data.emotion_word_count_by_city;
@@ -72,8 +64,6 @@ export default class Scenario5 extends React.Component {
             word_cloud3: barChartData1.word_cloud[2],
             word_cloud4: barChartData1.word_cloud[3],
             muitiBarChartData: muitiBarChartData,
-            //    muitiBarChartData1: muitiBarChartData1,
-            //    muiltiLineChartData: muiltiLineChartData,
             isLoading: false
           });
           console.log(this.state.barChartData);
@@ -85,13 +75,11 @@ export default class Scenario5 extends React.Component {
               console.log("ok");
             } else {
               console.log("error");
-              //    alert("error");
             }
             console.log(res.json());
           },
           err => {
             console.log(err);
-            //   alert("error");
           }
         )
         .then(
@@ -100,13 +88,9 @@ export default class Scenario5 extends React.Component {
           },
           err => {
             console.log(err);
-            //    alert("error");
           }
         );
     }
-
-    
-
   }
 
   componentDidMount() {
@@ -123,7 +107,6 @@ export default class Scenario5 extends React.Component {
         return res.json();
       })
       .then(data => {
-        //   var data = scenario5;
         console.log(data);
         barChartData = data.barChart_psychological_distress_by_lga;
         barChartData1 = data.emotion_word_count_by_city;
@@ -139,8 +122,6 @@ export default class Scenario5 extends React.Component {
           word_cloud3: barChartData1.word_cloud[2],
           word_cloud4: barChartData1.word_cloud[3],
           muitiBarChartData: muitiBarChartData,
-          //    muitiBarChartData1: muitiBarChartData1,
-          //    muiltiLineChartData: muiltiLineChartData,
           isLoading: false
         });
         console.log(this.state.barChartData);
@@ -151,13 +132,11 @@ export default class Scenario5 extends React.Component {
             console.log("ok");
           } else {
             console.log("error");
-            //    alert("error");
           }
           console.log(res.json());
         },
         err => {
           console.log(err);
-          //   alert("error");
         }
       )
       .then(
@@ -166,7 +145,6 @@ export default class Scenario5 extends React.Component {
         },
         err => {
           console.log(err);
-          //    alert("error");
         }
       );
       

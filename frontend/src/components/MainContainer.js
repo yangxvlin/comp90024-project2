@@ -13,7 +13,7 @@ import Scenario2 from "./Scenario2";
 import scenario1 from "../testData/s1.json";
 import AboutUs from "../testData/aboutUs.jpg";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import {
   Icon,
@@ -135,18 +135,9 @@ export default class MainContainer extends React.Component {
                 expanded={expand}
                 defaultOpenKeys={["3"]}
                 appearance="default"
-                //   style={{ background: "black" }}
               >
                 <Sidenav.Body>
                   <Nav>
-                    {/*  <Nav.Item
-                      eventKey="1"
-                      active
-                      icon={<Icon icon="dashboard" />}
-                      href="/dashboard"
-                    >
-                      Dashboard
-                 </Nav.Item>*/}
                     <Dropdown
                       eventKey="3"
                       trigger="hover"
@@ -179,7 +170,6 @@ export default class MainContainer extends React.Component {
                       eventKey="2"
                       icon={<Icon icon="group" />}
                       onClick={() => this.setState({ diagramData: "aboutUs" })}
-                    //  href="/aboutus"
                     >
                       About Us
                     </Nav.Item>
@@ -192,43 +182,6 @@ export default class MainContainer extends React.Component {
             <Container>
               <Header></Header>
               <Content>
-                <Switch>
-                 
-                  <Route
-                    path={"/:url"}
-                    render={props => {
-                      //    return <Diagrams {...props} items={this.state.data}
-                      /*       console.log(this.state.diagramData);
-                      this.state.diagramData.split("?").map(list => {
-                        console.log(list);
-                        if (list === "scenario1")
-                         <Diagrams {...props} items={this.state.diagramData} />;
-                      else if (list === "scenario2")
-                         <Scenario2 {...props} items={this.state.diagramData} />;
-                      else if (list === "scenario3")
-                         <Scenario3 {...props} items={this.state.diagramData} />;
-                      else if (list === "scenario4")
-                         <Scenario4 {...props} items={this.state.diagramData} />;
-                      else if (list === "scenario5")
-                         <Scenario5 {...props} items={this.state.diagramData} />;
-                      else if (list === "s1")
-                         <Keplermap scenario="1" />;
-                      else if (list === "s4")
-                        return <Keplermap scenario="4" />;
-                      else if (list === "s4")
-                        return <img src={AboutUs} width="100%" height="100%" />;
-                      else if (list === "/")
-                        return <Keplermap scenario="0" />;
-                      else return <Keplermap scenario="0" />;
-                      });*/
-                    }}
-                  />
-
-            
-                 
-
-                </Switch>
-               
                 {this.state.diagramData == "scenario1" ? (
                   <Diagrams data={this.state.url} />
                 ) : null}

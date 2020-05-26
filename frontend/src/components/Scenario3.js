@@ -1,19 +1,11 @@
 import React from "react";
-//import CanvasJSReact from "../assets/canvasjs.react";
-//import LineChart from "./LineChart";
-import PieChart from "./PieChart";
-//import Paraluna from "./Paraluna";
-import scenario3 from "../testData/scenario3.json";
 import { Grid, Row, Col, Panel } from "rsuite";
-import MultiLines from "./MultiLines";
 import MultiBars from "./MultiBars";
 import BarChart from "./BarChart";
 
 export default class Scenario3 extends React.Component {
   constructor(props) {
     super(props);
-    //   console.log(this.props.match.params.url + this.props.location.search);
-    //   var url = this.props.match.params.url + this.props.location.search;
     var barChartData;
     var muitiBarChartData;
     var muitiBarChartData1;
@@ -27,8 +19,6 @@ export default class Scenario3 extends React.Component {
       muitiBarChartData1: muitiBarChartData1,
       muiltiLineChartData: muiltiLineChartData
     };
-
-    //  this.fetchData();
   }
 
   UNSAFE_componentWillUpdate(nextProps, nextState) {
@@ -49,7 +39,6 @@ export default class Scenario3 extends React.Component {
           return res.json();
         })
         .then(data => {
-          //   var data = scenario3;
           console.log(data);
           barChartData = data.barChart_city_foreigner;
           muitiBarChartData1 =
@@ -74,13 +63,11 @@ export default class Scenario3 extends React.Component {
               console.log("ok");
             } else {
               console.log("error");
-              //    alert("error")
             }
             console.log(res.json());
           },
           err => {
             console.log(err);
-            //   alert("error")
           }
         )
         .then(
@@ -89,7 +76,6 @@ export default class Scenario3 extends React.Component {
           },
           err => {
             console.log(err);
-            //   alert("error")
           }
         );
     }
@@ -110,7 +96,6 @@ export default class Scenario3 extends React.Component {
         return res.json();
       })
       .then(data => {
-        //   var data = scenario3;
         console.log(data);
         barChartData = data.barChart_city_foreigner;
         muitiBarChartData1 =
@@ -135,13 +120,11 @@ export default class Scenario3 extends React.Component {
             console.log("ok");
           } else {
             console.log("error");
-            //    alert("error")
           }
           console.log(res.json());
         },
         err => {
           console.log(err);
-          //   alert("error")
         }
       )
       .then(
@@ -150,7 +133,6 @@ export default class Scenario3 extends React.Component {
         },
         err => {
           console.log(err);
-          //   alert("error")
         }
       );
   }

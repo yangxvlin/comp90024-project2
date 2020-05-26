@@ -1,9 +1,5 @@
 import React from "react";
 import CanvasJSReact from "../assets/canvasjs.react";
-//import { Grid, Row, Col, Panel } from "rsuite";
-//import data from "../testData/data.json";
-
-//var CanvasJSReact = require('./canvasjs.react');
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
@@ -22,10 +18,8 @@ export default class MultiBars extends React.Component {
 
     
     var data = props.data;
- //   var showData = [];
     console.log(props.data.length);
     for (var i = 0; i < data.length; i++) {
-      //console.log(data[i].data.length);
       var dataPoints = [];
       for (var j = 0; j < data[i].data.length; j++) {
         dataPoints.push({
@@ -54,11 +48,8 @@ export default class MultiBars extends React.Component {
     
     if(nextProps.data !== this.state.data){
       var data = nextProps.data;
-    //  var nextShowData = [];
       this.state.showData = [];
-      //   console.log(nextProps.data.length);
          for (var i = 0; i < data.length; i++) {
-           //console.log(data[i].data.length);
            var dataPoints = [];
            for (var j = 0; j < data[i].data.length; j++) {
              dataPoints.push({
@@ -75,39 +66,11 @@ export default class MultiBars extends React.Component {
              dataPoints: dataPoints
            })
          }
-     //    this.forceUpdate();
 
     }
   }
 
-/*
-  componentDidMount() {
-    var data = this.state.data;
-    var chart = this.chart;
-    for (var i = 0; i < data.length; i++) {
-      console.log(data[i].data.length);
-      var dataPoints = [];
-      for (var j = 0; j < data[i].data.length; j++) {
-        dataPoints.push({
-          label: data[i].data[j].x,
-          y: parseInt(data[i].data[j].y)
-        });
-        console.log(dataPoints);
-      }
-      this.state.showData.push({
-        type: this.state.type,
-        name: data[i].title,
-        showInLegend: true,
-        xValueFormatString: "MMMM YYYY",
-        yValueFormatString: "$#,##0",
-        dataPoints: dataPoints
-      })
-      
-    }
-    console.log(this.state.showData);
-    chart.render();
-  }
-*/
+
   addSymbols(e) {
     var suffixes = ["", "K", "M", "B"];
     var order = Math.max(Math.floor(Math.log(e.value) / Math.log(1000)), 0);
@@ -147,34 +110,6 @@ export default class MultiBars extends React.Component {
         verticalAlign: "top"
       },
       data: this.state.showData
-      /*[
-
-        {
-          type: "line",
-          name: "Actual Sales",
-          showInLegend: true,
-          xValueFormatString: "MMMM YYYY",
-          yValueFormatString: "$#,##0",
-          dataPoints: dataPoints
-          
-        },
-        {
-          type: "line",
-          name: "Expected Sales",
-          showInLegend: true,
-          yValueFormatString: "$#,##0",
-          dataPoints: dataPoints
-        },
-        {
-          type: "line",
-          name: "Profit",
-          markerBorderColor: "white",
-          markerBorderThickness: 2,
-          showInLegend: true,
-          yValueFormatString: "$#,##0",
-          dataPoints: dataPoints
-        }
-      ]*/
     };
     return (
       <div>

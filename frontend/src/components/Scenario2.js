@@ -9,8 +9,6 @@ import { Grid, Row, Col, Panel } from "rsuite";
 export default class Scenario2 extends React.Component {
   constructor(props) {
     super(props);
- //   console.log(this.props.match.params.url + this.props.location.search);
- //   var url = this.props.match.params.url + this.props.location.search;
     var barChartData;
     var muitiBarChartData;
     var muiltiLineChartData;
@@ -26,14 +24,11 @@ export default class Scenario2 extends React.Component {
 
   }
   componentWillMount() {
-    // fetch the HTML fragment with a local API request
     fetch()
       .then(resp => {
-        // fetch returns a readable stream, so translate it into stringified HTML
         return resp.text();
       })
       .then(content => {
-        // dangerouslySetInnerHTML requires using an object with an `__html` key
         this.setState({
           __html: content
         });
@@ -58,9 +53,7 @@ export default class Scenario2 extends React.Component {
                   );
                 }}
               />
-              {
-                // <button onClick={()=>{window.open("http://172.26.131.223/scenario2_brisbane", "_blank")}}>Brisbane</button>
-              }
+             
             </Panel>
           </Col>
 

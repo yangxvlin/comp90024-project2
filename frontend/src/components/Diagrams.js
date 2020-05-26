@@ -1,8 +1,5 @@
 import React from "react";
-//import CanvasJSReact from "../assets/canvasjs.react";
-//import LineChart from "./LineChart";
 import PieChart from "./PieChart";
-//import Paraluna from "./Paraluna";
 import fetch from 'fetch-with-proxy';
 
 import { Grid, Row, Col, Panel } from "rsuite";
@@ -13,8 +10,6 @@ import BarChart from "./BarChart";
 export default class Diagrams extends React.Component {
   constructor(props) {
     super(props);
- //   console.log(this.props.match.params.url + this.props.location.search);
-  //  var url = this.props.match.params.url + this.props.location.search;
     var pieChartData;
     var barChartData;
     var muitiBarChartData;
@@ -31,7 +26,6 @@ export default class Diagrams extends React.Component {
       muiltiLineChartData: muiltiLineChartData
     };
 
-    //  this.fetchData();
   }
 
 
@@ -81,13 +75,11 @@ export default class Diagrams extends React.Component {
             
           } else {
             console.log("error");
-        //    alert("error")
           }
           console.log(res.json());
         },
         err => {
           console.log(err);
-       //   alert("error")
         }
       )
       .then(
@@ -96,7 +88,6 @@ export default class Diagrams extends React.Component {
         },
         err => {
           console.log(err);
-    //      alert("error")
         }
       );
     }
@@ -110,7 +101,6 @@ export default class Diagrams extends React.Component {
     var muitiBarChartData;
     var muitiBarChartData1;
     var muiltiLineChartData;
-  //  console.log(this.state.url);
     fetch(this.state.url)
       .then(function(res) {
         if (res.status >= 400) {
@@ -147,13 +137,11 @@ export default class Diagrams extends React.Component {
             
           } else {
             console.log("error");
-        //    alert("error")
           }
           console.log(res.json());
         },
         err => {
           console.log(err);
-       //   alert("error")
         }
       )
       .then(
@@ -162,7 +150,6 @@ export default class Diagrams extends React.Component {
         },
         err => {
           console.log(err);
-    //      alert("error")
         }
       );
   }

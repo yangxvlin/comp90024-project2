@@ -40,13 +40,11 @@ export default class Elements extends React.Component {
   handleUpdate() {
     if (this.state.community.length === 0) {
       setTimeout(() => {
-        //   this.setState({ community: topic[this.state.topicId].community });
       }, 1000);
     }
   }
 
   clickSubmit(e) {
-    //    e.preventDefault();
     var scena = this.state.scena;
     var lga = this.state.lga;
     var weekday = this.state.weekday;
@@ -108,8 +106,6 @@ export default class Elements extends React.Component {
     if (this.state.scena == "5") url = "scenario" + scena + "?&lga=" + lga;
 
     console.log(url);
-
-    //   this.props.handleEmail = scenario1;
     this.setState({
       url: url,
       data: scenario1
@@ -118,41 +114,7 @@ export default class Elements extends React.Component {
     // 触发回调 传递给父组件
     this.props.getChildrenMsg(url);
     this.forceUpdate();
-  //  this.props.getMsg(url);
-  //  console.log(this.state.scena);
-    /*
-    
-    fetch(
-      "http://172.26.132.122:5000/"+url
-    )
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-      //  this.props.getChildrenMsg(data);
-      })
-      .then(
-        res => {
-          if (res.ok) {
-            console.log("ok");
-          } else {
-            console.log("error");
-          }
-          console.log(res.json());
-        },
-        err => {
-          console.log(err);
-        }
-      )
-      .then(
-        data => {
-          console.log(data);
-        },
-        err => {
-          console.log(err);
-        }
-      );
-*/
-    // alert(e);
+
     if (this.state.visible) {
       // Alert隐藏
       this.setState({ visible: false });
@@ -160,7 +122,6 @@ export default class Elements extends React.Component {
       // Alert显示
       this.setState({ visible: true });
     }
-    //  return (render(<Diagrams data={this.state.url}/>));
   }
 
   handleChange(value) {
@@ -171,25 +132,12 @@ export default class Elements extends React.Component {
     });
   }
 
-  onChange(value, item, event) {
-    //  console.log(event + value + item.topic);
+  onChange(value) {
     this.setState({ topicId: parseInt(value) - 1 });
     this.setState({ value1: "--- Please choosing community here ---" });
-    //  this.setState({community: topic[parseInt(value)-1].community});
-    //   console.log(topic[parseInt(value)-1].community)
-    //   console.log(Object.keys(topic[parseInt(value)-1].community))
-    // console.log(Object.keys(topic))
+   
   }
 
-  onChoose(value, item, event) {
-    /*    console.log(event + value + item);
-    this.setState({
-        value1: item.community
-      });
-    console.log(item.community);
-   // this.state.value1 = item.community;
-    console.log(this.state.value1)*/
-  }
 
   render() {
     return (
@@ -286,7 +234,6 @@ export default class Elements extends React.Component {
                 defaultValue={0}
                 max={24}
                 min={0}
-                //  style={{ width: 150 }} }
               />
 
               <br />
@@ -304,7 +251,6 @@ export default class Elements extends React.Component {
                 defaultValue={0}
                 max={24}
                 min={0}
-                //  style={{ width: 150 }} }
               />
 
               <br />
@@ -321,7 +267,6 @@ export default class Elements extends React.Component {
                 defaultValue={0}
                 max={12}
                 min={1}
-                //  style={{ width: 150 }} }
               />
 
               <br />
@@ -338,7 +283,6 @@ export default class Elements extends React.Component {
               defaultValue={0}
               max={12}
               min={1}
-              //  style={{ width: 150 }} }
             />
           ) : null}
 
@@ -347,17 +291,10 @@ export default class Elements extends React.Component {
           <Button 
             appearance="primary"
             onClick={this.clickSubmit}
-            //href={"/comparison/"+`${this.state.url}`}>
-        //    href={"/" + `${this.state.url}`}
           >
             Submit
           </Button>
           </div>
-          
-
-        </div>
-        <div>{//this.state.visible ? <p>You can see me.</p> : null
-        }
         </div>
       </div>
     );

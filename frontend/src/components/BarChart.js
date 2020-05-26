@@ -1,10 +1,5 @@
 import React from "react";
 import CanvasJSReact from "../assets/canvasjs.react";
-//import { Grid, Row, Col, Panel } from "rsuite";
-//import data from "../testData/data.json";
-
-//var CanvasJSReact = require('./canvasjs.react');
-//var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 export default class BarChart extends React.Component {
@@ -30,9 +25,6 @@ export default class BarChart extends React.Component {
 
   UNSAFE_componentWillUpdate(nextProps, nextState) {
     console.log(nextProps);
-
-   // if (nextProps.data.data !== this.state.data) {
-     // var datas = [];
       var data = nextProps.data.data;
       console.log(data);
       this.state.title = nextProps.title;
@@ -46,8 +38,6 @@ export default class BarChart extends React.Component {
           y: data[i].y
         });
       }
-  //    console.log(this.state.showData);
-//    }
   }
 
   render() {
@@ -60,7 +50,6 @@ export default class BarChart extends React.Component {
       },
       data: [
         {
-          // Change type to "doughnut", "line", "splineArea", etc.
           type: "column",
           xValueFormatString: "##",
           yValueFormatString: "#,###",
