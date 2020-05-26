@@ -67,11 +67,13 @@ export default class Scenario5 extends React.Component {
             console.log("ok");
           } else {
             console.log("error");
+            alert("error");
           }
           console.log(res.json());
         },
         err => {
           console.log(err);
+          alert("error");
         }
       )
       .then(
@@ -80,6 +82,7 @@ export default class Scenario5 extends React.Component {
         },
         err => {
           console.log(err);
+          alert("error");
         }
       );
   }

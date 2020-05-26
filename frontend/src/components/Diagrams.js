@@ -66,13 +66,16 @@ export default class Diagrams extends React.Component {
         res => {
           if (res.ok) {
             console.log("ok");
+            
           } else {
             console.log("error");
+            alert("error")
           }
           console.log(res.json());
         },
         err => {
           console.log(err);
+          alert("error")
         }
       )
       .then(
@@ -81,6 +84,7 @@ export default class Diagrams extends React.Component {
         },
         err => {
           console.log(err);
+          alert("error")
         }
       );
   }
