@@ -302,7 +302,6 @@ class Scenario3(Resource):
         # month_end_integer = int(month_end_param)
 
         result = {}
-        result["request_url"] = str(request.url)
 
         # english twitter count
         total_tweets_by_city_year_month = get_city_year_month()
@@ -401,7 +400,7 @@ class Scenario3(Resource):
         return resp
 
 
-api.add_resource(Scenario3, "/comparison/scenario3", endpoint='scenario3')
+api.add_resource(Scenario3, "/scenario3", endpoint='scenario3')
 
 
 class EnglishTweetSample(Resource):
