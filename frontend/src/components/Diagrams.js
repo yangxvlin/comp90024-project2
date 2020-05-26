@@ -13,8 +13,8 @@ import BarChart from "./BarChart";
 export default class Diagrams extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.match.params.url + this.props.location.search);
-    var url = this.props.match.params.url + this.props.location.search;
+ //   console.log(this.props.match.params.url + this.props.location.search);
+  //  var url = this.props.match.params.url + this.props.location.search;
     var pieChartData;
     var barChartData;
     var muitiBarChartData;
@@ -23,7 +23,7 @@ export default class Diagrams extends React.Component {
 
     this.state = {
       isLoading: true,
-      url: url,
+      url: props.data,
       pieChartData: pieChartData,
       barChartData: barChartData,
       muitiBarChartData: muitiBarChartData,
@@ -41,14 +41,11 @@ export default class Diagrams extends React.Component {
     var muitiBarChartData1;
     var muiltiLineChartData;
   //  console.log(this.state.url);
-    fetch(""+this.state.url)
+    fetch(this.state.url)
       .then(function(res) {
         if (res.status >= 400) {
           alert("Bad response from server: " + res.status);
           throw new Error("Bad response from server");
-        }
-        if (res.status == 200) {
-          alert("Response OK but wrong Json format : " + res.status);
         }
         return res.json();
       })

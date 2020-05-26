@@ -15,6 +15,8 @@ export default class App extends React.Component {
       <Sidepanel/>
     </div>
     */
+
+
     );
   }
 }

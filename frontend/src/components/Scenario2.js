@@ -9,15 +9,15 @@ import { Grid, Row, Col, Panel } from "rsuite";
 export default class Scenario2 extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.match.params.url + this.props.location.search);
-    var url = this.props.match.params.url + this.props.location.search;
+ //   console.log(this.props.match.params.url + this.props.location.search);
+ //   var url = this.props.match.params.url + this.props.location.search;
     var barChartData;
     var muitiBarChartData;
     var muiltiLineChartData;
     console.log(great_brisbane);
     this.state = {
       isLoading: true,
-      url: url,
+   //   url: url,
       __html: "",
       barChartData: barChartData,
       muitiBarChartData: muitiBarChartData,

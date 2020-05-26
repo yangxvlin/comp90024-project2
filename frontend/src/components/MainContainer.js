@@ -87,8 +87,14 @@ export default class MainContainer extends React.Component {
 
   getChildrenMsg = msg => {
     console.log(msg);
-    this.setState({ diagramData: msg });
+
+    this.state.diagramData = msg;
     console.log(this.state.diagramData);
+    var urlm;
+    urlm = this.state.diagramData.split("?");
+    console.log(urlm[0]);
+    this.setState({ diagramData: urlm[0], url: msg });
+
     //   (<Diagrams {...props} items={this.state.data}/>)
     //
   };
@@ -147,10 +153,16 @@ export default class MainContainer extends React.Component {
                       icon={<Icon icon="magic" />}
                       placement="rightStart"
                     >
-                      <Dropdown.Item href="/s1">
+                      <Dropdown.Item
+                        onClick={() => this.setState({ diagramData: "s1" })}
+                      >
                         Twitter Daily Time
                       </Dropdown.Item>
-                      <Dropdown.Item href="/s4">Covid-19 Tweet</Dropdown.Item>
+                      <Dropdown.Item
+                        onClick={() => this.setState({ diagramData: "s4" })}
+                      >
+                        Covid-19 Tweet
+                      </Dropdown.Item>
                     </Dropdown>
                     <Dropdown
                       eventKey="4"
@@ -165,7 +177,8 @@ export default class MainContainer extends React.Component {
                     <Nav.Item
                       eventKey="2"
                       icon={<Icon icon="group" />}
-                      href="/aboutus"
+                      onClick={() => this.setState({ diagramData: "aboutUs" })}
+                    //  href="/aboutus"
                     >
                       About Us
                     </Nav.Item>
@@ -186,26 +199,29 @@ export default class MainContainer extends React.Component {
                     path={"/:url"}
                     render={props => {
                       //    return <Diagrams {...props} items={this.state.data}
-                      console.log(props);
-                      if (props.match.params.url === "scenario1")
-                        return <Diagrams {...props} items={this.state.data} />;
-                      else if (props.match.params.url === "scenario2")
-                        return <Scenario2 {...props} items={this.state.data} />;
-                      else if (props.match.params.url === "scenario3")
-                        return <Scenario3 {...props} items={this.state.data} />;
-                      else if (props.match.params.url === "scenario4")
-                        return <Scenario4 {...props} items={this.state.data} />;
-                      else if (props.match.params.url === "scenario5")
-                        return <Scenario5 {...props} items={this.state.data} />;
-                      else if (props.match.params.url === "s1")
-                        return <Keplermap scenario="1" />;
-                      else if (props.match.params.url === "s4")
+                      /*       console.log(this.state.diagramData);
+                      this.state.diagramData.split("?").map(list => {
+                        console.log(list);
+                        if (list === "scenario1")
+                         <Diagrams {...props} items={this.state.diagramData} />;
+                      else if (list === "scenario2")
+                         <Scenario2 {...props} items={this.state.diagramData} />;
+                      else if (list === "scenario3")
+                         <Scenario3 {...props} items={this.state.diagramData} />;
+                      else if (list === "scenario4")
+                         <Scenario4 {...props} items={this.state.diagramData} />;
+                      else if (list === "scenario5")
+                         <Scenario5 {...props} items={this.state.diagramData} />;
+                      else if (list === "s1")
+                         <Keplermap scenario="1" />;
+                      else if (list === "s4")
                         return <Keplermap scenario="4" />;
-                      else if (props.match.params.url === "s4")
+                      else if (list === "s4")
                         return <img src={AboutUs} width="100%" height="100%" />;
-                      else if (props.match.params.url === "/")
+                      else if (list === "/")
                         return <Keplermap scenario="0" />;
                       else return <Keplermap scenario="0" />;
+                      });*/
                     }}
                   />
 
@@ -227,6 +243,27 @@ export default class MainContainer extends React.Component {
                     <Keplermap scenario="0" />
                   </Route>
                 </Switch>
+                {this.state.diagramData == "scenario1" ? (
+                  <Diagrams data={this.state.url} />
+                ) : null}
+                {this.state.diagramData == "scenario2" ? (
+                  <Scenario2 data={this.state.url} />
+                ) : null}
+                {this.state.diagramData == "scenario3" ? (
+                  <Scenario3 data={this.state.url} />
+                ) : null}
+                {this.state.diagramData == "scenario4" ? (
+                  <Scenario4 data={this.state.url} />
+                ) : null}
+                {this.state.diagramData == "scenario5" ? (
+                    <Scenario5 data={this.state.url} />
+                ) : null}
+                {this.state.diagramData == "s1" ? (
+                  <Keplermap scenario="1" />
+                ) : null}
+                {this.state.diagramData == "s4" ? (
+                  <Keplermap scenario="4" />
+                ) : null}
               </Content>
             </Container>
           </Container>

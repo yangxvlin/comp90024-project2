@@ -12,8 +12,8 @@ import BarChart from "./BarChart";
 export default class Scenario3 extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.match.params.url + this.props.location.search);
-    var url = this.props.match.params.url + this.props.location.search;
+ //   console.log(this.props.match.params.url + this.props.location.search);
+ //   var url = this.props.match.params.url + this.props.location.search;
     var barChartData;
     var muitiBarChartData;
     var muitiBarChartData1;
@@ -21,7 +21,7 @@ export default class Scenario3 extends React.Component {
 
     this.state = {
       isLoading: true,
-      url: url,
+      url: props.data,
       barChartData: barChartData,
       muitiBarChartData: muitiBarChartData,
       muitiBarChartData1: muitiBarChartData1,
@@ -37,19 +37,14 @@ export default class Scenario3 extends React.Component {
     var muitiBarChartData1;
     var muiltiLineChartData;
     var test = this.state.url;
-    fetch("http://172.26.131.223/" + this.state.url) //http://172.26.131.223/ "scenario3?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney&year_start=2020&month_start=2&year_end=2020&month_end=5")//)
-      .then(
-        function(res) {
-          if (res.status >= 400) {
-            alert("Bad response from server: " + res.status);
-            throw new Error("Bad response from server");
-          }
-          if (res.status == 200) {
-            alert("Response OK but wrong Json format : " + res.status);
-          }
-          return res.json();
-        }
-      )
+    fetch(this.state.url)
+    .then(function(res) {
+      if (res.status >= 400) {
+        alert("Bad response from server: " + res.status);
+        throw new Error("Bad response from server");
+      }
+      return res.json();
+    })
       .then(data => {
         //   var data = scenario3;
         console.log(data);

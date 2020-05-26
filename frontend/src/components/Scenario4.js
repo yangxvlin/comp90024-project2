@@ -12,8 +12,8 @@ import BarChart from "./BarChart";
 export default class Scenario4 extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.match.params.url + this.props.location.search);
-    var url = this.props.match.params.url + this.props.location.search;
+  //  console.log(this.props.match.params.url + this.props.location.search);
+ //   var url = this.props.match.params.url + this.props.location.search;
     var barChartData;
     var barChartData1;
     var muitiBarChartData;
@@ -23,7 +23,7 @@ export default class Scenario4 extends React.Component {
 
     this.state = {
       isLoading: true,
-      url: url,
+      url: props.data,
       barChartData: barChartData,
       barChartData1: barChartData1,
       muitiBarChartData: muitiBarChartData,
@@ -42,14 +42,11 @@ export default class Scenario4 extends React.Component {
     var muitiBarChartData1;
     var muiltiLineChartData;
     var muiltiLineChartData1;
-   fetch(""+this.state.url)//+ "scenario4?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney&income=0,3,7,8,9,12,13,15&year_start=2020&month_start=2&day_start=1&year_end=2020&month_end=5&day_end=10")//this.state.url)
+   fetch(this.state.url)//+ "scenario4?lga=Greater_Adelaide,Greater_Melbourne,Greater_Brisbane,Greater_Sydney&income=0,3,7,8,9,12,13,15&year_start=2020&month_start=2&day_start=1&year_end=2020&month_end=5&day_end=10")//this.state.url)
       .then(function(res) {
         if (res.status >= 400) {
           alert("Bad response from server: " + res.status);
           throw new Error("Bad response from server");
-        }
-        if (res.status == 200) {
-          alert("Response OK but wrong Json format : " + res.status);
         }
         return res.json();
       })

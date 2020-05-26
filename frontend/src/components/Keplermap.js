@@ -13,6 +13,7 @@ import KeplerGlSchema from "kepler.gl/schemas";
 
 import animationS1 from "../testData/animationS1.json";
 import animationS5 from "../testData/animationS5.json";
+import render from "dom-serializer";
 
 const mapToLoad = KeplerGlSchema.load(covid19);
 const reducers = combineReducers({

@@ -4,11 +4,12 @@ import { Grid, Row, Col, Panel } from "rsuite";
 import MultiBars from "./MultiBars";
 import BarChart from "./BarChart";
 
+
 export default class Scenario5 extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.match.params.url + this.props.location.search);
-    var url = this.props.match.params.url + this.props.location.search;
+    console.log(props);
+
     var barChartData;
     var barChartData1;
     var muitiBarChartData;
@@ -17,7 +18,7 @@ export default class Scenario5 extends React.Component {
 
     this.state = {
       isLoading: true,
-      url: url,
+      url: props.data,
       barChartData: barChartData,
       barChartData1: barChartData1,
       muitiBarChartData: muitiBarChartData,
@@ -25,21 +26,21 @@ export default class Scenario5 extends React.Component {
       muiltiLineChartData: muiltiLineChartData
     };
 
+    
+
     //  this.fetchData();
   }
 
-  componentWillMount() {
+  componentDidMount() {
     var barChartData;
     var barChartData1;
     var muitiBarChartData;
-    fetch('' + this.state.url)
+
+      fetch(this.state.url)
       .then(function(res) {
         if (res.status >= 400) {
           alert("Bad response from server: " + res.status);
           throw new Error("Bad response from server");
-        }
-        if (res.status == 200) {
-          alert("Response OK but wrong Json format : " + res.status);
         }
         return res.json();
       })
@@ -52,11 +53,7 @@ export default class Scenario5 extends React.Component {
           data.chart_emotion_word_count_by_city
             .multiBarChart_emotion_word_count_by_city;
         console.log(barChartData1.word_cloud);
-
-        //   muitiBarChartData1 =
-        //     data.income_axis_by_selected_income_group_legend_by_lga_selected
-        //      .multiBarChart_income_by_group_by_lga;
-        //   muiltiLineChartData = data.state_covid_count.lineChart;
+       
         this.setState({
           barChartData: barChartData,
           barChartData1: barChartData1.word_cloud,
@@ -94,6 +91,7 @@ export default class Scenario5 extends React.Component {
           //    alert("error");
         }
       );
+      
   }
 
   render() {

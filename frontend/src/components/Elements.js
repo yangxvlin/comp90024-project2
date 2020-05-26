@@ -117,7 +117,8 @@ export default class Elements extends React.Component {
     console.log(url);
     // 触发回调 传递给父组件
     this.props.getChildrenMsg(url);
-    console.log(this.state.url);
+  //  this.props.getMsg(url);
+  //  console.log(this.state.scena);
     /*
     
     fetch(
@@ -344,7 +345,7 @@ export default class Elements extends React.Component {
             appearance="primary"
             onClick={this.clickSubmit}
             //href={"/comparison/"+`${this.state.url}`}>
-            href={"/" + `${this.state.url}`}
+        //    href={"/" + `${this.state.url}`}
           >
             Submit
           </Button>
@@ -352,7 +353,9 @@ export default class Elements extends React.Component {
           
 
         </div>
-        <div>{this.state.visible ? <p>You can see me.</p> : null}</div>
+        <div>{//this.state.visible ? <p>You can see me.</p> : null
+        }
+        </div>
       </div>
     );
   }
