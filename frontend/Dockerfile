@@ -12,4 +12,5 @@ COPY package.json package.json
 
 RUN yarn
 
-CMD ["npm", "start"]
+
+CMD ["bash", "-c", "npm start"]
