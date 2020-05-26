@@ -375,6 +375,7 @@ class Scenario3(Resource):
             line_data["title"] = key
             line_data["data"] = []
 
+            line_data_y_total = 0
             for row in twitter_word_len["rows"]:
                 row_key = row["key"]
                 row_value = row["value"]
@@ -383,9 +384,13 @@ class Scenario3(Resource):
                 row_city = row_key[1]
 
                 if row_city == key:
+                    line_data_y_total += row_value
                     line_data["data"].append({"x": row_len_type.split('_')[0],
                                               "y": row_value
                                               })
+
+            for data in line_data["data"]:
+                data["y"] /= line_data_y_total
             result["twitter_word_len_axis_by_lga_legend_by_len_type"]["multiBarChart_twitter_word_len_axis_by_short_medium_long_legend_by_lga"].append(
                 line_data)
 
