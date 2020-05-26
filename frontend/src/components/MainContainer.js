@@ -9,6 +9,7 @@ import Scenario4 from "./Scenario4";
 import Scenario3 from "./Scenario3";
 import Scenario2 from "./Scenario2";
 import scenario1 from "../testData/s1.json";
+import AboutUs from "../testData/aboutUs.jpg";
 
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
@@ -163,7 +164,7 @@ export default class MainContainer extends React.Component {
                       <Elements getChildrenMsg={this.getChildrenMsg} />
                     </Dropdown>
 
-                    <Nav.Item eventKey="2" icon={<Icon icon="group" />}>
+                    <Nav.Item eventKey="2" icon={<Icon icon="group" />} href="/aboutus">
                       About Us
                     </Nav.Item>
                   </Nav>
@@ -208,8 +209,10 @@ export default class MainContainer extends React.Component {
                   <Route path="/scenario1">
                     <Keplermap scenario="1" />
                   </Route>
-                  <Route path="/scenario2">
-                    <Keplermap scenario="2" />
+                  <Route path="/aboutus">
+                  <img src={AboutUs} width="100%"
+                height="100%"/>
+                    
                   </Route>
                   <Route path="/scenario3">
                     <Keplermap scenario="3" />
@@ -220,8 +223,8 @@ export default class MainContainer extends React.Component {
                   <Route path="/scenario5">
                     <Keplermap scenario="5" />
                   </Route>
-                  <Route path="/111">
-                    <Keplermap scenario="1" />
+                  <Route path="/">
+                    <Keplermap scenario="0" />
                   </Route>
                 </Switch>
               </Content>
