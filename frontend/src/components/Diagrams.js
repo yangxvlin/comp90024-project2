@@ -3,7 +3,7 @@ import React from "react";
 //import LineChart from "./LineChart";
 import PieChart from "./PieChart";
 //import Paraluna from "./Paraluna";
-import scenario1 from "../testData/s1.json";
+
 import { Grid, Row, Col, Panel } from "rsuite";
 import MultiLines from "./MultiLines";
 import MultiBars from "./MultiBars";
@@ -39,7 +39,7 @@ export default class Diagrams extends React.Component {
     var muitiBarChartData;
     var muitiBarChartData1;
     var muiltiLineChartData;
-    fetch("http://172.26.131.223/" + this.state.url)
+    fetch(process.env.WEBSITE + this.state.url)
       .then(res => res.json())
       .then(data => {
         console.log(data);
