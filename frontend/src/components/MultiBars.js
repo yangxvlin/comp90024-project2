@@ -48,6 +48,37 @@ export default class MultiBars extends React.Component {
     this.toggleDataSeries = this.toggleDataSeries.bind(this);
     this.addSymbols = this.addSymbols.bind(this);
   }
+  UNSAFE_componentWillUpdate(nextProps, nextState) {
+    console.log(nextProps);
+    
+    if(nextProps.data !== this.state.data){
+      var data = nextProps.data;
+    //  var nextShowData = [];
+      this.state.showData = [];
+      //   console.log(nextProps.data.length);
+         for (var i = 0; i < data.length; i++) {
+           //console.log(data[i].data.length);
+           var dataPoints = [];
+           for (var j = 0; j < data[i].data.length; j++) {
+             dataPoints.push({
+               label: data[i].data[j].x,
+               y: data[i].data[j].y
+             });
+           }
+           this.state.showData.push({
+             type: this.state.type,
+             name: data[i].title,
+             showInLegend: true,
+             xValueFormatString: "#",
+             yValueFormatString: "#,###,###",
+             dataPoints: dataPoints
+           })
+         }
+     //    this.forceUpdate();
+
+    }
+  }
+
 /*
   componentDidMount() {
     var data = this.state.data;

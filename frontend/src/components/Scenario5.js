@@ -27,8 +27,86 @@ export default class Scenario5 extends React.Component {
     };
 
     
-
+   
     //  this.fetchData();
+  }
+
+
+  
+
+  UNSAFE_componentWillUpdate(nextProps, nextState) {
+    console.log(nextProps);
+
+    
+    // 只要 props.email 改变，就改变 state
+    if (nextProps.data !== this.state.url) {
+      this.setState({
+        url: nextProps.data
+      });
+      var barChartData;
+      var barChartData1;
+      var muitiBarChartData;
+  
+        fetch(nextProps.data)
+        .then(function(res) {
+          if (res.status >= 400) {
+            alert("Bad response from server: " + res.status);
+            throw new Error("Bad response from server");
+          }
+          return res.json();
+        })
+        .then(data => {
+          //   var data = scenario5;
+          console.log(data);
+          barChartData = data.barChart_psychological_distress_by_lga;
+          barChartData1 = data.emotion_word_count_by_city;
+          muitiBarChartData =
+            data.chart_emotion_word_count_by_city
+              .multiBarChart_emotion_word_count_by_city;
+          console.log(barChartData1.word_cloud);
+         
+          this.setState({
+            barChartData: barChartData,
+            barChartData1: barChartData1.word_cloud,
+            word_cloud2: barChartData1.word_cloud[0],
+            word_cloud3: barChartData1.word_cloud[2],
+            word_cloud4: barChartData1.word_cloud[3],
+            muitiBarChartData: muitiBarChartData,
+            //    muitiBarChartData1: muitiBarChartData1,
+            //    muiltiLineChartData: muiltiLineChartData,
+            isLoading: false
+          });
+          console.log(this.state.barChartData);
+          this.forceUpdate();
+        })
+        .then(
+          res => {
+            if (res.ok) {
+              console.log("ok");
+            } else {
+              console.log("error");
+              //    alert("error");
+            }
+            console.log(res.json());
+          },
+          err => {
+            console.log(err);
+            //   alert("error");
+          }
+        )
+        .then(
+          data => {
+            console.log(data);
+          },
+          err => {
+            console.log(err);
+            //    alert("error");
+          }
+        );
+    }
+
+    
+
   }
 
   componentDidMount() {

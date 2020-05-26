@@ -117,6 +117,7 @@ export default class Elements extends React.Component {
     console.log(url);
     // 触发回调 传递给父组件
     this.props.getChildrenMsg(url);
+    this.forceUpdate();
   //  this.props.getMsg(url);
   //  console.log(this.state.scena);
     /*

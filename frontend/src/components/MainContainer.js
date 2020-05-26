@@ -2,6 +2,8 @@ import React from "react";
 import "rsuite/dist/styles/rsuite-default.css";
 
 import Keplermap from "./Keplermap";
+import Keplermap1 from "./Keplermap1";
+import KeplermapHome from "./KeplermapHome";
 import Elements from "./Elements";
 import Diagrams from "./Diagrams";
 import Scenario5 from "./Scenario5";
@@ -94,9 +96,8 @@ export default class MainContainer extends React.Component {
     urlm = this.state.diagramData.split("?");
     console.log(urlm[0]);
     this.setState({ diagramData: urlm[0], url: msg });
+    this.forceUpdate();
 
-    //   (<Diagrams {...props} items={this.state.data}/>)
-    //
   };
 
   handleToggle() {
@@ -243,6 +244,7 @@ export default class MainContainer extends React.Component {
                     <Keplermap scenario="0" />
                   </Route>
                 </Switch>
+               
                 {this.state.diagramData == "scenario1" ? (
                   <Diagrams data={this.state.url} />
                 ) : null}
@@ -262,7 +264,13 @@ export default class MainContainer extends React.Component {
                   <Keplermap scenario="1" />
                 ) : null}
                 {this.state.diagramData == "s4" ? (
-                  <Keplermap scenario="4" />
+                  <Keplermap1 scenario="4" />
+                ) : null}
+                {this.state.diagramData == "" ? (
+                  <KeplermapHome />
+                ) : null}
+                {this.state.diagramData == "aboutUs" ? (
+                  <img src={AboutUs} width="100%" height="100%" />
                 ) : null}
               </Content>
             </Container>
