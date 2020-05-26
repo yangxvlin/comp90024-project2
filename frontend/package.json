@@ -2,12 +2,13 @@
   "name": "comp90024-team3",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://yangxvlin.github.io/comp90024-project2",
+  "homepage": "https://Olivia0012.github.io/comp90024",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "bootstrap": "^4.4.1",
+    "fetch-with-proxy": "^1.1.0",
     "gh-pages": "^2.2.0",
     "http-to-curl": "^1.4.3",
     "kepler.gl": "^2.0.1",
@@ -35,7 +36,7 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "comp90024-project2"
   },
   "browserslist": {
     "production": [

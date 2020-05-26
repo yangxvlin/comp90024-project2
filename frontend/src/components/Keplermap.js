@@ -76,7 +76,7 @@ const data1 =  fetch('./testDate/convid19.json')
         }*/
         )
       );
-    } else if (data === "5") {
+    } else if (data === "4") {
       const map = KeplerGlSchema.load(animationS5);
       dispatch(addDataToMap(map));
     } else if (data === "1") {

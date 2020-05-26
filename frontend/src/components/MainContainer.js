@@ -78,7 +78,8 @@ export default class MainContainer extends React.Component {
     console.log(props);
     this.state = {
       expand: true,
-      diagramData: []
+      url:"",
+      diagramData: ""
     };
     this.handleToggle = this.handleToggle.bind(this);
   }
@@ -86,7 +87,9 @@ export default class MainContainer extends React.Component {
   getChildrenMsg = msg => {
     console.log(msg);
     this.setState({ diagramData: msg });
-    //   console.log(this.state.diagramData);
+     console.log(this.state.diagramData);
+//   (<Diagrams {...props} items={this.state.data}/>)
+     //
   };
 
   handleToggle() {
@@ -146,8 +149,8 @@ export default class MainContainer extends React.Component {
                       <Dropdown.Item href="/scenario1">
                         Twitter Daily Time
                       </Dropdown.Item>
-                      <Dropdown.Item href="/scenario5">
-                        People Emotion
+                      <Dropdown.Item href="/scenario4">
+                       Covid-19 Tweet
                       </Dropdown.Item>
                     </Dropdown>
                     <Dropdown
@@ -182,7 +185,7 @@ export default class MainContainer extends React.Component {
                     console.log(props)
                      if(props.match.params.url === "scenario1")
                         return <Diagrams {...props} items={this.state.data}/>
-                     else if(props.match.params.url === "scenario2")
+                     if(props.match.params.url === "scenario2")
                       return <Scenario2 {...props} items={this.state.data}/>
                         
                      if(props.match.params.url === "scenario3")
