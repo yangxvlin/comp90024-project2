@@ -2,6 +2,5 @@ hosts = ["{{ groups['database'][0] }}", "{{ groups['database'][1] }}", "{{ group
 port = "{{ couchdb_port }}"
 username = "{{ couchdb_user }}"
 password = "{{couchdb_pass}}"
-live_db_name = "{{couchdb_db_name}}"
 covid_db_name = "covid-19-tweets"
 all_tweets_db_name = "all-tweets"
