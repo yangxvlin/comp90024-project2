@@ -1,0 +1,13 @@
+version: '3'
+services:
+  backend:
+    build: .
+    image: comp90024-backend:latest
+    ports:
+      # port number on server that others can access: port number in container
+      - "80:5001"
+    volumes:
+      - .:/usr/backend
+    environment:
+      # port number that you want the flask to listen to
+      flask_port: 5001
