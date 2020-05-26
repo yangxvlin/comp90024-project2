@@ -1,0 +1,223 @@
+[
+    {
+        "level_1": [
+            {
+                "label": "Twitter Daily Time",
+                "value": 1
+            },
+            {
+                "label": "Twitter Popularity",
+                "value": 2
+            },
+            {
+                "label": "Twitter Language Usage",
+                "value": 3
+            },
+            {
+                "label": "COVID-19 on twitter and attention in community",
+                "value": 4
+            },
+            {
+                "label": "Emotion",
+                "value": 5
+            }
+        ]
+    },
+    {
+        "city": [
+            {
+                "label": "Greater_Adelaide",
+                "value": "Greater_Adelaide"
+            },
+            {
+                "label": "Greater_Melbourne",
+                "value": "Greater_Melbourne"
+            },
+            {
+                "label": "Greater_Brisbane",
+                "value": "Greater_Brisbane"
+            },
+            {
+                "label": "Greater_Sydney",
+                "value": "Greater_Sydney"
+            }
+        ]
+    },
+    {
+        "week": [
+            {
+                "label": "Mon",
+                "value": "1"
+            },
+            {
+                "label": "Tue",
+                "value": "2"
+            },
+            {
+                "label": "Wed",
+                "value": "3"
+            },
+            {
+                "label": "Thu",
+                "value": "4"
+            },
+            {
+                "label": "Fri",
+                "value": "5"
+            },
+            {
+                "label": "Sat",
+                "value": "6"
+            },
+            {
+                "label": "Sun",
+                "value": "7"
+            }
+        ]
+    },
+   
+    {
+        "age_group": [
+            {
+                "label": "0-4",
+                "value": "0"
+            },
+            {
+                "label": "5-9",
+                "value": "1"
+            },
+            {
+                "label": "10-14",
+                "value": "2"
+            },
+            {
+                "label": "15-19",
+                "value": "3"
+            },
+            {
+                "label": "20-24",
+                "value": "4"
+            },
+            {
+                "label": "25-29",
+                "value": "5"
+            },
+            {
+                "label": "30-34",
+                "value": "6"
+            },
+            {
+                "label": "35-39",
+                "value": "7"
+            },
+            {
+                "label": "40-44",
+                "value": "8"
+            },
+            {
+                "label": "45-49",
+                "value": "9"
+            },
+            {
+                "label": "50-54",
+                "value": "10"
+            },
+            {
+                "label": "55-59",
+                "value": "11"
+            },
+            {
+                "label": "60-64",
+                "value": "12"
+            },
+            {
+                "label": "65-69",
+                "value": "13"
+            },
+            {
+                "label": "70-74",
+                "value": "14"
+            },
+            {
+                "label": "75-79",
+                "value": "15"
+            },
+            {
+                "label": "80-84",
+                "value": "16"
+            },
+            {
+                "label": "85+",
+                "value": "17"
+            }
+        ]
+    },
+    {
+        "income": [
+            {
+                "value": "0",
+                "label": "$1-$149"
+            },
+            {
+                "value": "1",
+                "label": "$150-$299"
+            },
+            {
+                "value": "2",
+                "label": "$300-$399"
+            },
+            {
+                "value": "3",
+                "label": "$400-$499"
+            },
+            {
+                "value": "4",
+                "label": "$500-$649"
+            },
+            {
+                "value": "5",
+                "label": "$650-$799"
+            },
+            {
+                "value": "6",
+                "label": "$800-$999"
+            },
+            {
+                "value": "7",
+                "label": "$1000-$1249"
+            },
+            {
+                "value": "8",
+                "label": "$1250-$1499"
+            },
+            {
+                "value": "9",
+                "label": "$1500-$1749"
+            },
+            {
+                "value": "10",
+                "label": "$1750-$1999"
+            },
+            {
+                "value": "11",
+                "label": "$2000-$2499"
+            },
+            {
+                "value": "12",
+                "label": "$2500-$2999"
+            },
+            {
+                "value": "13",
+                "label": "$3000-$3499"
+            },
+            {
+                "value": "14",
+                "label": "$3500-$3999"
+            },
+            {
+                "value": "15",
+                "label": "$4000+"
+            }
+        ]
+    }
+]

@@ -1,0 +1,380 @@
+{
+  "meta": {
+    "_0_4_yrs_proj_count": {
+      "description": "The projected population of People aged 0-4 years for 2020, based on the 2012 estimated resident population count.", 
+      "title": "People aged 0-4 years count"
+    }, 
+    "_0_4_yrs_proj_percent": {
+      "description": "The projected population of People aged 0-4 years, as a percentage of the total projected population for 2020, based on the 2012 estimated resident population percent.", 
+      "title": "Projected population of People aged 0-4 years percent"
+    }, 
+    "_10_14_yrs_proj_count": {
+      "description": "The projected population of People aged 10-14 years for 2020, based on the 2012 estimated resident population count.", 
+      "title": "Projected population of People aged 10-14 years count"
+    }, 
+    "_10_14_yrs_proj_percent": {
+      "description": "The projected population of People aged 10-14 years, as a percentage of the total projected population for 2020, based on the 2012 estimated resident population percent.", 
+      "title": "Projected population of People aged 10-14 years percent"
+    }, 
+    "_15_19_yrs_proj_count": {
+      "description": "The projected population of People aged 15-19 years for 2020, based on the 2012 estimated resident population count.", 
+      "title": "Projected population of People aged 15-19 years count"
+    }, 
+    "_15_19_yrs_proj_percent": {
+      "description": "The projected population of People aged 15-19 years, as a percentage of the total projected population for 2020, based on the 2012 estimated resident population percent.", 
+      "title": "Projected population of People aged 15-19 years percent"
+    }, 
+    "_20_24_yrs_proj_count": {
+      "description": "The projected population of People aged 20-24 years for 2020, based on the 2012 estimated resident population count.", 
+      "title": "Projected population of People aged 20-24 years count"
+    }, 
+    "_20_24_yrs_proj_percent": {
+      "description": "The projected population of People aged 20-24 years, as a percentage of the total projected population for 2020, based on the 2012 estimated resident population percent.", 
+      "title": "Projected population of People aged 20-24 years percent"
+    }, 
+    "_25_29_yrs_proj_count": {
+      "description": "The projected population of People aged 25-29 years for 2020, based on the 2012 estimated resident population count.", 
+      "title": "Projected population of People aged 25-29 years count"
+    }, 
+    "_25_29_yrs_proj_percent": {
+      "description": "The projected population of People aged 25-29 years, as a percentage of the total projected population for 2020, based on the 2012 estimated resident population percent.", 
+      "title": "Projected population of People aged 25-29 years percent"
+    }, 
+    "_30_34_yrs_proj_count": {
+      "description": "The projected population of People aged 30-34 years for 2020, based on the 2012 estimated resident population count.", 
+      "title": "Projected population of People aged 30-34 years count"
+    }, 
+    "_30_34_yrs_proj_percent": {
+      "description": "The projected population of People aged 30-34 years, as a percentage of the total projected population for 2020, based on the 2012 estimated resident population percent.", 
+      "title": "Projected population of People aged 30-34 years percent"
+    }, 
+    "_35_39_yrs_proj_count": {
+      "description": "The projected population of People aged 35-39 years for 2020, based on the 2012 estimated resident population count.", 
+      "title": "Projected population of People aged 35-39 years count"
+    }, 
+    "_35_39_yrs_proj_percent": {
+      "description": "The projected population of People aged 35-39 years, as a percentage of the total projected population for 2020, based on the 2012 estimated resident population percent.", 
+      "title": "Projected population of People aged 35-39 years percent"
+    }, 
+    "_40_44_yrs_proj_count": {
+      "description": "The projected population of People aged 40-44 years for 2020, based on the 2012 estimated resident population count.", 
+      "title": "Projected population of People aged 40-44 years count"
+    }, 
+    "_40_44_yrs_proj_percent": {
+      "description": "The projected population of People aged 40-44 years, as a percentage of the total projected population for 2020, based on the 2012 estimated resident population percent.", 
+      "title": "Projected population of People aged 40-44 years percent"
+    }, 
+    "_45_49_yrs_proj_count": {
+      "description": "The projected population of People aged 45-49 years for 2020, based on the 2012 estimated resident population count.", 
+      "title": "Projected population of People aged 45-49 years count"
+    }, 
+    "_45_49_yrs_proj_percent": {
+      "description": "The projected population of People aged 45-49 years, as a percentage of the total projected population for 2020, based on the 2012 estimated resident population percent.", 
+      "title": "Projected population of People aged 45-49 years percent"
+    }, 
+    "_50_54_yrs_proj_count": {
+      "description": "The projected population of People aged 50-54 years for 2020, based on the 2012 estimated resident population count.", 
+      "title": "Projected population of People aged 50-54 years count"
+    }, 
+    "_50_54_yrs_proj_percent": {
+      "description": "The projected population of People aged 50-54 years, as a percentage of the total projected population for 2020, based on the 2012 estimated resident population percent.", 
+      "title": "Projected population of People aged 50-54 years percent"
+    }, 
+    "_55_59_yrs_proj_count": {
+      "description": "The projected population of People aged 55-59 years for 2020, based on the 2012 estimated resident population count.", 
+      "title": "Projected population of People aged 55-59 years count"
+    }, 
+    "_55_59_yrs_proj_percent": {
+      "description": "The projected population of People aged 55-59 years, as a percentage of the total projected population for 2020, based on the 2012 estimated resident population percent.", 
+      "title": "Projected population of People aged 55-59 years percent"
+    }, 
+    "_5_9_yrs_proj_count": {
+      "description": "The projected population of People aged 5-9 years for 2020, based on the 2012 estimated resident population count.", 
+      "title": "Projected population of People aged 5-9 years count"
+    }, 
+    "_5_9_yrs_proj_percent": {
+      "description": "The projected population of People aged 5-9 years, as a percentage of the total projected population for 2020, based on the 2012 estimated resident population percent.", 
+      "title": "Projected population of People aged 5-9 years percent"
+    }, 
+    "_60_64_yrs_proj_count": {
+      "description": "The projected population of People aged 60-64 years for 2020, based on the 2012 estimated resident population count.", 
+      "title": "Projected population of People aged 60-64 years count"
+    }, 
+    "_60_64_yrs_proj_percent": {
+      "description": "The projected population of People aged 60-64 years, as a percentage of the total projected population for 2020, based on the 2012 estimated resident population percent.", 
+      "title": "Projected population of People aged 60-64 years percent"
+    }, 
+    "_65_69_yrs_proj_count": {
+      "description": "The projected population of People aged 65-69 years for 2020, based on the 2012 estimated resident population count.", 
+      "title": "Projected population of People aged 65-69 years count"
+    }, 
+    "_65_69_yrs_proj_percent": {
+      "description": "The projected population of People aged 65-69 years, as a percentage of the total projected population for 2020, based on the 2012 estimated resident population percent.", 
+      "title": "Projected population of People aged 65-69 years percent"
+    }, 
+    "_70_74_yrs_proj_count": {
+      "description": "The projected population of People aged 70-74 years for 2020, based on the 2012 estimated resident population count.", 
+      "title": "Projected population of People aged 70-74 years count"
+    }, 
+    "_70_74_yrs_proj_percent": {
+      "description": "The projected population of People aged 70-74 years, as a percentage of the total projected population for 2020, based on the 2012 estimated resident population percent.", 
+      "title": "Projected population of People aged 70-74 years percent"
+    }, 
+    "_75_79_yrs_proj_count": {
+      "description": "The projected population of People aged 75-79 years for 2020, based on the 2012 estimated resident population count.", 
+      "title": "Projected population of People aged 75-79 years count"
+    }, 
+    "_75_79_yrs_proj_percent": {
+      "description": "The projected population of People aged 75-79 years, as a percentage of the total projected population for 2020, based on the 2012 estimated resident population percent.", 
+      "title": "Projected population of People aged 75-79 years percent"
+    }, 
+    "_80_84_yrs_proj_count": {
+      "description": "The projected population of People aged 80-84 years for 2020, based on the 2012 estimated resident population count.", 
+      "title": "Projected population of People aged 80-84 years count"
+    }, 
+    "_80_84_yrs_proj_percent": {
+      "description": "The projected population of People aged 80-84 years, as a percentage of the total projected population for 2020, based on the 2012 estimated resident population percent.", 
+      "title": "Projected population of People aged 80-84 years percent"
+    }, 
+    "_85_yrs_over_proj_count": {
+      "description": "The projected population of People aged 85 years and over for 2020, based on the 2012 estimated resident population count.", 
+      "title": "Projected population of People aged 85 years and over count"
+    }, 
+    "_85_yrs_over_proj_percent": {
+      "description": "The projected population of People aged 85 years and over, as a percentage of the total projected population for 2020, based on the 2012 estimated resident population percent.", 
+      "title": "Projected population of People aged 85 years and over percent"
+    }, 
+    "lga_name": {
+      "description": "Local Government Area Name (2011).", 
+      "title": "Local Government Area Name"
+    }, 
+    "tot_proj_pop_denom": {
+      "description": "The total projected population for 2020, based on the 2012 estimated resident population denominator.", 
+      "title": "Total Projected population denominator "
+    }
+  }, 
+  "selected_age_group_count_by_lga": {
+    "_0_4_yrs_proj_count": {
+      "Adelaide": 84933, 
+      "Brisbane": 180285, 
+      "Melbourne": 329736, 
+      "Sydney": 359381
+    }, 
+    "_10_14_yrs_proj_count": {
+      "Adelaide": 82637, 
+      "Brisbane": 166862, 
+      "Melbourne": 290768, 
+      "Sydney": 314894
+    }, 
+    "_5_9_yrs_proj_count": {
+      "Adelaide": 85762, 
+      "Brisbane": 174358, 
+      "Melbourne": 314129, 
+      "Sydney": 338924
+    }, 
+    "_85_yrs_over_proj_count": {
+      "Adelaide": 35745, 
+      "Brisbane": 42528, 
+      "Melbourne": 101550, 
+      "Sydney": 102995
+    }
+  }, 
+  "selected_lga": {
+    "Greater Adelaide": {
+      "selected_lga_by_all_age_group_count": {
+        "_0_4_yrs_proj_count": 84933, 
+        "_10_14_yrs_proj_count": 82637, 
+        "_15_19_yrs_proj_count": 83409, 
+        "_20_24_yrs_proj_count": 95944, 
+        "_25_29_yrs_proj_count": 97085, 
+        "_30_34_yrs_proj_count": 100993, 
+        "_35_39_yrs_proj_count": 98950, 
+        "_40_44_yrs_proj_count": 88520, 
+        "_45_49_yrs_proj_count": 92442, 
+        "_50_54_yrs_proj_count": 86885, 
+        "_55_59_yrs_proj_count": 88805, 
+        "_5_9_yrs_proj_count": 85762, 
+        "_60_64_yrs_proj_count": 82614, 
+        "_65_69_yrs_proj_count": 73311, 
+        "_70_74_yrs_proj_count": 65383, 
+        "_75_79_yrs_proj_count": 46374, 
+        "_80_84_yrs_proj_count": 33180, 
+        "_85_yrs_over_proj_count": 35745
+      }, 
+      "selected_lga_by_selected_age_group_count": {
+        "_0_4_yrs_proj_count": 84933, 
+        "_10_14_yrs_proj_count": 82637, 
+        "_5_9_yrs_proj_count": 85762, 
+        "_85_yrs_over_proj_count": 35745
+      }, 
+      "total_population": 1422963
+    }, 
+    "Greater Brisbane": {
+      "selected_lga_by_all_age_group_count": {
+        "_0_4_yrs_proj_count": 180285, 
+        "_10_14_yrs_proj_count": 166862, 
+        "_15_19_yrs_proj_count": 165768, 
+        "_20_24_yrs_proj_count": 197094, 
+        "_25_29_yrs_proj_count": 206294, 
+        "_30_34_yrs_proj_count": 203503, 
+        "_35_39_yrs_proj_count": 196543, 
+        "_40_44_yrs_proj_count": 173368, 
+        "_45_49_yrs_proj_count": 176278, 
+        "_50_54_yrs_proj_count": 156880, 
+        "_55_59_yrs_proj_count": 147123, 
+        "_5_9_yrs_proj_count": 174358, 
+        "_60_64_yrs_proj_count": 129525, 
+        "_65_69_yrs_proj_count": 111685, 
+        "_70_74_yrs_proj_count": 96704, 
+        "_75_79_yrs_proj_count": 66503, 
+        "_80_84_yrs_proj_count": 42975, 
+        "_85_yrs_over_proj_count": 42528
+      }, 
+      "selected_lga_by_selected_age_group_count": {
+        "_0_4_yrs_proj_count": 180285, 
+        "_10_14_yrs_proj_count": 166862, 
+        "_5_9_yrs_proj_count": 174358, 
+        "_85_yrs_over_proj_count": 42528
+      }, 
+      "total_population": 2634274
+    }, 
+    "Greater Melbourne": {
+      "selected_lga_by_all_age_group_count": {
+        "_0_4_yrs_proj_count": 329736, 
+        "_10_14_yrs_proj_count": 290768, 
+        "_15_19_yrs_proj_count": 284622, 
+        "_20_24_yrs_proj_count": 349886, 
+        "_25_29_yrs_proj_count": 394053, 
+        "_30_34_yrs_proj_count": 418388, 
+        "_35_39_yrs_proj_count": 398673, 
+        "_40_44_yrs_proj_count": 341490, 
+        "_45_49_yrs_proj_count": 337205, 
+        "_50_54_yrs_proj_count": 309169, 
+        "_55_59_yrs_proj_count": 286015, 
+        "_5_9_yrs_proj_count": 314129, 
+        "_60_64_yrs_proj_count": 255237, 
+        "_65_69_yrs_proj_count": 216931, 
+        "_70_74_yrs_proj_count": 189331, 
+        "_75_79_yrs_proj_count": 137211, 
+        "_80_84_yrs_proj_count": 97637, 
+        "_85_yrs_over_proj_count": 101550
+      }, 
+      "selected_lga_by_selected_age_group_count": {
+        "_0_4_yrs_proj_count": 329736, 
+        "_10_14_yrs_proj_count": 290768, 
+        "_5_9_yrs_proj_count": 314129, 
+        "_85_yrs_over_proj_count": 101550
+      }, 
+      "total_population": 5052040
+    }, 
+    "Greater Sydney": {
+      "selected_lga_by_all_age_group_count": {
+        "_0_4_yrs_proj_count": 359381, 
+        "_10_14_yrs_proj_count": 314894, 
+        "_15_19_yrs_proj_count": 306549, 
+        "_20_24_yrs_proj_count": 366819, 
+        "_25_29_yrs_proj_count": 420218, 
+        "_30_34_yrs_proj_count": 432770, 
+        "_35_39_yrs_proj_count": 411634, 
+        "_40_44_yrs_proj_count": 360077, 
+        "_45_49_yrs_proj_count": 356562, 
+        "_50_54_yrs_proj_count": 317239, 
+        "_55_59_yrs_proj_count": 306818, 
+        "_5_9_yrs_proj_count": 338924, 
+        "_60_64_yrs_proj_count": 272434, 
+        "_65_69_yrs_proj_count": 230335, 
+        "_70_74_yrs_proj_count": 200735, 
+        "_75_79_yrs_proj_count": 143117, 
+        "_80_84_yrs_proj_count": 98386, 
+        "_85_yrs_over_proj_count": 102995
+      }, 
+      "selected_lga_by_selected_age_group_count": {
+        "_0_4_yrs_proj_count": 359381, 
+        "_10_14_yrs_proj_count": 314894, 
+        "_5_9_yrs_proj_count": 338924, 
+        "_85_yrs_over_proj_count": 102995
+      }, 
+      "total_population": 5339881
+    }
+  }, 
+  "twitter_daily_time": {
+    "Greater Brisbane": {
+      "0": 16, 
+      "1": 14, 
+      "2": 15, 
+      "3": 14, 
+      "4": 14, 
+      "5": 16, 
+      "6": 25, 
+      "7": 16, 
+      "8": 19, 
+      "9": 14, 
+      "10": 25, 
+      "11": 16, 
+      "12": 13, 
+      "13": 11, 
+      "14": 6, 
+      "15": 1, 
+      "16": 1, 
+      "17": 1, 
+      "18": 2, 
+      "19": 4, 
+      "20": 16, 
+      "21": 11, 
+      "22": 11, 
+      "23": 13
+    }, 
+    "Greater Melbourne": {
+      "0": 21, 
+      "1": 27, 
+      "2": 24, 
+      "3": 28, 
+      "4": 36, 
+      "5": 34, 
+      "6": 41, 
+      "7": 52, 
+      "8": 66, 
+      "9": 58, 
+      "10": 62, 
+      "11": 44, 
+      "12": 26, 
+      "13": 14, 
+      "14": 7, 
+      "15": 3, 
+      "16": 2, 
+      "17": 3, 
+      "18": 7, 
+      "19": 17, 
+      "20": 34, 
+      "21": 34, 
+      "22": 33, 
+      "23": 36
+    }, 
+    "Greater Sydney": {
+      "0": 34, 
+      "1": 37, 
+      "2": 35, 
+      "3": 38, 
+      "4": 47, 
+      "5": 40, 
+      "6": 56, 
+      "7": 58, 
+      "8": 65, 
+      "9": 63, 
+      "10": 63, 
+      "11": 46, 
+      "12": 35, 
+      "13": 13, 
+      "14": 7, 
+      "15": 4, 
+      "16": 4, 
+      "17": 3, 
+      "18": 6, 
+      "19": 12, 
+      "20": 34, 
+      "21": 32, 
+      "22": 34, 
+      "23": 35
+    }
+  }
+}
