@@ -36,3 +36,7 @@ sentiment-analysis/.ipynb_checkpoints/
 *.jpg
 
 sentiment-analysis/compress.zip
+
+*.ipynb
+config_*.json
+*.zip
