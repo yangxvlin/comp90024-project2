@@ -27,7 +27,7 @@
   args:
     chdir: '{{ remote_working_directory }}'
 
-- name: Remove GitHubKey
-  file:
-    path: /home/ubuntu/.ssh/GitHubKey
-    state: absent
+#- name: Remove GitHubKey
+#  file:
+#    path: /home/ubuntu/.ssh/GitHubKey
+#    state: absent

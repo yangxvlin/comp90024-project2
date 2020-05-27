@@ -1,4 +1,4 @@
-- name: generate frontend configuration of couchdb
+- name: generate frontend configuration of backend
   become:
     yes
   template:
