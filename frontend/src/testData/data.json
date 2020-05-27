@@ -1,0 +1,251 @@
+{
+  "pieChart": [
+    {
+      "title" : "Age Group 0-4",
+      "Adelaide": 84933, 
+      "Brisbane": 180285, 
+      "Melbourne": 329736, 
+      "Sydney": 359381,
+      "Sum" : 0
+    },
+    {
+      "title" : "Age Group 5-9",
+      "Adelaide": 85762, 
+      "Brisbane": 174358, 
+      "Melbourne": 314129, 
+      "Sydney": 338924
+    },
+    {
+      "title" : "Age Group 10-14",
+      "Adelaide": 82637, 
+      "Brisbane": 166862, 
+      "Melbourne": 290768, 
+      "Sydney": 314894
+    }
+  ],
+  "pieChart1":
+    [
+        {"data":
+            [
+                {"name":"People_aged_0_to_4_years_count","y":84933},
+                {"name":"People_aged_5_to_9_years_count","y":85762},
+                {"name":"People_aged_10_to_14_years_count","y":82637},
+                {"name":"People_aged_85_years_and_over_count","y":35745}
+            ],
+        "title":"Greater_Adelaide"
+        },
+        {"data":
+          [
+              {"name":"People_aged_0_to_4_years_count","y":84933},
+              {"name":"People_aged_5_to_9_years_count","y":85762},
+              {"name":"People_aged_10_to_14_years_count","y":82637},
+              {"name":"People_aged_85_years_and_over_count","y":35745}
+          ],
+      "title":"Greater_Brisbane"
+      }
+    ],
+  "lineChart" :[
+    {
+      "title" : "Brisbane",
+      "data":[
+        {
+          "x" : 0,
+          "y" : 16
+        },
+        {
+          "x" : 1,
+          "y" : 14
+        },
+        {
+          "x" : 2,
+          "y" : 15
+        },
+        {
+          "x" : 3,
+          "y" : 14
+        },
+        {
+          "x" : 4,
+          "y" : 19
+        },
+        {
+          "x" : 5,
+          "y" : 14
+        },
+        {
+          "x" : 6,
+          "y" : 25
+        }
+      ]
+    },
+    {
+      "title" : "Melbourne",
+      "data":[
+        {
+          "x" : 0,
+          "y" : 11
+        },
+        {
+          "x" : 1,
+          "y" : 13
+        },
+        {
+          "x" : 2,
+          "y" : 17
+        },
+        {
+          "x" : 3,
+          "y" : 19
+        },
+        {
+          "x" : 4,
+          "y" : 22
+        },
+        {
+          "x" : 5,
+          "y" : 16
+        },
+        {
+          "x" : 6,
+          "y" : 22
+        }
+      ]
+    }, 
+    {
+      "title" : "Sydney",
+      "data":[
+        {
+          "x" : 0,
+          "y" : 33
+        },
+        {
+          "x" : 1,
+          "y" : 31
+        },
+        {
+          "x" : 2,
+          "y" : 22
+        },
+        {
+          "x" : 3,
+          "y" : 27
+        },
+        {
+          "x" : 4,
+          "y" : 29
+        },
+        {
+          "x" : 5,
+          "y" : 23
+        },
+        {
+          "x" : 6,
+          "y" : 14
+        }
+      ]
+  }
+  ],
+  "multiBarChart_age":[
+    {
+      "title" : "Brisbane",
+      "data":[
+        {
+          "x" : 0,
+          "y" : 16
+        },
+        {
+          "x" : 1,
+          "y" : 14
+        },
+        {
+          "x" : 2,
+          "y" : 15
+        },
+        {
+          "x" : 3,
+          "y" : 14
+        },
+        {
+          "x" : 4,
+          "y" : 19
+        },
+        {
+          "x" : 5,
+          "y" : 14
+        },
+        {
+          "x" : 6,
+          "y" : 25
+        }
+      ]
+    },
+    {
+      "title" : "Melbourne",
+      "data":[
+        {
+          "x" : 0,
+          "y" : 11
+        },
+        {
+          "x" : 1,
+          "y" : 13
+        },
+        {
+          "x" : 2,
+          "y" : 17
+        },
+        {
+          "x" : 3,
+          "y" : 19
+        },
+        {
+          "x" : 4,
+          "y" : 22
+        },
+        {
+          "x" : 5,
+          "y" : 16
+        },
+        {
+          "x" : 6,
+          "y" : 22
+        }
+      ]
+    }, 
+    {
+      "title" : "Sydney",
+      "data":[
+        {
+          "x" : 0,
+          "y" : 33
+        },
+        {
+          "x" : 1,
+          "y" : 31
+        },
+        {
+          "x" : 2,
+          "y" : 22
+        },
+        {
+          "x" : 3,
+          "y" : 27
+        },
+        {
+          "x" : 4,
+          "y" : 29
+        },
+        {
+          "x" : 5,
+          "y" : 23
+        },
+        {
+          "x" : 6,
+          "y" : 14
+        }
+      ]
+  }
+  ]
+
+}
+

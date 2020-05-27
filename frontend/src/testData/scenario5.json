@@ -1,0 +1,311 @@
+{
+    "emotion_word_count_by_city": {
+        "word_cloud": [
+            {
+                "title": "Greater_Adelaide",
+                "data": []
+            },
+            {
+                "title": "Greater_Melbourne",
+                "data": [
+                    {
+                        "text": "anger",
+                        "value": 373
+                    },
+                    {
+                        "text": "anticipation",
+                        "value": 560
+                    },
+                    {
+                        "text": "disgust",
+                        "value": 349
+                    },
+                    {
+                        "text": "fear",
+                        "value": 669
+                    },
+                    {
+                        "text": "joy",
+                        "value": 345
+                    },
+                    {
+                        "text": "negative",
+                        "value": 1144
+                    },
+                    {
+                        "text": "positive",
+                        "value": 1114
+                    },
+                    {
+                        "text": "sadness",
+                        "value": 470
+                    },
+                    {
+                        "text": "surprise",
+                        "value": 239
+                    },
+                    {
+                        "text": "trust",
+                        "value": 673
+                    }
+                ]
+            },
+            {
+                "title": "Greater_Brisbane",
+                "data": [
+                    {
+                        "name": "anger",
+                        "y": 166
+                    },
+                    {
+                        "name": "anticipation",
+                        "y": 237
+                    },
+                    {
+                        "name": "disgust",
+                        "y": 167
+                    },
+                    {
+                        "name": "fear",
+                        "y": 271
+                    },
+                    {
+                        "name": "joy",
+                        "y": 184
+                    },
+                    {
+                        "name": "negative",
+                        "y": 499
+                    },
+                    {
+                        "name": "positive",
+                        "y": 485
+                    },
+                    {
+                        "name": "sadness",
+                        "y": 214
+                    },
+                    {
+                        "name": "surprise",
+                        "y": 124
+                    },
+                    {
+                        "name": "trust",
+                        "y": 307
+                    }
+                ]
+            },
+            {
+                "title": "Greater_Sydney",
+                "data": [
+                    {
+                        "name": "anger",
+                        "y": 348
+                    },
+                    {
+                        "name": "anticipation",
+                        "y": 592
+                    },
+                    {
+                        "name": "disgust",
+                        "y": 342
+                    },
+                    {
+                        "name": "fear",
+                        "y": 694
+                    },
+                    {
+                        "name": "joy",
+                        "y": 355
+                    },
+                    {
+                        "name": "negative",
+                        "y": 1188
+                    },
+                    {
+                        "name": "positive",
+                        "y": 1148
+                    },
+                    {
+                        "name": "sadness",
+                        "y": 478
+                    },
+                    {
+                        "name": "surprise",
+                        "y": 256
+                    },
+                    {
+                        "name": "trust",
+                        "y": 705
+                    }
+                ]
+            }
+        ]
+    },
+    "chart_emotion_word_count_by_city": {
+        "multiBarChart_emotion_word_count_by_city": [
+            {
+                "title": "Greater_Adelaide",
+                "data": []
+            },
+            {
+                "title": "Greater_Melbourne",
+                "data": [
+                    {
+                        "name": "anger",
+                        "y": 373
+                    },
+                    {
+                        "name": "anticipation",
+                        "y": 560
+                    },
+                    {
+                        "name": "disgust",
+                        "y": 349
+                    },
+                    {
+                        "name": "fear",
+                        "y": 669
+                    },
+                    {
+                        "name": "joy",
+                        "y": 345
+                    },
+                    {
+                        "name": "negative",
+                        "y": 1144
+                    },
+                    {
+                        "name": "positive",
+                        "y": 1114
+                    },
+                    {
+                        "name": "sadness",
+                        "y": 470
+                    },
+                    {
+                        "name": "surprise",
+                        "y": 239
+                    },
+                    {
+                        "name": "trust",
+                        "y": 673
+                    }
+                ]
+            },
+            {
+                "title": "Greater_Brisbane",
+                "data": [
+                    {
+                        "name": "anger",
+                        "y": 166
+                    },
+                    {
+                        "name": "anticipation",
+                        "y": 237
+                    },
+                    {
+                        "name": "disgust",
+                        "y": 167
+                    },
+                    {
+                        "name": "fear",
+                        "y": 271
+                    },
+                    {
+                        "name": "joy",
+                        "y": 184
+                    },
+                    {
+                        "name": "negative",
+                        "y": 499
+                    },
+                    {
+                        "name": "positive",
+                        "y": 485
+                    },
+                    {
+                        "name": "sadness",
+                        "y": 214
+                    },
+                    {
+                        "name": "surprise",
+                        "y": 124
+                    },
+                    {
+                        "name": "trust",
+                        "y": 307
+                    }
+                ]
+            },
+            {
+                "title": "Greater_Sydney",
+                "data": [
+                    {
+                        "name": "anger",
+                        "y": 348
+                    },
+                    {
+                        "name": "anticipation",
+                        "y": 592
+                    },
+                    {
+                        "name": "disgust",
+                        "y": 342
+                    },
+                    {
+                        "name": "fear",
+                        "y": 694
+                    },
+                    {
+                        "name": "joy",
+                        "y": 355
+                    },
+                    {
+                        "name": "negative",
+                        "y": 1188
+                    },
+                    {
+                        "name": "positive",
+                        "y": 1148
+                    },
+                    {
+                        "name": "sadness",
+                        "y": 478
+                    },
+                    {
+                        "name": "surprise",
+                        "y": 256
+                    },
+                    {
+                        "name": "trust",
+                        "y": 705
+                    }
+                ]
+            }
+        ]
+    },
+    "barChart_psychological_distress_by_lga": [
+        {
+            "title": "People feel High psychological level stress %",
+            "data": [
+                {
+                    "x": "Greater_Adelaide",
+                    "y": 10.79545982527709
+                },
+                {
+                    "x": "Greater_Melbourne",
+                    "y": 11.120544245921717
+                },
+                {
+                    "x": "Greater_Brisbane",
+                    "y": 10.909391977081102
+                },
+                {
+                    "x": "Greater_Sydney",
+                    "y": 9.99366238630219
+                }
+            ]
+        }
+    ]
+}

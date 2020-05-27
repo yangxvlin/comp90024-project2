@@ -1,0 +1,19 @@
+[
+    {
+        "city": "Melbourne", 
+        "value": "Melbourne" 
+    }, 
+    {
+        "city": "Sydney", 
+        "value": "Sydney" 
+    },
+    {
+        "city": "Adelaide", 
+        "value": "Adelaide" 
+    }, 
+   
+    {
+        "city": "Brisbane",
+        "value": "Brisbane"
+    }
+]

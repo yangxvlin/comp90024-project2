@@ -1,0 +1,22 @@
+[
+    {
+      "community": "Twitter daily time",
+      "value": "1"
+    },
+    {
+      "community": "Twitter popularity",
+      "value": "2"
+    },
+    {
+      "community": "Twitter language usage",
+      "value": "3"
+    },
+    {
+      "community": "COVID-19 on twitter and attention in community",
+      "value": "4"
+    },
+    {
+      "community": "People emotion",
+      "value": "5"
+    }
+  ]

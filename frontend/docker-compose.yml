@@ -1,0 +1,7 @@
+version: '3'
+services:
+  frontend:
+    build: .
+    ports:
+      - "3456:3000"
+    stdin_open: true
