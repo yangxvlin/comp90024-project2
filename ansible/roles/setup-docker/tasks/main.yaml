@@ -1,51 +1,51 @@
 ---
-- name: Uninstall old versions of docker
-  tags: 'docker'
-  become: yes
-  apt:
-    name: ['docker', 'docker-engine', 'docker.io']
-    state: absent
-
-- name: Install dependencies for docker
-  tags: 'docker'
-  become: yes
-  apt:
-    name: ['apt-transport-https', 'ca-certificates', 'curl', 'python-setuptools', 'software-properties-common']
-    state: latest
-    install_recommends: no
-    update_cache: yes
-
-- name: Add Docker apt repository key
-  tags: 'docker'
-  become: yes
-  apt_key:
-    url: https://download.docker.com/linux/ubuntu/gpg
-    state: present
-
-- name: Add Docker apt repository and update apt cache
-  tags: 'docker'
-  become: yes
-  apt_repository:
-    repo: "deb https://download.docker.com/linux/{{ ansible_distribution|lower }} {{ ansible_distribution_release }} stable"
-    mode: '644'
-    update_cache: yes
-    state: present
-
-- name: Install docker
-  tags: 'docker'
-  become: yes
-  apt:
-    name: ['docker-ce']
-    state: latest
-    install_recommends: no
-    update_cache: yes
-
-- name: Install docker-compose
-  tags: 'docker'
-  become: yes
-  pip:
-    name: ['docker-compose']
-    state: latest
+#- name: Uninstall old versions of docker
+#  tags: 'docker'
+#  become: yes
+#  apt:
+#    name: ['docker', 'docker-engine', 'docker.io']
+#    state: absent
+#
+#- name: Install dependencies for docker
+#  tags: 'docker'
+#  become: yes
+#  apt:
+#    name: ['apt-transport-https', 'ca-certificates', 'curl', 'python-setuptools', 'software-properties-common']
+#    state: latest
+#    install_recommends: no
+#    update_cache: yes
+#
+#- name: Add Docker apt repository key
+#  tags: 'docker'
+#  become: yes
+#  apt_key:
+#    url: https://download.docker.com/linux/ubuntu/gpg
+#    state: present
+#
+#- name: Add Docker apt repository and update apt cache
+#  tags: 'docker'
+#  become: yes
+#  apt_repository:
+#    repo: "deb https://download.docker.com/linux/{{ ansible_distribution|lower }} {{ ansible_distribution_release }} stable"
+#    mode: '644'
+#    update_cache: yes
+#    state: present
+#
+#- name: Install docker
+#  tags: 'docker'
+#  become: yes
+#  apt:
+#    name: ['docker-ce']
+#    state: latest
+#    install_recommends: no
+#    update_cache: yes
+#
+#- name: Install docker-compose
+#  tags: 'docker'
+#  become: yes
+#  pip:
+#    name: ['docker-compose']
+#    state: latest
 
 - name: create proxy directory for docker
   tags: 'docker_proxy'

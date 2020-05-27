@@ -1,0 +1,18 @@
+- name: generate frontend configuration of backend
+  become:
+    yes
+  template:
+    src: webpackDevServer.config.js.j2
+    dest: '{{remote_working_directory}}/comp90024-project2/frontend/config/webpackDevServer.config.js'
+
+- name: Shut down previous server
+  become:
+    yes
+  shell: docker-compose down --rmi local
+  args:
+    chdir: /home/ubuntu/COMP90024/comp90024-project2/frontend
+
+- name: Start server
+  shell: docker-compose up -d --build
+  args:
+    chdir: /home/ubuntu/COMP90024/comp90024-project2/frontend

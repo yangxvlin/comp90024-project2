@@ -1,17 +1,20 @@
 ---
-- name: pip3 install requirements
-  command: pip3 install -r requirements.txt
-  args:
-    chdir: /home/ubuntu/COMP90024/backend
+- name: generate bacnkend configuration of couchdb
+  become:
+    yes
+  template:
+    src: couchDBSetting.py.j2
+    dest: '{{remote_working_directory}}/comp90024-project2/backend/couchDBSetting.py'
 
-- name: pip3 install flask
-  command: pip3 install flask
+- name: Shut down previous server
+  become:
+    yes
+  shell: docker-compose down --rmi local
   args:
-    chdir: /home/ubuntu/COMP90024/backend
+    chdir: /home/ubuntu/COMP90024/comp90024-project2/backend
 
 - name: Start server
-  shell: python3 backend.py -host "{{ inventory_hostname }}" -port 5000
+  shell: docker-compose up -d --build
   args:
-    chdir: /home/ubuntu/COMP90024/backend
-  async: 3600 # 2592000               # 60*60*24*30: 1 month
-  poll: 0
+    chdir: /home/ubuntu/COMP90024/comp90024-project2/backend
+

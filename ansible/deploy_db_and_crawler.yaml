@@ -1,0 +1,29 @@
+---
+- hosts: database
+  vars_files:
+    - host_vars/config.yaml
+  gather_facts: true
+  roles:
+    - role: deploy-couchdb
+
+- hosts: masternode
+  vars_files:
+    - host_vars/config.yaml
+  gather_facts: true
+  roles:
+    - role: deploy-couchdb-cluster
+
+ - hosts: crawler
+   vars_files:
+     - host_vars/config.yaml
+   gather_facts: true
+   roles:
+     - role: git-pull-source-repository
+
+- hosts: crawler
+  gather_facts: true
+  vars_files:
+    - host_vars/config.yaml
+#    - host_vars/deploy.yaml
+  roles:
+    - role: deploy-crawler
