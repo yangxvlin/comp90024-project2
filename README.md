@@ -35,6 +35,9 @@ COMP90024 - Cluster and Cloud Computing - 2020 S1 - Project 2
 ## Videos
 https://www.youtube.com/playlist?list=PL3rzNLhlw3lEjaleheqtzTwldK0IhOWBx
 
+## report
+- [report](./docs/CCC2020_Team3_Report.pdf)
+
 ## Repository Structure
 ```
 | /.github 
