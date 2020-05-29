@@ -94,7 +94,7 @@ export default class MainContainer extends React.Component {
     console.log(this.state.diagramData);
     var urlm;
     if(this.state.diagramData === "" || this.state.diagramData === null){
-      alert("Please choose one senario for comparison");
+      alert("Please choose one scenario for comparison");
     }else{
       urlm = this.state.diagramData.split("?");
       console.log(urlm[0]);
