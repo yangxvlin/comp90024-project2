@@ -4,7 +4,9 @@ ansible_user: ubuntu
 ansible_ssh_private_key_file: ~/.ssh/NectarGroupKey.pem
 ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
 remote_working_directory: /home/ubuntu/COMP90024
+remote_working_directory_big_data: /home/ubuntu/COMP90024/COMP90024
 repository_name: comp90024-project2
+git_repo: /home/ubuntu/COMP90024/comp90024-project2
 couchdb_image: ibmcom/couchdb3:latest
 couchdb_user: admin
 couchdb_pass: admin
@@ -13,3 +15,5 @@ couchdb_cookie: 'a192aeb9904e6590849337933b000c99'
 couchdb_uuid: 'a192aeb9904e6590849337933b001159'
 cluster_name: '_cluster_setup'
 couchdb_container_name: 'couchdb_'
+couchdb_port: 5984
+couchdb_db_name: "live-tweets"

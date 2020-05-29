@@ -1,1 +1,22 @@
 ---
+- name: generate crawler configuration of couchdb
+  become:
+    yes
+  template:
+    src: crawlerSetting.py.j2
+    dest: '{{remote_working_directory}}/comp90024-project2/crawler/crawlerSetting.py'
+#    force: yes
+
+- name: Shut down previous server
+  become:
+    yes
+  shell: docker-compose down --rmi local
+  args:
+    chdir: /home/ubuntu/COMP90024/comp90024-project2/crawler
+#
+- name: Start server
+  become:
+    yes
+  shell: docker-compose up  --build -d
+  args:
+    chdir: /home/ubuntu/COMP90024/comp90024-project2/crawler
