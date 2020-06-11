@@ -65,6 +65,11 @@ https://www.youtube.com/playlist?list=PL3rzNLhlw3lEjaleheqtzTwldK0IhOWBx
 
 ## Due: Wednesday 20th May (by 12 noon!).
 
+## results
+- 32/40
+- ```The report is pleasant to read but contains a few impressions; there are may attempted analysis of correlation of tweets with various socio-economic variables, but the statistical analysis is lacking and the charts are sometimes poorly chosen; no use of Docker Swarm, only HA/scalability is given by the CouchDB cluster; the homemade load-balancer is nice, but of little help with CouchDB views; redundant code in the MapReduce views; Python dependencies are tracked via requirements.txt; the application has many functionalities and nice animations but a bit unpolished.```
+- ![](./docs/17.jpg)
+
 ## The focus of this assignment
 1. harvest tweets from across the cities of Australia on the UniMelb Research Cloud
 2. and undertake a variety of social media data analytics scenarios that tell interesting stories of life in Australian cities
