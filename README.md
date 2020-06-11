@@ -69,6 +69,58 @@ https://www.youtube.com/playlist?list=PL3rzNLhlw3lEjaleheqtzTwldK0IhOWBx
 - 32/40
 - ```The report is pleasant to read but contains a few impressions; there are may attempted analysis of correlation of tweets with various socio-economic variables, but the statistical analysis is lacking and the charts are sometimes poorly chosen; no use of Docker Swarm, only HA/scalability is given by the CouchDB cluster; the homemade load-balancer is nice, but of little help with CouchDB views; redundant code in the MapReduce views; Python dependencies are tracked via requirements.txt; the application has many functionalities and nice animations but a bit unpolished.```
 - ![](./docs/17.jpg)
+- Then we ask Richard for our marking detail
+    - ```
+        发件人: Richard Sinnott
+        发送时间: 2020年6月11日 15:28
+        收件人: Xulin
+        主题: Re: COMP90024 Assignment 2 mark query Group 03
+        
+        I can remark if you want, but I note that if the score goes down then you can’t complain, e.g. say you wanted the previous score etc.
+        
+        Shall I proceed?
+        
+        >>>comments below…
+        
+        R.
+        
+        --
+        Prof. Richard O. Sinnott
+        Professor of Applied Computing Systems
+        School of Computing and Information Systems, The University of Melbourne
+        333 Exhibition Street (lvl 2), Melbourne, Vic 3010, Australia
+        Tel: +61-(0)435-964-844 Email: rsinnott@unimelb.edu.au
+        Web: www.eresearch.unimelb.edu.au
+        
+        
+        
+        From: Xulin <xuliny@student.unimelb.edu.au>
+        Date: Thursday, 11 June 2020 at 2:04 pm
+        To: Richard Sinnott <rsinnott@unimelb.edu.au>
+        Subject: COMP90024 Assignment 2 mark query Group 03
+        
+        Hi Richard,
+        We have receive the mark and the feedback of the assignment 2. We get 32/40 with the feedback: 
+        “The report is pleasant to read but contains a few impressions; there are may attempted analysis of correlation of tweets with various socio-economic variables, but the statistical analysis is lacking and the charts are sometimes poorly chosen; no use of Docker Swarm, only HA/scalability is given by the CouchDB cluster; the homemade load-balancer is nice, but of little help with CouchDB views; redundant code in the MapReduce views; Python dependencies are tracked via requirements.txt; the application has many functionalities and nice animations but a bit unpolished.”
+         
+        I have several questions:
+        1.	“no use of Docker Swarm, only HA/scalability is given by the CouchDB cluster;” As noted by the specification, the use of docker technology is not mandatory. So why we lose marks here for not using docker?
+        
+        >>>pretty sure you didn’t lose marks for this – it was more of a comment
+        
+        2.	“Python dependencies are tracked via requirements.txt;” I think it is ok to track python dependencies in requirements.txt. What’s more, in lecture it seems that we haven’t discuss such technology. And track dependencies in txt is quite comfortable in my perspective (This is the first time I track dependencies for python application). So why we lose marks here?
+        
+        >>>not sure you did
+        
+        3.	Application is unpolished. I am not sure what it means? We have error handling for the application and required content displayed. I think the application is OK. Can you explain it?
+        4.	I wonder where our 8 marks lost? How much in the 2 demonstrations? How much in the report?
+        
+        >>>see attached for the score breakdown
+         
+        By XuLin Yang
+        Kind Regards
+        ```
+        - ![](./docs/18.png)
 
 ## The focus of this assignment
 1. harvest tweets from across the cities of Australia on the UniMelb Research Cloud
